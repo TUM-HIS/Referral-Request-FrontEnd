@@ -35,9 +35,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($referrals as $key => $referral)
+                            @foreach($referralRequests as $referralRequest)
                                 <tr>
-
+                                    <td>{{ $referralRequest->id }}</td>
                                 </tr>
                             @endforeach
                             </tbody>

@@ -20,6 +20,12 @@
 
     <main id="main" class="main">
 
+        @if(session('status'))
+            <div class="alert alert-success">
+                {{ session('status') }}
+            </div>
+        @endif
+
         <div class="pagetitle">
             <h1> Referrals </h1>
             <nav>
@@ -55,30 +61,31 @@
                     <body>
                     <div class="container">
                         <h1>Referral Request</h1>
-                        <form>
+                        <form name="referalRequest" method="post" action="{{ route('referral.storeReferral') }}">
+                            @csrf
                             <div class="form-group">
                                 <label for="identifier">Business identifier:</label>
-                                <input type="text" class="form-control" id="identifier">
+                                <input type="text" class="form-control" name="identifier" id="identifier">
                             </div>
                             <div class="form-group">
                                 <label for="definition">Instantiates protocol or definition:</label>
-                                <input type="text" class="form-control" id="definition">
+                                <input type="text" class="form-control" name="definition" id="definition">
                             </div>
                             <div class="form-group">
                                 <label for="basedOn">Request fulfilled by this request:</label>
-                                <input type="text" class="form-control" id="basedOn">
+                                <input type="text" class="form-control" name="basedOn" id="basedOn">
                             </div>
                             <div class="form-group">
                                 <label for="replaces">Request(s) replaced by this request:</label>
-                                <input type="text" class="form-control" id="replaces">
+                                <input type="text" class="form-control" name="replaces" id="replaces">
                             </div>
                             <div class="form-group">
                                 <label for="groupIdentifier">Composite request this is part of:</label>
-                                <input type="text" class="form-control" id="groupIdentifier">
+                                <input type="text" class="form-control" name="groupIdentifier" id="groupIdentifier">
                             </div>
                             <div class="form-group">
                                 <label for="status">Status:</label>
-                                <select class="form-control" id="status">
+                                <select class="form-control" name="status" id="status">
                                     <option value="draft">Draft</option>
                                     <option value="active">Active</option>
                                     <option value="suspended">Suspended</option>
@@ -90,7 +97,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="intent">Intent:</label>
-                                <select class="form-control" id="intent">
+                                <select class="form-control" name="intent" id="intent">
                                     <option value="proposal">Proposal</option>
                                     <option value="plan">Plan</option>
                                     <option value="order">Order</option>
@@ -98,67 +105,76 @@
                             </div>
                             <div class="form-group">
                                 <label for="type">Referral/Transition of care request type:</label>
-                                <input type="text" class="form-control" id="type">
+                                <select class="form-control" name="type" id="type">
+                                    <option value="client">Client</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="priority">Urgency of referral / transfer of care request:</label>
-                                <input type="text" class="form-control" id="priority">
+                                <select class="form-control" name="priority" id="priority">
+                                    <option value="proposal">Proposal</option>
+                                    <option value="plan">Plan</option>
+                                    <option value="order">Order</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="serviceRequested">Actions requested as part of the referral:</label>
-                                <input type="text" class="form-control" id="serviceRequested">
+                                <input type="text" class="form-control" name="serviceRequested" id="serviceRequested">
                             </div>
                             <div class="form-group">
                                 <label for="subject">Patient referred to care or transfer:</label>
-                                <input type="text" class="form-control" id="subject">
+                                <select class="form-control" name="subject" id="subject">
+                                    <option value="care">Care</option>
+                                    <option value="transfer">Transfer</option>
+                                </select>
                 </div>
                 <div class="form-group">
                     <label for="context">Originating encounter:</label>
-                    <input type="text" class="form-control" id="context">
+                    <input type="text" class="form-control" name="context" id="context">
                 </div>
                 <div class="form-group">
                     <label for="occurrence">When the service(s) requested in the referral should occur:</label>
-                    <input type="text" class="form-control" id="occurrence">
+                    <input type="text" class="form-control" name="occurrence" id="occurrence">
                 </div>
                 <div class="form-group">
                     <label for="authoredOn">Date of creation/activation:</label>
-                    <input type="text" class="form-control" id="authoredOn">
+                    <input type="text" class="form-control" name="authoredOn" id="authoredOn">
                 </div>
                 <div class="form-group">
                     <label for="requester">Who/what is requesting service:</label>
-                    <input type="text" class="form-control" id="requester">
+                    <input type="text" class="form-control" name="requester" id="requester">
                 </div>
                 <div class="form-group">
                     <label for="specialty">The clinical specialty (discipline) that the referral is requested for:</label>
-                    <input type="text" class="form-control" id="specialty">
+                    <input type="text" class="form-control" name="specialty" id="specialty">
                 </div>
                 <div class="form-group">
                     <label for="recipient">Receiver of referral / transfer of care request:</label>
-                    <input type="text" class="form-control" id="recipient">
+                    <input type="text" class="form-control" name="recipient" id="recipient">
                 </div>
                 <div class="form-group">
                     <label for="reasonCode">Reason for referral / transfer of care request:</label>
-                    <input type="text" class="form-control" id="reasonCode">
+                    <input type="text" class="form-control" name="reasonCode" id="reasonCode">
                 </div>
                 <div class="form-group">
                     <label for="reasonReference">Why is service needed?</label>
-                    <input type="text" class="form-control" id="reasonReference">
+                    <input type="text" class="form-control" name="reasonReference" id="reasonReference">
                 </div>
                 <div class="form-group">
                     <label for="description">A textual description of the referral:</label>
-                    <textarea type="text" class="form-control" id="description"></textarea>
+                    <textarea type="text" class="form-control" name="description" id="description"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="supportingInfo">Additonal information to support referral or transfer of care request:</label>
-                    <textarea type="text" class="form-control" id="supportingInfo"></textarea>
+                    <textarea type="text" class="form-control" name="supportingInfo" id="supportingInfo"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="note">Comments made about referral request:</label>
-                    <textarea type="text" class="form-control" id="note"></textarea>
+                    <textarea type="text" class="form-control" name="note" id="note"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="relevantHistory">Key events in history of request:</label>
-                    <textarea class="form-control" id="relevantHistory"></textarea>
+                    <textarea class="form-control" name="relevantHistory" id="relevantHistory"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
