@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 //use ;
 use Illuminate\Http\Request;
+use App\Models\ReferalRequest;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class ReferralController extends Controller
@@ -27,6 +29,51 @@ class ReferralController extends Controller
 
         return view('referrals.addReferral');
     }
+
+    public function facilities(){
+
+        return view('referrals.facilities');
+    }
+    public function medicalTerms(){
+
+        return view('referrals.medicalTerms');
+    }
+
+    public function storeReferral(Request $request)
+    {
+        $post = new ReferalRequest;
+        $post->identifier = $request->identifier;
+        $post->definition = $request->definition;
+        $post->basedOn = $request->basedOn;
+        $post->replaces = $request->replaces;
+        $post->groupIdentifier = $request->groupIdentifier;
+        $post->status = $request->status;
+        $post->intent = $request->intent;
+        $post->type = $request->type;
+        $post->priority = $request->priority;
+        $post->serviceRequested = $request->serviceRequested;
+        $post->subject = $request->subject;
+        $post->context = $request->context;
+        $post->occurrence = $request->occurrence;
+        $post->authoredOn = $request->authoredOn;
+        $post->requester = $request->requester;
+        $post->specialty = $request->specialty;
+        $post->recipient = $request->recipient;
+        $post->reasonCode = $request->reasonCode;
+        $post->reasonReference = $request->reasonReference;
+        $post->description = $request->description;
+        $post->supportingInfo = $request->supportingInfo;
+        $post->note = $request->note;
+        $post->relevantHistory = $request->relevantHistory;
+        $post->save();
+        return redirect('add-referral')->with('status', 'Referral Request posted succesfully');
+    }
+
+    public function outgoing(){
+        $referralRequests = DB::select('select * from referal_requests');
+        //$referralRequests = referralRequest::all();
+        return view('referrals.outgoing.outgoing',['referralRequests'=>$referralRequests]);
+        }
 
 //    public function getFacilities(){
 //
