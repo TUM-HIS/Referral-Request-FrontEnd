@@ -146,19 +146,19 @@
                 </div>
                 <div class="form-group">
                     <label for="description">A textual description of the referral:</label>
-                    <input type="text" class="form-control" id="description">
+                    <textarea type="text" class="form-control" id="description"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="supportingInfo">Additonal information to support referral or transfer of care request:</label>
-                    <input type="text" class="form-control" id="supportingInfo">
+                    <textarea type="text" class="form-control" id="supportingInfo"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="note">Comments made about referral request:</label>
-                    <input type="text" class="form-control" id="note">
+                    <textarea type="text" class="form-control" id="note"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="relevantHistory">Key events in history of request:</label>
-                    <input type="text" class="form-control" id="relevantHistory">
+                    <textarea class="form-control" id="relevantHistory"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

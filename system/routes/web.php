@@ -31,6 +31,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/referrals', [ReferralController::class, 'index'])->name('referrals.index');
     Route::get('/add-referral', [ReferralController::class, 'addReferral'])->name('referrals.addReferral');
     Route::get('/outgoing-referrals', [ReferralController::class, 'outgoingReferrals'])->name('referral.outgoing');
+    Route::get('/facilities', [ReferralController::class, 'facilities'])->name('referral.facilities');
+    Route::get('/medicalTerms', [ReferralController::class, 'medicalTerms'])->name('referral.medicalTerms');
 
     Route::get('/patients',[PatientController::class,'addPatient'])->name('patients.addPatient');
     Route::post('/store-user', [PatientController::class, 'addData'])->name('patients.storeData');

@@ -28,6 +28,15 @@ class ReferralController extends Controller
         return view('referrals.addReferral');
     }
 
+    public function facilities(){
+
+        return view('referrals.facilities');
+    }
+    public function medicalTerms(){
+
+        return view('referrals.medicalTerms');
+    }
+
 //    public function getFacilities(){
 //
 //        $apifacilities = Http::withToken('xN1xg42a71GUnXs9Kwf2VLrik7Jtq2')->get('http://api.kmhfltest.health.go.ke/api/facilities/facilities/?format=json');
