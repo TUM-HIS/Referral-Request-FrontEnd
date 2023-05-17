@@ -25,6 +25,16 @@
                         <i class="bi bi-circle"></i><span>Outgoing Referrals</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('referral.facilities') }}">
+                        <i class="bi bi-circle"></i><span>Facilities</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('referral.medicalTerms') }}">
+                        <i class="bi bi-circle"></i><span>Medical terms database</span>
+                    </a>
+                </li>
             </ul>
         </li><!-- End Tables Nav -->
 
