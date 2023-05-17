@@ -71,7 +71,8 @@ class ReferralController extends Controller
 
     public function outgoing(){
         $referralRequests = DB::select('select * from referal_requests');
-        return view('referral.outgoing',['referralRequests'=>$referralRequests]);
+        //$referralRequests = referralRequest::all();
+        return view('referrals.outgoing.outgoing',['referralRequests'=>$referralRequests]);
         }
 
 //    public function getFacilities(){
