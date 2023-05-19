@@ -169,19 +169,22 @@
             <label for="subCounty">Sub-county:<abbr title="required">*</abbr></label>
             <select id="subCounty" name="subCounty" required class="form-control">
               <option value="">--Please select a sub-county--</option>
-              <option value="sub1">Mvita</option>
-              <option value="sub2">Changamwe</option>
-              <option value="sub3">Nyali</option>
+              <option value="mvita">Mvita</option>
+              <option value="changamwe">Changamwe</option>
+              <option value="nyali">Nyali</option>
+              <option value="jomvu">Jomvu</option>
+              <option value="kisauni">Kisauni</option>
+              <option value="likoni">Likoni</option>
             </select><br>
 
-            <label for="location">Location:<abbr title="required">*</abbr></label>
+            <label for="location">Ward:<abbr title="required">*</abbr></label>
             <select id="location" name="location" required class="form-control">
               <option value="">--Please select a location--</option>
-              <option value="loc1">Location 1</option>
-              <option value="loc2">Location 2</option>
-              <option value="loc3">Location 3</option>
-              <option value="loc4">Location 4</option>
-              <option value="loc5">Location 5</option>
+              <option value="mji wa kale">Mji wa Kale</option>
+              <option value="tudor">Tudor</option>
+              <option value="tononoka">Tononoka</option>
+              <option value="shimanzi">Shimanzi</option>
+              <option value="majengo">Majengo</option>
             </select><br><br>
 
             <label for="landmark">Landmark:<abbr title="required">*</abbr></label>

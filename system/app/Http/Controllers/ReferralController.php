@@ -8,6 +8,7 @@ use App\Models\ReferalRequest;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use App\Models\Patient;
 
 class ReferralController extends Controller
 {
@@ -38,6 +39,30 @@ class ReferralController extends Controller
 
         return view('referrals.medicalTerms');
     }
+
+    public function worklist(){
+
+        $patients = Patient::all(); // Retrieve all patients from the database
+
+        return view('referrals.worklist', ['patients' => $patients]);
+    }
+
+    public function create(Patient $patient){
+
+        $patientDetails = Patient::where('id', $patient->id)->first();
+        
+        return view('referrals.create', compact('patient', 'patientDetails'));
+    }
+
+    public function store(Request $request){
+        // Process and store the referral form data
+        // Retrieve the patient ID from $request->input('patient_id')
+        // Store the referral details in the database
+
+        // Optionally, redirect to a success page
+        return redirect()->route('referrals.success');
+}
+
 
     public function storeReferral(Request $request)
     {
