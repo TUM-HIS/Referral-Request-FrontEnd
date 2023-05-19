@@ -35,6 +35,11 @@
                         <i class="bi bi-circle"></i><span>Medical terms database</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('referrals.worklist') }}">
+                        <i class="bi bi-circle"></i><span>Worklist</span>
+                    </a>
+                </li>
             </ul>
         </li><!-- End Tables Nav -->
 

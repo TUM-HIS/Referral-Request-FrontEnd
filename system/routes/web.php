@@ -43,6 +43,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/triages', [TriageController::class, 'addTriage'])->name('triages.addTriage');
     Route::post('/store-form', [TriageController::class, 'store'])->name('triages.store-form');
+    Route::get('/worklist',[ReferralController::class,'worklist'])->name('referrals.worklist');
+    Route::post('/submit-referral', [ReferralController::class, 'submitReferral'])->name('referral.submit_referral');
+    Route::get('/referral/{patient}', [ReferralController::class, 'create'])->name('referrals.create');
+    Route::get('/referral-success}', [ReferralController::class, 'store'])->name('referrals.success');
 });
 
 
