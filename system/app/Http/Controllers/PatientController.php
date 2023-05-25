@@ -48,5 +48,4 @@ class PatientController extends Controller
 
         return redirect()->back()->with('success', 'Patient registered successfully');
     }
-
 }
