@@ -53,7 +53,7 @@ class ReferralController extends Controller
     public function create(Patient $patient){
 
         $patientDetails = Patient::where('id', $patient->id)->first();
-        
+
         return view('referrals.create', compact('patient', 'patientDetails'));
     }
 
@@ -140,7 +140,7 @@ class ReferralController extends Controller
         $referralRequests = DB::select('select * from referal_requests');
         //$referralRequests = referralRequest::all();
         return view('referrals.outgoing.outgoing',['referralRequests'=>$referralRequests]);
-        }
+    }
 
 //    public function getFacilities(){
 //
