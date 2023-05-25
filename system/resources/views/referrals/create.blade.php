@@ -53,7 +53,7 @@
     <body>
         <div class="container">
             <h1>Referral Request</h1>
-<form id="referralForm" action="{{ route('referrals.success') }}" method="GET">
+<form id="referralForm" action="{{ route('referrals.submitReferral') }}" method="POST">
     @csrf
     <div class="section">
       <h2>Patient Details</h2>
@@ -193,7 +193,7 @@
         </select>
       </div>
       <div class="mb-3">
-        <label for="formFileMultiple" class="form-label">Attachments:</label>
+        <label for="attachments" class="form-label">Attachments:</label>
         <input class="form-control" type="file" id="formFileMultiple" multiple>
       </div>
       <div class="form-group">
