@@ -43,6 +43,7 @@
                 <div class="col-lg-12">
 
     <div class="container">
+        {{ dd('Inside the success view!') }}
         <h1>Referral Submitted Successfully</h1>
         <p>Thank you for submitting the referral request. Our team will review the information and take appropriate actions.</p>
         <p>For any further assistance, please contact our support team.</p>

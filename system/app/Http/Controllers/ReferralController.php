@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 //use ;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\RedirectResponse;
 use App\Models\ReferalRequest;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use App\Models\Patient;
+use App\Models\Referral;
 
 class ReferralController extends Controller
 {
@@ -92,6 +95,45 @@ class ReferralController extends Controller
         $post->relevantHistory = $request->relevantHistory;
         $post->save();
         return redirect('add-referral')->with('status', 'Referral Request posted succesfully');
+    }
+
+    public function submitReferral(Request $request): RedirectResponse
+    {
+
+        // Validate the form data
+        $validatedData = $request->validate([
+            'referringOfficer' => 'required',
+            'reasonReferral' => 'required',
+            'priorityLevel' => 'required',
+            // Add validation rules for other form fields
+        ]);
+
+        // Create a new referral instance
+        $referral = new Referral;
+        $referral->clientName = $request->input('clientName');
+        $referral->clientUPI = $request->input('clientUPI');
+        $referral->referringOfficer = $request->input('referringOfficer');
+        $referral->historyInvestigation = $request->input('historyInvestigation');
+        $referral->diagnosis = $request->input('diagnosis');
+        $referral->reasonReferral = $request->input('reasonReferral');
+        $referral->attachments = $request->input('attachments');
+        $referral->additionalNotes = $request->input('additionalNotes');
+        $referral->priorityLevel = $request->input('priorityLevel');
+        $referral->serviceCategory = $request->input('serviceCategory');
+        $referral->service = $request->input('service');
+        $referral->facility = $request->input('facility');
+        $referral->distance = $request->input('distance');
+        $referral->serviceNotes = $request->input('serviceNotes');
+
+        // Set other referral properties
+
+        // Save the referral to the database
+        $referral->save();
+
+        // Perform any additional processing or integrations
+
+        // Redirect to a success page or display a success message
+        return Redirect::route('referrals.success');
     }
 
     public function outgoing(){
