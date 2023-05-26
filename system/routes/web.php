@@ -42,7 +42,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/store-user', [PatientController::class, 'addData'])->name('patients.storeData');
 
     Route::get('/search-patient', [PatientController::class, 'searchPatient'])->name('patients.searchPatients');
-    Route::get('/view-patient', [PatientController::class, 'viewPatient'])->name('patients.viewPatient');
+    // Route::get('/view-patient', [PatientController::class, 'viewPatient'])->name('patients.viewPatient');
+
+    // Route::get('/search-doctor', [DoctorController::class, 'searchDoctor'])->name('doctors.searchDoctor');
+    // Route::get('/view-pdoctor', [DoctorController::class, 'viewDoctor'])->name('doctors.viewDoctor');
 
     Route::get('/triages', [TriageController::class, 'addTriage'])->name('triages.addTriage');
     Route::post('/store-form', [TriageController::class, 'store'])->name('triages.store-form');
