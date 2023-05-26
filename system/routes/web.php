@@ -41,6 +41,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/patients',[PatientController::class,'addPatient'])->name('patients.addPatient');
     Route::post('/store-user', [PatientController::class, 'addData'])->name('patients.storeData');
 
+    Route::get('/search-patient', [PatientController::class, 'searchPatient'])->name('patients.searchPatients');
+    Route::get('/view-patient', [PatientController::class, 'viewPatient'])->name('patients.viewPatient');
+
     Route::get('/triages', [TriageController::class, 'addTriage'])->name('triages.addTriage');
     Route::post('/store-form', [TriageController::class, 'store'])->name('triages.store-form');
     Route::get('/worklist',[ReferralController::class,'worklist'])->name('referrals.worklist');
