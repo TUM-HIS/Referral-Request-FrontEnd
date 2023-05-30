@@ -4,10 +4,10 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1> Medical Terms </h1>
+            <h1> Patients </h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href=" ">Medical Terms</a></li>
+                    <li class="breadcrumb-item"><a href=" ">Patients</a></li>
                     <li class="breadcrumb-item active">Search</li>
                 </ol>
             </nav>
@@ -18,8 +18,8 @@
 
                 <div class="input-group mx-auto d-flex justify-content-center" style="width:450px;top:5rem;">
                     <div class="form-outline">
-                        <label class="form-label visually-hidden" for="nhddform">Search medical Terms</label>
-                        <input id="search-input" type="search" id="nhddform" class="form-control" placeholder="Search Medical Terms"/>
+                        <label class="form-label visually-hidden" for="nhddform">Search Patient</label>
+                        <input id="search-input" type="search" id="nhddform" class="form-control" placeholder="Search Patients"/>
                     </div>
                     <button id="search-button" type="button" class="btn btn-primary">
                       <i class="bi bi-search"></i>

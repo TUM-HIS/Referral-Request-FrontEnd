@@ -48,4 +48,12 @@ class PatientController extends Controller
 
         return redirect()->back()->with('success', 'Patient registered successfully');
     }
+
+    public function searchPatient () {
+        return view('patients.search');
+    }
+
+    public function viewPatient () {
+
+    }
 }

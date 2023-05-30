@@ -4,7 +4,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-            <a class="nav-link " href="{{ route('user.dashboard') }}">
+            <a class="nav-link" href="{{ route('user.dashboard') }}">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
@@ -12,7 +12,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-layout-text-window-reverse"></i><span>Referrals</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-arrow-up-right-circle"></i><span>Referrals</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
@@ -45,7 +45,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#patient-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-layout-text-window-reverse"></i><span>Patients</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-file-earmark-person"></i><span>Patients</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="patient-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>

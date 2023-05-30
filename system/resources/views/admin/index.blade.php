@@ -195,7 +195,7 @@
                                         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                                             <i class="bi bi-people"></i>
                                         </div>
-                                                <a href="" class="ps-3">
+                                                <a href="{{ route('patients.searchPatients') }}" class="ps-3">
                                                     <div class="dashboardItem">
                                                         <p><i class="fa-sharp fa-solid fa-hospital"></i></p>
                                                         <h3>Find patient</h3>
