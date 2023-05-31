@@ -17,29 +17,23 @@
 			<div class="row mb-3">
 				<div class="col-md-6">
                     <label for="name" class="form-label">Name:</label>
-                    <select class="form-control selected2">
+                    <select class="form-control selected2" id="selectedPatient">
                         <option selected disabled style="text-align: center !important;">-- search patient --</option>
                         @foreach($patients as $patient)
-                            <option value="{{$patient->UPI}}">{{$patient->idNo}} - {{$patient->first_name.' '.$patient->last_name}}</option>
+                            <option value="{{$patient}}">{{$patient->idNo}} - {{$patient->first_name.' '.$patient->last_name}}</option>
                         @endforeach
-                       {{ $patients }}
                     </select>
-{{--					<input type="text" class="form-control js-example-basic-single" id="name" name="name" required>--}}
 				</div>
 				<div class="col-md-6">
 					<label for="age" class="form-label">Age:</label>
-					<input type="number" class="form-control" id="age" name="age" min="1" required>
+					<input type="Number" readonly class="form-control" id="age" name="age" min="1" required >
 				</div>
 			</div>
 			<div class="row mb-3">
 				<div class="col-md-6">
 					<label for="gender" class="form-label">Gender:</label>
-					<select class="form-select" id="gender" name="gender" required>
-						<option value="">--Select--</option>
-						<option value="male">Male</option>
-						<option value="female">Female</option>
-						<option value="other">Other</option>
-					</select>
+                    <input type="text" readonly class="form-control" id="gender" name="gender" min="1" required >
+
 				</div>
 				<div class="col-md-6">
 					<label for="reason_for_visit" class="form-label">Reason For Visit:</label>
@@ -125,4 +119,47 @@
     $(document).ready(function() {
         $('.selected2').select2();
     });
+
+    $(document).ready(function() {
+        $('#selectedPatient').on('change', function() {
+
+            var selectedPatient = $(this).val();//this is a jquery function for getting the selected object
+
+            if (selectedPatient !== '') {
+                var patient = JSON.parse(selectedPatient);
+
+                var dob = patient.dob
+                // Split the date and time parts
+                var parts = dob.split(' ');
+                var datePart = parts[0]; // "2007-04-15"
+
+                // Split the date into year, month, and day
+                var dateParts = datePart.split('-');
+                var year = parseInt(dateParts[0], 10);
+                var month = parseInt(dateParts[1], 10) - 1; // Month is zero-based in JavaScript
+                var day = parseInt(dateParts[2], 10);
+
+                // Calculate the age
+                var birthDate = new Date(year, month, day);
+                var currentDate = new Date();
+                var ageDiff = currentDate - birthDate;
+
+                // Convert the age difference to years
+                var ageDate = new Date(ageDiff);
+                var age = Math.abs(ageDate.getUTCFullYear() - 1970);
+
+
+                //console.log(age)
+
+
+                $('#age').val(age);
+                $('#gender').val(patient.gender);
+            } else {
+                // Clear the fields if no object is selected
+                $('#age').val('');
+                //$('#field2').val('');
+            }
+        });
+    });
+
 </script>
