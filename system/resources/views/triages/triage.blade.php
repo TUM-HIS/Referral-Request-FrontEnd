@@ -1,5 +1,11 @@
 @extends('layouts.backend')
 
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.7.0.slim.min.js"></script>
+{{--<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>--}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+
+
 @section('form')
   <main id="main" class="main">
 	<div class="container py-5">
@@ -10,8 +16,15 @@
 			@csrf
 			<div class="row mb-3">
 				<div class="col-md-6">
-					<label for="name" class="form-label">Name:</label>
-					<input type="text" class="form-control" id="name" name="name" required>
+                    <label for="name" class="form-label">Name:</label>
+                    <select class="form-control selected2">
+                        <option selected disabled style="text-align: center !important;">-- search patient --</option>
+                        @foreach($patients as $patient)
+                            <option value="{{$patient->UPI}}">{{$patient->idNo}} - {{$patient->first_name.' '.$patient->last_name}}</option>
+                        @endforeach
+                       {{ $patients }}
+                    </select>
+{{--					<input type="text" class="form-control js-example-basic-single" id="name" name="name" required>--}}
 				</div>
 				<div class="col-md-6">
 					<label for="age" class="form-label">Age:</label>
@@ -84,7 +97,7 @@
                     <input type="text" class="form-control" id="recent-travel" name="recent_travel" required>
                 </div>
             </div>
-            
+
             <div class="row mb-3">
                 <div class="row md-6">
                     <label for="emergency-contact-name" class="form-label">Emergency Contact Name: </label>
@@ -108,3 +121,8 @@
     </div>
   </main>
 @endsection
+<script>
+    $(document).ready(function() {
+        $('.selected2').select2();
+    });
+</script>
