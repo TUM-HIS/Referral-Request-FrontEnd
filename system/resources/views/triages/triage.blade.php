@@ -26,13 +26,13 @@
 				</div>
 				<div class="col-md-6">
 					<label for="age" class="form-label">Age:</label>
-					<input type="Number" readonly class="form-control" id="age" name="age" min="1" required >
+					<input type="Number" readonly class="form-control" id="age" name="age" min="1" required placeholder="-- age --">
 				</div>
 			</div>
 			<div class="row mb-3">
 				<div class="col-md-6">
 					<label for="gender" class="form-label">Gender:</label>
-                    <input type="text" readonly class="form-control" id="gender" name="gender" min="1" required >
+                    <input type="text" readonly class="form-control" id="gender" name="gender" min="1" required placeholder="-- gender --">
 
 				</div>
 				<div class="col-md-6">
@@ -156,7 +156,8 @@
                 $('#gender').val(patient.gender);
             } else {
                 // Clear the fields if no object is selected
-                $('#age').val('');
+                $('#age').val('-- age --');
+                $('#gender').val('-- gender --');
                 //$('#field2').val('');
             }
         });
