@@ -1,58 +1,127 @@
-# Referral System
+<a name="readme-top"></a>
+
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+
+<br />
+<div align="center">
+<h3 align="center">Referral System</h3>
+</div>
+<br />
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#installation">Installation</a></li>
+        <li><a href="#set-up">Set-up</a></li>
+      </ul>
+    </li>
+    <li><a href="#Flowchart">Flowchart</a></li>
+    <li><a href="#Use Case Diagram">Use Case Diagram</a></li>
+    <li><a href="#Use Case Diagram">Activity Diagram</a></li>
+    <li><a href="#Use Case Diagram">Data Flow Diagram</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
+
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+![Referral System Screen Shot][product-screenshot]
+
+### Referral System
 
 The referral system is a web-based application that allows users to create and manage referrals for medical services. It facilitates the seamless transfer of patients from one healthcare provider to another, ensuring efficient coordination and continuity of care.
 
-## Features
+_For more information, please refer to the [Documentation](docs.md)_
 
--   **User Authentication**: The system provides user authentication functionality to ensure secure access to the referral system. Users can register, login, and manage their account credentials.
-    
--   **Worklist**: The worklist displays a list of patients awaiting referral. It provides an overview of patients' information such as name, age, contact details, and referral status.
-    
--   **Referral Form**: The referral form enables users to create new referral requests. It includes various sections for capturing patient details, next of kin information, referring officer details, service details, and additional notes.
-    
--   **Dynamic Pre-filling**: When selecting a patient from the worklist, the referral form dynamically pre-fills the patient's information, such as name, gender, telephone number, ID number, county, and other demographics.
-    
--   **Validation and Error Handling**: The system performs validation checks on form inputs to ensure data integrity and accuracy. It provides error messages and feedback to users for any incorrect or missing information.
-    
--   **Submit and Processing**: Upon completing the referral form, users can submit the request. The system processes the referral request, performs necessary operations, and stores the referral details securely.
-    
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Technologies Used
 
--   **Front-end**: The user interface is built using HTML, CSS, and JavaScript. It incorporates a responsive design to ensure compatibility across various devices.
-    
--   **Backend**: The system utilizes the Laravel framework, a PHP-based web application framework, to handle server-side logic, database interactions, and API integrations.
-    
--   **Database**: MySQL is used as the database management system to store and retrieve referral data. It provides data persistence and efficient querying capabilities.
-    
 
-## Installation
+### Built With
+* [![Laravel][Laravel.com]][Laravel-url]
+* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 
-1.  Clone the repository: `git clone <repository-url>`
-2.  Change directory to the system folder: `cd system`
-3.  Install project dependencies: `composer install`
-4.  Configure the database connection in the `.env` file.
-5.  Run database migrations: `php artisan migrate`
-6.  Start the development server: `php artisan serve`
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Contributing
 
-Contributions are welcome! If you would like to contribute to the referral system project, please follow these steps:
 
-1.  Fork the repository
-2.  Create a new branch for your feature: `git checkout -b feature-name`
-3.  Make the necessary changes and commit them: `git commit -m 'Add feature'`
-4.  Push your changes to the branch: `git push origin feature-name`
-5.  Submit a pull request explaining the changes you have made.
+<!-- GETTING STARTED -->
+## Getting Started
 
-## License
+### Installation
 
-This referral system is open-source and released under the [MIT License](https://chat.openai.com/c/LICENSE). Feel free to use, modify, and distribute the code as per the terms of the license.
+1. Clone the repo
+   ```sh
+   git clone https://github.com/github_username/repo_name.git
+   ```
+2. Install dependencies - missing `composer packages`
+   ```sh
+   composer install
+   ```  
+3. Install NPM packages
+   ```sh
+   npm install
+   ```
+4. Create a .env file
 
-## Contact
+   -  Copy content of the .env.example file
+   -  Paste it in your .env file
 
-If you have any questions, suggestions, or feedback, please reach out to the project maintainers at tumhis@tum.ac.ke.
+5. Run
+   ```sh
+   artisan key:generate
+   ```
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+### Set-up
+
+1. Setup Database Credentials in the .env file.
+   -  DB_HOST=localhost
+   -  DB_DATABASE=''
+   -  DB_USERNAME=''
+   -  DB_PASSWORD=''
+
+2. Publish all the schema to the database.
+   ```sh
+   php artisan:migrate
+   ```  
+3. Seed the database with dummy users.
+   ```sh
+   php artisan tinker
+   User::factory()->count(5)->create()
+   ```
+4. Navigate to your browser and type “localhost/foldernameinHTdocs/” in the address bar to access the login page.
+5. How to get the users' credentials
+   -  Access your database
+   -  Open the users table
+   -  Copy any of the usernames and paste it in the login page - username section
+   -  The password is, "password"
+6. Create faker for user and roles
+   -  Edit the roles table.
+   -  Insert the role, guard_name, and the logged in user id in the role_id
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Flowchart
 
@@ -80,4 +149,52 @@ The data flow diagram shows the flow of information in the patient referral syst
 
 The activity diagram shows the detailed process flow for creating a referral in the patient referral system. The process begins with the creation of a new referral, and continues with the selection of the referral priority, entry of the diagnosis and reason for referral, selection of the physician/provider, and submission of the referral. The process concludes with the tracking of the referral status until feedback is received.
 
+
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature-name`)
+3. Commit your Changes (`git commit -m 'Add Feature'`)
+4. Push to the Branch (`git push origin feature-name`)
+5. Submit a pull request explaining the changes you have made.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- LICENSE -->
+## License
+
+This referral system is open-source and released under the [MIT License](https://chat.openai.com/c/LICENSE). Feel free to use, modify, and distribute the code as per the terms of the license.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTACT -->
+## Contact
+
+If you have any questions, suggestions, or feedback, please reach out to the project maintainers at tumhis@tum.ac.ke.
+
 Thank you for using the referral system!
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/TUM-HIS/Referral-Request-FrontEnd.svg?style=for-the-badge
+[contributors-url]: https://github.com/TUM-HIS/Referral-Request-FrontEnd.git/contributors
+
+[forks-shield]: https://img.shields.io/github/forks/TUM-HIS/Referral-Request-FrontEnd.svg?style=for-the-badge
+[forks-url]: https://github.com/TUM-HIS/Referral-Request-FrontEnd.git/network/members
+
+[stars-shield]: https://img.shields.io/github/stars/TUM-HIS/Referral-Request-FrontEnd.svg?style=for-the-badge
+[stars-url]: https://github.com/TUM-HIS/Referral-Request-FrontEnd.git/stargazers
+
+[issues-shield]: https://img.shields.io/github/issues/TUM-HIS/Referral-Request-FrontEnd.svg?style=for-the-badge
+[issues-url]: https://github.com/TUM-HIS/Referral-Request-FrontEnd-Template/issues
+
+[product-screenshot]: images/screenshot.png
+
+[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
+[Laravel-url]: https://laravel.com
+
+[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[Bootstrap-url]: https://getbootstrap.com
