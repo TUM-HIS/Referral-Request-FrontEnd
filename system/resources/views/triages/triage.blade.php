@@ -1,5 +1,6 @@
 @extends('layouts.backend')
 
+//adding select cdn for column selection
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.7.0.slim.min.js"></script>
 {{--<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>--}}
@@ -26,7 +27,7 @@
 				</div>
 				<div class="col-md-6">
 					<label for="age" class="form-label">Age:</label>
-					<input type="Number" readonly class="form-control" id="age" name="age" min="1" required placeholder="-- age --">
+					<input type="text" readonly class="form-control readonly" id="age" name="age" min="1" required>
 				</div>
 			</div>
 			<div class="row mb-3">
@@ -148,6 +149,7 @@
                 var ageDate = new Date(ageDiff);
                 var age = Math.abs(ageDate.getUTCFullYear() - 1970);
 
+                // var date = Carbon
 
                 //console.log(age)
 
