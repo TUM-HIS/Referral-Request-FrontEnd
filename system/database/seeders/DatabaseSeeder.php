@@ -11,6 +11,5 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // Generate 10 dummy service requests using the factory
-        Patient::factory()->count(1000)->create();
     }
 }
