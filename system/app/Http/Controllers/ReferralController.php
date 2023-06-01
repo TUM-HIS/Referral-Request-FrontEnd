@@ -57,6 +57,10 @@ class ReferralController extends Controller
         return view('referrals.create', compact('patient', 'patientDetails'));
     }
 
+    public function createreferal() {
+        return view('referrals.createreferal');
+    }
+
     public function store(Request $request){
         // Process and store the referral form data
         // Retrieve the patient ID from $request->input('patient_id')
