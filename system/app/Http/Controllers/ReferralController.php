@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 //use ;
+use App\utils\SendReferral;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\RedirectResponse;
@@ -125,10 +126,21 @@ class ReferralController extends Controller
         $referral->distance = $request->input('distance');
         $referral->serviceNotes = $request->input('serviceNotes');
 
-        // Set other referral properties
+        $SendReferral = new SendReferral();
+        $res = json_decode($SendReferral->sendPost());
+        $referral->referralId = $res->id;
 
         // Save the referral to the database
         $referral->save();
+        //dd(gettype($res));
+
+
+        // Set other referral properties
+
+
+
+
+
 
         // Perform any additional processing or integrations
 

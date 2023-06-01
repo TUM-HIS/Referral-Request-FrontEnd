@@ -4,10 +4,10 @@ namespace App\utils;
 
 class SendReferral
 {
-    public function sendpost(){
+    public function sendPost(){
         $curl = curl_init();
 
-        $url = '';
+        $url = 'http://127.0.0.1:8000/api/referral/serviceRequest';
 
 
         $headers = [

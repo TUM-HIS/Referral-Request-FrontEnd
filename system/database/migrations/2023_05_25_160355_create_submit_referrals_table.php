@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('facility');
             $table->string('distance')->nullable();
             $table->string('serviceNotes');
+            $table->string('referralId')->nullable();
             $table->timestamps();
         });
     }
