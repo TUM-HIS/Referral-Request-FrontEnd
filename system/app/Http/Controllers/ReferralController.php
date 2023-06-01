@@ -94,6 +94,7 @@ class ReferralController extends Controller
         $post->note = $request->note;
         $post->relevantHistory = $request->relevantHistory;
         $post->save();
+        // return response()->json($referalrequests);
         return redirect('add-referral')->with('status', 'Referral Request posted succesfully');
     }
 
@@ -137,7 +138,7 @@ class ReferralController extends Controller
     }
 
     public function outgoing(){
-        $referralRequests = DB::select('select * from referal_requests');
+        $referralRequests = DB::select('select * from referrals');
         //$referralRequests = referralRequest::all();
         return view('referrals.outgoing.outgoing',['referralRequests'=>$referralRequests]);
     }
