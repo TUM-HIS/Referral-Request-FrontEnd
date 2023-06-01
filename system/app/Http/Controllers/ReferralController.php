@@ -61,57 +61,59 @@ class ReferralController extends Controller
     //     return view('referrals.createreferal');
     // }
 
-    public function store(Request $request){
-        // Process and store the referral form data
-        // Retrieve the patient ID from $request->input('patient_id')
-        // Store the referral details in the database
+//     public function store(Request $request){
+//         // Process and store the referral form data
+//         // Retrieve the patient ID from $request->input('patient_id')
+//         // Store the referral details in the database
 
-        // Optionally, redirect to a success page
-        return redirect()->route('referrals.success');
-}
+//         // Optionally, redirect to a success page
+//         return redirect()->route('referrals.success');
+// }
 
 
-    public function storeReferral(Request $request)
-    {
-        $post = new ReferalRequest;
-        $post->identifier = $request->identifier;
-        $post->definition = $request->definition;
-        $post->basedOn = $request->basedOn;
-        $post->replaces = $request->replaces;
-        $post->groupIdentifier = $request->groupIdentifier;
-        $post->status = $request->status;
-        $post->intent = $request->intent;
-        $post->type = $request->type;
-        $post->priority = $request->priority;
-        $post->serviceRequested = $request->serviceRequested;
-        $post->subject = $request->subject;
-        $post->context = $request->context;
-        $post->occurrence = $request->occurrence;
-        $post->authoredOn = $request->authoredOn;
-        $post->requester = $request->requester;
-        $post->specialty = $request->specialty;
-        $post->recipient = $request->recipient;
-        $post->reasonCode = $request->reasonCode;
-        $post->reasonReference = $request->reasonReference;
-        $post->description = $request->description;
-        $post->supportingInfo = $request->supportingInfo;
-        $post->note = $request->note;
-        $post->relevantHistory = $request->relevantHistory;
-        $post->save();
-        // return response()->json($referalrequests);
-        return redirect('add-referral')->with('status', 'Referral Request posted succesfully');
-    }
+//     public function storeReferral(Request $request)
+//     {
+//         $post = new ReferalRequest;
+//         $post->identifier = $request->identifier;
+//         $post->definition = $request->definition;
+//         $post->basedOn = $request->basedOn;
+//         $post->replaces = $request->replaces;
+//         $post->groupIdentifier = $request->groupIdentifier;
+//         $post->status = $request->status;
+//         $post->intent = $request->intent;
+//         $post->type = $request->type;
+//         $post->priority = $request->priority;
+//         $post->serviceRequested = $request->serviceRequested;
+//         $post->subject = $request->subject;
+//         $post->context = $request->context;
+//         $post->occurrence = $request->occurrence;
+//         $post->authoredOn = $request->authoredOn;
+//         $post->requester = $request->requester;
+//         $post->specialty = $request->specialty;
+//         $post->recipient = $request->recipient;
+//         $post->reasonCode = $request->reasonCode;
+//         $post->reasonReference = $request->reasonReference;
+//         $post->description = $request->description;
+//         $post->supportingInfo = $request->supportingInfo;
+//         $post->note = $request->note;
+//         $post->relevantHistory = $request->relevantHistory;
+//         $post->save();
+//         // return response()->json($referalrequests);
+//         return redirect('add-referral')->with('status', 'Referral Request posted succesfully');
+//     }
 
     public function submitReferral(Request $request): RedirectResponse
     {
 
+        
+
         // Validate the form data
-        $validatedData = $request->validate([
-            'referringOfficer' => 'required',
-            'reasonReferral' => 'required',
-            'priorityLevel' => 'required',
-            // Add validation rules for other form fields
-        ]);
+        // $validatedData = $request->validate([
+        //     'referringOfficer' => 'required',
+        //     'reasonReferral' => 'required',
+        //     'priorityLevel' => 'required',
+        //     // Add validation rules for other form fields
+        // ]);
 
         // Create a new referral instance
         $referral = new Referral;

@@ -22,7 +22,7 @@
 
 
     <section class='referral'>
-        <form class="" id="referralForm" action="{{ route('referrals.submitReferral') }}" method="POST">
+        <form id="referralForm" action="{{ route('referrals.submitReferral') }}" method="POST">
             @csrf
             <div class="grid-by-ace">
                 <div class="grid-by-ace">
@@ -61,7 +61,7 @@
         
                         <div class="">
                             <p>County</p>
-                            <input type='text' name='' placeholder='County' value="{{ $patient->tcountyOfBirth }}" required> <br>
+                            <input type='text' name='' placeholder='County' value="{{ $patient->countyOfBirth }}" required> <br>
                         </div>
         
                         <div class="">
