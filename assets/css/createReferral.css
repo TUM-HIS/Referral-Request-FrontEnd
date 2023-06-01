@@ -1,0 +1,58 @@
+     /*CUSTOM CLASSES*/
+     .grid-by-ace{
+        display: grid !important;
+    }
+
+
+    .grid-1-1{
+        grid-row: 1 !important;
+        grid-column: 1 !important;
+    }
+
+    .grid-1-2{
+        grid-row: 1 !important;
+        grid-column: 2 !important;
+    }
+
+    .grid-2-1{
+        grid-row: 2 !important;
+        grid-column: 1 !important;
+    }
+
+    .grid-2-2{
+        grid-row: 2 !important;
+        grid-column: 2 !important;
+    }
+
+    fieldset{
+        padding: 10px;
+        border-radius: 8px;
+        border: 2px solid rgb(2,48,71);
+        margin-bottom: 40px;
+    }
+
+    legend{
+        font-weight: bold;
+    }
+
+    input{
+        width: 30vw;
+        height: 35px;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    select{
+        width: 30vw;
+        height: 35px;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    textarea{
+        max-width: 30vw;
+        min-width: 29.9vw;
+        height: 100px;
+        padding: 5px;
+        border-radius: 5px;
+    }
