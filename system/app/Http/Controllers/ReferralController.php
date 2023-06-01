@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 //use ;
+use App\utils\SendReferral;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\RedirectResponse;
@@ -132,16 +133,36 @@ class ReferralController extends Controller
         $referral->distance = $request->input('distance');
         $referral->serviceNotes = $request->input('serviceNotes');
 
-        // Set other referral properties
-
         // Save the referral to the database
         $referral->save();
+        //dd($referral->id);
+        $savedId = $referral->id;
 
+        $SendReferral = new SendReferral();
+        $res = json_decode($SendReferral->sendPost($savedId));
+        $referral->referralId = $res->referralRes->referralId;
+
+        //local and remote referral ids
+        $local = $savedId;
+        $remote = $referral->referralId;
+        //dd($res -> referralRes -> localRRID, );
+        //dd($local. " " . $remote);
+        //dd(gettype($res));
+
+        $referral = Referral::find($local);
+        $referral->referralId =$remote;
+        $referral->update();
+
+
+
+        // Set other referral properties
         // Perform any additional processing or integrations
 
         // Redirect to a success page or display a success message
         return Redirect::route('referrals.success');
     }
+
+
 
     public function outgoing(){
         $referralRequests = DB::select('select * from referrals');
