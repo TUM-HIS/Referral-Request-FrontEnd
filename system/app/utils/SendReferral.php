@@ -4,7 +4,8 @@ namespace App\utils;
 
 class SendReferral
 {
-    public function sendPost(){
+    public function sendPost($localRRID){
+        //dd($localRRID);
         $curl = curl_init();
 
         $url = 'http://127.0.0.1:8000/api/referral/serviceRequest';
@@ -18,6 +19,7 @@ class SendReferral
 
 
         $requestBody = [
+            "localRRID" => $localRRID,
             "resourceType" => "ServiceRequest",
             "identifier" => [
                 [
