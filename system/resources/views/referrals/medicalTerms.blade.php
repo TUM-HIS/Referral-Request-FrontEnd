@@ -16,7 +16,10 @@
         <section class="section dashboard">
             <div class="row">
 
-                <div class="input-group mx-auto d-flex justify-content-center" style="width:450px;top:5rem;">
+                <div class="card input-group mx-auto d-flex flex-row p-4 pb-5 justify-content-center" style="width:450px;top:5rem;">
+                    <div>
+                        <h5 class="p-2">Search Medical Terms</h5>
+                    </div>
                     <div class="form-outline">
                         <label class="form-label visually-hidden" for="nhddform">Search medical Terms</label>
                         <input id="search-input" type="search" id="nhddform" class="form-control" placeholder="Search Medical Terms"/>

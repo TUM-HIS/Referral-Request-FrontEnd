@@ -16,10 +16,13 @@
         <section class="section dashboard">
             <div class="row">
 
-                <div class="input-group mx-auto d-flex justify-content-center" style="width:450px;top:5rem;">
+                <div class="card input-group mx-auto d-flex flex-row p-4 pb-5 justify-content-center" style="width:450px;top:5rem;">
+                    <div>
+                        <h5 class="p-2">Search Patient using PID</h5>
+                    </div>
                     <div class="form-outline">
-                        <label class="form-label visually-hidden" for="nhddform">Search Patient</label>
-                        <input id="search-input" type="search" id="nhddform" class="form-control" placeholder="Search Patients"/>
+                        <label class="form-label visually-hidden" for="searchform">Search Patient</label>
+                        <input id="search-input" type="search" id="searchform" class="form-control" placeholder="Search Patients"/>
                     </div>
                     <button id="search-button" type="button" class="btn btn-primary">
                       <i class="bi bi-search"></i>
