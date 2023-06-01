@@ -28,29 +28,47 @@
         padding: 10px;
         border-radius: 8px;
         border: 2px solid rgb(2,48,71);
-        margin-bottom: 40px;
+        margin: 20px;
+        width: max-content;
+        margin: 1vw;
     }
+
+
+    .submitreqbtn{
+        border: 2px solid transparent;
+        background: rgba(0, 102, 255, 0.822);
+        color: whitesmoke;
+        padding: 8px;
+        border-radius: 5px;
+        margin-left: 1vw;
+    }
+
+    .submitreqbtn:hover{
+        
+    }
+
 
     legend{
         font-weight: bold;
+        color: orangered;
     }
 
     input{
-        width: 30vw;
+        width: 28vw;
         height: 35px;
         padding: 5px;
         border-radius: 5px;
     }
 
     select{
-        width: 30vw;
+        width: 28vw;
         height: 35px;
         padding: 5px;
         border-radius: 5px;
     }
 
     textarea{
-        max-width: 30vw;
+        max-width: 28vw;
         min-width: 29.9vw;
         height: 100px;
         padding: 5px;

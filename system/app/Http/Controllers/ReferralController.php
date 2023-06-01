@@ -50,16 +50,16 @@ class ReferralController extends Controller
         return view('referrals.worklist', ['patients' => $patients]);
     }
 
-    public function create(Patient $patient){
+    public function createreferal(Patient $patient){
 
         $patientDetails = Patient::where('id', $patient->id)->first();
 
-        return view('referrals.create', compact('patient', 'patientDetails'));
+        return view('referrals.createreferal', compact('patient', 'patientDetails'));
     }
 
-    public function createreferal() {
-        return view('referrals.createreferal');
-    }
+    // public function createreferal() {
+    //     return view('referrals.createreferal');
+    // }
 
     public function store(Request $request){
         // Process and store the referral form data
