@@ -105,15 +105,15 @@ class ReferralController extends Controller
     public function submitReferral(Request $request): RedirectResponse
     {
 
-        
 
-        // Validate the form data
-        // $validatedData = $request->validate([
-        //     'referringOfficer' => 'required',
-        //     'reasonReferral' => 'required',
-        //     'priorityLevel' => 'required',
-        //     // Add validation rules for other form fields
-        // ]);
+
+        //Validate the form data
+        $validatedData = $request->validate([
+            'referringOfficer' => 'required',
+            //'reasonReferral' => 'required',
+            'priorityLevel' => 'required',
+            // Add validation rules for other form fields
+        ]);
 
         // Create a new referral instance
         $referral = new Referral;

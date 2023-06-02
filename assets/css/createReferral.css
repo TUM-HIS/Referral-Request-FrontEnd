@@ -36,7 +36,7 @@
 
     .submitreqbtn{
         border: 2px solid transparent;
-        background: rgba(0, 102, 255, 0.822);
+        background: #4154f1;
         color: whitesmoke;
         padding: 8px;
         border-radius: 5px;
@@ -50,7 +50,7 @@
 
     legend{
         font-weight: bold;
-        color: orangered;
+        color: #012970;
     }
 
     input{

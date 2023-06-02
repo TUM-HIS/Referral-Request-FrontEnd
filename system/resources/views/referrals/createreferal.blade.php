@@ -28,93 +28,93 @@
                 <div class="grid-by-ace">
                     <fieldset class="grid-1-1">
                         <legend>Patient Details</legend>
-        
+
                         <div class="">
                             <p>Full Name</p>
-                            <input type='text' name='' placeholder="Patient's Full Name" value="{{ $patient->first_name }}" phprequired> <br>  
+                            <input type='text' name='clientName' placeholder="Patient's Full Name" value="{{ $patient->first_name }}" phprequired> <br>
                         </div>
-                        
+
                         <div class="">
                             <p>Identification Number</p>
-                            <input type='text' name='' placeholder='Identification Number' value="{{ $patient->idNo }}" required> <br>
+                            <input type='text' name='clientID' placeholder='Identification Number' value="{{ $patient->idNo }}" required> <br>
                         </div>
-        
+
                         <div class="">
                             <p>Age</p>
-                            <input type='number' name='' placeholder='Age'> <br>
+                            <input type='number' name='clientAge' placeholder='Age'> <br>
                         </div>
-        
+
                         <div class="">
                             <p>UPI Number</p>
-                            <input type='text' name='' placeholder='Unique Personal Identification Number' value="{{ $patient->upi }}"> <br>
+                            <input type='text' name='clientUPI' placeholder='Unique Personal Identification Number' value="{{ $patient->upi }}"> <br>
                         </div>
-        
+
                         <div class="">
                             <p>Birth Certificate Number</p>
-                            <input type='text' name='' placeholder='Birth Certificate Number'> <br>
+                            <input type='text' name='clientBirthCert' placeholder='Birth Certificate Number'> <br>
                         </div>
-        
+
                         <div class="">
                             <p>Telephone Number</p>
-                            <input type='text' name='' placeholder='Telephone Number' value="{{ $patient->telephone }}" required> <br>
+                            <input type='text' name='clientTelephone' placeholder='Telephone Number' value="{{ $patient->telephone }}" required> <br>
                         </div>
-        
+
                         <div class="">
                             <p>County</p>
-                            <input type='text' name='' placeholder='County' value="{{ $patient->countyOfBirth }}" required> <br>
+                            <input type='text' name='clientCounty' placeholder='County' value="{{ $patient->countyOfBirth }}" required> <br>
                         </div>
-        
+
                         <div class="">
                             <p>Subcounty</p>
-                            <input type='text' name='' placeholder='Subcounty' value="{{ $patient->subCounty }}" required> <br>
+                            <input type='text' name='clientSubCounty' placeholder='Subcounty' value="{{ $patient->subCounty }}" required> <br>
                         </div>
-        
+
                         <div class="">
                             <p>Constituency</p>
-                            <input type='text' name='' placeholder='Constituency' value="{{ $patient->village }}" required> <br>
+                            <input type='text' name='clientConstituency' placeholder='Constituency' value="{{ $patient->village }}" required> <br>
                         </div>
-                        
+
                         <div class="">
                             <p>Ward</p>
-                            <input type='text' name='' placeholder='Ward' value="{{ $patient->address }}" required> <br>
+                            <input type='text' name='clientWard' placeholder='Ward' value="{{ $patient->address }}" required> <br>
                         </div>
-                        
+
                     </fieldset>
-        
-                    <div class="grid-1-2 ">
+
+                    <div class="grid-1-2">
                         <fieldset class="">
                             <legend>Next of Kin Details</legend>
-                           
+
                             <div class="">
                                 <p>Full Name</p>
-                                <input type='text' name='' placeholder="Kin's Full Name"" value="{{ $patient->kinName }}" required> <br>
+                                <input type='text' name='kinName' placeholder="Kin's Full Name"" value="{{ $patient->kinName }}" required> <br>
                             </div>
-        
+
                             <div class="">
                                 <p>Relationship to Patient</p>
-                                <input name="" id="" value="{{ $patient->relationship }}"> <br>
+                                <input name="kinRelationship" id="" value="{{ $patient->relationship }}"> <br>
                             </div>
-        
+
                             <div class="">
                                 <p>Telephone Number</p>
-                                <input type='text' name='' placeholder='Telephone Number' value="{{ $patient->kinTelephone }}"> <br>
+                                <input type='text' name='kinTelephone' placeholder='Telephone Number' value="{{ $patient->kinTelephone }}"> <br>
                             </div>
-                            
+
                         </fieldset>
-            
+
                         <fieldset class="">
                             <legend>Referral Details</legend>
-            
+
                             <div class="">
                                 <p>Referring Officer</p>
-                                <select type='text' name='referringOfficer' id='referringOfficer' placeholder="Referring Officer's Name"> 
+                                <select type='text' name='referringOfficer' id='referringOfficer' placeholder="Referring Officer's Name">
                                     <option value="">Select Referring Officer</option>
                                     <!-- Populate referring officers dynamically from the database or an API -->
                                     <option value="officer1">Dr. Amos Katwa</option>
                                     <option value="officer2">Dr. Mercy Cherono</option>
                                 </select>
                             </div>
-                            
+
                             <div class="">
                                 <p>History/Investigation</p>
                                 <select type="text" id="historyInvestigation" name="historyInvestigation" multiple required>
@@ -137,7 +137,7 @@
                                     <option value="history15">Spirometry</option>
                                   </select>
                             </div>
-        
+
                             <div class="">
                                 <p>Diagnosis</p>
                                 <select id="diagnosis" name="diagnosis" multiple required>
@@ -160,27 +160,27 @@
                                     <option value="diagnosis15">Breast cancer</option>
                                   </select>
                             </div>
-        
+
                             <div class="">
                                 <p>Referral Details</p>
-                                <input type='text' name='' placeholder='Referral Details'> <br>
+                                <input type='text' name='referralDetails' placeholder='Referral Details'> <br>
                             </div>
-        
+
                             <div class="">
                                 <p>Attachments</p>
                                 <input type="file" id="formFileMultiple" multiple placeholder='File Attachments'> <br>
                             </div>
-            
+
                             <div class="">
                                 <p>Additional Notes</p>
                                 <input type='text' id="additionalNotes" name="additionalNotes" placeholder='Additional Medical Notes'> <br>
                             </div>
-            
+
                         </fieldset>
                     </div>
             </div>
-    
-    
+
+
                 <fieldset class="grid-by-ace">
                     <div class="grid-1-1" style="margin-right: 6vw;">
                         <legend>Service Details</legend>
@@ -195,7 +195,7 @@
                                 <option value="routine">Routine</option>
                             </select>
                         </div>
-                        
+
                         <div class="">
                             <p>Service Category</p>
                             <select id="serviceCategory" name="serviceCategory">
@@ -217,7 +217,7 @@
                                 <option value="category14">Oncology</option>
                             </select>
                         </div>
-        
+
                         <div class="">
                             <p>Service</p>
                             <select id="service" name="service">
@@ -230,7 +230,7 @@
                                 <option value="service5">Stress test</option>
                             </select>
                         </div>
-                        
+
                         <div class="">
                             <p>Facility</p>
                             <select id="facility" name="facility">
@@ -247,22 +247,22 @@
                                 <option value="facility9">Tenwek Hospital - Bomet</option>
                                 <option value="facility10">Rift Valley Provincial General Hospital - Nakuru</option>
                             </select>
-                        </div>    
+                        </div>
                     </div>
-    
-    
+
+
                     <div class="grid-1-2" style="margin-top: 40px;">
                         <div class="">
                             <p>Approximate Distance</p>
                             <input type="text" id="distance" name='distance' placeholder='Approximate distance' readonly> <br>
                         </div>
-        
+
                         <div class="">
                             <p>Additional Notes</p>
                             <textarea id="serviceNotes" name="serviceNotes" cols="30" rows="10" placeholder="Additional Medical Notes..."></textarea>
-                        </div>     
+                        </div>
                     </div>
-                </fieldset>    
+                </fieldset>
             </div>
 
             <button class="submitreqbtn">Submit Request</button>
