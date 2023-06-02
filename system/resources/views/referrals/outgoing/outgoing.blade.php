@@ -26,9 +26,12 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Referral ID</th>
-                                <th>Status</th>
-                                <th>Referral Type</th>
+                                <th>Client Name</th>
+                                <th>Client UPI</th>
+                                <th>Refering Officer</th>
+                                <th>Investigations</th>
+                                <th>diagnosis</th>
+                                <th>Referral Reason</th>
                                 <th>Priority</th>
                                 <th>Requested Service </th>
                                 <th>Intended Facility </th>
@@ -38,29 +41,20 @@
                             @foreach($referralRequests as $referralRequest)
                                 <tr>
                                     <td>{{ $referralRequest->id }}</td>
-                                    <td>{{ $referralRequest->identifier }}</td>
-                                    {{-- <td>{{ $referralRequest->definition }}</td>
-                                    <td>{{ $referralRequest->basedOn }}</td>
-                                    <td>{{ $referralRequest->replaces }}</td>
-                                    <td>{{ $referralRequest->groupIdentifier }}</td> --}}
-                                    <td>{{ $referralRequest->status }}</td>
-                                    {{-- <td>{{ $referralRequest->intent }}</td> --}}
-                                    <td>{{ $referralRequest->type }}</td>
-                                    <td>{{ $referralRequest->priority }}</td>
-                                    <td>{{ $referralRequest->serviceRequested }}</td>
-                                    {{-- <td>{{ $referralRequest->subject }}</td>
-                                    <td>{{ $referralRequest->context }}</td>
-                                    <td>{{ $referralRequest->occurrence }}</td>
-                                    <td>{{ $referralRequest->authoredOn }}</td>
-                                    <td>{{ $referralRequest->requester }}</td>
-                                    <td>{{ $referralRequest->specialty }}</td> --}}
-                                    <td>{{ $referralRequest->recipient }}</td>
-                                    {{-- <td>{{ $referralRequest->reasonCode }}</td>
-                                    <td>{{ $referralRequest->reasonReference }}</td>
-                                    <td>{{ $referralRequest->description }}</td>
-                                    <td>{{ $referralRequest->supportingInfo }}</td>
-                                    <td>{{ $referralRequest->note }}</td>
-                                    <td>{{ $referralRequest->relevantHistory }}</td> --}}
+                                    <td>{{ $referralRequest->clientName }}</td>
+                                    <td>{{ $referralRequest->clientUPI }}</td>
+                                    <td>{{ $referralRequest->referringOfficer }}</td>
+                                    <td>{{ $referralRequest->historyInvestigation }}</td>
+                                    <td>{{ $referralRequest->diagnosis }}</td>
+                                    <td>{{ $referralRequest->reasonReferral }}</td>
+                                    {{-- <td>{{ $referralRequest->attachments }}</td>
+                                    <td>{{ $referralRequest->additionalNotes }}</td> --}}
+                                    <td>{{ $referralRequest->priorityLevel }}</td>
+                                    {{-- <td>{{ $referralRequest->serviceCategory }}</td> --}}
+                                    <td>{{ $referralRequest->service }}</td>
+                                    <td>{{ $referralRequest->facility }}</td>
+                                    {{-- <td>{{ $referralRequest->distance }}</td>
+                                    <td>{{ $referralRequest->serviceNotes }}</td> --}}
                                 </tr>
                             @endforeach
                             </tbody>

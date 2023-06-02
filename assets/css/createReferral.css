@@ -1,0 +1,76 @@
+     /*CUSTOM CLASSES*/
+     .grid-by-ace{
+        display: grid !important;
+    }
+
+
+    .grid-1-1{
+        grid-row: 1 !important;
+        grid-column: 1 !important;
+    }
+
+    .grid-1-2{
+        grid-row: 1 !important;
+        grid-column: 2 !important;
+    }
+
+    .grid-2-1{
+        grid-row: 2 !important;
+        grid-column: 1 !important;
+    }
+
+    .grid-2-2{
+        grid-row: 2 !important;
+        grid-column: 2 !important;
+    }
+
+    fieldset{
+        padding: 10px;
+        border-radius: 8px;
+        border: 2px solid rgb(2,48,71);
+        margin: 20px;
+        width: max-content;
+        margin: 1vw;
+    }
+
+
+    .submitreqbtn{
+        border: 2px solid transparent;
+        background: rgba(0, 102, 255, 0.822);
+        color: whitesmoke;
+        padding: 8px;
+        border-radius: 5px;
+        margin-left: 1vw;
+    }
+
+    .submitreqbtn:hover{
+        
+    }
+
+
+    legend{
+        font-weight: bold;
+        color: orangered;
+    }
+
+    input{
+        width: 28vw;
+        height: 35px;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    select{
+        width: 28vw;
+        height: 35px;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    textarea{
+        max-width: 28vw;
+        min-width: 29.9vw;
+        height: 100px;
+        padding: 5px;
+        border-radius: 5px;
+    }

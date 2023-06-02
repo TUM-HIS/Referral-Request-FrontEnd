@@ -59,7 +59,7 @@
       <tbody>
         <!-- Patient records will be dynamically added here -->
         @foreach ($patients as $patient)
-            <tr onclick="window.location.href='{{ route('referrals.create', $patient) }}'">
+            <tr onclick="window.location.href='{{ route('referrals.createreferal', $patient) }}'">
                 <td>{{ $patient->id }}</td>
                 <td>{{ $patient->first_name }}</td>
                 <td>{{ $patient->last_name }}</td>

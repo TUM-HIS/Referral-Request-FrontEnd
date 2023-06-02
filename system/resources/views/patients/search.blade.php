@@ -18,7 +18,7 @@
 
                 <div class="card input-group mx-auto d-flex flex-row p-4 pb-5 justify-content-center" style="width:450px;top:5rem;">
                     <div>
-                        <h5 class="p-2">Search Patient using PID</h5>
+                        <h5 class="p-2">Search Patient using Patient Identifier</h5>
                     </div>
                     <div class="form-outline">
                         <label class="form-label visually-hidden" for="searchform">Search Patient</label>
