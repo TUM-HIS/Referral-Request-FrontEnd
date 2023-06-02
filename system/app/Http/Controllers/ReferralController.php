@@ -106,7 +106,7 @@ class ReferralController extends Controller
     public function submitReferral(Request $request): RedirectResponse
     {
 
-        
+
 
         // Validate the form data
         // $validatedData = $request->validate([
@@ -132,6 +132,24 @@ class ReferralController extends Controller
         $referral->facility = $request->input('facility');
         $referral->distance = $request->input('distance');
         $referral->serviceNotes = $request->input('serviceNotes');
+
+
+//        $referral = new Referral;
+//        $referral->clientName = "request->input('clientName')";
+//        $referral->clientUPI = "request->input('clientUPI')";
+//        $referral->referringOfficer = "request->input('referringOfficer')";
+//        $referral->historyInvestigation = "request->input('historyInvestigation')";
+//        $referral->diagnosis = "request->input('diagnosis')";
+//        $referral->reasonReferral = "request->input('reasonReferral')";
+//        $referral->attachments = "request->input('attachments')";
+//        $referral->additionalNotes = "request->input('additionalNotes')";
+//        $referral->priorityLevel = "request->input('priorityLevel')";
+//        $referral->serviceCategory = "request->input('serviceCategory')";
+//        $referral->service = "request->input('service')";
+//        $referral->facility = "request->input('facility')";
+//        $referral->distance = "request->input('distance')";
+//        $referral->serviceNotes = "request->input('serviceNotes')";
+
 
         // Save the referral to the database
         $referral->save();
@@ -159,7 +177,7 @@ class ReferralController extends Controller
         // Perform any additional processing or integrations
 
         // Redirect to a success page or display a success message
-        return Redirect::route('referrals.success');
+        return Redirect::route('referrals.worklist');
     }
 
 
