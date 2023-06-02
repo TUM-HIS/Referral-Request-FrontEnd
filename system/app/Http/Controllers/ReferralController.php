@@ -109,12 +109,12 @@ class ReferralController extends Controller
 
 
         // Validate the form data
-        // $validatedData = $request->validate([
-        //     'referringOfficer' => 'required',
-        //     'reasonReferral' => 'required',
-        //     'priorityLevel' => 'required',
-        //     // Add validation rules for other form fields
-        // ]);
+         $validatedData = $request->validate([
+             'referringOfficer' => 'required',
+             'reasonReferral' => 'required',
+             'priorityLevel' => 'required',
+             // Add validation rules for other form fields
+         ]);
 
         // Create a new referral instance
         $referral = new Referral;
@@ -177,13 +177,13 @@ class ReferralController extends Controller
         // Perform any additional processing or integrations
 
         // Redirect to a success page or display a success message
-        return Redirect::route('referrals.worklist');
+        return Redirect::route('referral.outgoing');
     }
 
 
 
     public function outgoing(){
-        $referralRequests = DB::select('select * from referrals');
+        $referralRequests = Referral::orderBy('created_at', 'desc')->get();
         //$referralRequests = referralRequest::all();
         return view('referrals.outgoing.outgoing',['referralRequests'=>$referralRequests]);
     }
