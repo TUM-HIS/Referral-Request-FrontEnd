@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('referringOfficer');
             $table->string('historyInvestigation');
             $table->string('diagnosis');
-            $table->string('reasonReferral');
+            $table->string('reasonReferral')->nullable();
             $table->string('attachments')->nullable();
             $table->string('additionalNotes');
             $table->string('priorityLevel');

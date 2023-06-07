@@ -6,12 +6,13 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "ext-curl": "*",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
-        "spatie/laravel-permission": "^5.10",
-      "ext-curl": "*"
+        "nesbot/carbon": "*",
+        "spatie/laravel-permission": "^5.10"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

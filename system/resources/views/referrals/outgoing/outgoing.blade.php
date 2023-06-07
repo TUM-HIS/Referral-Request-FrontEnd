@@ -19,7 +19,7 @@
                 <!-- Left side columns -->
                 <div class="col-lg-12">
                     <div class="d-flex justify-content-end m-2">
-                        <a class="btn btn-sm btn-outline-primary" href="{{ route('referrals.addReferral') }}">Refer</a>
+                        <a class="btn btn-sm btn-outline-primary" href="{{ route('referrals.worklist') }}">Refer</a>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped datatable">

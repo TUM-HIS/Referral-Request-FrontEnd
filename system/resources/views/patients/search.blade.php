@@ -20,13 +20,26 @@
                     <div>
                         <h5 class="p-2">Search Patient using Patient Identifier</h5>
                     </div>
-                    <div class="form-outline">
-                        <label class="form-label visually-hidden" for="searchform">Search Patient</label>
-                        <input id="search-input" type="search" id="searchform" class="form-control" placeholder="Search Patients"/>
-                    </div>
-                    <button id="search-button" type="button" class="btn btn-primary">
-                      <i class="bi bi-search"></i>
-                    </button>
+                    {{-- <form action="{{ route('patients.search-patient') }}" method="get">
+                        <div class="form-outline">
+                            <label class="form-label visually-hidden" for="searchform">Search Patient</label>
+                            <input id="search-input" type="search" id="searchform" class="form-control" placeholder="Search Patients"/>
+                        </div>
+                        <button id="search-button" type="button" class="btn btn-primary">
+                          <i class="bi bi-search"></i>
+                        </button>
+                    </form> --}}
+                    <form method="GET" action="{{ route('patients.search-patient') }}">
+                        <div class="input-group">
+                            <div class="form-outline">
+                                <input type="search" name="idNo" class="form-control rounded" placeholder="Enter Patient ID Number">  
+                              </div>
+                              <button class="btn btn-outline-primary" type="submit">
+                                  <i class="bi bi-search"></i>
+                              </button>
+                        </div>
+                    </form>
+                    
                 </div>
             </div>
         </section>

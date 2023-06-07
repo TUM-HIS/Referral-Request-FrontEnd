@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Models\Patient;
+	
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PatientController extends Controller
 {
@@ -24,7 +27,7 @@ class PatientController extends Controller
         $randomupi='MOH-'.substr(str_shuffle($chars),0,4).'-'.substr(str_shuffle($numbers),0,3).'-'.substr(str_shuffle($chars),0,3);
 
         $patient = new Patient;
-        $patient -> first_name = $request ->username;
+        $patient -> first_name = $request ->patientname;
         $patient -> last_name = $request->name;
         $patient -> dob = $request ->dob;
         $patient -> idNo = $request->id;
@@ -53,7 +56,29 @@ class PatientController extends Controller
         return view('patients.search');
     }
 
-    public function viewPatient () {
+    public function search(Request $request)
+    {
+        $idNo = $request->input('idNo');
 
+        // Perform the search logic using the $idNo
+        $patient = Patient::where('idNo', $idNo)->first();
+
+        if ($patient) {
+            // Patient found
+            return view('patients.viewPatient', ['patient' => $patient]);
+        } else {
+            // Patient not found
+            return view('patients.patientNotFound');
+        }
     }
+
+    public function viewPatient (Patient $patient) {
+        $patientDetails = Patient::where('id', $patient->id)->first();
+
+        return view('patients.viewPatient', compact('patient', 'patientDetails'));
+    }
+
+
+    
+
 }

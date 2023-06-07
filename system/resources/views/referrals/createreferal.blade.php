@@ -31,7 +31,7 @@
 
                         <div class="">
                             <p>Full Name</p>
-                            <input type='text' name='clientName' placeholder="Patient's Full Name" value="{{ $patient->first_name }}" phprequired> <br>
+                            <input type='text' name='clientName' placeholder="Patient's Full Name" value="{{ $patient->first_name }} {{ $patient->last_name }}" phprequired> <br>
                         </div>
 
                         <div class="">
@@ -41,7 +41,7 @@
 
                         <div class="">
                             <p>Age</p>
-                            <input type='number' name='clientAge' placeholder='Age'> <br>
+                            <input type='number' name='clientAge' value="{{ \Carbon\Carbon::parse($patient->dob)->age }}" placeholder='Age'> <br>
                         </div>
 
                         <div class="">
