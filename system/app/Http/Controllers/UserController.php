@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Facility;
 use App\Models\Patient;
-use App\Models\ReferalRequest;
+use App\Models\Facility;
+use App\Models\Referral;
 use Illuminate\Http\Request;
+use App\Models\ReferalRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -61,7 +62,7 @@ class UserController extends Controller
 //        return 'aricha';
         $patients = Patient::count();
         // $physicians = Physicians::count();
-        $referals = ReferalRequest::count();
+        $referals = Referral::count();
         // $referalfeedback = Referalfeedback::count();
         $facilities = Facility::count();
         return view('admin.index', compact('facilities','referals','patients'));

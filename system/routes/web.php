@@ -42,7 +42,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/store-user', [PatientController::class, 'addData'])->name('patients.storeData');
 
     Route::get('/search-patient', [PatientController::class, 'searchPatient'])->name('patients.searchPatients');
-    // Route::get('/view-patient', [PatientController::class, 'viewPatient'])->name('patients.viewPatient');
+    Route::get('/search-patients', [PatientController::class, 'search'])->name('patients.search-patient');
+    // Route::get('/search-patient/results/', [PatientController::class, 'searchResults'])->name('patients.searchResults');
+    Route::get('/patients/view/{patient}', [PatientController::class, 'viewPatient'])->name('patients.viewPatient');
 
     // Route::get('/search-doctor', [DoctorController::class, 'searchDoctor'])->name('doctors.searchDoctor');
     // Route::get('/view-pdoctor', [DoctorController::class, 'viewDoctor'])->name('doctors.viewDoctor');
@@ -51,8 +53,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/store-form', [TriageController::class, 'store'])->name('triages.store-form');
     Route::get('/worklist',[ReferralController::class,'worklist'])->name('referrals.worklist');
     Route::post('/submit-referral', [ReferralController::class, 'submitReferral'])->name('referrals.submitReferral');
-    // Route::get('/referral/{patient}', [ReferralController::class, 'create'])->name('referrals.create');
-    Route::get('/referral/create{patient}', [ReferralController::class, 'createreferal'])->name('referrals.createreferal');
+    //Route::get('/referral/{patient}', [ReferralController::class, 'create'])->name('referrals.create');
+    Route::get('/referral/create/{patient}', [ReferralController::class, 'createreferal'])->name('referrals.createreferal');
     Route::get('/referral-success}', [ReferralController::class, 'submitReferral'])->name('referrals.success');
 });
 
