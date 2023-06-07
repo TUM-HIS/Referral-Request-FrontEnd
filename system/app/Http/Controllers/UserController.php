@@ -59,6 +59,7 @@ class UserController extends Controller
     }
 
     public function admin(){
+//        return 'aricha';
         $patients = Patient::count();
         // $physicians = Physicians::count();
         $referals = Referral::count();

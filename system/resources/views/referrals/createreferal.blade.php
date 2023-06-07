@@ -64,20 +64,24 @@
                             <input type='text' name='clientCounty' placeholder='County' value="{{ $patient->countyOfBirth }}" required> <br>
                         </div>
 
+
                         <div class="">
                             <p>Subcounty</p>
                             <input type='text' name='clientSubCounty' placeholder='Subcounty' value="{{ $patient->subCounty }}" required> <br>
                         </div>
+
 
                         <div class="">
                             <p>Constituency</p>
                             <input type='text' name='clientConstituency' placeholder='Constituency' value="{{ $patient->village }}" required> <br>
                         </div>
 
+
                         <div class="">
                             <p>Ward</p>
                             <input type='text' name='clientWard' placeholder='Ward' value="{{ $patient->address }}" required> <br>
                         </div>
+
 
                     </fieldset>
 
@@ -85,10 +89,12 @@
                         <fieldset class="">
                             <legend>Next of Kin Details</legend>
 
+
                             <div class="">
                                 <p>Full Name</p>
                                 <input type='text' name='kinName' placeholder="Kin's Full Name"" value="{{ $patient->kinName }}" required> <br>
                             </div>
+
 
                             <div class="">
                                 <p>Relationship to Patient</p>
@@ -100,13 +106,16 @@
                                 <input type='text' name='kinTelephone' placeholder='Telephone Number' value="{{ $patient->kinTelephone }}"> <br>
                             </div>
 
+
                         </fieldset>
+
 
                         <fieldset class="">
                             <legend>Referral Details</legend>
 
                             <div class="">
                                 <p>Referring Officer</p>
+                                <select type='text' name='referringOfficer' id='referringOfficer' placeholder="Referring Officer's Name">
                                 <select type='text' name='referringOfficer' id='referringOfficer' placeholder="Referring Officer's Name">
                                     <option value="">Select Referring Officer</option>
                                     <!-- Populate referring officers dynamically from the database or an API -->
@@ -117,7 +126,7 @@
 
                             <div class="">
                                 <p>History/Investigation</p>
-                                <select type="text" id="historyInvestigation" name="historyInvestigation" multiple required>
+                                <select type="text" id="historyInvestigation" name="historyInvestigation" required>
                                     <option value="">Select History/Investigation</option>
                                     <!-- Populate history/investigation options dynamically -->
                                     <option value="history1">Radiography (X-ray) of the affected area</option>
@@ -140,7 +149,7 @@
 
                             <div class="">
                                 <p>Diagnosis</p>
-                                <select id="diagnosis" name="diagnosis" multiple required>
+                                <select id="diagnosis" name="diagnosis" required>
                                     <option value="">Select Diagnosis</option>
                                     <!-- Populate diagnosis options dynamically using coded concepts -->
                                     <option value="diagnosis1">Hypertension</option>
@@ -161,10 +170,34 @@
                                   </select>
                             </div>
 
-                            <div class="">
+
+                            <div class="required">
+                                <p>Reason for Referral</p>
+                                <select id="reasonReferral" name="reasonReferral" required>
+                                    <option value="">Select Reason for Referral</option>
+                                    <!-- Populate reason for referral options dynamically using coded concepts -->
+                                    <option value="reason1">Need for specialized surgical intervention</option>
+                                    <option value="reason2">Diagnostic uncertainty requiring further investigation by a specialist</option>
+                                    <option value="reason3">Suspected malignancy or cancer diagnosis</option>
+                                    <option value="reason4">Inadequate response to initial treatment or therapy</option>
+                                    <option value="reason5">Need for specialized rehabilitative services</option>
+                                    <option value="reason6">Evaluation for organ transplantation</option>
+                                    <option value="reason7">Second opinion for a challenging medical case</option>
+                                    <option value="reason8">Need for genetic testing or counseling</option>
+                                    <option value="reason9">Suspected neurological disorder or condition</option>
+                                    <option value="reason10">Assessment and management of chronic pain</option>
+                                    <option value="reason11">Evaluation and management of psychiatric or psychological concerns</option>
+                                    <option value="reason12">Complex obstetric or gynecological conditions</option>
+                                    <option value="reason13">Evaluation and management of developmental delays or disabilities in children</option>
+                                    <option value="reason14">Suspected infectious diseases or rare medical conditions requiring expertise</option>
+                                </select>
+                            </div>
+
+                            <div class="required">
                                 <p>Referral Details</p>
                                 <input type='text' name='referralDetails' placeholder='Referral Details'> <br>
                             </div>
+
 
                             <div class="">
                                 <p>Attachments</p>
@@ -173,12 +206,15 @@
 
                             <div class="">
                                 <p>Additional Notes</p>
-                                <input type='text' id="additionalNotes" name="additionalNotes" placeholder='Additional Medical Notes'> <br>
+                                <input type='text' id="additionalNotes" name="additionalNotes" placeholder='Additional Medical Notes' required> <br>
                             </div>
+
 
                         </fieldset>
                     </div>
             </div>
+
+
 
 
                 <fieldset class="grid-by-ace">
@@ -195,6 +231,7 @@
                                 <option value="routine">Routine</option>
                             </select>
                         </div>
+
 
                         <div class="">
                             <p>Service Category</p>
@@ -218,6 +255,7 @@
                             </select>
                         </div>
 
+
                         <div class="">
                             <p>Service</p>
                             <select id="service" name="service">
@@ -230,6 +268,7 @@
                                 <option value="service5">Stress test</option>
                             </select>
                         </div>
+
 
                         <div class="">
                             <p>Facility</p>
@@ -256,11 +295,11 @@
                             <p>Approximate Distance</p>
                             <input type="text" id="distance" name='distance' placeholder='Approximate distance' readonly> <br>
                         </div>
-
+        
                         <div class="">
                             <p>Additional Notes</p>
                             <textarea id="serviceNotes" name="serviceNotes" cols="30" rows="10" placeholder="Additional Medical Notes..."></textarea>
-                        </div>
+                        </div>     
                     </div>
                 </fieldset>
             </div>
