@@ -104,7 +104,7 @@ _For more information, please refer to the [Documentation](docs.md)_
 
 2. Publish all the schema to the database.
    ```sh
-   php artisan:migrate
+   php artisan migrate
    ```  
 3. Seed the database with dummy users.
    ```sh
