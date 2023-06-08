@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Facility;
+use App\Models\m_f_l_s;
 use App\Models\Patient;
 use App\Models\ReferalRequest;
 use Illuminate\Http\Request;
@@ -31,13 +31,35 @@ class UserController extends Controller
 
         if (Auth::guard('web')->attempt($logins, true)) {
 
-            return redirect()->route('user.dashboard')->with('success', 'Welcome' . " " . Auth::user()->name);
+            return redirect()->route('facility.set')->with('success', 'Welcome' . " " . Auth::user()->name);
 
         }else{
 
             return redirect()->back()->with('error', 'Oops!! Confirm your logins');
         }
 
+    }
+
+    Public function getFacilities()
+    {
+       $facilities = m_f_l_s::all();
+       return view('auth.facility-selection', compact('facilities'));
+    }
+
+
+    public function select(Request $request)
+    {
+        $user = auth()->user();
+        $Code = $request->input('facility_id');
+
+        $facilities = m_f_l_s::find($Code);
+
+        if ($facilities && $user) {
+            $user->facility_id = $facilities->$Code;
+            $user->save();
+        }
+
+        return redirect()->route('user.dashboard');
     }
 
     public function dashboard(){
@@ -63,7 +85,7 @@ class UserController extends Controller
         // $physicians = Physicians::count();
         $referals = ReferalRequest::count();
         // $referalfeedback = Referalfeedback::count();
-        $facilities = Facility::count();
+        $facilities = m_f_l_s::count();
         return view('admin.index', compact('facilities','referals','patients'));
     }
 

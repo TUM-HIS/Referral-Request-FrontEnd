@@ -49,4 +49,9 @@ class User extends Authenticatable
         return $this->hasOne(Role::class, 'id', 'role_id');
 
     }
+    
+    public function facility()
+    {
+        return $this->belongsTo(Facility::class);
+    }
 }

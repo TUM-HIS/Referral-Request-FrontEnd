@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TriageController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ReferralController;
+use App\Http\Controllers\FacilityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +20,8 @@ use App\Http\Controllers\ReferralController;
 
 Route::get('/', [UserController::class, 'signIn'])->name('user.signIn');
 Route::post('/user-login', [UserController::class, 'login'])->name('user.login');
+Route::get('/facility/set', [UserController::class, 'getFacilities'])->name('facility.set');
+Route::post('/facility/select', [UserController::class, 'select'])->name('facility.select');
 Route::get('/dashboard', [UserController::class, 'dashboard'])->name('user.dashboard');
 Route::get('/admin', [UserController::class, 'admin'])->name('admin.dashboard');
 Route::get('/doctor', [UserController::class, 'doctor'])->name('doctor.dashboard');
