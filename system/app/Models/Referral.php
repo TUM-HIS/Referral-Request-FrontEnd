@@ -16,6 +16,7 @@ class Referral extends Model
         'clientName',
         'clientUPI',
         'referringOfficer',
+        'referredFacility',
         'historyInvestigation',
         'diagnosis',
         'reasonReferral',
@@ -27,6 +28,12 @@ class Referral extends Model
         'facility',
         'distance',
         'serviceNotes',
-        'referralId'
+        'referralId',
+        'submitReferral'
     ];
+
+    public function referredFacility()
+    {
+        return $this->belongsTo(Facility::class, 'referredFacility');
+    }
 }
