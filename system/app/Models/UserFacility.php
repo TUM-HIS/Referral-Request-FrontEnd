@@ -15,11 +15,11 @@ class UserFacility extends Model
     // Define the relationships with User and Facility models
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function facility()
     {
-        return $this->belongsTo(m_f_l_s::class);
+        return $this->belongsTo(m_f_l_s::class, 'facility_id');
     }
 }
