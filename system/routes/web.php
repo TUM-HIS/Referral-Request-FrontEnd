@@ -38,8 +38,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/outgoing', [ReferralController::class, 'outgoing'])->name('referral.outgoing');
 
-    Route::get('/patients',[PatientController::class,'addPatient'])->name('patients.addPatient');
-    Route::post('/store-user', [PatientController::class, 'addData'])->name('patients.storeData');
+    Route::get('/new-patient',[PatientController::class,'addPatient'])->name('patients.addPatient');
+    Route::post('/store-patient', [PatientController::class, 'addData'])->name('patients.storeData');
 
     Route::get('/search-patient', [PatientController::class, 'searchPatient'])->name('patients.searchPatients');
     Route::get('/search-patients', [PatientController::class, 'search'])->name('patients.search-patient');

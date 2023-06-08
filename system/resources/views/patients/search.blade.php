@@ -32,7 +32,7 @@
                     <form method="GET" action="{{ route('patients.search-patient') }}">
                         <div class="input-group">
                             <div class="form-outline">
-                                <input type="search" name="idNo" class="form-control rounded" placeholder="Enter Patient ID Number">  
+                                <input type="search" name="idNo" class="form-control rounded" placeholder="Enter Patient ID Number" required>  
                               </div>
                               <button class="btn btn-outline-primary" type="submit">
                                   <i class="bi bi-search"></i>

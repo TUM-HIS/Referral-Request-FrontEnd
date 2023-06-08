@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MFL;
+use App\Models\Ref;
 use App\Models\Patient;
 use App\Models\Facility;
 use App\Models\Referral;
 use Illuminate\Http\Request;
-use App\Models\ReferalRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -64,7 +65,7 @@ class UserController extends Controller
         // $physicians = Physicians::count();
         $referals = Referral::count();
         // $referalfeedback = Referalfeedback::count();
-        $facilities = Facility::count();
+        $facilities = MFL::count();
         return view('admin.index', compact('facilities','referals','patients'));
     }
 

@@ -13,7 +13,7 @@ class PatientController extends Controller
 
     public function addPatient (){
 
-        return view('patients.patient');
+        return view('patients.newPatient');
     }
     //
     public function addData(Request $request)
