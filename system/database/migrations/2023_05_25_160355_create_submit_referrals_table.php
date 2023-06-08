@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('referrals', function (Blueprint $table) {
             $table->id();
+            $table->string('referralId')->nullable();
             $table->string('clientName');
             $table->string('clientUPI');
             $table->string('referringOfficer');
+            $table->string('referredFacility');
             $table->string('historyInvestigation');
             $table->string('diagnosis');
             $table->string('reasonReferral')->nullable();
@@ -27,7 +29,7 @@ return new class extends Migration
             $table->string('facility');
             $table->string('distance')->nullable();
             $table->string('serviceNotes');
-            $table->string('referralId')->nullable();
+
             $table->timestamps();
         });
     }
