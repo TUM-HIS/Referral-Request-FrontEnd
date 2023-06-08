@@ -36,16 +36,21 @@
 
     .submitreqbtn{
         border: 2px solid transparent;
-        background: rgba(0, 102, 255, 0.822);
+        background: #4154f1;
         color: whitesmoke;
         padding: 8px;
         border-radius: 5px;
         margin-left: 1vw;
     }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> refs/remotes/origin/referral
     legend{
         font-weight: bold;
-        color: rgb(2,48,71);
+        color: #012970;
     }
 
     input{
