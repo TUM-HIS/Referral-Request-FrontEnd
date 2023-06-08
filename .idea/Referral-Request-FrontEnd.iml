@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/system/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
       <sourceFolder url="file://$MODULE_DIR$/system/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/system/app/Models" isTestSource="false" packagePrefix="App\Models\" />
       <excludeFolder url="file://$MODULE_DIR$/system/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/system/vendor/psr/http-message" />
       <excludeFolder url="file://$MODULE_DIR$/system/vendor/psr/http-client" />
@@ -119,5 +120,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="jquery-3.7.0.slim" level="application" />
+    <orderEntry type="library" name="select2" level="application" />
   </component>
 </module>

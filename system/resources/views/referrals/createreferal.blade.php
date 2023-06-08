@@ -92,7 +92,7 @@
 
                             <div class="">
                                 <p>Full Name</p>
-                                <input type='text' name='kinName' placeholder="Kin's Full Name"" value="{{ $patient->kinName }}" required> <br>
+                                <input type='text' name='kinName' placeholder="Kin's Full Name" value="{{ $patient->kinName }}" required> <br>
                             </div>
 
 
@@ -116,7 +116,7 @@
                             <div class="">
                                 <p>Referring Officer</p>
                                 <select type='text' name='referringOfficer' id='referringOfficer' placeholder="Referring Officer's Name">
-                                <select type='text' name='referringOfficer' id='referringOfficer' placeholder="Referring Officer's Name">
+{{--                                <select type='text' name='referringOfficer' id='referringOfficer' placeholder="Referring Officer's Name">--}}
                                     <option value="">Select Referring Officer</option>
                                     <!-- Populate referring officers dynamically from the database or an API -->
                                     <option value="officer1">Dr. Amos Katwa</option>
@@ -295,11 +295,11 @@
                             <p>Approximate Distance</p>
                             <input type="text" id="distance" name='distance' placeholder='Approximate distance' readonly> <br>
                         </div>
-        
+
                         <div class="">
                             <p>Additional Notes</p>
                             <textarea id="serviceNotes" name="serviceNotes" cols="30" rows="10" placeholder="Additional Medical Notes..."></textarea>
-                        </div>     
+                        </div>
                     </div>
                 </fieldset>
             </div>
