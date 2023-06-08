@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\m_f_l_s;
 use App\Models\Patient;
 use App\Models\Facility;
 use App\Models\Referral;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\ReferalRequest;
 use Illuminate\Support\Facades\Auth;
@@ -70,5 +72,35 @@ class UserController extends Controller
 
     public function doctor(){
         return view('doctor.index');
+    }
+
+    //registering a user to a facility
+    public function register_user_facility(Request $request){
+        $userId = $request->user_id;
+        $facilityId = $request->facility_id;
+        $user = User::find($userId);
+        $facility = m_f_l_s::find($facilityId);
+
+        $user->facilities()->attach($facility);
+    }
+
+    //getting facilities associated to user
+    public function user_facilities(Request $request){
+        $userId = $request->user_id;
+        $user = User::find($userId);
+        $facilities = $user->facilities;
+
+        return $facilities;
+    }
+
+    //getting users associated to a facility
+    public function facility_users(Request $request){
+        $facilityId = $request->facility_id;
+
+        $facility = m_f_l_s::find($facilityId);
+        $users = $facility->users;
+
+        return $users;
+
     }
 }
