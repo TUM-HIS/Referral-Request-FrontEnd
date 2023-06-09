@@ -29,7 +29,7 @@
     <!-- Template Main CSS File -->
     <link href="{{ url('assets/css/style.css') }}" rel="stylesheet">
     <link href="{{ url('assets/css/createReferral.css') }}" rel="stylesheet">
-    <link href="{{ url('assets/css/patientProfile.css') }}" rel="stylesheet">
+    <link href="{{ url('assets/css/newPatient.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css"href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
