@@ -24,18 +24,25 @@
                             <tr>
                                 <th>#</th>
                                 <th>Referral ID</th>
-                                <th>Referral Type</th>
-                                <th>Initiating Facility </th>
+                                <th>Client Name</th>
+                                <th>Priority Level</th>
+                                <th>Referring Officer </th>
                                 <th>Requested Service </th>
                                 <th>Status </th>
-                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($referrals as $key => $referral)
-                                    <tr>
+                            @foreach($referralRequests as $referralRequest)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $referralRequest->referralId }}</td>
+                                    <td>{{ $referralRequest->clientName }}</td>
+                                    <td>{{ $referralRequest->priorityLevel }}</td>
+                                    <td>{{ $referralRequest->referringOfficer }}</td>
+                                    <td>Cardiovascular</td>
+                                    <td>Pending</td>
 
-                                    </tr>
+                                </tr>
                             @endforeach
                             </tbody>
                         </table>

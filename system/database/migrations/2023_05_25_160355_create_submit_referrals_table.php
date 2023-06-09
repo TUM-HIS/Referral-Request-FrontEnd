@@ -26,7 +26,6 @@ return new class extends Migration
             $table->string('priorityLevel');
             $table->string('serviceCategory');
             $table->string('service');
-            $table->string('facility');
             $table->string('distance')->nullable();
             $table->string('serviceNotes');
 

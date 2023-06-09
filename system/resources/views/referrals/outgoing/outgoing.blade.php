@@ -52,7 +52,7 @@
                                     <td>{{ $referralRequest->priorityLevel }}</td>
                                     {{-- <td>{{ $referralRequest->serviceCategory }}</td> --}}
                                     <td>{{ $referralRequest->service }}</td>
-                                    <td>{{ $referralRequest->facility }}</td>
+                                    <td>{{ $referralRequest->facilityReffered->Officialname }}</td>
                                     {{-- <td>{{ $referralRequest->distance }}</td>
                                     <td>{{ $referralRequest->serviceNotes }}</td> --}}
                                 </tr>

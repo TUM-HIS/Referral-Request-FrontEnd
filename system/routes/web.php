@@ -31,7 +31,7 @@ Route::get('/fhirJson', [ReferralController::class, 'fhirJson']);
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
 
-    Route::get('/referrals', [ReferralController::class, 'index'])->name('referrals.index');
+    Route::get('/referrals', [ReferralController::class, 'incomingReferrals'])->name('referrals.index');
     Route::get('/add-referral', [ReferralController::class, 'addReferral'])->name('referrals.addReferral');
     Route::get('/outgoing-referrals', [ReferralController::class, 'outgoingReferrals'])->name('referral.outgoing');
     Route::get('/facilities', [ReferralController::class, 'facilities'])->name('referral.facilities');
