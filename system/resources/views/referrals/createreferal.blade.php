@@ -1,5 +1,13 @@
 @extends('layouts.backend')
 
+//adding select cdn for column selection
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.7.0.slim.min.js"></script>
+{{--<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>--}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+
+
+
 @section('content')
 <main id="main" class="main">
 
@@ -273,18 +281,10 @@
                         <div class="">
                             <p>Facility</p>
                             <select id="facility" name="facility">
-                                <option value="">--- Select Medical Facility ---</option>
-                                <!-- Populate facility options dynamically based on selected service -->
-                                <option value="facility1">Kenyatta National Hospital - Nairobi</option>
-                                <option value="facility2">Aga Khan University Hospital - Nairobi</option>
-                                <option value="facility3">Nairobi Hospital - Nairobi</option>
-                                <option value="facility4">Moi Teaching and Referral Hospital - Eldoret</option>
-                                <option value="facility5">Coast Provincial General Hospital - Mombasa</option>
-                                <option value="facility6">Gertrude's Children's Hospital - Nairobi</option>
-                                <option value="facility7">Mater Misericordiae Hospital - Nairobi</option>
-                                <option value="facility8">Aga Khan Hospital - Mombasai</option>
-                                <option value="facility9">Tenwek Hospital - Bomet</option>
-                                <option value="facility10">Rift Valley Provincial General Hospital - Nakuru</option>
+                                <option selected disabled>--- Select Medical Facility ---</option>
+                                @foreach($facilities as $facility)
+                                    <option value="{{ $facility->Code }}">{{$facility->Code}} - {{ $facility->Officialname }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -311,4 +311,11 @@
 
 
 
+
+
 @endsection
+        <script>
+            $(document).ready(function() {
+            $('#facility').select2();
+            });
+        </script>

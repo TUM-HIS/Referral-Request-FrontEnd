@@ -25,7 +25,6 @@ class Referral extends Model
         'priorityLevel',
         'serviceCategory',
         'service',
-        'facility',
         'distance',
         'serviceNotes',
         'referralId',

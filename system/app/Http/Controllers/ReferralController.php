@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 //use ;
+use App\Models\m_f_l_s;
 use App\utils\SendReferral;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -53,9 +54,10 @@ class ReferralController extends Controller
 
     public function createreferal(Patient $patient){
 
+        $facilities = m_f_l_s::all();
         $patientDetails = Patient::where('id', $patient->id)->first();
 
-        return view('referrals.createreferal', compact('patient', 'patientDetails'));
+        return view('referrals.createreferal')->with(['facilities' => $facilities, 'patient' => $patientDetails]);
     }
 
     // public function createreferal() {
@@ -103,7 +105,7 @@ class ReferralController extends Controller
 //         return redirect('add-referral')->with('status', 'Referral Request posted succesfully');
 //     }
 
-    public function submitReferral(Request $request): RedirectResponse
+    public function submitReferral(Request $request)
     {
 
 
@@ -116,6 +118,8 @@ class ReferralController extends Controller
             'priorityLevel' => 'required',
             // Add validation rules for other form fields
         ]);
+
+//        return $request->all();
 
         // Create a new referral instance
         $referral = new Referral;
@@ -130,7 +134,7 @@ class ReferralController extends Controller
         $referral->priorityLevel = $request->input('priorityLevel');
         $referral->serviceCategory = $request->input('serviceCategory');
         $referral->service = $request->input('service');
-        $referral->facility = $request->input('facility');
+        $referral->referredFacility = $request->input('facility');
         $referral->distance = $request->input('distance');
         $referral->serviceNotes = $request->input('serviceNotes');
 

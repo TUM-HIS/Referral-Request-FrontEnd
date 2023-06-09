@@ -5,9 +5,12 @@
         <i class="bi bi-list toggle-sidebar-btn"></i>
         <a href="index.html" class="logo d-flex align-items-center">
             <img src="" alt="">
-            <span class="d-none d-lg-block">Referral System</span>
+            <span class="d-none d-lg-block">Referral System </span>
         </a>
+
     </div><!-- End Logo -->
+
+    <span class="m-5 "> | </span> <span style="font-size: 90% !important;">{{ auth()->user()->userFacility->Officialname }} ({{ auth()->user()->userFacility->County }} County)</span>
 
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
