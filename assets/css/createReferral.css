@@ -1,6 +1,9 @@
      /*CUSTOM CLASSES*/
      .grid-by-ace{
         display: grid !important;
+        grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+        row-gap: 3rem;
+        column-gap: 3rem;
     }
 
 
@@ -11,7 +14,7 @@
 
     .grid-1-2{
         grid-row: 1 !important;
-        grid-column: 2 !important;
+        grid-column: 2 ;
     }
 
     .grid-2-1{
@@ -27,10 +30,15 @@
     fieldset{
         padding: 10px;
         border-radius: 8px;
-        border: 2px solid rgb(2,48,71);
+        /* border: 2px solid rgb(2,48,71); */
         margin: 20px;
         width: max-content;
         margin: 1vw;
+    }
+
+    .resized fieldset {
+        border: 2px solid #cde0fd;
+        padding: 20px;
     }
 
 
@@ -43,9 +51,12 @@
         margin-left: 1vw;
     }
 
-<<<<<<< HEAD
-=======
-
+    .resize {
+        max-width: 450px;
+        width: 100%;
+        border: 2px solid  #cde0fd;
+        display: grid;
+    }
 
 >>>>>>> refs/remotes/origin/referral
     legend{

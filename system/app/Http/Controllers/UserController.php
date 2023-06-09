@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MFL;
+use App\Models\Ref;
 use App\Models\m_f_l_s;
 use App\Models\Patient;
 use App\Models\Facility;
 use App\Models\Referral;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\ReferalRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
