@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\m_f_l_s;
 use App\utils\SendReferral;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\RedirectResponse;
 use App\Models\ReferalRequest;
@@ -22,13 +23,6 @@ class ReferralController extends Controller
         $referrals = [];
 
         return view('referrals.index')->with(['referrals' => $referrals]);
-    }
-
-    public function outgoingReferrals(){
-
-        $referrals = [];
-
-        return view('referrals.outgoing.outgoing')->with(['referrals' => $referrals]);
     }
 
     public function addReferral(){
@@ -54,7 +48,7 @@ class ReferralController extends Controller
 
     public function createreferal(Patient $patient){
 
-        $facilities = m_f_l_s::all();
+        $facilities = m_f_l_s::take(20)->get();
         $patientDetails = Patient::where('id', $patient->id)->first();
 
         return view('referrals.createreferal')->with(['facilities' => $facilities, 'patient' => $patientDetails]);
@@ -108,9 +102,6 @@ class ReferralController extends Controller
     public function submitReferral(Request $request)
     {
 
-
-
-
         //Validate the form data
         $validatedData = $request->validate([
             'referringOfficer' => 'required',
@@ -125,7 +116,7 @@ class ReferralController extends Controller
         $referral = new Referral;
         $referral->clientName = $request->input('clientName');
         $referral->clientUPI = $request->input('clientUPI');
-        $referral->referringOfficer = $request->input('referringOfficer');
+        $referral->referringOfficer = Auth::user()->name;
         $referral->historyInvestigation = $request->input('historyInvestigation');
         $referral->diagnosis = $request->input('diagnosis');
         $referral->reasonReferral = $request->input('reasonReferral');
@@ -177,7 +168,6 @@ class ReferralController extends Controller
         $referral->update();
 
 
-
         // Set other referral properties
         // Perform any additional processing or integrations
 
@@ -191,6 +181,18 @@ class ReferralController extends Controller
         $referralRequests = Referral::orderBy('created_at', 'desc')->get();
         //$referralRequests = referralRequest::all();
         return view('referrals.outgoing.outgoing',['referralRequests'=>$referralRequests]);
+    }
+
+    public function incomingReferrals(){
+
+        //getting referrals associated to a particular facility
+
+        $referralRequests = Referral::where('referredFacility', Auth::user()->userFacility->Code)
+            ->orderBy('created_at', 'desc')->get();
+        //$referralRequests = referralRequest::all();
+
+        return view('referrals.index')->with(['referralRequests' => $referralRequests]);
+
     }
 
 //    public function getFacilities(){

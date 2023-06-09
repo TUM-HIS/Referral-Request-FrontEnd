@@ -123,13 +123,8 @@
 
                             <div class="">
                                 <p>Referring Officer</p>
-                                <select type='text' name='referringOfficer' id='referringOfficer' placeholder="Referring Officer's Name">
-{{--                                <select type='text' name='referringOfficer' id='referringOfficer' placeholder="Referring Officer's Name">--}}
-                                    <option value="">Select Referring Officer</option>
-                                    <!-- Populate referring officers dynamically from the database or an API -->
-                                    <option value="officer1">Dr. Amos Katwa</option>
-                                    <option value="officer2">Dr. Mercy Cherono</option>
-                                </select>
+                                <input type='text' name='referringOfficer' id='referringOfficer' placeholder="Referring Officer's Name" value="{{ Auth::user()->name }}" readonly> <br>
+                                </input>
                             </div>
 
                             <div class="">
