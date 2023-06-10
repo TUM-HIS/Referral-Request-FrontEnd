@@ -49,4 +49,8 @@ class User extends Authenticatable
         return $this->hasOne(Role::class, 'id', 'role_id');
 
     }
+
+    public function userFacility(){
+        return $this->hasOne(m_f_l_s::class, 'Code', 'facility_id');
+    }
 }

@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('m_f_l_s', function (Blueprint $table) {
-            //
-            $table->unsignedBigInteger('id');
+        Schema::table('referrals', function (Blueprint $table) {
+
+            $table->string('referring_facility_id');
+
         });
     }
 
@@ -22,9 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('m_f_l_s', function (Blueprint $table) {
+        Schema::table('referral', function (Blueprint $table) {
             //
-            $table->dropColumn('id');
         });
     }
 };

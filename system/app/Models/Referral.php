@@ -36,4 +36,9 @@ class Referral extends Model
     {
         return $this->belongsTo(m_f_l_s::class, 'referredFacility', 'Code');
     }
+
+    public function facilityReffering()
+    {
+        return $this->belongsTo(m_f_l_s::class, 'referringFacility', 'Code');
+    }
 }
