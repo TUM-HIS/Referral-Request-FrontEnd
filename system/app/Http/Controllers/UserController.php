@@ -56,12 +56,12 @@ class UserController extends Controller
         $user = auth()->user();
         $Code = $request->input('facility_id');
 
-        $facilities = m_f_l_s::find($Code);
+        //$facilities = m_f_l_s::find($Code);
 
-        if ($facilities && $user) {
-            $user->facility_id = $facilities->$Code;
-            $user->save();
-        }
+//        if ($facilities && $user) {
+//            $user->facility_id = $facilities->$Code;
+//            $user->save();
+//        }
 
         return redirect()->route('user.dashboard');
     }
