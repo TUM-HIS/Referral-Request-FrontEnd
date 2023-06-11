@@ -9,9 +9,6 @@ class Referral extends Model
 {
     use HasFactory;
 
-    /**
-     * @var bool|mixed|string
-     */
     protected $fillable = [
         'clientName',
         'clientUPI',
