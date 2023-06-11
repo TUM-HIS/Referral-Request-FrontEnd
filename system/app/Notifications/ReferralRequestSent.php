@@ -44,6 +44,9 @@ class ReferralRequestSent extends Notification
 
     public function toDatabase(){
 
+        return [
+            ''
+        ];
     }
 
     /**
