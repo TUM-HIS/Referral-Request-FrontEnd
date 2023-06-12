@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('mappings', function (Blueprint $table) {
             $table->string('checksums');
-            $table->integer('id');
+            $table->integer('id')->unique();
             $table->string('public access');
             $table->string('created at');
             $table->string('updated at');
