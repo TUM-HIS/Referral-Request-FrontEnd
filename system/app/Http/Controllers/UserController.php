@@ -35,7 +35,7 @@ class UserController extends Controller
 
         if (Auth::guard('web')->attempt($logins, true)) {
 
-            return redirect()->route('facility.set')->with('success', 'Welcome' . " " . Auth::user()->name);
+            return redirect()->route('user.dashboard')->with('success', 'Welcome' . " " . Auth::user()->name);
 
         }else{
 
