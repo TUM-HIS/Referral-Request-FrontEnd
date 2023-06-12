@@ -29,7 +29,7 @@
                                 <th>#</th>
                                 <th>Client Name</th>
                                 <th>Client UPI</th>
-                                <th>Refering Officer</th>
+                                <th>Referring Officer</th>
                                 <th>Investigations</th>
                                 <th>diagnosis</th>
                                 <th>Referral Reason</th>

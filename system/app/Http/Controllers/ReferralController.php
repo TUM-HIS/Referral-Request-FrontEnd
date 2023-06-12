@@ -137,8 +137,7 @@ class ReferralController extends Controller
 
         //getting referrals associated to a particular facility
 
-        $referralRequests = Referral::where('referredFacility', Auth::user()->userFacility->Code)
-            ->orderBy('created_at', 'desc')->get();
+        $referralRequests = Referral::orderBy('created_at', 'desc')->get();
         //$referralRequests = referralRequest::all();
 
         return view('referrals.index')->with(['referralRequests' => $referralRequests]);
