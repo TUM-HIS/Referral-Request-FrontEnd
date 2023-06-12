@@ -49,7 +49,7 @@ class ReferralController extends Controller
         return view('referrals.createReferral')->with(['facilities' => $facilities, 'patient' => $patientDetails]);
     }
 
-    public function viewReferal(Referral $referral, patient $patient){
+    public function viewReferal(Referral $referral){
 
         // $facilities = m_f_l_s::take(20)->get();
         // $patientDetails = Patient::where('id', $patient->id)->first();
@@ -60,7 +60,7 @@ class ReferralController extends Controller
             'referral' => $referralRequests,
             'patient' => $patientDetails,
         ];
-    
+
 
         return view('referrals.outgoing.viewReferral', $data);
     }
