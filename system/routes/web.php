@@ -7,16 +7,6 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ReferralController;
 use App\Http\Controllers\FacilityController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', [UserController::class, 'signIn'])->name('user.signIn');
 Route::post('/user-login', [UserController::class, 'login'])->name('user.login');
