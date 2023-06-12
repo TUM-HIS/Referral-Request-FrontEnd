@@ -10,7 +10,7 @@
 
     </div><!-- End Logo -->
 
-    <span class="m-5 "> | </span> <span style="font-size: 90% !important;">{{ auth()->user()->userFacility->Officialname }} ({{ auth()->user()->userFacility->County }} County)</span>
+    <span class="m-5 "> | </span> <span style="font-size: 90% !important;">{{ auth()->user()->userFacility->Code }} - {{ auth()->user()->userFacility->Officialname }} ({{ auth()->user()->userFacility->County }} County)</span>
 
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
