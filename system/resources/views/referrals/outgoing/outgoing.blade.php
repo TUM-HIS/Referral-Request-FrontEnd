@@ -1,4 +1,5 @@
 @extends('layouts.backend')
+
 @section('content')
 
     <main id="main" class="main">
@@ -39,7 +40,20 @@
                             </thead>
                             <tbody>
                             @foreach($referralRequests as $referralRequest)
-                                <tr>
+                                <tr onclick="window.location.href='{{ route('referrals.viewReferral', $referralRequest) }}'"
+                                    class="
+                                    @if ($referralRequest->priorityLevel == 'stat')
+                                        color-red
+                                    @elseif ($referralRequest->priorityLevel == 'asap')
+                                        color-blue
+                                    @elseif ($referralRequest->priorityLevel == 'urgent')
+                                        color-green
+                                    @elseif ($referralRequest->priorityLevel == 'routine')
+                                        color-yellow
+                                    @else
+                                        color-default
+                                    @endif
+                                ">
                                     <td>{{ $referralRequest->id }}</td>
                                     <td>{{ $referralRequest->clientName }}</td>
                                     <td>{{ $referralRequest->clientUPI }}</td>

@@ -46,7 +46,23 @@ class ReferralController extends Controller
         $facilities = m_f_l_s::take(20)->get();
         $patientDetails = Patient::where('id', $patient->id)->first();
 
-        return view('referrals.createreferal')->with(['facilities' => $facilities, 'patient' => $patientDetails]);
+        return view('referrals.createReferral')->with(['facilities' => $facilities, 'patient' => $patientDetails]);
+    }
+
+    public function viewReferal(Referral $referral, patient $patient){
+
+        // $facilities = m_f_l_s::take(20)->get();
+        // $patientDetails = Patient::where('id', $patient->id)->first();
+        $referralRequests = Referral::where('id', $referral->id)->first();
+        $patientDetails = Patient::where('upi', $referral->clientUPI)->first();
+
+        $data = [
+            'referral' => $referralRequests,
+            'patient' => $patientDetails,
+        ];
+    
+
+        return view('referrals.outgoing.viewReferral', $data);
     }
 
 
