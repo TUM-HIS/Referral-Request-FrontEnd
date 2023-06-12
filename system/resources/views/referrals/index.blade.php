@@ -29,11 +29,24 @@
                                 <th>Referring Officer </th>
                                 <th>Requested Service </th>
                                 <th>Status </th>
+                                <th>Action </th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($referralRequests as $referralRequest)
-                                <tr>
+                                <tr class="
+                                    @if ($referralRequest->priorityLevel == 'stat')
+                                        color-red
+                                    @elseif ($referralRequest->priorityLevel == 'asap')
+                                        color-blue
+                                    @elseif ($referralRequest->priorityLevel == 'urgent')
+                                        color-green
+                                    @elseif ($referralRequest->priorityLevel == 'routine')
+                                        color-yellow
+                                    @else
+                                        color-default
+                                    @endif
+                                ">
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $referralRequest->referralId }}</td>
                                     <td>{{ $referralRequest->clientName }}</td>

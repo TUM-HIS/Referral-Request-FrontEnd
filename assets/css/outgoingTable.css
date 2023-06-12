@@ -1,0 +1,18 @@
+.color-red {
+    background-color: rgb(250, 208, 208);
+}
+
+.color-blue {
+    background-color: #c4dcff;
+}
+
+.color-green {
+    background-color: #d2ffea;
+}
+.color-yellow {
+    background-color: rgb(250, 250, 202);
+}
+
+.color-default {
+    background-color: whitesmoke;
+}
