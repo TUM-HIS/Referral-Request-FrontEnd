@@ -199,11 +199,6 @@
                                     </select>
                                 </div>
 
-                                <div class="required">
-                                    <label for="referralDetails">Referral Details</label> <br>
-                                    <input type='text' name='referralDetails' placeholder='Referral Details'> <br>
-                                </div>
-
 
                                 <div class="pb-2">
                                     <label for="formFileMultiple">Attachments</label> <br>
