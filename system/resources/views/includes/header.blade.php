@@ -43,8 +43,8 @@
                             <div>
 
                                 <h4>{{$notification->data['data']}}</h4>
-                                <p>{{$notification->data['data']}}</p>
-                                <p>30 min. ago</p>
+                                <p>{{$notification->data['from']}}</p>
+                                <p>{{$notification->created_at->diffForHumans() }} ago</p>
                             </div>
                         </a>
                         <li>

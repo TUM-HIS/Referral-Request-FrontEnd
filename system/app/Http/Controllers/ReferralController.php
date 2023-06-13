@@ -134,17 +134,15 @@ class ReferralController extends Controller
 
         // Save the referral to the database
         $referral->save();
-
-
-        $referral->save();
-
         $referralId = $referral->id;
 
+        $user = Auth::user();
+        $userFacility = $user->userFacility;
+
         $facility = m_f_l_s::where('Code', $referral->referredFacility)->first();
-        $notification = new ReferralRequestSent($referralId);
+        $notification = new ReferralRequestSent($referralId, $userFacility->Code, "Referral Request");
 
         Notification::send($facility, $notification);
-
 
 
 
@@ -186,11 +184,12 @@ class ReferralController extends Controller
 
     public function acceptReferralRequest(Referral $referral){
 
+
+        $referral->status = "Accepted"; // Assign the new value to the column
+        $referral->save();
+
         $user = Auth::user();
-
         $userFacility = $user->userFacility;
-
-
         $userFacility->unreadNotifications
             ->where('data.referral_id', $referral->id)
             ->each(function ($notification) {
@@ -208,9 +207,33 @@ class ReferralController extends Controller
 
     public function rejectReferralRequest(Referral $referral){
 
+        $referral->status = "Rejected"; // Assign the new value to the column
+        $referral->save();
+
+        //changing the status of the notification
+        $user = Auth::user();
+        $userFacility = $user->userFacility;
+        $userFacility->unreadNotifications
+            ->where('data.referral_id', $referral->id)
+            ->each(function ($notification) {
+                $notification->markAsRead();
+                //you can add aditional code here for more functionality
+
+            });
+
+        //sending notification to referral facility of rejected referral
+        $referralId = $referral->id;
+        $facility = m_f_l_s::where('Code', $referral->referring_facility_id)->first();
+        $notification = new ReferralRequestSent($referralId,$userFacility->Code , "Referral Request Rejected");
+
+        Notification::send($facility, $notification);
+
+
+
+
         $referralRequests = Referral::orderBy('created_at', 'desc')->get();
 
-        return view('referrals.incoming')->with(['referralRequests' => $referralRequests]);
+        return redirect()->route('referrals.incoming')->with(['referralRequests' => $referralRequests]);
     }
 
 
