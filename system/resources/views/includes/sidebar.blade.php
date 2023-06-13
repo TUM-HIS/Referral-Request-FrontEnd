@@ -76,7 +76,7 @@
             </a>
             <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{ route('referrals.index') }}">
+                    <a href="{{ route('reports.incoming-reports') }}">
                         <i class="bi bi-circle"></i><span>Incoming referral reports</span>
                     </a>
                 </li>
@@ -125,7 +125,7 @@
                 </li>
             </ul>
         </li>End Tables Nav -->
-        
+
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#patient-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-file-earmark-person"></i><span>Patients</span><i class="bi bi-chevron-down ms-auto"></i>

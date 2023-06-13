@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TriageController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ReferralController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\FacilityController;
 
 
@@ -50,6 +51,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/referral/create/{patient}', [ReferralController::class, 'createreferal'])->name('referrals.createReferral');
     Route::get('/incoming-referrals/reviewed-requests', [ReferralController::class, 'reviewed'])->name('referrals.incoming.reviewed');
     Route::get('/incoming-referrals/counter-referrals', [ReferralController::class, 'counterReferral'])->name('referrals.incoming.counterreferral');
+    Route::get('/reports/incoming-referrals-reports', [ReportController::class, 'incomingReports'])->name('reports.incoming-reports');
     Route::get('/referral/view/{referral}', [ReferralController::class, 'viewReferal'])->name('referrals.viewReferral');
     Route::get('/referral/view-incoming/{referral}', [ReferralController::class, 'viewIncomingReferal'])->name('referrals.viewIncomingReferral');
     Route::get('/referral-success}', [ReferralController::class, 'submitReferral'])->name('referrals.success');
