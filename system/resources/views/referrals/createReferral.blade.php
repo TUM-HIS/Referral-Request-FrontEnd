@@ -159,6 +159,7 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                </div>
 
                                 <div class="pb-2">
                                     <label for="formFileMultiple">Attachments</label> <br>
