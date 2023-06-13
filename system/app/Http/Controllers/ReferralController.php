@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 //use ;
 use App\Models\m_f_l_s;
+use App\Models\User;
+use App\Notifications\ReferralRequestSent;
 use App\utils\SendReferral;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -101,7 +103,13 @@ class ReferralController extends Controller
         $referral->save();
 
 
- /*       $savedId = $referral->id;
+        $savedId = $referral->id;
+        $user = User::find(1);
+
+        $user->notify(new ReferralRequestSent());
+
+
+ /*
 
         $SendReferral = new SendReferral();
         $res = json_decode($SendReferral->sendPost($savedId));

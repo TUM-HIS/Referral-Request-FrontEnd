@@ -26,7 +26,7 @@ class ReferralRequestSent extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail', 'database'];
+        return ['database'];
     }
 
     /**
@@ -45,7 +45,9 @@ class ReferralRequestSent extends Notification
     public function toDatabase(){
 
         return [
-            ''
+            'data' => "referral request received",
+            'from' => "Coast General",
+            'referral_id' => "3"
         ];
     }
 
