@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\Referral;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -11,12 +12,10 @@ class ReferralRequestSent extends Notification
 {
     use Queueable;
 
-    /**
-     * Create a new notification instance.
-     */
-    public function __construct()
+    protected $referralId;
+    public function __construct($referralId)
     {
-        //
+        $this->referralId = $referralId;
     }
 
     /**
@@ -26,7 +25,7 @@ class ReferralRequestSent extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail', 'database'];
+        return ['database'];
     }
 
     /**
@@ -44,20 +43,21 @@ class ReferralRequestSent extends Notification
 
     public function toDatabase(){
 
+        $referral = Referral::find($this->referralId);
         return [
-            ''
+            'data' => "referral request received",
+            'from' => "Coast General",
+            'referral_id' => $referral->id
         ];
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @return array<string, mixed>
-     */
+
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'data' => "referral request received",
+            'from' => "Coast General",
+            'referral_id' => "3"
         ];
     }
 }
