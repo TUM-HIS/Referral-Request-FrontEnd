@@ -14,9 +14,13 @@ class ReferralRequestSent extends Notification
     use Queueable;
 
     protected $referralId;
-    public function __construct($referralId)
+    protected $notifyingFacilityCode;
+    protected $notificationMessage;
+    public function __construct($referralId, $facilityCode, $notificationMessage)
     {
         $this->referralId = $referralId;
+        $this->notifyingFacilityCode = $facilityCode;
+        $this->notificationMessage = $notificationMessage;
     }
 
     /**
@@ -45,10 +49,10 @@ class ReferralRequestSent extends Notification
     public function toDatabase(){
 
         $referral = Referral::find($this->referralId);
-        $facility = m_f_l_s::where('Code', $referral->referring_facility_id)->first();
+        $facility = m_f_l_s::where('Code', $this->notifyingFacilityCode)->first();
         $facility_name = $facility->Officialname;
         return [
-            'data' => "referral request received",
+            'data' => $this->notificationMessage,
             'from' => $facility->Code." - ".$facility_name,
             'referral_id' => $referral->id
         ];

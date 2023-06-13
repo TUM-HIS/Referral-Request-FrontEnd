@@ -134,14 +134,13 @@ class ReferralController extends Controller
 
         // Save the referral to the database
         $referral->save();
-
-
-        $referral->save();
-
         $referralId = $referral->id;
 
+        $user = Auth::user();
+        $userFacility = $user->userFacility;
+
         $facility = m_f_l_s::where('Code', $referral->referredFacility)->first();
-        $notification = new ReferralRequestSent($referralId);
+        $notification = new ReferralRequestSent($referralId, $userFacility->Code, "Referral Request");
 
         Notification::send($facility, $notification);
 
@@ -225,7 +224,7 @@ class ReferralController extends Controller
         //sending notification to referral facility of rejected referral
         $referralId = $referral->id;
         $facility = m_f_l_s::where('Code', $referral->referring_facility_id)->first();
-        $notification = new ReferralRequestSent($referralId);
+        $notification = new ReferralRequestSent($referralId,$userFacility->Code , "Referral Request Rejected");
 
         Notification::send($facility, $notification);
 
