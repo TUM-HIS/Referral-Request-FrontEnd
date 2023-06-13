@@ -16,12 +16,12 @@
             </a>
             <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{ route('referrals.index') }}">
+                    <a href="{{ route('referrals.incoming') }}">
                         <i class="bi bi-circle"></i><span>Incoming Referrals</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('referral.outgoing') }}">
+                    <a href="{{ route('referrals.outgoing') }}">
                         <i class="bi bi-circle"></i><span>Outgoing Referrals</span>
                     </a>
                 </li>

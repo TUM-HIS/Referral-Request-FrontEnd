@@ -7,7 +7,7 @@
             <h1> Referrals </h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('referrals.index') }}">Incoming</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('referrals.incoming') }}">Incoming</a></li>
                     <li class="breadcrumb-item active">Referrals</li>
                 </ol>
             </nav>
@@ -33,7 +33,7 @@
                             </thead>
                             <tbody>
                             @foreach($referralRequests as $referralRequest)
-                                <tr 
+                                <tr
                                     class="
                                     @if ($referralRequest->priorityLevel == 'stat')
                                         color-red
@@ -48,7 +48,7 @@
                                     @endif
                                 ">
                                     <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $loop->iteration }}</td>
-                                    
+
                                     <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $referralRequest->clientName }}</td>
                                     <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $referralRequest->priorityLevel }}</td>
                                     <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $referralRequest->referringOfficer }}</td>
