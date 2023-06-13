@@ -34,7 +34,7 @@
                             </thead>
                             <tbody>
                             @foreach($referralRequests as $referralRequest)
-                                <tr onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'"
+                                <tr 
                                     class="
                                     @if ($referralRequest->priorityLevel == 'stat')
                                         color-red
@@ -48,13 +48,44 @@
                                         color-default
                                     @endif
                                 ">
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $referralRequest->referralId }}</td>
-                                    <td>{{ $referralRequest->clientName }}</td>
-                                    <td>{{ $referralRequest->priorityLevel }}</td>
-                                    <td>{{ $referralRequest->referringOfficer }}</td>
+                                    <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $loop->iteration }}</td>
+                                    <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $referralRequest->referralId }}</td>
+                                    <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $referralRequest->clientName }}</td>
+                                    <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $referralRequest->priorityLevel }}</td>
+                                    <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'"{{ $referralRequest->referringOfficer }}</td>
                                     <td>Cardiovascular</td>
                                     <td>Pending</td>
+                                    <td class="no-click">
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                              Action
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                              <li><a class="dropdown-item" href="#">Reject</a></li>
+                                              <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                    Accept
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                            ...
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </a></li>
+                                            </ul>
+                                          </div>
+                                    </td>
 
                                 </tr>
                             @endforeach
@@ -66,4 +97,15 @@
         </section>
 
     </main>
+@endsection
+@section('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('table td:not(.no-click)').on('click', function() {
+                // Your onclick function logic goes here
+                console.log('Clicked on a table column');
+            });
+        });
+    </script>
 @endsection

@@ -14,7 +14,7 @@
         <h1> Referrals </h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('referrals.addReferral') }}"> View </a></li>
+                <li class="breadcrumb-item"><a href=" "> View </a></li>
                 <li class="breadcrumb-item active">Referrals</li>
             </ol>
         </nav>
@@ -192,11 +192,11 @@
                             <label for="distance">Approximate Distance</label> <br>
                             <input type="text" id="distance" name='distance' placeholder='Approximate distance' readonly> <br>
                         </div>
-        
+
                         <div class="pb-2">
                             <label for="serviceNotes">Additional Notes</label> <br>
                             <textarea id="serviceNotes" name="serviceNotes" cols="30" rows="10" placeholder="Additional Medical Notes..." readonly >{{ $referral->additionalNotes }}</textarea>
-                        </div>     
+                        </div>
                     </div>
                 </fieldset>
             </div>
@@ -204,11 +204,59 @@
     </div>
 
     <div class="mt-3 pb-2">
-        {{-- <button class="submitreqbtn">Submit Request</button> --}}
-        <button class="btn btn-primary-d" style="background: #ff3347;">Cancel Referral</button>
-        <button class="btn btn-primary">Exit Referral</button>
+        
+        <!-- Button trigger modal -->
+        
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Accept Referral
+        </button>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Warning</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                Are you sure you want to accept this referral?
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
+                <button type="submit" class="btn btn-success">Accept</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Button trigger modal -->
+        
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#anotherModal">
+            Reject Referral
+        </button>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="anotherModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Warning</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                Are you sure you want to Reject this referral?
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
+                <button type="submit" class="btn btn-danger">Reject</button>
+                </div>
+            </div>
+            </div>
+        </div>
+        <a class="btn btn-primary" href="{{ route('referrals.index') }}">Exit Referral</a>
     </div>
-    
+
 </form>
 </section>
 
