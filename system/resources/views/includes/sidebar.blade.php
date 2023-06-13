@@ -77,17 +77,17 @@
             <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="{{ route('reports.incoming-reports') }}">
-                        <i class="bi bi-circle"></i><span>Incoming referral reports</span>
+                        <i class="bi bi-circle"></i><span>Incoming referrals report</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('reports.outgoing-reports') }}">
-                        <i class="bi bi-circle"></i><span>Outgoing referral reports</span>
+                        <i class="bi bi-circle"></i><span>Outgoing referrals report</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('reports.completed-reports') }}">
-                        <i class="bi bi-circle"></i><span>Completed referrals</span>
+                        <i class="bi bi-circle"></i><span>Completed referrals report</span>
                     </a>
                 </li>
             </ul>
