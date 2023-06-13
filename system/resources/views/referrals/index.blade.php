@@ -34,7 +34,7 @@
                             </thead>
                             <tbody>
                             @foreach($referralRequests as $referralRequest)
-                                <tr onclick="window.location.href='{{ route('referrals.viewReferral', $referralRequest) }}'"
+                                <tr onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'"
                                     class="
                                     @if ($referralRequest->priorityLevel == 'stat')
                                         color-red
