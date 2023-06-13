@@ -38,7 +38,7 @@ class ReferralController extends Controller
         }
         // Delete the record
         $referralRequests->delete();
-        
+
         return redirect()->route('referrals.outgoing.outgoing')->with('success', 'Record deleted successfully');
 
     }
@@ -134,19 +134,20 @@ class ReferralController extends Controller
 
         // Save the referral to the database
         $referral->save();
-
         $referralId = $referral->id;
 
-        $user = User::find(1);
-        $notification = new ReferralRequestSent($referralId);
+        $user = Auth::user();
+        $userFacility = $user->userFacility;
 
-        Notification::send($user, $notification);
+        $facility = m_f_l_s::where('Code', $referral->referredFacility)->first();
+        $notification = new ReferralRequestSent($referralId, $userFacility->Code, "Referral Request");
 
-        //$user->notify(new ReferralRequestSent());
+        Notification::send($facility, $notification);
+
 
 
  /*
-$savedId = $referral->id;
+        $savedId = $referral->id;
         $SendReferral = new SendReferral();
         $res = json_decode($SendReferral->sendPost($savedId));
         $referral->referralId = $res->referralRes->referralId;
@@ -154,11 +155,6 @@ $savedId = $referral->id;
         //local and remote referral ids
         $local = $savedId;
         $remote = $referral->referralId;
-
-        //TESTING
-        //dd($res -> referralRes -> localRRID, );
-        //dd($local. " " . $remote);
-        //dd(gettype($res));
 
         $referral = Referral::find($local);
         $referral->referralId =$remote;
@@ -190,13 +186,85 @@ $savedId = $referral->id;
     public function incomingReferrals(){
 
         //getting referrals associated to a particular facility
-
         $referralRequests = Referral::orderBy('created_at', 'desc')->get();
-        //$referralRequests = referralRequest::all();
 
         return view('referrals.index')->with(['referralRequests' => $referralRequests]);
 
     }
+
+    public function acceptReferralRequest(Referral $referral){
+
+
+        $referral->status = "Accepted"; // Assign the new value to the column
+        $referral->save();
+
+        $user = Auth::user();
+        $userFacility = $user->userFacility;
+        $userFacility->unreadNotifications
+            ->where('data.referral_id', $referral->id)
+            ->each(function ($notification) {
+                $notification->markAsRead();
+                // Perform any other necessary updates
+            });
+
+
+
+        $referralRequests = Referral::orderBy('created_at', 'desc')->get();
+        //$referralRequests = referralRequest::all();
+        return  redirect()->route('referrals.incoming')->with(['referralRequests' => $referralRequests]);
+
+    }
+
+    public function rejectReferralRequest(Referral $referral){
+
+        $referral->status = "Rejected"; // Assign the new value to the column
+        $referral->save();
+
+        //changing the status of the notification
+        $user = Auth::user();
+        $userFacility = $user->userFacility;
+        $userFacility->unreadNotifications
+            ->where('data.referral_id', $referral->id)
+            ->each(function ($notification) {
+                $notification->markAsRead();
+                //you can add aditional code here for more functionality
+
+            });
+
+        //sending notification to referral facility of rejected referral
+        $referralId = $referral->id;
+        $facility = m_f_l_s::where('Code', $referral->referring_facility_id)->first();
+        $notification = new ReferralRequestSent($referralId,$userFacility->Code , "Referral Request Rejected");
+
+        Notification::send($facility, $notification);
+
+
+
+
+        $referralRequests = Referral::orderBy('created_at', 'desc')->get();
+
+        return redirect()->route('referrals.incoming')->with(['referralRequests' => $referralRequests]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public function fhirJson(){

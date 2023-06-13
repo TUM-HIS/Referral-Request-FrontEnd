@@ -22,27 +22,20 @@ Route::get('/fhirJson', [ReferralController::class, 'fhirJson']);
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
 
-    Route::get('/referrals', [ReferralController::class, 'incomingReferrals'])->name('referrals.index');
-    Route::get('/add-referral', [ReferralController::class, 'addReferral'])->name('referrals.addReferral');
-    Route::get('/outgoing-referrals', [ReferralController::class, 'outgoingReferrals'])->name('referral.outgoing');
+
     Route::get('/facilities', [ReferralController::class, 'facilities'])->name('referral.facilities');
     Route::get('/medicalTerms', [ReferralController::class, 'medicalTerms'])->name('referral.medicalTerms');
 
-    Route::post('/storeReferral', [ReferralController::class, 'storeReferral'])->name('referral.storeReferral');
 
-    Route::get('/outgoing', [ReferralController::class, 'outgoing'])->name('referral.outgoing');
-
+    //patient routes
     Route::get('/new-patient',[PatientController::class,'addPatient'])->name('patients.addPatient');
     Route::post('/store-patient', [PatientController::class, 'addData'])->name('patients.storeData');
-
     Route::get('/search-patient', [PatientController::class, 'searchPatient'])->name('patients.searchPatients');
     Route::get('/search-patients', [PatientController::class, 'search'])->name('patients.search-patient');
     // Route::get('/search-patient/results/', [PatientController::class, 'searchResults'])->name('patients.searchResults');
     Route::get('/patients/view/{patient}', [PatientController::class, 'viewPatient'])->name('patients.viewPatient');
     Route::get('/worklist',[ReferralController::class,'worklist'])->name('referrals.worklist');
 
-    // Route::get('/search-doctor', [DoctorController::class, 'searchDoctor'])->name('doctors.searchDoctor');
-    // Route::get('/view-pdoctor', [DoctorController::class, 'viewDoctor'])->name('doctors.viewDoctor');
 
 
     //referral routes
@@ -60,6 +53,19 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/reports/incoming-referrals-reports', [ReportController::class, 'incomingReports'])->name('reports.incoming-reports');
     Route::get('/reports/outgoing-referrals-reports', [ReportController::class, 'outgoingReports'])->name('reports.outgoing-reports');
     Route::get('/reports/completed-referrals-reports', [ReportController::class, 'completedReports'])->name('reports.completed-reports');
+
+    //incoming referral
+    Route::get('/incoming-referrals', [ReferralController::class, 'incomingReferrals'])->name('referrals.incoming');
+    Route::get('/add-referral', [ReferralController::class, 'addReferral'])->name('referrals.addReferral');
+    Route::get('/outgoing-referrals', [ReferralController::class, 'outgoing'])->name('referrals.outgoing');
+
+    Route::post('/storeReferral', [ReferralController::class, 'storeReferral'])->name('referral.storeReferral');
+
+    //outgoing referral
+    Route::get('/outgoing', [ReferralController::class, 'outgoing'])->name('referral.outgoing');
+    Route::get('/accept-referral-request/{referral}', [ReferralController::class, 'acceptReferralRequest'])->name('referral.accept');
+    Route::get('/reject-referral-request/{referral}', [ReferralController::class, 'rejectReferralRequest'])->name('referral.reject');
+
 
     //triage routes
     Route::get('/triages', [TriageController::class, 'addTriage'])->name('triages.addTriage');
