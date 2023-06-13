@@ -51,12 +51,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/referral/create/{patient}', [ReferralController::class, 'createreferal'])->name('referrals.createReferral');
     Route::get('/incoming-referrals/reviewed-requests', [ReferralController::class, 'reviewed'])->name('referrals.incoming.reviewed');
     Route::get('/incoming-referrals/counter-referrals', [ReferralController::class, 'counterReferral'])->name('referrals.incoming.counterreferral');
-    Route::get('/reports/incoming-referrals-reports', [ReportController::class, 'incomingReports'])->name('reports.incoming-reports');
     Route::get('/referral/view/{referral}', [ReferralController::class, 'viewReferal'])->name('referrals.viewReferral');
     Route::get('/referral/view-incoming/{referral}', [ReferralController::class, 'viewIncomingReferal'])->name('referrals.viewIncomingReferral');
     Route::get('/referral-success}', [ReferralController::class, 'submitReferral'])->name('referrals.success');
     Route::delete('/referral/{id}', [ReferralController::class, 'destroy'])->name('referral.destroy');
 
+    //Report routes
+    Route::get('/reports/incoming-referrals-reports', [ReportController::class, 'incomingReports'])->name('reports.incoming-reports');
+    Route::get('/reports/outgoing-referrals-reports', [ReportController::class, 'outgoingReports'])->name('reports.outgoing-reports');
 
     //triage routes
     Route::get('/triages', [TriageController::class, 'addTriage'])->name('triages.addTriage');

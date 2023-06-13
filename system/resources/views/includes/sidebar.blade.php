@@ -81,7 +81,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('referral.outgoing') }}">
+                    <a href="{{ route('reports.outgoing-reports') }}">
                         <i class="bi bi-circle"></i><span>Outgoing referral reports</span>
                     </a>
                 </li>
