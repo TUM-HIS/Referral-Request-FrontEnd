@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth'], function () {
     //Report routes
     Route::get('/reports/incoming-referrals-reports', [ReportController::class, 'incomingReports'])->name('reports.incoming-reports');
     Route::get('/reports/outgoing-referrals-reports', [ReportController::class, 'outgoingReports'])->name('reports.outgoing-reports');
+    Route::get('/reports/completed-referrals-reports', [ReportController::class, 'completedReports'])->name('reports.completed-reports');
 
     //triage routes
     Route::get('/triages', [TriageController::class, 'addTriage'])->name('triages.addTriage');

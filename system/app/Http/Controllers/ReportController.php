@@ -16,4 +16,9 @@ class ReportController extends Controller
 
         return view('reports.outgoing-reports');
     }
+
+    public function completedReports(){
+
+        return view('reports.completed-reports');
+    }
 }
