@@ -133,72 +133,32 @@
                                 <div class="pb-2">
                                     <label for="historyInvestigation">History/Investigation</label> <br>
                                     <select type="text" id="historyInvestigation" name="historyInvestigation" required>
-                                        <option value="">Select History/Investigation</option>
-                                        <!-- Populate history/investigation options dynamically -->
-                                        <option value="history1">Radiography (X-ray) of the affected area</option>
-                                        <option value="history2">Complete blood count (CBC) with differential</option>
-                                        <option value="history3">Electrocardiogram (ECG)</option>
-                                        <option value="history4">Magnetic Resonance Imaging (MRI) scan of the brain</option>
-                                        <option value="history5">Colonoscopy</option>
-                                        <option value="history6">Pulmonary function tests (PFTs)</option>
-                                        <option value="history7">Ultrasound examination of the abdomen</option>
-                                        <option value="history8">Upper gastrointestinal endoscopy</option>
-                                        <option value="history9">Genetic testing</option>
-                                        <option value="history10">Tissue biopsy</option>
-                                        <option value="history11">Allergy testing</option>
-                                        <option value="history12">Electroencephalogram (EEG)</option>
-                                        <option value="history13">Urine analysis</option>
-                                        <option value="history14">Bone mineral density (BMD) scan</option>
-                                        <option value="history15">Spirometry</option>
+                                        <!-- Place all the options here initially -->
+                                        @foreach($diagnosis as $reason)
+                                            <option value="{{ $reason->id }}">{{ $reason->{'from concept name'} }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
                                 <div class="pb-2">
                                     <label for="diagnosis">Diagnosis</label> <br>
                                     <select class="select" id="diagnosis" name="diagnosis" required>
-                                        <option value="">Select Diagnosis</option>
                                         <!-- Populate diagnosis options dynamically using coded concepts -->
-                                        <option value="diagnosis1">Hypertension</option>
-                                        <option value="diagnosis2">Diabetes mellitus type 2</option>
-                                        <option value="diagnosis3">Acute respiratory infection</option>
-                                        <option value="diagnosis4">Major depressive disorder</option>
-                                        <option value="diagnosis5">Osteoarthritis</option>
-                                        <option value="diagnosis6">Asthma</option>
-                                        <option value="diagnosis7">Urinary tract infection</option>
-                                        <option value="diagnosis8">Chronic obstructive pulmonary disease (COPD)</option>
-                                        <option value="diagnosis9">Migraine</option>
-                                        <option value="diagnosis10">Gastroesophageal reflux disease (GERD)</option>
-                                        <option value="diagnosis11">Coronary artery disease</option>
-                                        <option value="diagnosis12">Schizophrenia</option>
-                                        <option value="diagnosis13">Rheumatoid arthritis</option>
-                                        <option value="diagnosis14">Stroke</option>
-                                        <option value="diagnosis15">Breast cancer</option>
+                                        @foreach($diagnosis as $reason)
+                                            <option value="{{ $reason->id }}">{{ $reason->{'from concept name'} }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
 
-
-                                <div class="required">
+                                <div class="pb-2">
                                     <label for="reasonReferral">Reason for Referral</label> <br>
                                     <select id="reasonReferral" name="reasonReferral"  required>
-                                        <option value="">Select Reason for Referral</option>
-                                        <!-- Populate reason for referral options dynamically using coded concepts -->
-                                        <option value="reason1">Need for specialized surgical intervention</option>
-                                        <option value="reason2">Diagnostic uncertainty requiring further investigation by a specialist</option>
-                                        <option value="reason3">Suspected malignancy or cancer diagnosis</option>
-                                        <option value="reason4">Inadequate response to initial treatment or therapy</option>
-                                        <option value="reason5">Need for specialized rehabilitative services</option>
-                                        <option value="reason6">Evaluation for organ transplantation</option>
-                                        <option value="reason7">Second opinion for a challenging medical case</option>
-                                        <option value="reason8">Need for genetic testing or counseling</option>
-                                        <option value="reason9">Suspected neurological disorder or condition</option>
-                                        <option value="reason10">Assessment and management of chronic pain</option>
-                                        <option value="reason11">Evaluation and management of psychiatric or psychological concerns</option>
-                                        <option value="reason12">Complex obstetric or gynecological conditions</option>
-                                        <option value="reason13">Evaluation and management of developmental delays or disabilities in children</option>
-                                        <option value="reason14">Suspected infectious diseases or rare medical conditions requiring expertise</option>
+                                        <!-- Populate diagnosis options dynamically using coded concepts -->
+                                        @foreach($diagnosis as $reason)
+                                            <option value="{{ $reason->id }}">{{ $reason->{'from concept name'} }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
-
 
                                 <div class="pb-2">
                                     <label for="formFileMultiple">Attachments</label> <br>
