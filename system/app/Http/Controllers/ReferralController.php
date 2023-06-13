@@ -38,7 +38,7 @@ class ReferralController extends Controller
         }
         // Delete the record
         $referralRequests->delete();
-        
+
         return redirect()->route('referrals.outgoing.outgoing')->with('success', 'Record deleted successfully');
 
     }
@@ -186,6 +186,23 @@ $savedId = $referral->id;
 
         return view('referrals.index')->with(['referralRequests' => $referralRequests]);
 
+    }
+
+    public function acceptReferralRequest(){
+
+        $referralRequests = Referral::orderBy('created_at', 'desc')->get();
+        //$referralRequests = referralRequest::all();
+
+        return view('referrals.index')->with(['referralRequests' => $referralRequests]);
+
+    }
+
+    public function rejectReferralRequest(){
+
+        $referralRequests = Referral::orderBy('created_at', 'desc')->get();
+        //$referralRequests = referralRequest::all();
+
+        return view('referrals.index')->with(['referralRequests' => $referralRequests]);
     }
 
 

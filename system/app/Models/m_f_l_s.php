@@ -9,6 +9,8 @@ class m_f_l_s extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'Code';
+
     protected $fillable = [
         'Code',
         'Officialname',

@@ -204,13 +204,13 @@
     </div>
 
     <div class="mt-3 pb-2">
-        
+
         <!-- Button trigger modal -->
-        
+
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Accept Referral
         </button>
-        
+
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -224,18 +224,18 @@
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
-                <button type="submit" class="btn btn-success">Accept</button>
+                <a href="{{ route('referrals.index') }}" class="btn btn-success">Accept</a>
                 </div>
             </div>
             </div>
         </div>
 
         <!-- Button trigger modal -->
-        
+
         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#anotherModal">
             Reject Referral
         </button>
-        
+
         <!-- Modal -->
         <div class="modal fade" id="anotherModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -249,7 +249,7 @@
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
-                <button type="submit" class="btn btn-danger">Reject</button>
+                <a href="{{ route('referrals.index') }}"  class="btn btn-danger">Reject</a>
                 </div>
             </div>
             </div>
