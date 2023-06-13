@@ -2,7 +2,6 @@
 
 namespace App\Notifications;
 
-use App\Models\m_f_l_s;
 use App\Models\Referral;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -45,11 +44,9 @@ class ReferralRequestSent extends Notification
     public function toDatabase(){
 
         $referral = Referral::find($this->referralId);
-        $referringFacility = m_f_l_s::where('Code', '=', $referral->referring_facility_id)->first();
-
         return [
             'data' => "referral request received",
-            'from' => $referringFacility->Officialname,
+            'from' => "Coast General",
             'referral_id' => $referral->id
         ];
     }

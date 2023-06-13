@@ -36,24 +36,25 @@
                                 <th>Priority</th>
                                 <th>Requested Service </th>
                                 <th>Intended Facility </th>
-                                <th>Status </th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($referralRequests as $referralRequest)
                                 <tr onclick="window.location.href='{{ route('referrals.viewReferral', $referralRequest) }}'"
                                     class="
-                                    @if ($referralRequest->status == 'Pending')
-                                        color-yellow
-                                    @elseif ($referralRequest->status == 'Accepted')
-                                        color-green
-                                    @elseif ($referralRequest->status == 'Rejected')
+                                    @if ($referralRequest->priorityLevel == 'stat')
                                         color-red
+                                    @elseif ($referralRequest->priorityLevel == 'asap')
+                                        color-blue
+                                    @elseif ($referralRequest->priorityLevel == 'urgent')
+                                        color-green
+                                    @elseif ($referralRequest->priorityLevel == 'routine')
+                                        color-yellow
                                     @else
                                         color-default
                                     @endif
                                 ">
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $referralRequest->id }}</td>
                                     <td>{{ $referralRequest->clientName }}</td>
                                     <td>{{ $referralRequest->clientUPI }}</td>
                                     <td>{{ $referralRequest->referringOfficer }}</td>
@@ -66,7 +67,6 @@
                                     {{-- <td>{{ $referralRequest->serviceCategory }}</td> --}}
                                     <td>{{ $referralRequest->service }}</td>
                                     <td>{{ $referralRequest->facilityReffered->Officialname }}</td>
-                                    <td>{{ $referralRequest->status }}</td>
                                     {{-- <td>{{ $referralRequest->distance }}</td>
                                     <td>{{ $referralRequest->serviceNotes }}</td> --}}
                                 </tr>

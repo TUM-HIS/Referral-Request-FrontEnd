@@ -29,21 +29,21 @@
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                     <li class="dropdown-header">
-                        You have {{auth()->user()->unreadNotifications->count()}} new referral requests
+                        You have {{auth()->user()->notifications->count()}} new referral requests
                         <a href="{{route('referrals.index') }}"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
 
-                    @foreach(Auth::user()->unreadNotifications as $notification)
+                    @foreach(Auth::user()->notifications as $notification)
 
-                        <a href={{ url('/referral/view-incoming/'.$notification->data['referral_id']) }} class="notification-item">
+                        <a href={{ url('/referral/view/'.$notification->data['referral_id']) }} class="notification-item">
                             <i class="bi bi-info-circle text-primary"></i>
                             <div>
 
                                 <h4>{{$notification->data['data']}}</h4>
-                                <p>{{$notification->data['from']}}</p>
+                                <p>{{$notification->data['data']}}</p>
                                 <p>30 min. ago</p>
                             </div>
                         </a>
