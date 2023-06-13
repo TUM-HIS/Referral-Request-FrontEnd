@@ -38,18 +38,23 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/search-patients', [PatientController::class, 'search'])->name('patients.search-patient');
     // Route::get('/search-patient/results/', [PatientController::class, 'searchResults'])->name('patients.searchResults');
     Route::get('/patients/view/{patient}', [PatientController::class, 'viewPatient'])->name('patients.viewPatient');
+    Route::get('/worklist',[ReferralController::class,'worklist'])->name('referrals.worklist');
 
     // Route::get('/search-doctor', [DoctorController::class, 'searchDoctor'])->name('doctors.searchDoctor');
     // Route::get('/view-pdoctor', [DoctorController::class, 'viewDoctor'])->name('doctors.viewDoctor');
 
-    Route::get('/triages', [TriageController::class, 'addTriage'])->name('triages.addTriage');
-    Route::post('/store-form', [TriageController::class, 'store'])->name('triages.store-form');
-    Route::get('/worklist',[ReferralController::class,'worklist'])->name('referrals.worklist');
+
+    //referral routes
     Route::post('/submit-referral', [ReferralController::class, 'submitReferral'])->name('referrals.submitReferral');
     //Route::get('/referral/{patient}', [ReferralController::class, 'create'])->name('referrals.create');
     Route::get('/referral/create/{patient}', [ReferralController::class, 'createreferal'])->name('referrals.createReferral');
     Route::get('/referral/view/{referral}', [ReferralController::class, 'viewReferal'])->name('referrals.viewReferral');
+    Route::get('/referral/view-incoming/{referral}', [ReferralController::class, 'viewReferal'])->name('referrals.viewIncomingReferral');
     Route::get('/referral-success}', [ReferralController::class, 'submitReferral'])->name('referrals.success');
+
+    //triage routes
+    Route::get('/triages', [TriageController::class, 'addTriage'])->name('triages.addTriage');
+    Route::post('/store-form', [TriageController::class, 'store'])->name('triages.store-form');
 });
 
 
