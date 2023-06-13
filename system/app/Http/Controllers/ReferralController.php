@@ -9,6 +9,7 @@ use App\Notifications\ReferralRequestSent;
 use App\utils\SendReferral;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Patient;
 use App\Models\Referral;
@@ -102,15 +103,18 @@ class ReferralController extends Controller
         // Save the referral to the database
         $referral->save();
 
+        $referralId = $referral->id;
 
-        $savedId = $referral->id;
         $user = User::find(1);
+        $notification = new ReferralRequestSent($referralId);
 
-        $user->notify(new ReferralRequestSent());
+        Notification::send($user, $notification);
+
+        //$user->notify(new ReferralRequestSent());
 
 
  /*
-
+$savedId = $referral->id;
         $SendReferral = new SendReferral();
         $res = json_decode($SendReferral->sendPost($savedId));
         $referral->referralId = $res->referralRes->referralId;
