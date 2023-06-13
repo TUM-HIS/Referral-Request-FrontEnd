@@ -23,7 +23,6 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Referral ID</th>
                                 <th>Client Name</th>
                                 <th>Priority Level</th>
                                 <th>Referring Officer </th>
@@ -49,10 +48,10 @@
                                     @endif
                                 ">
                                     <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $loop->iteration }}</td>
-                                    <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $referralRequest->referralId }}</td>
+                                    
                                     <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $referralRequest->clientName }}</td>
                                     <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $referralRequest->priorityLevel }}</td>
-                                    <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'"{{ $referralRequest->referringOfficer }}</td>
+                                    <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $referralRequest->referringOfficer }}</td>
                                     <td>Cardiovascular</td>
                                     <td>Pending</td>
                                     <td class="no-click">
