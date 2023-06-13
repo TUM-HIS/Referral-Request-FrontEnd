@@ -55,7 +55,7 @@
                                         color-default
                                     @endif
                                 ">
-                                    <td>{{ $referralRequest->id }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $referralRequest->clientName }}</td>
                                     <td>{{ $referralRequest->clientUPI }}</td>
                                     <td>{{ $referralRequest->referringOfficer }}</td>
