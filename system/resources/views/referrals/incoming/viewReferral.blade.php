@@ -224,7 +224,7 @@
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
-                <a href="{{ route('referrals.index') }}" class="btn btn-success">Accept</a>
+                <a href="{{ route('referral.accept', $referral) }}" class="btn btn-success">Accept</a>
                 </div>
             </div>
             </div>
@@ -249,12 +249,12 @@
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
-                <a href="{{ route('referrals.index') }}"  class="btn btn-danger">Reject</a>
+                <a href="{{ route('referral.reject', $referral) }}"  class="btn btn-danger">Reject</a>
                 </div>
             </div>
             </div>
         </div>
-        <a class="btn btn-primary" href="{{ route('referrals.index') }}">Exit Referral</a>
+        <a class="btn btn-primary" href="{{ route('referrals.incoming', $referral) }}">Exit Referral</a>
     </div>
 
 </form>

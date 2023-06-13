@@ -24,19 +24,19 @@
 
                 <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                     <i class="bi bi-bell"></i>
-                    <span class="badge bg-primary badge-number">{{auth()->user()->notifications->count()}}</span>
+                    <span class="badge bg-primary badge-number">{{auth()->user()->userFacility->unreadNotifications->count()}}</span>
                 </a><!-- End Notification Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                     <li class="dropdown-header">
-                        You have {{auth()->user()->unreadNotifications->count()}} new referral requests
+                        You have {{auth()->user()->userFacility->unreadNotifications->count()}} new referral requests
                         <a href="{{route('referrals.incoming') }}"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
 
-                    @foreach(Auth::user()->notifications as $notification)
+                    @foreach(Auth::user()->userFacility->unreadNotifications as $notification)
 
                         <a href={{ url('/referral/view-incoming/'.$notification->data['referral_id']) }} class="notification-item">
                             <i class="bi bi-info-circle text-primary"></i>

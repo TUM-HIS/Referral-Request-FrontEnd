@@ -156,16 +156,11 @@ class ReferralController extends Controller
         $facility = m_f_l_s::where('Code', $referral->referredFacility)->first();
         $notification = new ReferralRequestSent($referralId);
 
+        Notification::send($facility, $notification);
+
         //dd($facility);
         //Notification::send($facility, $notification);
-        $facility->notify($notification);
-
-
-
-
-
-
-
+       // $facility->notify($notification);
 
 
 
@@ -206,6 +201,29 @@ $savedId = $referral->id;
     public function incomingReferrals(){
 
         //getting referrals associated to a particular facility
+        $referralRequests = Referral::orderBy('created_at', 'desc')->get();
+
+        return view('referrals.index')->with(['referralRequests' => $referralRequests]);
+
+    }
+
+    public function acceptReferralRequest(Referral $referral){
+        //dd($referral);
+        // Retrieve the referral based on its ID
+        //$referral = Referral::find($referralId);
+        $notifiedFacility = $referral->referredFacility;
+        $user = Auth::user();
+
+        $userFacility = $user->userFacility;
+
+
+        // Retrieve the notification associated with the referral
+        $notification = $userFacility->notifications()->where('notifiable_id', $userFacility->Code);
+
+        if ($notification) {
+            // Mark the notification as read
+            $notification->markAsRead();
+        }
 
         $referralRequests = Referral::orderBy('created_at', 'desc')->get();
         //$referralRequests = referralRequest::all();
@@ -214,22 +232,32 @@ $savedId = $referral->id;
 
     }
 
-    public function acceptReferralRequest(){
+    public function rejectReferralRequest(Referral $referral){
 
         $referralRequests = Referral::orderBy('created_at', 'desc')->get();
-        //$referralRequests = referralRequest::all();
-
-        return view('referrals.index')->with(['referralRequests' => $referralRequests]);
-
-    }
-
-    public function rejectReferralRequest(){
-
-        $referralRequests = Referral::orderBy('created_at', 'desc')->get();
-        //$referralRequests = referralRequest::all();
 
         return view('referrals.index')->with(['referralRequests' => $referralRequests]);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public function fhirJson(){

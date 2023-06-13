@@ -56,8 +56,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     //outgoing referral
     Route::get('/outgoing', [ReferralController::class, 'outgoing'])->name('referral.outgoing');
-    Route::get('/accept-referral-request', [ReferralController::class, 'acceptReferralRequest'])->name('referral.outgoing');
-    Route::get('/reject-referral-request', [ReferralController::class, 'rejectReferralRequest'])->name('referral.outgoing');
+    Route::get('/accept-referral-request/{referral}', [ReferralController::class, 'acceptReferralRequest'])->name('referral.accept');
+    Route::get('/reject-referral-request/{referral}', [ReferralController::class, 'rejectReferralRequest'])->name('referral.reject');
 
 
     //triage routes
