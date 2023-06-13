@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Patient;
 use App\Models\Referral;
+use App\Models\Mappings;
 
 class ReferralController extends Controller
 {
@@ -62,8 +63,9 @@ class ReferralController extends Controller
 
         $facilities = m_f_l_s::take(20)->get();
         $patientDetails = Patient::where('id', $patient->id)->first();
+        $diagnosis = Mappings::select('id', 'from concept name')->get();
 
-        return view('referrals.createReferral')->with(['facilities' => $facilities, 'patient' => $patientDetails]);
+        return view('referrals.createReferral')->with(['facilities' => $facilities, 'patient' => $patientDetails, 'diagnosis' => $diagnosis]);
     }
 
     public function viewReferal(Referral $referral){
