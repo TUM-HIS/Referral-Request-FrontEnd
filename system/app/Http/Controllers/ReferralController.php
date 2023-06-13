@@ -135,6 +135,8 @@ class ReferralController extends Controller
         // Save the referral to the database
         $referral->save();
 
+        return redirect()->back()->with('success', 'Referral Form Submitted successfully');
+
 
         $referral->save();
 
