@@ -34,7 +34,8 @@
                             </thead>
                             <tbody>
                             @foreach($referralRequests as $referralRequest)
-                                <tr class="
+                                <tr onclick="window.location.href='{{ route('referrals.viewReferral', $referralRequest) }}'"
+                                    class="
                                     @if ($referralRequest->priorityLevel == 'stat')
                                         color-red
                                     @elseif ($referralRequest->priorityLevel == 'asap')
@@ -54,6 +55,7 @@
                                     <td>{{ $referralRequest->referringOfficer }}</td>
                                     <td>Cardiovascular</td>
                                     <td>Pending</td>
+                                    <td><button class="btn btn-primary">Action</button></td>
 
                                 </tr>
                             @endforeach
