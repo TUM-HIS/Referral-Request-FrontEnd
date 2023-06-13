@@ -28,6 +28,20 @@ class ReferralController extends Controller
         return view('referrals.addReferral');
     }
 
+    public function destroy(referral $referral) {
+        $referralRequests = Referral::where('id', $referral->id)->first();
+
+        // Perform any additional checks or authorization if needed
+        if (!$referralRequests) {
+            return redirect()->route('referrals.outgoing')->with('error', 'Record not found');
+        }
+        // Delete the record
+        $referralRequests->delete();
+        
+        return redirect()->route('referrals.outgoing.outgoing')->with('success', 'Record deleted successfully');
+
+    }
+
     public function facilities(){
 
         return view('referrals.facilities');
@@ -66,6 +80,22 @@ class ReferralController extends Controller
 
 
         return view('referrals.outgoing.viewReferral', $data);
+    }
+
+    public function viewIncomingReferal(Referral $referral){
+
+        // $facilities = m_f_l_s::take(20)->get();
+        // $patientDetails = Patient::where('id', $patient->id)->first();
+        $referralRequests = Referral::where('id', $referral->id)->first();
+        $patientDetails = Patient::where('upi', $referral->clientUPI)->first();
+
+        $data = [
+            'referral' => $referralRequests,
+            'patient' => $patientDetails,
+        ];
+
+
+        return view('referrals.incoming.viewReferral', $data);
     }
 
 

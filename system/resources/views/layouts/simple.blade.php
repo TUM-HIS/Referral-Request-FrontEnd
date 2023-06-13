@@ -48,6 +48,7 @@
         @include('includes.messages')
     </div>
 </main>
+@section('scripts')
 </body>
 </html>
 

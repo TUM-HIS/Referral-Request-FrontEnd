@@ -54,6 +54,7 @@
         @yield('content')
         @yield('form')
     @include('includes.footer')
+    @section('scripts')
 
 </body>
 

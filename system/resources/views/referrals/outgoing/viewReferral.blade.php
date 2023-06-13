@@ -23,7 +23,7 @@
 
 
     <section class='referral'>
-        <form id="referralForm" action="{{ route('referrals.submitReferral') }}" method="POST">
+        <form id="referralForm" action="{{ route('referral.destroy', $referral->id) }}" method="POST">
             @csrf
             <div class="grid-by-ace">
                 <div class="grid-by-ace">
@@ -204,10 +204,36 @@
     </div>
 
     <div class="mt-3 pb-2">
-        {{-- <button class="submitreqbtn">Submit Request</button> --}}
+
+        <!-- Button trigger modal -->
         
-        <button class="btn btn-primary-d" style="background: #ff3347;">Cancel Referral</button>
-        <button class="btn btn-primary">Exit Referral</button>
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Cancel Referral
+        </button>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Warning</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                This action is irreversible, once done the referal data is lost. do you still wish to calcel the referal?
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Proceed</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <a class="btn btn-primary" href="{{ route('referral.outgoing') }}">Exit Referral</a>
+
+        
     </div>
 
 </form>
