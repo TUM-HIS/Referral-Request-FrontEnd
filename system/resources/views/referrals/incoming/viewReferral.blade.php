@@ -192,11 +192,11 @@
                             <label for="distance">Approximate Distance</label> <br>
                             <input type="text" id="distance" name='distance' placeholder='Approximate distance' readonly> <br>
                         </div>
-        
+
                         <div class="pb-2">
                             <label for="serviceNotes">Additional Notes</label> <br>
                             <textarea id="serviceNotes" name="serviceNotes" cols="30" rows="10" placeholder="Additional Medical Notes..." readonly >{{ $referral->additionalNotes }}</textarea>
-                        </div>     
+                        </div>
                     </div>
                 </fieldset>
             </div>
@@ -256,13 +256,8 @@
         </div>
         <a class="btn btn-primary" href="{{ route('referrals.index') }}">Exit Referral</a>
     </div>
-    
+
 </form>
 </section>
-
-
-
-
-
 
 @endsection
