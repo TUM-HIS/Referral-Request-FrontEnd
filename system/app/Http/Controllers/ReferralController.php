@@ -136,19 +136,6 @@ class ReferralController extends Controller
         $referral->save();
 
 
-
-
-
-//        $referralId = $referral->id;
-//
-//        $user = User::find(1);
-//        $notification = new ReferralRequestSent($referralId);
-//
-//        Notification::send($user, $notification);
-//
-//        //$user->notify(new ReferralRequestSent());
-
-
         $referral->save();
 
         $referralId = $referral->id;
@@ -158,16 +145,11 @@ class ReferralController extends Controller
 
         Notification::send($facility, $notification);
 
-        //dd($facility);
-        //Notification::send($facility, $notification);
-       // $facility->notify($notification);
-
-
 
 
 
  /*
-$savedId = $referral->id;
+        $savedId = $referral->id;
         $SendReferral = new SendReferral();
         $res = json_decode($SendReferral->sendPost($savedId));
         $referral->referralId = $res->referralRes->referralId;
@@ -175,11 +157,6 @@ $savedId = $referral->id;
         //local and remote referral ids
         $local = $savedId;
         $remote = $referral->referralId;
-
-        //TESTING
-        //dd($res -> referralRes -> localRRID, );
-        //dd($local. " " . $remote);
-        //dd(gettype($res));
 
         $referral = Referral::find($local);
         $referral->referralId =$remote;
@@ -208,27 +185,24 @@ $savedId = $referral->id;
     }
 
     public function acceptReferralRequest(Referral $referral){
-        //dd($referral);
-        // Retrieve the referral based on its ID
-        //$referral = Referral::find($referralId);
-        $notifiedFacility = $referral->referredFacility;
+
         $user = Auth::user();
 
         $userFacility = $user->userFacility;
 
 
-        // Retrieve the notification associated with the referral
-        $notification = $userFacility->notifications()->where('notifiable_id', $userFacility->Code);
+        $userFacility->unreadNotifications
+            ->where('data.referral_id', $referral->id)
+            ->each(function ($notification) {
+                $notification->markAsRead();
+                // Perform any other necessary updates
+            });
 
-        if ($notification) {
-            // Mark the notification as read
-            $notification->markAsRead();
-        }
+
 
         $referralRequests = Referral::orderBy('created_at', 'desc')->get();
         //$referralRequests = referralRequest::all();
-
-        return view('referrals.index')->with(['referralRequests' => $referralRequests]);
+        return  redirect()->route('referrals.incoming')->with(['referralRequests' => $referralRequests]);
 
     }
 
@@ -236,7 +210,7 @@ $savedId = $referral->id;
 
         $referralRequests = Referral::orderBy('created_at', 'desc')->get();
 
-        return view('referrals.index')->with(['referralRequests' => $referralRequests]);
+        return view('referrals.incoming')->with(['referralRequests' => $referralRequests]);
     }
 
 
