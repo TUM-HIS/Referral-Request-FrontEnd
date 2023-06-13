@@ -8,7 +8,7 @@
             <h1> Referrals </h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('referrals.index') }}">Outgoing</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('referrals.incoming') }}">Outgoing</a></li>
                     <li class="breadcrumb-item active">Referrals</li>
                 </ol>
             </nav>

@@ -135,14 +135,40 @@ class ReferralController extends Controller
         // Save the referral to the database
         $referral->save();
 
+
+
+
+
+//        $referralId = $referral->id;
+//
+//        $user = User::find(1);
+//        $notification = new ReferralRequestSent($referralId);
+//
+//        Notification::send($user, $notification);
+//
+//        //$user->notify(new ReferralRequestSent());
+
+
+        $referral->save();
+
         $referralId = $referral->id;
 
-        $user = User::find(1);
+        $facility = m_f_l_s::where('Code', $referral->referredFacility)->first();
         $notification = new ReferralRequestSent($referralId);
 
-        Notification::send($user, $notification);
+        //dd($facility);
+        //Notification::send($facility, $notification);
+        $facility->notify($notification);
 
-        //$user->notify(new ReferralRequestSent());
+
+
+
+
+
+
+
+
+
 
 
  /*

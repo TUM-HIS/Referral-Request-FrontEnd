@@ -30,7 +30,7 @@
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                     <li class="dropdown-header">
                         You have {{auth()->user()->unreadNotifications->count()}} new referral requests
-                        <a href="{{route('referrals.index') }}"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                        <a href="{{route('referrals.incoming') }}"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
@@ -96,7 +96,7 @@
 {{--                        <hr class="dropdown-divider">--}}
 {{--                    </li>--}}
                     <li class="dropdown-footer">
-                        <a href="{{route('referrals.index') }}">Show all notifications</a>
+                        <a href="{{route('referrals.incoming') }}">Show all notifications</a>
                     </li>
 
                 </ul><!-- End Notification Dropdown Items -->

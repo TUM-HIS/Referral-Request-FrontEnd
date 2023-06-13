@@ -48,9 +48,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     //incoming referral
-    Route::get('/referrals', [ReferralController::class, 'incomingReferrals'])->name('referrals.index');
+    Route::get('/incoming-referrals', [ReferralController::class, 'incomingReferrals'])->name('referrals.incoming');
     Route::get('/add-referral', [ReferralController::class, 'addReferral'])->name('referrals.addReferral');
-    Route::get('/outgoing-referrals', [ReferralController::class, 'outgoingReferrals'])->name('referral.outgoing');
+    Route::get('/outgoing-referrals', [ReferralController::class, 'outgoing'])->name('referrals.outgoing');
 
     Route::post('/storeReferral', [ReferralController::class, 'storeReferral'])->name('referral.storeReferral');
 
