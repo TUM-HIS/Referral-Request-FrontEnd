@@ -30,7 +30,7 @@
             </a>
             <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{ route('referrals.index') }}">
+                    <a href="{{ route('referrals.incoming') }}">
                         <i class="bi bi-circle"></i><span>Worklist</span>
                     </a>
                 </li>
