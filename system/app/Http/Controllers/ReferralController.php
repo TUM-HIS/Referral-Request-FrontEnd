@@ -112,7 +112,6 @@ class ReferralController extends Controller
             // Add validation rules for other form fields
         ]);
 
-        dd($request);
         // Create a new referral instance
         $referral = new Referral;
         $referral->clientName = $request->input('clientName');
