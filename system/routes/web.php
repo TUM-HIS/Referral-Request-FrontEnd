@@ -34,11 +34,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/search-patients', [PatientController::class, 'search'])->name('patients.search-patient');
     // Route::get('/search-patient/results/', [PatientController::class, 'searchResults'])->name('patients.searchResults');
     Route::get('/patients/view/{patient}', [PatientController::class, 'viewPatient'])->name('patients.viewPatient');
-    Route::get('/worklist',[ReferralController::class,'worklist'])->name('referrals.worklist');
-
-
+    Route::get('/patients-count',[PatientController::class,'getPatientsCount']);
+    
+    
 
     //referral routes
+    Route::get('/worklist',[ReferralController::class,'worklist'])->name('referrals.worklist');
     Route::post('/submit-referral', [ReferralController::class, 'submitReferral'])->name('referrals.submitReferral');
     //Route::get('/referral/{patient}', [ReferralController::class, 'create'])->name('referrals.create');
     Route::get('/referral/create/{patient}', [ReferralController::class, 'createreferal'])->name('referrals.createReferral');

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Patient;
-	
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -78,7 +78,23 @@ class PatientController extends Controller
         return view('patients.viewPatient', compact('patient', 'patientDetails'));
     }
 
+    public function getPatientsCount(Request $request)
+    {
+        $period = $request->query('period');
+        $patientsCount = 0;
 
-    
+        // Query the database based on the selected period
+        if ($period === 'today') {
+            $patientsCount = Patient::whereDate('created_at', today())->count();
+        } elseif ($period === 'this_month') {
+            $patientsCount = Patient::whereMonth('created_at', now()->month)->count();
+        } elseif ($period === 'this_year') {
+            $patientsCount = Patient::whereYear('created_at', now()->year)->count();
+        }
+
+        return response()->json($patientsCount);
+    }
+
+
 
 }
