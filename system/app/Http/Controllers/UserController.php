@@ -86,11 +86,11 @@ class UserController extends Controller
     public function admin(){
 //        return 'aricha';
         $patients = Patient::count();
-        // $physicians = Physicians::count();
+        $physicians = User::count();
         $referals = Referral::count();
         // $referalfeedback = Referalfeedback::count();
         $facilities = m_f_l_s::count();
-        return view('admin.index', compact('facilities','referals','patients'));
+        return view('admin.index', compact('facilities', 'physicians','referals','patients'));
     }
 
     public function doctor(){
