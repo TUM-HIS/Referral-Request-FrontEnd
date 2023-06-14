@@ -134,6 +134,10 @@ class ReferralController extends Controller
 
         // Save the referral to the database
         $referral->save();
+
+        return redirect()->back()->with('success', 'Referral Request Submitted successfully');
+
+
         $referralId = $referral->id;
 
         $user = Auth::user();
