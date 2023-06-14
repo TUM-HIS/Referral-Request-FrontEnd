@@ -25,183 +25,180 @@
     <section class='referral'>
         <form id="referralForm" action="{{ route('referral.destroy', $referral->id) }}" method="POST">
             @csrf
-            <div class="grid-by-ace">
-                <div class="grid-by-ace">
-                    <div class="card resize">
-                        <fieldset class="grid-1-1">
-                            <legend>Patient Details</legend>
+            <div class="row">
+                <div class="">
+                    <div class="row">
+                        <div class="col-xxl-6 col-md-4">
+                            <div class="card">
+                                <div class="p-4">
+                                    <legend>Patient Details</legend>
 
-                            <div class="pb-2">
-                                <label for="clientName">Full Name</label> <br>
-                                <input type='text' name='clientName' placeholder="Patient's Full Name" readonly value="{{ $patient->first_name }} {{ $patient->last_name }}"> <br>
-                            </div>
+                                    <div class="pb-1">
+                                        <label for="clientName">Full Name</label> 
+                                        <input type='text' class="form-control" name='clientName' placeholder="Patient's Full Name" readonly value="{{ $patient->first_name }} {{ $patient->last_name }}"> 
+                                    </div>
 
-                            <div class="pb-2">
-                                <label for="clientID">Identification Number</label> <br>
-                                <input type='text' name='clientID' placeholder='Identification Number' readonly value="{{ $patient->idNo }}" > <br>
-                            </div>
+                                    <div class=" pb-1">
+                                        <label for="clientID">Identification Number</label> 
+                                        <input type='text' class="form-control" name='clientID' placeholder='Identification Number' readonly value="{{ $patient->idNo }}" > 
+                                    </div>
 
-                            <div class="pb-2">
-                                <label for="clientAge">Age</label> <br>
-                                <input type='number' name='clientAge' readonly value="{{ \Carbon\Carbon::parse($patient->dob)->age }}" placeholder='Age' > <br>
-                            </div>
+                                    <div class=" pb-1">
+                                        <label for="clientAge">Age</label> 
+                                        <input type='number' class="form-control" name='clientAge' value="{{ \Carbon\Carbon::parse($patient->dob)->age }}" readonly placeholder='Age' > 
+                                    </div>
 
-                            <div class="pb-2">
-                                <label for="clientUPI">UPI Number</label> <br>
-                                <input type='text' name='clientUPI' placeholder='Unique Personal Identification Number' readonly value="{{ $patient->upi }}" > <br>
-                            </div>
+                                    <div class=" pb-1">
+                                        <label for="clientUPI">UPI Number</label> 
+                                        <input type='text' class="form-control" name='clientUPI' placeholder='Unique Personal Identification Number' readonly value="{{ $patient->upi }}" > 
+                                    </div>
 
-                            <div class="pb-2">
-                                <label for="clientBirthCert">Birth Certificate Number</label> <br>
-                                <input type='text' name='clientBirthCert' placeholder='Birth Certificate Number' readonly> <br>
-                            </div>
+                                    <div class=" pb-1">
+                                        <label for="clientBirthCert">Birth Certificate Number</label> 
+                                        <input type='text' class="form-control" name='clientBirthCert' placeholder='Birth Certificate Number'> 
+                                    </div>
 
-                            <div class="pb-2">
-                                <label for="clientTelephone">Telephone Number</label> <br>
-                                <input type='text' name='clientTelephone' placeholder='Telephone Number' readonly value="{{ $patient->telephone }}" > <br>
-                            </div>
+                                    <div class=" pb-1">
+                                        <label for="clientTelephone">Telephone Number</label> 
+                                        <input type='text' class="form-control" name='clientTelephone' placeholder='Telephone Number' readonly value="{{ $patient->telephone }}" > 
+                                    </div>
 
-                            <div class="pb-2">
-                                <label for="clientCounty">County</label> <br>
-                                <input type='text' name='clientCounty' placeholder='County' readonly value="{{ $patient->countyOfBirth }}" > <br>
-                            </div>
-
-
-                            <div class="pb-2">
-                                <label for="clientSubCounty">Subcounty</label> <br>
-                                <input type='text' name='clientSubCounty' placeholder='Subcounty' readonly value="{{ $patient->subCounty }}" > <br>
-                            </div>
+                                    <div class=" pb-1">
+                                        <label for="clientCounty">County</label> 
+                                        <input type='text' class="form-control" name='clientCounty' placeholder='County' value="{{ $patient->countyOfBirth }}" readonly> 
+                                    </div>
 
 
-                            <div class="pb-2">
-                                <label for="clientConstituency">Constituency</label> <br>
-                                <input type='text' name='clientConstituency' placeholder='Constituency' readonly value="{{ $patient->village }}" > <br>
-                            </div>
+                                    <div class=" pb-1">
+                                        <label for="clientSubCounty">Subcounty</label> 
+                                        <input type='text' class="form-control" name='clientSubCounty' placeholder='Subcounty' value="{{ $patient->subCounty }}" readonly> 
+                                    </div>
 
 
-                            <div class="pb-2">
-                                <label for="clientWard">Ward</label> <br>
-                                <input type='text' name='clientWard' placeholder='Ward' readonly value="{{ $patient->address }}" > <br>
-                            </div>
+                                    <div class=" pb-1">
+                                        <label for="clientConstituency">Constituency</label> 
+                                        <input type='text' class="form-control" name='clientConstituency' placeholder='Constituency' value="{{ $patient->village }}" > 
+                                    </div>
 
 
-                        </fieldset>
-                    </div>
+                                    <div class=" pb-1">
+                                        <label for="clientWard">Ward</label> 
+                                        <input type='text' class="form-control" name='clientWard' placeholder='Ward' value="{{ $patient->address }}" > 
+                                    </div>
 
-                    <div class="grid-1-2">
-                        <div class="card resize">
-                            <fieldset class="">
-                                <legend>Next of Kin Details</legend>
-
-
-                                <div class="pb-2">
-                                    <label for="kinName">Full Name</label> <br>
-                                    <input type='text' name='kinName' placeholder="Kin's Full Name" readonly value="{{ $patient->kinName }}" > <br>
                                 </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="p-4">
+                                    <legend>Next of Kin Details</legend>
 
 
-                                <div class="pb-2">
-                                    <label for="kinRelationship">Relationship to Patient</label> <br>
-                                    <input name="kinRelationship" id="" readonly value="{{ $patient->relationship }}" > <br>
+                                    <div class=" pb-1">
+                                        <label for="kinName">Full Name</label> 
+                                        <input type='text' class="form-control" name='kinName' placeholder="Kin's Full Name"" value="{{ $patient->kinName }}" readonly> 
+                                    </div>
+
+
+                                    <div class=" pb-1">
+                                        <label for="kinRelationship">Relationship to Patient</label> 
+                                        <input class="form-control" name="kinRelationship" id="" value="{{ $patient->relationship }}" > 
+                                    </div>
+
+                                    <div class=" pb-1">
+                                        <label for="kinTelephone">Telephone Number</label> 
+                                        <input class="form-control" type='text' name='kinTelephone' placeholder='Telephone Number' value="{{ $patient->kinTelephone }}" readonly> 
+                                    </div>
+
+
                                 </div>
-
-                                <div class="pb-2">
-                                    <label for="kinTelephone">Telephone Number</label> <br>
-                                    <input type='text' name='kinTelephone' placeholder='Telephone Number' readonly value="{{ $patient->kinTelephone }}" > <br>
-                                </div>
-
-
-                            </fieldset>
+                            </div>
                         </div>
 
-                        <div class="card resize">
-                            <fieldset class="">
-                                <legend>Referral Details</legend>
+                        <div class="col-xxl-6 col-md-4">
+                            
 
-                                <div class="pb-2">
-                                    <label for="referringOfficer">Referring Officer</label> <br>
-                                    <input type="text" readonly value="{{ $referral->referringOfficer }}"> <br>
-                                </div>
+                            <div class="card">
+                                <fieldset class="p-4">
+                                    <legend>Referral Details</legend>
 
-                                <div class="pb-2">
-                                    <label for="historyInvestigation">History/Investigation</label> <br>
-                                    <input type="text" readonly value="{{ $referral->historyInvestigation }}">
-                                </div>
+                                    <div class=" pb-1">
+                                        <label for="referringOfficer">Referring Officer</label> 
+                                        <input type="text" class="form-control" readonly value="{{ $referral->referringOfficer }}"> 
+                                    </div>
 
-                                <div class="pb-2">
-                                    <label for="diagnosis">Diagnosis</label> <br>
-                                    <input type="text" readonly value="{{ $referral->diagnosis }}">
-                                </div>
+                                    <div class=" pb-1">
+                                        <label for="historyInvestigation">History/Investigation</label> 
+                                        <input type="text" class="form-control" readonly value="{{ $referral->historyInvestigation }}">
+                                    </div>
 
+                                    <div class=" pb-1">
+                                        <label for="diagnosis">Diagnosis</label> 
+                                        <input type="text" class="form-control" readonly value="{{ $referral->diagnosis }}">
+                                    </div>
 
-                                <div class="required">
-                                    <label for="reasonReferral">Reason for Referral</label> <br>
-                                    <input type="text" readonly value="{{ $referral->reasonReferral }}">
-                                </div>
+                                    <div class=" pb-1">
+                                        <label for="reasonReferral">Reason for Referral</label>
+                                        <input type="text" class="form-control" readonly value="{{ $referral->reasonReferral }}">
+                                    </div>
 
-                                <div class="pb-2">
-                                    <label for="formFileMultiple">Attachments</label> <br>
-                                    <input type="text" readonly value="{{ $referral->attachments }}"> <br>
-                                </div>
+                                    <div class=" pb-1">
+                                        <label for="formFileMultiple">Attachments</label>
+                                        <input type="text" class="form-control" readonly value="{{ $referral->attachments }}">
+                                    </div>
 
-                                <div class="pb-2">
-                                    <label for="additionalNotes">Additional Notes</label> <br>
-                                    <input type="text" readonly value="{{ $referral->additionalNotes }}"> <br>
-                                </div>
+                                    <div class=" pb-1">
+                                        <label for="additionalNotes">Additional Notes</label>
+                                        <input type="text" name="additionalNotes" class="form-control" readonly value="{{ $referral->additionalNotes }}">
+                                    </div>
+                                </fieldset>
+                            </div>
 
+                            <div class="card">
+                                <fieldset class="">
+                                    <div class="p-4">
+                                        <legend>Service Details</legend>
+                
+                                        <div class=" pb-1">
+                                            <label for="priorityLevel">Priority Level</label> 
+                                            <input type="text" class="form-control" readonly value="{{ $referral->priorityLevel }}">
+                                        </div>
+                
+                
+                                        <div class=" pb-1">
+                                            <label for="serviceCategory">Service Category</label> 
+                                            <input type="text" class="form-control" readonly value="{{ $referral->serviceCategory }}">
+                                        </div>
+                
+                
+                                        <div class=" pb-1">
+                                            <label for="service">Service</label> 
+                                            <input type="text" class="form-control" readonly value="{{ $referral->service }}">
+                                        </div>
+                
+                
+                                        <div class="pb-1">
+                                            <label for="facility">Facility</label> 
+                                            <input type="text" class="form-control" readonly value="{{ $referral->facilityReffered->Officialname }}">
+                                        </div>
 
-                            </fieldset>
-                        </div>
-                    </div>
-
-
-
-
-            <div class="resized">
-                <fieldset class="grid-by-ace card">
-                    <div class="grid-1-1" style="margin-right: 6vw;">
-                        <legend>Service Details</legend>
-
-                        <div class="pb-2">
-                            <label for="priorityLevel">Priority Level</label> <br>
-                            <input type="text" readonly value="{{ $referral->priorityLevel }}">
-                        </div>
-
-
-                        <div class="pb-2">
-                            <label for="serviceCategory">Service Category</label> <br>
-                            <input type="text" readonly value="{{ $referral->serviceCategory }}">
-                        </div>
-
-
-                        <div class="pb-2">
-                            <label for="service">Service</label> <br>
-                            <input type="text" readonly value="{{ $referral->service }}">
-                        </div>
-
-
-                        <div class="pb-2">
-                            <label for="facility">Facility</label> <br>
-                            <input type="text" readonly value="{{ $referral->facilityReffered->Officialname }}">
-                        </div>
-                    </div>
-
-
-                    <div class="grid-1-2" style="margin-top: 40px;">
-                        <div class="pb-2">
-                            <label for="distance">Approximate Distance</label> <br>
-                            <input type="text" id="distance" name='distance' placeholder='Approximate distance' readonly> <br>
-                        </div>
-
-                        <div class="pb-2">
-                            <label for="serviceNotes">Additional Notes</label> <br>
-                            <textarea id="serviceNotes" name="serviceNotes" cols="30" rows="10" placeholder="Additional Medical Notes..." readonly >{{ $referral->additionalNotes }}</textarea>
+                                        <div class="pb-1">
+                                            <label for="distance">Approximate Distance</label> 
+                                            <input type="text" class="form-control" id="distance" name='distance' placeholder='Approximate distance' readonly> 
+                                        </div>
+                        
+                                        <div class="pb-1">
+                                            <label for="serviceNotes">Additional Notes</label> 
+                                            <textarea class="form-control" id="serviceNotes" name="serviceNotes" cols="30" rows="10" placeholder="Additional Medical Notes..." readonly style="height: 102px;" >{{ $referral->additionalNotes }}</textarea>
+                                        </div>     
+                                    </div>
+                                </fieldset>
+                            </div>
                         </div>
                     </div>
-                </fieldset>
+
+                </div>
             </div>
-        </div>
-    </div>
 
     <div class="mt-3 pb-2">
 
