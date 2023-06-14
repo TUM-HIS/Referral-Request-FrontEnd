@@ -149,49 +149,22 @@
                                         @endforeach
                                     </select>
                                 </div>
-
-                                <!--<div class="pb-2">
-                                    <label for="reasonReferral">Reason for Referral</label> <br>
-                                    <select id="reasonReferral" name="reasonReferral"  required>
-                                    
-                                        @foreach($diagnosis as $reason)
-                                            <option value="{{ $reason->id }}">{{ $reason->{'from concept name'} }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>-->
+                                
 
                                 <div class="pb-2">
                                     <label for="reasonReferral">Reason for Referral</label> <br>
-                                    <input type="text" id="search-input" list="options-list" placeholder="Type to search">
+                                    <input type="text" id="search-input" list="options-list" placeholder="Type to search" >
                                     <datalist id="options-list">
-                                        <!-- Populate diagnosis options dynamically using coded concepts -->
+                                        <!-- Populate diagnosis options dynamically using coded concepts-->
                                         @foreach($diagnosis as $reason)
                                             <option value="{{ $reason->id }}">{{ $reason->{'from concept name'} }}</option>
                                         @endforeach
                                     </datalist>
                                     <input type="hidden" id="reasonReferral" name="reasonReferral">
 
-                                    <!--<script>
-                                        document.getElementById('search-input').addEventListener('input', function() {
-                                            var inputText = this.value.toLowerCase();
-                                            var options = document.getElementById('options-list').options;
-
-                                            for (var i = 0; i < options.length; i++) {
-                                                var option = options[i];
-                                                var optionText = option.value.toLowerCase();
-
-                                                if (optionText.includes(inputText)) {
-                                                    option.style.display = 'block';
-                                                } else {
-                                                    option.style.display = 'none';
-                                                }
-                                            }
-                                        });
-                                    </script>-->
-
                                     <script>
                                         var searchInput = document.getElementById('search-input');
-                                        var selectedValueInput = document.getElementById('selected-value');
+                                        var selectedValueInput = document.getElementById('reasonReferral');
 
                                         searchInput.addEventListener('input', function() {
                                             var inputText = this.value.toLowerCase();
@@ -214,7 +187,7 @@
                                     });
                                 </script>
                                 </div>
-
+                                
                                 <div class="pb-2">
                                     <label for="formFileMultiple">Attachments</label> <br>
                                     <input type="file" id="formFileMultiple" multiple placeholder='File Attachments'> <br>
