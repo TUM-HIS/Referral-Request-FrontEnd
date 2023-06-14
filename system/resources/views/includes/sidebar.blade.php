@@ -102,7 +102,7 @@
             <ul id="reports-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="">
-                        <i class="bi bi-circle"></i><span>All Reports</span>
+                        <i class="bi bi-circle"></i><span>Reports</span>
                     </a>
                 </li>
             </ul>
