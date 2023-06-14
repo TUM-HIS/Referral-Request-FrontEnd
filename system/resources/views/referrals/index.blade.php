@@ -53,7 +53,7 @@
                                     <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $referralRequest->priorityLevel }}</td>
                                     <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $referralRequest->referringOfficer }}</td>
                                     <td>Cardiovascular</td>
-                                    <td>Pending</td>
+                                    <td>{{ $referralRequest->status }}</td>
                                     <td class="no-click">
                                         <div class="btn-group" role="group">
                                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
