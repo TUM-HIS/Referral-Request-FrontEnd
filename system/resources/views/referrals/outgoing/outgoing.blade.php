@@ -8,7 +8,7 @@
             <h1> Referrals </h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('referrals.index') }}">Outgoing</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('referrals.incoming') }}">Outgoing</a></li>
                     <li class="breadcrumb-item active">Referrals</li>
                 </ol>
             </nav>
@@ -36,6 +36,7 @@
                                 <th>Priority</th>
                                 <th>Requested Service </th>
                                 <th>Intended Facility </th>
+                                <th>Status</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -67,6 +68,7 @@
                                     {{-- <td>{{ $referralRequest->serviceCategory }}</td> --}}
                                     <td>{{ $referralRequest->service }}</td>
                                     <td>{{ $referralRequest->facilityReffered->Officialname }}</td>
+                                    <td>{{ $referralRequest->status }}</td>
                                     {{-- <td>{{ $referralRequest->distance }}</td>
                                     <td>{{ $referralRequest->serviceNotes }}</td> --}}
                                 </tr>

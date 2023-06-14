@@ -54,18 +54,18 @@
             </a>
             <ul id="incoming-referals-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{ route('referrals.index') }}">
-                        <i class="bi bi-circle"></i><span>Incoming Referrals</span>
+                    <a href="{{ route('referrals.incoming') }}">
+                        <i class="bi bi-circle"></i><span>Worklist</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('referral.outgoing') }}">
-                        <i class="bi bi-circle"></i><span>Outgoing Referrals</span>
+                    <a href="{{ route('referrals.outgoing') }}">
+                        <i class="bi bi-circle"></i><span>Reviewed Requests</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('referrals.worklist') }}">
-                        <i class="bi bi-circle"></i><span>Worklist</span>
+                        <i class="bi bi-circle"></i><span>Counter Referral</span>
                     </a>
                 </li>
             </ul>
@@ -78,18 +78,18 @@
             </a>
             <ul id="outgoing-referals-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{ route('referrals.index') }}">
-                        <i class="bi bi-circle"></i><span>Incoming Referrals</span>
+                    <a href="{{ route('referrals.worklist') }}">
+                        <i class="bi bi-circle"></i><span>Worklist</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('referral.outgoing') }}">
-                        <i class="bi bi-circle"></i><span>Outgoing Referrals</span>
+                        <i class="bi bi-circle"></i><span>Update Requests</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('referrals.worklist') }}">
-                        <i class="bi bi-circle"></i><span>Worklist</span>
+                    <a href="{{ route('referral.outgoing') }}">
+                        <i class="bi bi-circle"></i><span>Revoke Requests</span>
                     </a>
                 </li>
             </ul>
