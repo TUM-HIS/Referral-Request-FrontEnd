@@ -17,8 +17,6 @@
             </a>
             <ul id="registration-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-<<<<<<< HEAD
-=======
                     <a href="{{ route('patients.addPatient') }}">
                         <i class="bi bi-circle"></i><span>Register Patient</span>
                     </a>
@@ -56,8 +54,6 @@
             </a>
             <ul id="incoming-referals-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{ route('referrals.incoming') }}">
->>>>>>> 05ef943996ae75de0bace4d0eb07f7195a6523ff
                     <a href="{{ route('referrals.incoming') }}">
                         <i class="bi bi-circle"></i><span>Worklist</span>
                     </a>
