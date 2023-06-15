@@ -31,7 +31,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#verification-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-file-earmark-person"></i><span>Verification</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-check2-circle"></i><span>Verification</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="verification-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
@@ -50,7 +50,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#incoming-referals-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-arrow-up-right-circle"></i><span>Incoming Referrals</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-arrow-down-left-circle"></i><span>Incoming Referrals</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="incoming-referals-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
@@ -97,7 +97,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#reports-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-file-earmark-person"></i><span>Reports</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-graph-up"></i><span>Reports</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="reports-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
