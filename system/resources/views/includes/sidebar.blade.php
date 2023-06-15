@@ -13,7 +13,7 @@
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#registration-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-file-earmark-person"></i><span>Registration</span><i class="bi bi-chevron-down ms-auto"></i>
+                <i class="bi bi-person-plus"></i><span>Registration</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="registration-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
@@ -41,7 +41,7 @@
                 </li>
                 <li>
                     <a href="">
-                        <i class="bi bi-circle"></i><span>Verify Referal</span>
+                        <i class="bi bi-circle"></i><span>Verify Referral</span>
                     </a>
                 </li>
             </ul>
@@ -59,12 +59,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('referrals.outgoing') }}">
+                    <a href="{{ route('referrals.incoming.reviewed') }}">
                         <i class="bi bi-circle"></i><span>Reviewed Requests</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('referrals.worklist') }}">
+                    <a href="{{ route('referrals.incoming.counterreferral') }}">
                         <i class="bi bi-circle"></i><span>Counter Referral</span>
                     </a>
                 </li>
@@ -101,8 +101,18 @@
             </a>
             <ul id="reports-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="">
-                        <i class="bi bi-circle"></i><span>Reports</span>
+                    <a href="{{ route('reports.incoming-reports') }}">
+                        <i class="bi bi-circle"></i><span>Incoming Referrals Reports</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('reports.outgoing-reports') }}">
+                        <i class="bi bi-circle"></i><span>Outgoing Referrals Reports</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('reports.completed-reports') }}">
+                        <i class="bi bi-circle"></i><span>Completed Referrals Reports</span>
                     </a>
                 </li>
             </ul>
