@@ -34,26 +34,39 @@
                             <tbody>
                             @foreach($referralRequests as $referralRequest)
                                 <tr
-                                    class="
-                                    @if ($referralRequest->priorityLevel == 'stat')
-                                        color-red
-                                    @elseif ($referralRequest->priorityLevel == 'asap')
-                                        color-blue
-                                    @elseif ($referralRequest->priorityLevel == 'urgent')
-                                        color-green
-                                    @elseif ($referralRequest->priorityLevel == 'routine')
-                                        color-yellow
-                                    @else
-                                        color-default
-                                    @endif
-                                ">
+{{--                                    class="--}}
+{{--                                    @if ($referralRequest->priorityLevel == 'stat')--}}
+{{--                                        color-red--}}
+{{--                                    @elseif ($referralRequest->priorityLevel == 'asap')--}}
+{{--                                        color-blue--}}
+{{--                                    @elseif ($referralRequest->priorityLevel == 'urgent')--}}
+{{--                                        color-green--}}
+{{--                                    @elseif ($referralRequest->priorityLevel == 'routine')--}}
+{{--                                        color-yellow--}}
+{{--                                    @else--}}
+{{--                                        color-default--}}
+{{--                                    @endif--}}
+{{--                                "--}}
+                                >
                                     <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $loop->iteration }}</td>
 
                                     <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $referralRequest->clientName }}</td>
                                     <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $referralRequest->priorityLevel }}</td>
                                     <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $referralRequest->referringOfficer }}</td>
                                     <td>Cardiovascular</td>
-                                    <td>{{ $referralRequest->status }}</td>
+                                    <td >
+                                        <p class="badge
+                                            @if ($referralRequest->status == 'Pending')
+                                                bg-warning
+                                            @elseif ($referralRequest->status == 'Accepted')
+                                                bg-success
+                                            @elseif ($referralRequest->status == 'Rejected')
+                                                bg-danger
+                                            @endif"
+                                           style="display: flex; align-items: center; justify-content: center;">
+                                        {{ $referralRequest->status }}
+                                        </p>
+                                    </td>
                                     <td class="no-click">
                                         <div class="btn-group" role="group">
                                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
