@@ -112,7 +112,6 @@ class ReferralController extends Controller
             // Add validation rules for other form fields
         ]);
 
-
         // Create a new referral instance
         $referral = new Referral;
         $referral->clientName = $request->input('clientName');
@@ -134,6 +133,10 @@ class ReferralController extends Controller
 
         // Save the referral to the database
         $referral->save();
+
+        return redirect()->back()->with('success', 'Referral Request Submitted successfully');
+
+
         $referralId = $referral->id;
 
         $user = Auth::user();
@@ -171,6 +174,16 @@ class ReferralController extends Controller
         $referralRequests = Referral::orderBy('created_at', 'desc')->get();
         //$referralRequests = referralRequest::all();
         return view('referrals.outgoing.outgoing',['referralRequests'=>$referralRequests]);
+    }
+
+    public function reviewed(){
+
+        return view('referrals.incoming.reviewed');
+    }
+
+    public function counterReferral(){
+
+        return view('referrals.incoming.counter-referral');
     }
 
     public function incomingReferrals(){

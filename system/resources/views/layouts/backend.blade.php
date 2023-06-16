@@ -28,7 +28,6 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ url('assets/css/style.css') }}" rel="stylesheet">
-    <link href="{{ url('assets/css/createReferral.css') }}" rel="stylesheet">
     <link href="{{ url('assets/css/newPatient.css') }}" rel="stylesheet">
     <link href="{{ url('assets/css/outgoingTable.css') }}" rel="stylesheet">
 
@@ -37,6 +36,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 
     <style>
 
@@ -54,7 +56,7 @@
         @yield('content')
         @yield('form')
     @include('includes.footer')
-    @section('scripts')
+    @yield('scripts')
 
 </body>
 
@@ -72,5 +74,6 @@
 
 <!-- Template Main JS File -->
 <script src="{{ url('assets/js/main.js') }}"></script>
+
 
 </html>
