@@ -85,12 +85,74 @@ class UserController extends Controller
 
     public function admin(){
 //        return 'aricha';
-        $patients = Patient::count();
-        $physicians = User::count();
-        $referals = Referral::count();
+        // $patients = Patient::count();
+        // $physicians = User::count();
+        // $referals = Referral::count();
         // $referalfeedback = Referalfeedback::count();
         $facilities = m_f_l_s::count();
-        return view('admin.index', compact('facilities', 'physicians','referals','patients'));
+
+        $patientsCount = Patient::whereMonth('created_at', now()->month)->count();
+        $physiciansCount = User::whereMonth('created_at', now()->month)->count();
+        $referralsCount = Referral::whereMonth('created_at', now()->month)->count();
+
+        return view('admin.index', compact('facilities', 'physiciansCount','referralsCount', 'patientsCount'));
+    }
+
+    public function getPatientsCount(Request $request)
+    {
+        $period = $request->query('period');
+        $patientsCount = 0;
+
+        // Query the database based on the selected period
+        if ($period === 'today') {
+            $patientsCount = Patient::whereDate('created_at', now()->format('Y-m-d'))->count();
+        } elseif ($period === 'this_month') {
+            $patientsCount = Patient::whereMonth('created_at', now()->month)->whereYear('created_at', now()->year)->count();
+        } elseif ($period === 'this_year') {
+            $patientsCount = Patient::whereYear('created_at', now()->year)->count();
+        }elseif ($period === 'all') {
+            $patientsCount = Patient::count();
+        }
+
+        return response()->json($patientsCount);
+    }
+
+    public function getReferalsCount(Request $request)
+    {
+        $period = $request->query('period');
+        $referralsCount = 0;
+
+        // Query the database based on the selected period
+        if ($period === 'today') {
+            $referralsCount = Referral::whereDate('created_at', now()->format('Y-m-d'))->count();
+        } elseif ($period === 'this_month') {
+            $referralsCount = Referral::whereMonth('created_at', now()->month)->whereYear('created_at', now()->year)->count();
+        } elseif ($period === 'this_year') {
+            $referralsCount = Referral::whereYear('created_at', now()->year)->count();
+        }elseif ($period === 'all') {
+            $referralsCount = Referral::count();
+        }
+
+        return response()->json($referralsCount);
+    }
+
+    public function getPhysiciansCount(Request $request)
+    {
+        $period = $request->query('period');
+        $physiciansCount = 0;
+
+        // Query the database based on the selected period
+        if ($period === 'today') {
+            $physiciansCount = User::whereDate('created_at', now()->format('Y-m-d'))->count();
+        } elseif ($period === 'this_month') {
+            $physiciansCount = User::whereMonth('created_at', now()->month)->whereYear('created_at', now()->year)->count();
+        } elseif ($period === 'this_year') {
+            $physiciansCount = User::whereYear('created_at', now()->year)->count();
+        }elseif ($period === 'all') {
+            $physiciansCount = User::count();
+        }
+
+        return response()->json($physiciansCount);
     }
 
     public function doctor(){

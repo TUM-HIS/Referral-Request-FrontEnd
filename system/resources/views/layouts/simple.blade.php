@@ -51,7 +51,6 @@
     </div>
 </main>
 @yield('script')
-<script src="{{ url('assets/js/dashboardCount.js') }}"></script>
 </body>
 </html>
 
