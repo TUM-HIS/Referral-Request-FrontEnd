@@ -18,6 +18,10 @@ Route::get('/admin', [UserController::class, 'admin'])->name('admin.dashboard');
 Route::get('/doctor', [UserController::class, 'doctor'])->name('doctor.dashboard');
 Route::get('/fhirJson', [ReferralController::class, 'fhirJson']);
 
+Route::get('/patients-count', [UserController::class, 'getPatientsCount'])->name('patients.count');
+Route::get('/physicians-count', [UserController::class, 'getPhysiciansCount'])->name('physicians.count');
+Route::get('/referrals-count', [UserController::class, 'getReferralsCount'])->name('referrals.count');
+
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
@@ -34,9 +38,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/search-patients', [PatientController::class, 'search'])->name('patients.search-patient');
     // Route::get('/search-patient/results/', [PatientController::class, 'searchResults'])->name('patients.searchResults');
     Route::get('/patients/view/{patient}', [PatientController::class, 'viewPatient'])->name('patients.viewPatient');
-    Route::get('/patients-count',[PatientController::class,'getPatientsCount']);
-    
-    
+
+
 
     //referral routes
     Route::get('/worklist',[ReferralController::class,'worklist'])->name('referrals.worklist');

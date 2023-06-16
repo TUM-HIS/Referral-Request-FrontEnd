@@ -23,7 +23,7 @@
                         <a class="btn btn-sm btn-outline-primary" href="{{ route('referrals.worklist') }}">Refer</a>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped datatable">
+                        <table class="table table-bordered table-striped datatable" id="patientTable">
                             <thead>
                             <tr>
                                 <th>#</th>
