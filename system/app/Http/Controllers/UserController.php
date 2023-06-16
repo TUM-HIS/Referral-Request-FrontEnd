@@ -117,7 +117,7 @@ class UserController extends Controller
         return response()->json($patientsCount);
     }
 
-    public function getReferalsCount(Request $request)
+    public function getReferralsCount(Request $request)
     {
         $period = $request->query('period');
         $referralsCount = 0;
