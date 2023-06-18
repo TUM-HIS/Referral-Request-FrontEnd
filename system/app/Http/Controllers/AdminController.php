@@ -3,18 +3,121 @@
 namespace App\Http\Controllers;
 
 use App\Charts\ReferralChart;
-use App\Charts\ReferralsChart;
+use App\Models\Chart;
 use App\Models\m_f_l_s;
-use App\Models\Patient;
 use App\Models\Referral;
+use App\Models\TestUser;
 use Carbon\Carbon;
-use ConsoleTVs\Charts\Classes\Highcharts\Chart;
-use Illuminate\Http\Request;
-use Charts;
+use Illuminate\Support\Facades\DB;
 
 
 class AdminController extends Controller
 {
+
+    public function testCharts(){
+
+//        HANDLING TEST USERS DATA
+
+        $groups = TestUser::select('age', DB::raw('count(*) as total'))
+            ->groupBy('age')
+            ->pluck('total', 'age')
+            ->all();
+        // Generate random colours for the groups
+        for ($i=0; $i<=count($groups); $i++) {
+            $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
+        }
+        // Prepare the data for returning with the view
+        $chart = new Chart();
+        $chart->labels = (array_keys($groups));
+        $chart->dataset = (array_values($groups));
+        $chart->colours = $colours;
+
+//        HANDLING DATA FOR THE REFERRALS
+
+        $from = '2023-05-01';
+        $to = '2023-08-01';
+
+        $referrals = Referral::whereBetween('created_at', [$from, $to])
+            ->groupBy('referredFacility')
+            ->select('referredFacility', DB::raw('COUNT(*) as count'))
+            ->get();
+
+        $facilityNames = $referrals->pluck('referredFacility');
+        $referralCounts = $referrals->pluck('count');
+
+        $chart2 = new Chart();
+        $chart2->facilityNames = $facilityNames;
+        $chart2->referralCounts = $referralCounts;
+
+
+
+        //HANDLING STATUS FOR THE REFERRALS
+
+        $statusCounts = Referral::select('status', DB::raw('count(*) as total'))
+            ->groupBy('status')
+            ->pluck('total', 'status')
+            ->toArray();
+
+
+        //LINE CHART
+        $referrals = Referral::all();
+
+        $referralCounts = $referrals->groupBy(function ($referral) {
+            return $referral->created_at->format('F Y');
+        })->map(function ($group) {
+            return $group->count();
+        });
+
+        $chartData = [
+            'labels' => $referralCounts->keys()->toArray(),
+            'data' => $referralCounts->values()->toArray(),
+        ];
+
+
+//        dd($chartData);
+
+
+        return view('visualizations.test-charts')->with(['chart' => $chart,
+            'referralChart' => $chart2, 'statusData' => $statusCounts, 'chartData' => $chartData]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function charts(){
+
+        $data = Referral::select('id', 'created_at')->get()->groupBy(function ($data){
+            return Carbon::parse($data->created_at)->format('M');
+        });
+
+        $months = [];
+        $monthCount = [];
+        foreach ($data as $month => $values){
+
+            $months[] = $month;
+            $monthCount[] = count($values);
+        }
+
+        //dd($data);
+
+        return view('visualizations.charts')->with([
+            'data'=> $data,
+            'month' => $months,
+            'monthCount' => $monthCount]);
+
+    }
 
     public function admin(){
 
