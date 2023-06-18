@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TriageController;
@@ -74,6 +75,11 @@ Route::group(['middleware' => 'auth'], function () {
     //triage routes
     Route::get('/triages', [TriageController::class, 'addTriage'])->name('triages.addTriage');
     Route::post('/store-form', [TriageController::class, 'store'])->name('triages.store-form');
+
+
+
+    //admin routes
+    Route::get('/admin/dashboard', [AdminController::class, 'admin'])->name('admin.dashboard');
 });
 
 
