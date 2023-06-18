@@ -3,18 +3,76 @@
 namespace App\Http\Controllers;
 
 use App\Charts\ReferralChart;
-use App\Charts\ReferralsChart;
+use App\Models\Chart;
 use App\Models\m_f_l_s;
-use App\Models\Patient;
 use App\Models\Referral;
+use App\Models\TestUser;
 use Carbon\Carbon;
-use ConsoleTVs\Charts\Classes\Highcharts\Chart;
-use Illuminate\Http\Request;
-use Charts;
+use Illuminate\Support\Facades\DB;
 
 
 class AdminController extends Controller
 {
+
+    public function testCharts(){
+
+
+        $groups = TestUser::select('age', DB::raw('count(*) as total'))
+            ->groupBy('age')
+            ->pluck('total', 'age')
+            ->all();
+
+        // Generate random colours for the groups
+        for ($i=0; $i<=count($groups); $i++) {
+            $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
+        }
+
+        // Prepare the data for returning with the view
+        $chart = new Chart();
+        $chart->labels = (array_keys($groups));
+        $chart->dataset = (array_values($groups));
+        $chart->colours = $colours;
+
+        return view('visualizations.test-charts')->with(['chart' => $chart]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public function charts(){
+
+        $data = Referral::select('id', 'created_at')->get()->groupBy(function ($data){
+            return Carbon::parse($data->created_at)->format('M');
+        });
+
+        $months = [];
+        $monthCount = [];
+        foreach ($data as $month => $values){
+
+            $months[] = $month;
+            $monthCount[] = count($values);
+        }
+
+        //dd($data);
+
+        return view('visualizations.charts')->with([
+            'data'=> $data,
+            'month' => $months,
+            'monthCount' => $monthCount]);
+
+    }
 
     public function admin(){
 

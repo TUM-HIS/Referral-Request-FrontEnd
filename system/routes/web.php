@@ -36,8 +36,8 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::get('/search-patient/results/', [PatientController::class, 'searchResults'])->name('patients.searchResults');
     Route::get('/patients/view/{patient}', [PatientController::class, 'viewPatient'])->name('patients.viewPatient');
     Route::get('/patients-count',[PatientController::class,'getPatientsCount']);
-    
-    
+
+
 
     //referral routes
     Route::get('/worklist',[ReferralController::class,'worklist'])->name('referrals.worklist');
@@ -77,6 +77,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     //admin routes
     Route::get('/admin/dashboard', [AdminController::class, 'admin'])->name('admin.dashboard');
+    Route::get('/admin/charts', [AdminController::class, 'charts'])->name('admin.charts');
+    Route::get('/admin/test-charts', [AdminController::class, 'testCharts'])->name('admin.test-charts');
 });
 
 
