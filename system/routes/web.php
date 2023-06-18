@@ -19,6 +19,10 @@ Route::get('/admin', [UserController::class, 'admin'])->name('admin.dashboard');
 Route::get('/doctor', [UserController::class, 'doctor'])->name('doctor.dashboard');
 Route::get('/fhirJson', [ReferralController::class, 'fhirJson']);
 
+Route::get('/patients-count', [UserController::class, 'getPatientsCount'])->name('patients.count');
+Route::get('/physicians-count', [UserController::class, 'getPhysiciansCount'])->name('physicians.count');
+Route::get('/referrals-count', [UserController::class, 'getReferralsCount'])->name('referrals.count');
+
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/logout', [UserController::class, 'logout'])->name('user.logout');
@@ -77,8 +81,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     //admin routes
     Route::get('/admin/dashboard', [AdminController::class, 'admin'])->name('admin.dashboard');
-    Route::get('/admin/charts', [AdminController::class, 'charts'])->name('admin.charts');
-    Route::get('/admin/test-charts', [AdminController::class, 'testCharts'])->name('admin.test-charts');
 });
 
 
