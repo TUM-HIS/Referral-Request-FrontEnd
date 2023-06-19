@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Charts\ReferralChart;
-use App\Models\Chart;
 use App\Models\m_f_l_s;
 use App\Models\Referral;
 use App\Models\TestUser;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use ConsoleTVs\Charts\Classes\Chartjs\Chart;
+use Charts;
 
 
 class AdminController extends Controller
@@ -31,6 +31,9 @@ class AdminController extends Controller
         $chart->labels = (array_keys($groups));
         $chart->dataset = (array_values($groups));
         $chart->colours = $colours;
+
+
+
 
 //        HANDLING DATA FOR THE REFERRALS
 
@@ -81,21 +84,6 @@ class AdminController extends Controller
             'referralChart' => $chart2, 'statusData' => $statusCounts, 'chartData' => $chartData]);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function charts(){
 
         $data = Referral::select('id', 'created_at')->get()->groupBy(function ($data){
@@ -121,48 +109,87 @@ class AdminController extends Controller
 
     public function admin(){
 
-        $data = Referral::select('status', 'created_at')
-            ->whereDate('created_at', '>=', now()->subDays(6)->toDateString())
+        //BAR GRAPH
+        $data = Referral::whereBetween('created_at', [now()->subDays(7), now()])
+            ->groupBy('status')
+            ->groupByRaw('DATE(created_at)') // Group by the same day of the 'created_at' timestamp
+            ->selectRaw('status, DATE(created_at) AS date, count(*) as count')
             ->get();
 
+        // Prepare the chart data
+       $chartData = [];
+        foreach ($data as $item) {
+            $chartData[$item->date][$item->status] = $item->count;
+        }
 
-        $chart = new ReferralChart('line', 'chartjs');
-        $chart->title('Daily Referrals ');
-        $chart->labels($data->pluck('created_at'));
-        $chart->dataset('Pending Referral', 'line',     [10, 15, 8, 8, 2, 13, 7, 0, 16, 23]);
-        $chart->dataset('Completed Referrals', 'line',  [11, 5, 18, 3, 7, 8, 0, 10, 26, 15]);
-        $chart->dataset('All Referrals', 'line',        [21, 22, 26, 11, 9, 21, 7, 10, 42, 38]);
+        // Create the line chart
+        $chart = new Chart;
+        $chart->labels(array_keys($chartData));
+        foreach ($data->pluck('status')->unique() as $status) {
+//            return $status;
+            $color = [];
+            if ($status === 'Rejected') {
+                $color = 'rgba(255, 0, 0, 1)';
+            } elseif ($status === 'Accepted') {
+                $color = 'green';
+            } elseif ($status === 'Pending') {
+                $color = 'orange';
+            }
 
-//        return $referral = Referral::get()->groupBy('created_at')->map(function ($item){
-//            return count($item);
-//        });
-//
-//        $labels = Referral::pluck('created_at');
-//        $pending = Referral::where('status', 'Pending')->get();
-//        $chart = new ReferralsChart('line', 'highcharts');
-//        $chart->title('Sales Comparison');
-//        $chart->labels($labels);
-//        $chart->dataset('Pending', 'line', $pending);
-//        $chart->dataset('Product Y', 'line', [8, 12, 6, 10, 14]);
-//        $chart->dataset('Product Z', 'line', [5, 8, 10, 12, 6]);
+            $chart->dataset($status, 'bar', collect($chartData)->pluck($status)->toArray())
+                ->color($color)
+                ->backgroundColor($color); // Set background color as transparent
+        }
+        $chart->title('Referral Status');
+        $chart->options([
+            'responsive' => true,
+        ]);
 
 
-//        $referrals = Referral::all();
 
-//        $chart = Charts::create('bar', 'material')
-//            ->title("Referrals")
-//            ->dimensions(0, 400)
-//            ->elementLabel('Refferals Incoming/Outgoing')
-//            ->labels($referrals->pluck('created'))
-//            ->values($referrals->pluck('Pending'))
-//            ->values($referrals->pluck('Accepted'));
 
-        // $patients = Patients::count();
-        // $physicians = Physicians::count();
-        // $referals = Referals::count();
-        // $referalfeedback = Referalfeedback::count();
+        //PIE CHART
+        $pieChart = Referral::whereBetween('created_at', [now()->subMonth(1), now()])
+            ->selectRaw('status, count(*) as count')
+            ->groupBy('status')
+            ->get();
+
+        $acceptedRejectedCount = 0;
+        $allReferralCount = 0;
+        foreach ($pieChart as $item) {
+            if ($item->status === 'Accepted' || $item->status === 'Rejected') {
+                $acceptedRejectedCount += $item->count;
+            }
+            $allReferralCount += $item->count;
+        }
+        $completedCount = $acceptedRejectedCount;
+
+        $pieChartData = [
+            'Complete' => $completedCount,
+            'Incomplete' => $allReferralCount,
+        ];
+
+
+        // Create the pie chart
+        $completedPieChart = new Chart;
+        $completedPieChart->labels(array_keys($pieChartData));
+
+        $color = 'rgba(255, 0, 0, 1)';
+        $completedPieChart->dataset('Status', 'pie', array_values($pieChartData))
+            ->color([
+                'rgba(46, 204, 113, 1)',
+                'rgba(255, 0, 0, 1)',
+                ])
+            ->backgroundColor([
+                'rgba(46, 204, 113, 1)',
+                'rgba(255, 0, 0, 1)',
+            ]);;
+
+
+
+
         $facilities = m_f_l_s::count();
-        return view('visualizations.visualizations')->with(['facilities' => $facilities, 'chart' => $chart]);
+        return view('visualizations.visualizations')->with(['facilities' => $facilities, 'chart' => $chart, 'completedPieChart' => $completedPieChart]);
     }
 
 }
