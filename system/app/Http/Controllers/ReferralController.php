@@ -103,7 +103,6 @@ class ReferralController extends Controller
 
     public function submitReferral(Request $request)
     {
-
         //Validate the form data
         $validatedData = $request->validate([
             'referringOfficer' => 'required',
@@ -134,7 +133,7 @@ class ReferralController extends Controller
         // Save the referral to the database
         $referral->save();
 
-        return redirect()->back()->with('success', 'Referral Request Submitted successfully');
+        //return redirect()->back()->with('success', 'Referral Request Submitted successfully');
 
 
         $referralId = $referral->id;
@@ -165,39 +164,44 @@ class ReferralController extends Controller
 
 
         // Redirect to a success page or display a success message
-        return Redirect::route('referral.outgoing');
+        return Redirect::route('referral.outgoing')->with('success', 'Referral Request Submitted successfully');
     }
 
 
 
     public function outgoing(){
-        $referralRequests = Referral::orderBy('created_at', 'desc')->get();
+        $loggedInuserFacility = Auth::user()->userFacility->Code;
+        $referrals = Referral::where('referredFacility', $loggedInuserFacility)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
         //$referralRequests = referralRequest::all();
-        return view('referrals.outgoing.outgoing',['referralRequests'=>$referralRequests]);
+        return view('referrals.outgoing.outgoing',['referralRequests'=>$referrals]);
     }
 
-    public function reviewed(){
 
-        return view('referrals.incoming.reviewed');
-    }
-
-    public function counterReferral(){
-
-        return view('referrals.incoming.counter-referral');
-    }
 
     public function incomingReferrals(){
-
         //getting referrals associated to a particular facility
         $referralRequests = Referral::orderBy('created_at', 'desc')->get();
 
-        return view('referrals.index')->with(['referralRequests' => $referralRequests]);
+         $loggedInuserFacility = Auth::user()->userFacility->Code;
+
+        //dd($loggedInuserFacility);
+
+        $referrals = Referral::where('referredFacility', $loggedInuserFacility)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        //dd($referrals);
+
+        return view('referrals.index')->with(['referralRequests' => $referrals]);
 
     }
 
+
+
     public function acceptReferralRequest(Referral $referral){
-
-
         $referral->status = "Accepted"; // Assign the new value to the column
         $referral->save();
 
@@ -241,12 +245,22 @@ class ReferralController extends Controller
 
         Notification::send($facility, $notification);
 
-
-
-
         $referralRequests = Referral::orderBy('created_at', 'desc')->get();
 
         return redirect()->route('referrals.incoming')->with(['referralRequests' => $referralRequests]);
+    }
+
+
+
+
+    public function reviewed(){
+
+        return view('referrals.incoming.reviewed');
+    }
+
+    public function counterReferral(){
+
+        return view('referrals.incoming.counter-referral');
     }
 
 

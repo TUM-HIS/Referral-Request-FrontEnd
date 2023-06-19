@@ -18,7 +18,7 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $facilities = m_f_l_s::all()->pluck('Code');
+        $facilities = m_f_l_s::take(1000)->pluck('Code');
 
         $kenyanSecondNames = [
             'Wanjiru', 'Muthoni', 'Nyambura', 'Njoroge', 'Kamau',
