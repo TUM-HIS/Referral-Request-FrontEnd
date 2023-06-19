@@ -5,6 +5,8 @@
 <script src="https://code.jquery.com/jquery-3.7.0.slim.min.js"></script>
 {{--<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 
 
@@ -142,6 +144,15 @@
                                                 <option value="{{ $reason->id }}">{{ $reason->{'from concept name'} }}</option>
                                             @endforeach
                                         </select>
+                                        <script>
+                                            $(document).ready(function() {
+                                                // Initialize Select2
+                                                $('#historyInvestigation').select2({
+                                                    placeholder: 'Type to search...',
+                                                    minimumInputLength: 1 // Minimum number of characters to trigger the autocomplete
+                                                });
+                                            });
+                                        </script>
                                     </div>
 
                                     <div class=" pb-1">
@@ -152,16 +163,36 @@
                                                 <option value="{{ $reason->id }}">{{ $reason->{'from concept name'} }}</option>
                                             @endforeach
                                         </select>
+                                        <script>
+                                            $(document).ready(function() {
+                                                // Initialize Select2
+                                                $('#diagnosis').select2({
+                                                    placeholder: 'Type to search...',
+                                                    minimumInputLength: 1 // Minimum number of characters to trigger the autocomplete
+                                                });
+                                            });
+                                        </script>
                                     </div>
 
                                     <div class=" pb-1">
                                         <label for="reasonReferral">Reason for Referral</label> 
                                         <select id="reasonReferral" name="reasonReferral" class="form-control" required>
+                                            <!-- Add an empty option for the placeholder -->
+                                            <option></option>
                                             <!-- Populate diagnosis options dynamically using coded concepts -->
                                             @foreach($diagnosis as $reason)
                                                 <option value="{{ $reason->id }}">{{ $reason->{'from concept name'} }}</option>
                                             @endforeach
                                         </select>
+                                        <script>
+                                            $(document).ready(function() {
+                                                // Initialize Select2
+                                                $('#reasonReferral').select2({
+                                                    placeholder: 'Type to search...',
+                                                    minimumInputLength: 1 // Minimum number of characters to trigger the autocomplete
+                                                });
+                                            });
+                                        </script>
                                     </div>
 
                                     <div class=" pb-1">
