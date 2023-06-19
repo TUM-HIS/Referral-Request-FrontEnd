@@ -37,7 +37,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-    
+
 
 
     <style>
@@ -57,7 +57,7 @@
         @yield('form')
         @yield('scripts')
     @include('includes.footer')
-    
+
 
 </body>
 
@@ -77,10 +77,10 @@
 
 <!-- Template Main JS File -->
 <script src="{{ url('assets/js/main.js') }}"></script>
-<script src="{{ url('assets/js/dashboardCount.js') }}" 
-        data-patients-count-url="{{ route('patients.count') }}"
-        data-physicians-count-url="{{ route('physicians.count') }}"
-        data-referrals-count-url="{{ route('referrals.count') }}"></script>
+{{--<script src="{{ url('assets/js/dashboardCount.js') }}"--}}
+{{--        data-patients-count-url="{{ route('patients.count') }}"--}}
+{{--        data-physicians-count-url="{{ route('physicians.count') }}"--}}
+{{--        data-referrals-count-url="{{ route('referrals.count') }}"></script>--}}
 
 
 
