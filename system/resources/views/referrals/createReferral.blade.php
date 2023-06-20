@@ -139,6 +139,7 @@
                                     <div class=" pb-1">
                                         <label for="historyInvestigation">History/Investigation</label> 
                                         <select id="historyInvestigation" name="historyInvestigation" class="form-control" required>
+                                            <option>--- Select History/Investigation Facility ---</option>
                                             <!-- Place all the options here initially -->
                                             @foreach($diagnosis as $reason)
                                                 <option value="{{ $reason->id }}">{{ $reason->{'from concept name'} }}</option>
@@ -158,6 +159,7 @@
                                     <div class=" pb-1">
                                         <label for="diagnosis">Diagnosis</label> 
                                         <select id="diagnosis" name="diagnosis" class="form-control" required>
+                                            <option>--- Select Diagnosis details ---</option>
                                             <!-- Populate diagnosis options dynamically using coded concepts -->
                                             @foreach($diagnosis as $reason)
                                                 <option value="{{ $reason->id }}">{{ $reason->{'from concept name'} }}</option>
@@ -178,7 +180,7 @@
                                         <label for="reasonReferral">Reason for Referral</label> 
                                         <select id="reasonReferral" name="reasonReferral" class="form-control" required>
                                             <!-- Add an empty option for the placeholder -->
-                                            <option></option>
+                                            <option>--- Select reason for referral ---</option>
                                             <!-- Populate diagnosis options dynamically using coded concepts -->
                                             @foreach($diagnosis as $reason)
                                                 <option value="{{ $reason->id }}">{{ $reason->{'from concept name'} }}</option>
@@ -264,11 +266,20 @@
                                         <div class="pb-1">
                                             <label for="facility">Facility</label> 
                                             <select id="facility" name="facility" class="form-control">
-                                                <option selected disabled>--- Select Medical Facility ---</option>
+                                                <option>--- Select Medical Facility ---</option>
                                                 @foreach($facilities as $facility)
                                                     <option value="{{ $facility->Code }}">{{$facility->Code}} - {{ $facility->Officialname }}</option>
                                                 @endforeach
                                             </select>
+                                            <script>
+                                            $(document).ready(function() {
+                                                // Initialize Select2
+                                                $('#facility').select2({
+                                                    placeholder: 'Type to search...',
+                                                    minimumInputLength: 3 // Minimum number of characters to trigger the autocomplete
+                                                });
+                                            });
+                                        </script>
                                         </div>
 
                                         <div class="pb-1">
