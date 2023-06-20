@@ -77,18 +77,8 @@
             </a>
             <ul id="reports-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{ route('reports.incoming-reports') }}">
-                        <i class="bi bi-circle"></i><span>Incoming Referrals Reports</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('reports.outgoing-reports') }}">
-                        <i class="bi bi-circle"></i><span>Outgoing Referrals Reports</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('reports.completed-reports') }}">
-                        <i class="bi bi-circle"></i><span>Completed Referrals Reports</span>
+                    <a href="{{ route('admin.dashboard.charts') }}">
+                        <i class="bi bi-circle"></i><span>Visualizations</span>
                     </a>
                 </li>
             </ul>
