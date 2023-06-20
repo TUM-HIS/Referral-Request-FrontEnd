@@ -181,6 +181,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -210,6 +211,9 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+//        'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
+        'Charts' => ConsoleTVs\Charts\Classes\Chart::class,
+
     ])->toArray(),
 
 ];

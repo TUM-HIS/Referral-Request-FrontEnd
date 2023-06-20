@@ -9,9 +9,6 @@ class Referral extends Model
 {
     use HasFactory;
 
-    /**
-     * @var bool|mixed|string
-     */
     protected $fillable = [
         'clientName',
         'clientUPI',
@@ -35,5 +32,10 @@ class Referral extends Model
     public function facilityReffered()
     {
         return $this->belongsTo(m_f_l_s::class, 'referredFacility', 'Code');
+    }
+
+    public function facilityReffering()
+    {
+        return $this->belongsTo(m_f_l_s::class, 'referringFacility', 'Code');
     }
 }

@@ -14,8 +14,8 @@
                             <div class="d-flex justify-content-center py-4">
                                 <h4>Select your operating facility</h4>
                             </div>
-                            <div class="col-12">
-                                <select name="facility_id" class="form-label">
+                            <div class="col-12 d-flex align-items-center justify-content-center">
+                                <select name="facility_id" class="form-label" style="width: 50vw">
                                     @foreach ($facilities as $facility)
                                     <option value="{{ $facility->id }}"> <strong>{{ $facility->Code }}</strong> | {{ $facility->Officialname }}</option>
                                     @endforeach
@@ -32,3 +32,4 @@
     </div>
 </section>
 @endsection
+

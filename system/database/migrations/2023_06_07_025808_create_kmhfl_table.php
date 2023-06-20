@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('m_f_l_s', function (Blueprint $table) {
-            $table->id();
-            $table->integer('Code');
+            $table->integer('Code')->unique()->primary();
             $table->string('Officialname');
             $table->string('Province')->nullable();;
             $table->string('County')->nullable();;

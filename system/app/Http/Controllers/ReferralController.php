@@ -4,17 +4,16 @@ namespace App\Http\Controllers;
 
 //use ;
 use App\Models\m_f_l_s;
+use App\Models\User;
+use App\Notifications\ReferralRequestSent;
 use App\utils\SendReferral;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Http\RedirectResponse;
-use App\Models\ReferalRequest;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
 use App\Models\Patient;
 use App\Models\Referral;
+use App\Models\Mappings;
 
 class ReferralController extends Controller
 {
@@ -28,6 +27,20 @@ class ReferralController extends Controller
     public function addReferral(){
 
         return view('referrals.addReferral');
+    }
+
+    public function destroy(referral $referral) {
+        $referralRequests = Referral::where('id', $referral->id)->first();
+
+        // Perform any additional checks or authorization if needed
+        if (!$referralRequests) {
+            return redirect()->route('referrals.outgoing')->with('error', 'Record not found');
+        }
+        // Delete the record
+        $referralRequests->delete();
+
+        return redirect()->route('referrals.outgoing.outgoing')->with('success', 'Record deleted successfully');
+
     }
 
     public function facilities(){
@@ -48,60 +61,48 @@ class ReferralController extends Controller
 
     public function createreferal(Patient $patient){
 
-        $facilities = m_f_l_s::take(20)->get();
+        $facilities = m_f_l_s::all();
         $patientDetails = Patient::where('id', $patient->id)->first();
+        $diagnosis = Mappings::select('id', 'from concept name')->get();
 
-        return view('referrals.createreferal')->with(['facilities' => $facilities, 'patient' => $patientDetails]);
+        return view('referrals.createReferral')->with(['facilities' => $facilities, 'patient' => $patientDetails, 'diagnosis' => $diagnosis]);
     }
 
-    // public function createreferal() {
-    //     return view('referrals.createreferal');
-    // }
+    public function viewReferal(Referral $referral){
 
-//     public function store(Request $request){
-//         // Process and store the referral form data
-//         // Retrieve the patient ID from $request->input('patient_id')
-//         // Store the referral details in the database
+        // $facilities = m_f_l_s::take(20)->get();
+        // $patientDetails = Patient::where('id', $patient->id)->first();
+        $referralRequests = Referral::where('id', $referral->id)->first();
+        $patientDetails = Patient::where('upi', $referral->clientUPI)->first();
 
-//         // Optionally, redirect to a success page
-//         return redirect()->route('referrals.success');
-// }
+        $data = [
+            'referral' => $referralRequests,
+            'patient' => $patientDetails,
+        ];
 
 
-//     public function storeReferral(Request $request)
-//     {
-//         $post = new ReferalRequest;
-//         $post->identifier = $request->identifier;
-//         $post->definition = $request->definition;
-//         $post->basedOn = $request->basedOn;
-//         $post->replaces = $request->replaces;
-//         $post->groupIdentifier = $request->groupIdentifier;
-//         $post->status = $request->status;
-//         $post->intent = $request->intent;
-//         $post->type = $request->type;
-//         $post->priority = $request->priority;
-//         $post->serviceRequested = $request->serviceRequested;
-//         $post->subject = $request->subject;
-//         $post->context = $request->context;
-//         $post->occurrence = $request->occurrence;
-//         $post->authoredOn = $request->authoredOn;
-//         $post->requester = $request->requester;
-//         $post->specialty = $request->specialty;
-//         $post->recipient = $request->recipient;
-//         $post->reasonCode = $request->reasonCode;
-//         $post->reasonReference = $request->reasonReference;
-//         $post->description = $request->description;
-//         $post->supportingInfo = $request->supportingInfo;
-//         $post->note = $request->note;
-//         $post->relevantHistory = $request->relevantHistory;
-//         $post->save();
-//         // return response()->json($referalrequests);
-//         return redirect('add-referral')->with('status', 'Referral Request posted succesfully');
-//     }
+        return view('referrals.outgoing.viewReferral', $data);
+    }
+
+    public function viewIncomingReferal(Referral $referral){
+
+        // $facilities = m_f_l_s::take(20)->get();
+        // $patientDetails = Patient::where('id', $patient->id)->first();
+        $referralRequests = Referral::where('id', $referral->id)->first();
+        $patientDetails = Patient::where('upi', $referral->clientUPI)->first();
+
+        $data = [
+            'referral' => $referralRequests,
+            'patient' => $patientDetails,
+        ];
+
+
+        return view('referrals.incoming.viewReferral', $data);
+    }
+
 
     public function submitReferral(Request $request)
     {
-
         //Validate the form data
         $validatedData = $request->validate([
             'referringOfficer' => 'required',
@@ -110,13 +111,12 @@ class ReferralController extends Controller
             // Add validation rules for other form fields
         ]);
 
-//        return $request->all();
-
         // Create a new referral instance
         $referral = new Referral;
         $referral->clientName = $request->input('clientName');
         $referral->clientUPI = $request->input('clientUPI');
         $referral->referringOfficer = Auth::user()->name;
+        $referral->referring_facility_id = Auth::user()->facility_id;
         $referral->historyInvestigation = $request->input('historyInvestigation');
         $referral->diagnosis = $request->input('diagnosis');
         $referral->reasonReferral = $request->input('reasonReferral');
@@ -130,28 +130,26 @@ class ReferralController extends Controller
         $referral->serviceNotes = $request->input('serviceNotes');
 
 
-//        $referral = new Referral;
-//        $referral->clientName = "request->input('clientName')";
-//        $referral->clientUPI = "request->input('clientUPI')";
-//        $referral->referringOfficer = "request->input('referringOfficer')";
-//        $referral->historyInvestigation = "request->input('historyInvestigation')";
-//        $referral->diagnosis = "request->input('diagnosis')";
-//        $referral->reasonReferral = "request->input('reasonReferral')";
-//        $referral->attachments = "request->input('attachments')";
-//        $referral->additionalNotes = "request->input('additionalNotes')";
-//        $referral->priorityLevel = "request->input('priorityLevel')";
-//        $referral->serviceCategory = "request->input('serviceCategory')";
-//        $referral->service = "request->input('service')";
-//        $referral->facility = "request->input('facility')";
-//        $referral->distance = "request->input('distance')";
-//        $referral->serviceNotes = "request->input('serviceNotes')";
-
-
         // Save the referral to the database
         $referral->save();
-        //dd($referral->id);
-        $savedId = $referral->id;
 
+        //return redirect()->back()->with('success', 'Referral Request Submitted successfully');
+
+
+        $referralId = $referral->id;
+
+        $user = Auth::user();
+        $userFacility = $user->userFacility;
+
+        $facility = m_f_l_s::where('Code', $referral->referredFacility)->first();
+        $notification = new ReferralRequestSent($referralId, $userFacility->Code, "Referral Request");
+
+        Notification::send($facility, $notification);
+
+
+
+ /*
+        $savedId = $referral->id;
         $SendReferral = new SendReferral();
         $res = json_decode($SendReferral->sendPost($savedId));
         $referral->referralId = $res->referralRes->referralId;
@@ -159,49 +157,131 @@ class ReferralController extends Controller
         //local and remote referral ids
         $local = $savedId;
         $remote = $referral->referralId;
-        //dd($res -> referralRes -> localRRID, );
-        //dd($local. " " . $remote);
-        //dd(gettype($res));
 
         $referral = Referral::find($local);
         $referral->referralId =$remote;
-        $referral->update();
+        $referral->update();*/
 
-
-        // Set other referral properties
-        // Perform any additional processing or integrations
 
         // Redirect to a success page or display a success message
-        return Redirect::route('referral.outgoing');
+        return Redirect::route('referral.outgoing')->with('success', 'Referral Request Submitted successfully');
     }
 
 
 
     public function outgoing(){
-        $referralRequests = Referral::orderBy('created_at', 'desc')->get();
+        $loggedInuserFacility = Auth::user()->userFacility->Code;
+        $referrals = Referral::where('referredFacility', $loggedInuserFacility)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
         //$referralRequests = referralRequest::all();
-        return view('referrals.outgoing.outgoing',['referralRequests'=>$referralRequests]);
+        return view('referrals.outgoing.outgoing',['referralRequests'=>$referrals]);
     }
+
+
 
     public function incomingReferrals(){
-
         //getting referrals associated to a particular facility
+        $referralRequests = Referral::orderBy('created_at', 'desc')->get();
 
-        $referralRequests = Referral::where('referredFacility', Auth::user()->userFacility->Code)
-            ->orderBy('created_at', 'desc')->get();
-        //$referralRequests = referralRequest::all();
+         $loggedInuserFacility = Auth::user()->userFacility->Code;
 
-        return view('referrals.index')->with(['referralRequests' => $referralRequests]);
+        //dd($loggedInuserFacility);
+
+        $referrals = Referral::where('referredFacility', $loggedInuserFacility)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        //dd($referrals);
+
+        return view('referrals.index')->with(['referralRequests' => $referrals]);
 
     }
 
-//    public function getFacilities(){
-//
-//        $apifacilities = Http::withToken('xN1xg42a71GUnXs9Kwf2VLrik7Jtq2')->get('http://api.kmhfltest.health.go.ke/api/facilities/facilities/?format=json');
-//
-//        return $apifacilities['results'];
-//
-//    }
+
+
+    public function acceptReferralRequest(Referral $referral){
+        $referral->status = "Accepted"; // Assign the new value to the column
+        $referral->save();
+
+        $user = Auth::user();
+        $userFacility = $user->userFacility;
+        $userFacility->unreadNotifications
+            ->where('data.referral_id', $referral->id)
+            ->each(function ($notification) {
+                $notification->markAsRead();
+                // Perform any other necessary updates
+            });
+
+
+
+        $referralRequests = Referral::orderBy('created_at', 'desc')->get();
+        //$referralRequests = referralRequest::all();
+        return  redirect()->route('referrals.incoming')->with(['referralRequests' => $referralRequests]);
+
+    }
+
+    public function rejectReferralRequest(Referral $referral){
+
+        $referral->status = "Rejected"; // Assign the new value to the column
+        $referral->save();
+
+        //changing the status of the notification
+        $user = Auth::user();
+        $userFacility = $user->userFacility;
+        $userFacility->unreadNotifications
+            ->where('data.referral_id', $referral->id)
+            ->each(function ($notification) {
+                $notification->markAsRead();
+                //you can add aditional code here for more functionality
+
+            });
+
+        //sending notification to referral facility of rejected referral
+        $referralId = $referral->id;
+        $facility = m_f_l_s::where('Code', $referral->referring_facility_id)->first();
+        $notification = new ReferralRequestSent($referralId,$userFacility->Code , "Referral Request Rejected");
+
+        Notification::send($facility, $notification);
+
+        $referralRequests = Referral::orderBy('created_at', 'desc')->get();
+
+        return redirect()->route('referrals.incoming')->with(['referralRequests' => $referralRequests]);
+    }
+
+
+
+
+    public function reviewed(){
+
+        return view('referrals.incoming.reviewed');
+    }
+
+    public function counterReferral(){
+
+        return view('referrals.incoming.counter-referral');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public function fhirJson(){

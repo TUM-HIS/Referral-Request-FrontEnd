@@ -120,10 +120,19 @@
       <excludeFolder url="file://$MODULE_DIR$/system/vendor/league/flysystem-local" />
       <excludeFolder url="file://$MODULE_DIR$/system/vendor/league/csv" />
       <excludeFolder url="file://$MODULE_DIR$/system/vendor/symfony/polyfill-php83" />
+      <excludeFolder url="file://$MODULE_DIR$/system/vendor/psr/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/system/vendor/doctrine/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/system/vendor/doctrine/dbal" />
+      <excludeFolder url="file://$MODULE_DIR$/system/vendor/doctrine/event-manager" />
+      <excludeFolder url="file://$MODULE_DIR$/system/vendor/doctrine/deprecations" />
+      <excludeFolder url="file://$MODULE_DIR$/system/vendor/balping/json-raw-encoder" />
+      <excludeFolder url="file://$MODULE_DIR$/system/vendor/consoletvs/charts" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jquery-3.7.0.slim" level="application" />
     <orderEntry type="library" name="select2" level="application" />
+    <orderEntry type="library" name="Chart.js" level="application" />
+    <orderEntry type="library" name="highcharts" level="application" />
   </component>
 </module>

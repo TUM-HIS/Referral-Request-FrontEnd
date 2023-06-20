@@ -123,6 +123,13 @@
       <path value="$PROJECT_DIR$/system/vendor/league/flysystem-local" />
       <path value="$PROJECT_DIR$/system/vendor/league/csv" />
       <path value="$PROJECT_DIR$/system/vendor/symfony/polyfill-php83" />
+      <path value="$PROJECT_DIR$/system/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/system/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/system/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/system/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/system/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/system/vendor/balping/json-raw-encoder" />
+      <path value="$PROJECT_DIR$/system/vendor/consoletvs/charts" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />

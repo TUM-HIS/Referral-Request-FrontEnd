@@ -33,8 +33,8 @@
                           <h4>{{ $patient->first_name }} {{ $patient->last_name }}</h4>
                           <p class="text-secondary mb-1">{{ $patient->upi }}</p>
                           <p class="text-muted font-size-sm">{{ $patient->village }}, {{ $patient->subCounty }}, {{ $patient->county }}, {{ $patient->country }}</p>
-                          <button class="btn btn-primary" onclick="window.location.href='{{ route('referrals.createreferal', $patient) }}'">Refer Patient</button>
-                          {{-- <button class="btn btn-outline-primary" onclick="window.location.href='{{ route('referrals.createreferal', $patient) }}'">Refer Patient</button> --}}
+                          <button class="btn btn-primary" onclick="window.location.href='{{ route('referrals.createReferral', $patient) }}'">Refer Patient</button>
+                          {{-- <button class="btn btn-outline-primary" onclick="window.location.href='{{ route('triages.addTriage2', $patient) }}'">Triage</button> --}}
                         </div>
                       </div>
                     </div>
