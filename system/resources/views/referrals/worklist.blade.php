@@ -30,8 +30,8 @@
             <h1> Referrals </h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('referrals.addReferral') }}"> Add </a></li>
-                    <li class="breadcrumb-item active">Referrals</li>
+                    <li class="breadcrumb-item"> Outgoing referrals </a></li>
+                    <li class="breadcrumb-item active">Worklist</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -43,7 +43,6 @@
                 <div class="col-lg-12">
 
   <div class="table-responsive">
-    <h1>Worklist</h1>
     <table class="table table-bordered table-striped datatable" id="patientTable">
       <thead>
         <tr>
