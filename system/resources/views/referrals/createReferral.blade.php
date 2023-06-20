@@ -139,6 +139,7 @@
                                     <div class=" pb-1">
                                         <label for="historyInvestigation">History/Investigation</label> 
                                         <select id="historyInvestigation" name="historyInvestigation" class="form-control" required>
+                                            <option></option>
                                             <!-- Place all the options here initially -->
                                             @foreach($diagnosis as $reason)
                                                 <option value="{{ $reason->id }}">{{ $reason->{'from concept name'} }}</option>
@@ -158,6 +159,7 @@
                                     <div class=" pb-1">
                                         <label for="diagnosis">Diagnosis</label> 
                                         <select id="diagnosis" name="diagnosis" class="form-control" required>
+                                            <option></option>
                                             <!-- Populate diagnosis options dynamically using coded concepts -->
                                             @foreach($diagnosis as $reason)
                                                 <option value="{{ $reason->id }}">{{ $reason->{'from concept name'} }}</option>
