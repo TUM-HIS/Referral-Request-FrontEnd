@@ -107,6 +107,11 @@ class AdminController extends Controller
 
     }
 
+
+
+
+
+
     public function admin(){
 
         //BAR GRAPH
@@ -126,7 +131,6 @@ class AdminController extends Controller
         $chart = new Chart;
         $chart->labels(array_keys($chartData));
         foreach ($data->pluck('status')->unique() as $status) {
-//            return $status;
             $color = [];
             if ($status === 'Rejected') {
                 $color = 'rgba(255, 0, 0, 1)';
@@ -138,7 +142,7 @@ class AdminController extends Controller
 
             $chart->dataset($status, 'bar', collect($chartData)->pluck($status)->toArray())
                 ->color($color)
-                ->backgroundColor($color); // Set background color as transparent
+                ->backgroundColor($color);
         }
         $chart->title('Referral Status');
         $chart->options([
@@ -174,7 +178,6 @@ class AdminController extends Controller
         $completedPieChart = new Chart;
         $completedPieChart->labels(array_keys($pieChartData));
 
-        $color = 'rgba(255, 0, 0, 1)';
         $completedPieChart->dataset('Status', 'pie', array_values($pieChartData))
             ->color([
                 'rgba(46, 204, 113, 1)',
@@ -183,13 +186,64 @@ class AdminController extends Controller
             ->backgroundColor([
                 'rgba(46, 204, 113, 1)',
                 'rgba(255, 0, 0, 1)',
+            ]);
+
+
+        //PIE CHART2
+        $referralsStatusPieChart = Referral::whereBetween('created_at', [now()->subMonth(1), now()])
+            ->selectRaw('status, count(*) as count')
+            ->groupBy('status')
+            ->get();
+
+        $acceptedReferralsCount = 0;
+        $pendingReferralsCount = 0;
+        $rejectedReferralsCount = 0;
+
+//        return$referralsStatusPieChart;
+        foreach ($referralsStatusPieChart as $item) {
+
+//            return $item;
+            if ($item->status === 'Accepted') {
+                $acceptedReferralsCount += $item->count;
+            }elseif ($item->status === 'Pending'){
+                $pendingReferralsCount += $item->count;
+            }elseif ($item->status === 'Rejected'){
+                $rejectedReferralsCount += $item->count;
+            }
+        }
+
+        $pieChartData2 = [
+            'Accepted' => $acceptedReferralsCount,
+            'Pending' => $pendingReferralsCount,
+            'Rejected' => $rejectedReferralsCount,
+        ];
+
+
+        // Create the pie chart
+        $completedPieChart2 = new Chart;
+        $completedPieChart2->labels(array_keys($pieChartData2));
+
+        $completedPieChart2->dataset('Status', 'pie', array_values($pieChartData))
+            ->color([
+                'rgba(46, 204, 113, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(255, 0, 0, 1)',
+                ])
+            ->backgroundColor([
+                'rgba(46, 204, 113, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(255, 0, 0, 1)',
             ]);;
 
 
 
 
         $facilities = m_f_l_s::count();
-        return view('visualizations.visualizations')->with(['facilities' => $facilities, 'chart' => $chart, 'completedPieChart' => $completedPieChart]);
+        return view('visualizations.visualizations')->with([
+            'chart' => $chart,
+            'completedPieChart' => $completedPieChart,
+            'completedPieChart2' => $completedPieChart2
+        ]);
     }
 
 }
