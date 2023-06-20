@@ -61,7 +61,7 @@ class ReferralController extends Controller
 
     public function createreferal(Patient $patient){
 
-        $facilities = m_f_l_s::take(20)->get();
+        $facilities = m_f_l_s::all();
         $patientDetails = Patient::where('id', $patient->id)->first();
         $diagnosis = Mappings::select('id', 'from concept name')->get();
 

@@ -266,11 +266,20 @@
                                         <div class="pb-1">
                                             <label for="facility">Facility</label> 
                                             <select id="facility" name="facility" class="form-control">
-                                                <option selected disabled>--- Select Medical Facility ---</option>
+                                                <option></option>
                                                 @foreach($facilities as $facility)
                                                     <option value="{{ $facility->Code }}">{{$facility->Code}} - {{ $facility->Officialname }}</option>
                                                 @endforeach
                                             </select>
+                                            <script>
+                                            $(document).ready(function() {
+                                                // Initialize Select2
+                                                $('#facility').select2({
+                                                    placeholder: 'Type to search...',
+                                                    minimumInputLength: 3 // Minimum number of characters to trigger the autocomplete
+                                                });
+                                            });
+                                        </script>
                                         </div>
 
                                         <div class="pb-1">
