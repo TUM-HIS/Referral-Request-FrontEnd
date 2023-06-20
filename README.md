@@ -72,22 +72,26 @@ _For more information, please refer to the [Documentation](docs.md)_
    ```sh
    git clone https://github.com/github_username/repo_name.git
    ```
-2. Install dependencies - missing `composer packages`
+2. Navigate into the system directory
+   ```sh
+   cd Referral-Request-FrontEnd/system
+   ```  
+3. Install dependencies - missing `composer packages`
    ```sh
    composer install
    ```  
-3. Install NPM packages
+4. Install NPM packages
    ```sh
    npm install
    ```
-4. Create a .env file
+5. Create a .env file
 
    -  Copy content of the .env.example file
    -  Paste it in your .env file
 
-5. Run
+6. Run
    ```sh
-   artisan key:generate
+   php artisan key:generate
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
