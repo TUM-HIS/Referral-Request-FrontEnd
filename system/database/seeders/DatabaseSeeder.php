@@ -17,5 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ConceptsSeeder::class);
         $this->call(MappingsSeeder::class);
         $this->call(CountySeeder::class);
+        $this->call(ReferralSeeder::class);
+        $this->call(TestUserSeeder::class);
     }
 }
