@@ -21,7 +21,6 @@ return new class extends Migration
             $table->integer('code');           
             $table->string('created');
             $table->integer('created_by');
-            $table->string('category_name');
             $table->boolean('deleted');
             $table->string('description')->nullable();
             $table->string('group');
