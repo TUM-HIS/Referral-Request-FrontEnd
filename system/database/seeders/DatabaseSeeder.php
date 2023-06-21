@@ -19,5 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CountySeeder::class);
         $this->call(ReferralSeeder::class);
         $this->call(TestUserSeeder::class);
+        $this->call(ServiceCategorySeeder::class);
+        $this->call(ServiceSeeder::class);
     }
 }
