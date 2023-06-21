@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\m_f_l_s;
+use App\Models\Patient;
 use App\Models\Referral;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -48,25 +49,40 @@ class ReferralFactory extends Factory
             'Adhiambo', 'Opondo', 'Achola', 'Odera', 'Aw'
         ];
 
+
         $from = '2023-05-01';
         $to = '2023-08-01';
 
-        return [
-        'clientName' => $faker->firstName." ".fake()->randomElement($kenyanSecondNames),
-        'clientUPI' => $faker->numerify('#############'),
-        'referringOfficer' => $faker->firstName." ".fake()->randomElement($kenyanSecondNames),
-        'referredFacility' => $faker->randomElement($facilities),
-        'historyInvestigation' => '634334',
-        'diagnosis' => '634334',
-        'reasonReferral' => '635506',
-        'additionalNotes' => $faker->randomElement(['chest pains', 'heartburn', 'muscle pull', 'fever', 'isomania']),
-        'priorityLevel' => $faker->randomElement(['urgent', 'less urgent', 'asap', 'mild']),
-        'serviceCategory' => $faker->randomElement(['Category 12', 'Category 11', 'Category 8', 'Category 5', 'Category 4', 'Category 3', 'Category 23', 'Category 16']),
-        'service' => $faker->randomElement(['service1', 'service2', 'service4', 'service7', 'service15', 'service10', 'service9', 'service20', 'service16', 'service31' ]),
-        'referring_facility_id' => $faker->randomElement($facilities),
-        'serviceNotes' => $faker->randomElement(['AHTTAHAFA', 'HATTAHTSTA', 'AGSTTSFSGTRS', 'STRTSRRTSRST']),
-        'status' => $faker->randomElement(['Pending', 'Accepted', 'Rejected']),
-        'created_at' => $faker->dateTimeBetween($from, $to)
-        ];
+        $referral = [];
+
+
+        $patients = Patient::all();
+        $patient = fake()->randomElement($patients);
+
+//        dd($patients);
+
+            return [
+
+                'clientName' => $patient['first_name'] ." ". $patient['last_name'],
+                'clientUPI' => $patient['upi'],
+                'referringOfficer' => $faker->firstName." ".fake()->randomElement($kenyanSecondNames),
+                'referredFacility' => $faker->randomElement($facilities),
+                'historyInvestigation' => '634334',
+                'diagnosis' => '634334',
+                'reasonReferral' => '635506',
+                'additionalNotes' => $faker->randomElement(['chest pains', 'heartburn', 'muscle pull', 'fever', 'isomania']),
+                'priorityLevel' => $faker->randomElement(['urgent', 'less urgent', 'asap', 'mild']),
+                'serviceCategory' => $faker->randomElement(['Category 12', 'Category 11', 'Category 8', 'Category 5', 'Category 4', 'Category 3', 'Category 23', 'Category 16']),
+                'service' => $faker->randomElement(['service1', 'service2', 'service4', 'service7', 'service15', 'service10', 'service9', 'service20', 'service16', 'service31' ]),
+                'referring_facility_id' => $faker->randomElement($facilities),
+                'serviceNotes' => $faker->randomElement(['AHTTAHAFA', 'HATTAHTSTA', 'AGSTTSFSGTRS', 'STRTSRRTSRST']),
+                'status' => $faker->randomElement(['Pending', 'Accepted', 'Rejected']),
+                'created_at' => $faker->dateTimeBetween($from, $to)
+            ];
+
+
+
+
+
     }
 }

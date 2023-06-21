@@ -50,7 +50,7 @@
                         <div class="col-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Completed vs Incomplete Referrals <span>/Past Month</span></h5>
+                                    <h5 class="card-title">Accepted vs Pending vs Rejected Referrals <span>/Past Month</span></h5>
 
                                     <div class="width: 50%">
                                         {!! $completedPieChart2->container() !!}

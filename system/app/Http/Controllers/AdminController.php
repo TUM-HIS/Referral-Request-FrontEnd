@@ -133,11 +133,11 @@ class AdminController extends Controller
         foreach ($data->pluck('status')->unique() as $status) {
             $color = [];
             if ($status === 'Rejected') {
-                $color = 'rgba(255, 0, 0, 1)';
+                $color = 'rgba(255, 206, 86, 0.2)';
             } elseif ($status === 'Accepted') {
-                $color = 'green';
+                $color = 'rgba(255, 206, 86, 0.2)';
             } elseif ($status === 'Pending') {
-                $color = 'orange';
+                $color = 'rgba(255, 99, 132, 0.2)';
             }
 
             $chart->dataset($status, 'bar', collect($chartData)->pluck($status)->toArray())
@@ -180,12 +180,12 @@ class AdminController extends Controller
 
         $completedPieChart->dataset('Status', 'pie', array_values($pieChartData))
             ->color([
-                'rgba(46, 204, 113, 1)',
-                'rgba(255, 0, 0, 1)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
                 ])
             ->backgroundColor([
-                'rgba(46, 204, 113, 1)',
-                'rgba(255, 0, 0, 1)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
             ]);
 
 
@@ -223,16 +223,16 @@ class AdminController extends Controller
         $completedPieChart2 = new Chart;
         $completedPieChart2->labels(array_keys($pieChartData2));
 
-        $completedPieChart2->dataset('Status', 'pie', array_values($pieChartData))
+        $completedPieChart2->dataset('Status', 'pie', array_values($pieChartData2))
             ->color([
-                'rgba(46, 204, 113, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(255, 0, 0, 1)',
+                'rgba(46, 204, 113, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
                 ])
             ->backgroundColor([
-                'rgba(46, 204, 113, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(255, 0, 0, 1)',
+                'rgba(46, 204, 113, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
             ]);;
 
 

@@ -80,7 +80,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     //admin routes
-    Route::get('/admin/dashboard', [AdminController::class, 'admin'])->name('admin.dashboard.charts');
+    Route::get('/admin/dashboard/charts', [AdminController::class, 'admin'])->name('admin.dashboard.charts');
+
     Route::get('/admin/test-charts', [AdminController::class, 'testCharts'])->name('admin.test-charts');
 });
 
