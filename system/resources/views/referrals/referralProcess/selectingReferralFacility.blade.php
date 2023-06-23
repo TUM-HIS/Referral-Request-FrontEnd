@@ -94,7 +94,7 @@
             // When the service dropdown value changes
             $('#service').on('change', function () {
                 selectedService = $(this).val();
-                // console.log("checking ...", selectedService)
+                 console.log("checking ...", selectedService)
             });
 
             // When the service-category dropdown value changes
@@ -120,7 +120,7 @@
                         if (services.length > 0) {
                             serviceDropdown.append('<option value="">-- Select Service --</option>');
                             $.each(services, function (index, service) {
-                                serviceDropdown.append('<option value="' + service.id + '">' + service.name + '</option>');
+                                serviceDropdown.append('<option value="' + service + '">' + service.name + '</option>');
                             });
                         } else {
                             serviceDropdown.append('<option value="">-- No services available --</option>');
@@ -134,7 +134,6 @@
                 });
 
             $('#search_button').on('click', function () {
-                console.log(selectedService)
                 if (selectedService) {
                     axios.get('{{ url('api/kmhfl/facility/facility_services') }}', {
                         params: {
@@ -142,8 +141,28 @@
                         }
                     })
                         .then(function (response) {
-                            // Handle the response from the other endpoint
-                            console.log(response);
+                            console.log("inside response")
+                            const facilities = response.data;
+                            let servicesHtml = '';
+                            console.log(facilities)
+
+                            // if (facilities.length === 0) {
+                            //     facilitiesHtml += '<div class="col-md-12"><p>No services found for this level.</p></div>';
+                            // }
+                            // for (var i = 0; i < services.length; i++) {
+                            //     facilitiesHtml += '<div class="col-md-4">' +
+                            //         '<div class="card mb-4 box-shadow">' +
+                            //         '<div class="card-body">' +
+                            //         '<h5 class="card-title">' + services[0].name + '</h5>' +
+                            //         '<button class="btn btn-primary select-service-btn rounded-pill" data-hospital-level="' + services[i].level.level + '">Select</button>' +
+                            //         '</div>' +
+                            //         '</div>' +
+                            //         '</div>';
+                            // }
+                            // $("#facilities").html(facilitiesHtml);
+
+
+
                         })
                         .catch(function (error) {
                             console.log(error);

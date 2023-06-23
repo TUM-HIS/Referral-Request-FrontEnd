@@ -15,7 +15,8 @@ class MflController extends Controller
     public function getFacilityFromService(Request $request){
 
         $serviceId = $request->service_id;
-        $kmhflServiceResponse = KMHFLService::facilitiesFromServiceId($serviceId);
+        $kmhflService = new KMHFLService();
+        $kmhflServiceResponse = $kmhflService->facilitiesFromServiceId($serviceId);
 
         return $kmhflServiceResponse;
     }

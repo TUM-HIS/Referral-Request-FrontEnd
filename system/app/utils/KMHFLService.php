@@ -7,27 +7,85 @@ use Illuminate\Support\Facades\Http;
 class KMHFLService
 {
 
-    public static function facilitiesFromServiceId($serviceId){
+    public function facilitiesFromServiceId($serviceId){
 
+        $response = $this->facilityIdsFromService();
+        $results = $response['results'];
+
+        $facilities = [];
+        $facilityIds = [];
+        foreach ($results as $item) {
+            $facilityId = $item['facility'];
+            // Use the facility ID to fetch facility information
+            $facilityInfo = $this->facilitiesFromFacilityIds($facilityId);
+            $facilities[] = $facilityInfo;
+            $facilityIds = $facilityId;
+        }
+
+        return $facilities;
+
+    }
+
+
+    public function facilitiesFromFacilityIds($facilityId){
         $response = Http::withHeaders([
             'Authorization' => 'Bearer dP6McfKHK3sbOUwCrrVcmrcnDxqlB9',
         ])
-            ->get('http://api.kmhfltest.health.go.ke/api/facilities/facility_services', [
+            ->get('http://api.kmhfltest.health.go.ke/api/facilities/facilities', [
                 'format' => 'json',
-                'service' => '368c963a-b8de-461b-aa82-5ee1b0c0e391',
+                'id' => $facilityId,
             ]);
 
         if ($response->failed()) {
             $error = $response->body();
             // Handle the error
         } else {
-            echo $response->body();
-            echo "HTTP Code: " . $response->status() . "\n";
-            echo "Response Body: " . $response->body() . "\n";
+            $jsonResponse = $response->json();
+            return $jsonResponse;
         }
 
-        return $response->body();
+    }
 
+
+    public function countyIdFromName($county_name){
+
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer dP6McfKHK3sbOUwCrrVcmrcnDxqlB9',
+        ])
+            ->get('http://api.kmhfltest.health.go.ke/api/common/counties', [
+                'format' => 'json',
+                'name' => 'Nairobi',
+            ]);
+
+        if ($response->failed()) {
+            $error = $response->body();
+            // Handle the error
+        } else {
+            return $response->json();
+        }
+
+    }
+
+
+
+
+
+    public function facilityIdsFromService(){
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer dP6McfKHK3sbOUwCrrVcmrcnDxqlB9',
+        ])
+            ->get('http://api.kmhfltest.health.go.ke/api/facilities/facility_services', [
+                'format' => 'json',
+                'service' => '368c963a-b8de-461b-aa82-5ee1b0c0e391',
+                'county' => 'Nairobi'
+            ]);
+
+        if ($response->failed()) {
+            $error = $response->body();
+            // Handle the error
+        } else {
+            return $response->json();
+        }
     }
 
 }
