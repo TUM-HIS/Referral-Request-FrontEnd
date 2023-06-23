@@ -90,8 +90,8 @@
 
                 // When the service-category dropdown value changes
                 $('#service_category').on('change', function () {
-                    // var category_name = $(this).val();
-                    var category_name = "LEPROSY TREATMENT";
+                    var category_name = $(this).val();
+                    // var category_name = "LEPROSY TREATMENT";
 
                     axios.get('{{ url('api/service_category/get_services?category_name=LABORATORY SERVICES') }}', {
                         params: {
