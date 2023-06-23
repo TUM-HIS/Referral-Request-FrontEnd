@@ -134,7 +134,7 @@
                 });
 
             $('#search_button').on('click', function () {
-                console.log("search Btn Clicked")
+                console.log("search btn clicked")
                 if (selectedService) {
                     axios.get('{{ url('api/kmhfl/facility/facility_services') }}', {
                         params: {
@@ -154,8 +154,10 @@
                                 facilitiesHtml += '<div class="col-md-4">' +
                                     '<div class="card mb-4 box-shadow">' +
                                     '<div class="card-body">' +
-                                    '<h5 class="card-title">' + facilities[0].results[0].name + '</h5>' +
-                                    // '<button class="btn btn-primary select-service-btn rounded-pill" data-hospital-level="' + services[i].level.level + '">Select</button>' +
+                                    '<h5 class="card-title">' + facilities[i].results[0].name + '</h5>' +
+                                    '<h5 class="card-title">No. of Beds: ' + facilities[i].results[0].number_of_beds + '</h5>' +
+                                    '<h5 class="card-title">No. of ICU Beds:' + facilities[i].results[0].number_of_icu_beds + '</h5>' +
+                                    '<button class="btn btn-primary select-service-btn rounded-pill" data-hospital-level="' + facilities[i].results[0].id + '">Select</button>' +
                                     '</div>' +
                                     '</div>' +
                                     '</div>';
