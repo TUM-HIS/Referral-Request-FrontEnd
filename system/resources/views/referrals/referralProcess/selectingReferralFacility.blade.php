@@ -134,6 +134,7 @@
                 });
 
             $('#search_button').on('click', function () {
+                console.log("search Btn Clicked")
                 if (selectedService) {
                     axios.get('{{ url('api/kmhfl/facility/facility_services') }}', {
                         params: {
@@ -143,23 +144,23 @@
                         .then(function (response) {
                             console.log("inside response")
                             const facilities = response.data;
-                            let servicesHtml = '';
-                            console.log(facilities)
+                            let facilitiesHtml = '';
+                            console.log(facilities[0].results[0].name)
 
-                            // if (facilities.length === 0) {
-                            //     facilitiesHtml += '<div class="col-md-12"><p>No services found for this level.</p></div>';
-                            // }
-                            // for (var i = 0; i < services.length; i++) {
-                            //     facilitiesHtml += '<div class="col-md-4">' +
-                            //         '<div class="card mb-4 box-shadow">' +
-                            //         '<div class="card-body">' +
-                            //         '<h5 class="card-title">' + services[0].name + '</h5>' +
-                            //         '<button class="btn btn-primary select-service-btn rounded-pill" data-hospital-level="' + services[i].level.level + '">Select</button>' +
-                            //         '</div>' +
-                            //         '</div>' +
-                            //         '</div>';
-                            // }
-                            // $("#facilities").html(facilitiesHtml);
+                            if (facilities.length === 0) {
+                                facilitiesHtml += '<div class="col-md-12"><p>No services found for this level.</p></div>';
+                            }
+                            for (var i = 0; i < facilities.length; i++) {
+                                facilitiesHtml += '<div class="col-md-4">' +
+                                    '<div class="card mb-4 box-shadow">' +
+                                    '<div class="card-body">' +
+                                    '<h5 class="card-title">' + facilities[0].results[0].name + '</h5>' +
+                                    // '<button class="btn btn-primary select-service-btn rounded-pill" data-hospital-level="' + services[i].level.level + '">Select</button>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</div>';
+                            }
+                            $("#facilities").html(facilitiesHtml);
 
 
 
