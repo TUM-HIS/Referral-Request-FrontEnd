@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 //use ;
 use App\Models\m_f_l_s;
+use App\Models\Service;
+use App\Models\ServiceCategory;
 use App\Models\User;
 use App\Notifications\ReferralRequestSent;
 use App\utils\SendReferral;
@@ -17,6 +19,22 @@ use App\Models\Mappings;
 
 class ReferralController extends Controller
 {
+    public function sendtesting(){
+
+        $referralRequest = Referral::where('id', 1)->first();
+        $patientDetails = Patient::where('upi', $referralRequest->clientUPI)->first();
+
+        $serviceCategories =  ServiceCategory::get();
+        $services = Service::all();
+
+
+//        return $serviceCategories;
+        return view('referrals/referralProcess/selectingReferralFacility')->with(['patient' => $patientDetails,
+            'serviceCategories' => $serviceCategories,
+            'services' => $services]);
+    }
+
+
     public function index(){
 
         $referrals = [];

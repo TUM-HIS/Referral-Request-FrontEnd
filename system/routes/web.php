@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\MflController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TriageController;
@@ -81,8 +82,14 @@ Route::group(['middleware' => 'auth'], function () {
 
     //admin routes
     Route::get('/admin/dashboard/charts', [AdminController::class, 'admin'])->name('admin.dashboard.charts');
-
     Route::get('/admin/test-charts', [AdminController::class, 'testCharts'])->name('admin.test-charts');
+
+
+    //referral-testing routes
+    Route::get('/testing', [ReferralController::class, 'sendtesting'])->name('sendreferral');
+    Route::get('/service_category/get_services', [MflController::class, 'getServiceFromCategory'])->name('services_from_service_category');
+
+
 });
 
 
