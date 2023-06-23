@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('service_categories', function (Blueprint $table) {
-            $table->string('id')->unique();
+            $table->string('id');
             $table->string('name');
-            $table->string('abbreviation')->nullable();;
+            $table->string('abbreviation')->nullable();
             $table->boolean('active');
             $table->string('created');
             $table->integer('created_by');
@@ -28,7 +28,7 @@ return new class extends Migration
         });
     }
 
-									
+
 
     /**
      * Reverse the migrations.
