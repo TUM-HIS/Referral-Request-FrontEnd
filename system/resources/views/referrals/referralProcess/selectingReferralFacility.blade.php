@@ -41,7 +41,7 @@
                             <select class="form-control" id="service_category" name="service_category">
                                 <option value="">--Select Service Category--</option>
                                 @foreach($serviceCategories as $serviceCategory)
-                                    <option value="{{ $serviceCategory->name }}">{{ $serviceCategory->id }} - {{ $serviceCategory->name }}</option>
+                                    <option value="{{ $serviceCategory->name }}">{{ $serviceCategory->name }}</option>
                                 @endforeach
                             </select>
 {{--                            <div class="dropdown-icon">--}}
@@ -51,16 +51,16 @@
                     </form>
                 </div>
 
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <form class="my-5 bg-danger-light">
                         {{-- Services dropdown --}}
                         <div class="form-group position-relative">
                             <label for="service">Select Service:</label>
                             <select class="form-control" id="service" name="service">
-                                <option value="">--Select Service--</option>
-                                @foreach($services as $service)
-                                    <option value="{{ $service->id }}">{{ $service->name }}</option>
-                                @endforeach
+{{--                                <option value="">--Select Service--</option>--}}
+{{--                                @foreach($services as $service)--}}
+{{--                                    <option value="{{ $service->id }}">{{ $service->name }}</option>--}}
+{{--                                @endforeach--}}
                             </select>
 {{--                            <div class="dropdown-icon">--}}
 {{--                                <i class="fas fa-chevron-down"></i>--}}
@@ -68,7 +68,13 @@
                         </div>
                     </form>
                 </div>
+
+                <div class="col-md-2">
+                    <button id="search_button" class="btn btn-primary my-5">Submit</button>
+                </div>
             </div>
+
+
 
 
             <div class="row" id="facilities">
@@ -83,12 +89,15 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script>
-        // const services = null;
-        // console.log($services);
-
         $(document).ready(function () {
+            var selectedService = null;
+            // When the service dropdown value changes
+            $('#service').on('change', function () {
+                selectedService = $(this).val();
+                // console.log("checking ...", selectedService)
+            });
 
-                // When the service-category dropdown value changes
+            // When the service-category dropdown value changes
                 $('#service_category').on('change', function () {
                     var category_name = $(this).val();
                     // var category_name = "LEPROSY TREATMENT";
@@ -98,25 +107,53 @@
                             category_name: category_name
                         }
                     })
+                    .then(function (response) {
+                        // console.log(response)
+
+                        var services = response.data;
+                        var serviceDropdown = $('#service');
+
+                        // Clear the current options in the second dropdown
+                        serviceDropdown.empty();
+
+                        // Add the new options based on the response
+                        if (services.length > 0) {
+                            serviceDropdown.append('<option value="">-- Select Service --</option>');
+                            $.each(services, function (index, service) {
+                                serviceDropdown.append('<option value="' + service.id + '">' + service.name + '</option>');
+                            });
+                        } else {
+                            serviceDropdown.append('<option value="">-- No services available --</option>');
+                        }
+                    })
+                    .catch(function (error) {
+                        // console.log(error);
+                    });
+
+
+                });
+
+            $('#search_button').on('click', function () {
+                console.log(selectedService)
+                if (selectedService) {
+                    axios.get('{{ url('api/kmhfl/facility/facility_services') }}', {
+                        params: {
+                            service_id: selectedService
+                        }
+                    })
                         .then(function (response) {
-                            console.log(response)
+                            // Handle the response from the other endpoint
+                            console.log(response);
                         })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
+            });
 
 
-                    // var categoryID = "12bfc71f-280f-4c0b-8fb6-c5355a2eef0b"
 
 
-                });
-
-                $(document).on('click', '.select-service-btn', function () {
-
-                    //const personId = parseInt(person.id);
-                    //console.log(typeof personId)
-                    const hospitalLevel = $(this).data('hospital-level');
-                    window.location.href = 'referral-list?hospital_level=' + hospitalLevel + '&person_id=' + person.id;
-                    //window.location.href = 'patients/patient-queue';
-
-                });
             })
 
     </script>

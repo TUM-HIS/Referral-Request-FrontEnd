@@ -1,52 +1,33 @@
 <?php
 
 namespace App\utils;
+use Illuminate\Support\Facades\Http;
+
 
 class KMHFLService
 {
 
-    public function facilitiesFromServiceId(){
-        $curl = curl_init();
-        $url = 'http://127.0.0.1:8000/api/referral/serviceRequest';
+    public static function facilitiesFromServiceId($serviceId){
 
-        $headers = [
-            'Content-Type: application/json',
-            'Authorization: Basic '
-        ];
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer dP6McfKHK3sbOUwCrrVcmrcnDxqlB9',
+        ])
+            ->get('http://api.kmhfltest.health.go.ke/api/facilities/facility_services', [
+                'format' => 'json',
+                'service' => '368c963a-b8de-461b-aa82-5ee1b0c0e391',
+            ]);
 
-        //SOME MORE LOGIC IN HERE
-        $requestBody = null;
-
-
-        curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($requestBody));
-
-        curl_setopt($curl, CURLOPT_URL, $url);
-
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        $response = curl_exec($curl);
-
-        if ($response === false) {
-            $error = curl_error($curl);
+        if ($response->failed()) {
+            $error = $response->body();
             // Handle the error
         } else {
-            // Process the response
-            // $response contains the response body
-
-            echo $response;
-
-            $info = curl_getinfo($curl);
-
-            // Display the response details
-            echo "HTTP Code: " . $info['http_code'] . "\n";
-            echo "Response Body: " . $response . "\n";
+            echo $response->body();
+            echo "HTTP Code: " . $response->status() . "\n";
+            echo "Response Body: " . $response->body() . "\n";
         }
 
-        // Close the cURL handle
-        curl_close($curl);
+        return $response->body();
 
-        return $response;
     }
 
 }

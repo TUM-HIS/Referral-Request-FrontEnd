@@ -20,4 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/service_category/get_services', [MflController::class, 'getServiceFromCategory'])->name('services_from_service_category');
+Route::get('/kmhfl/facility/facility_services', [MflController::class, 'getFacilityFromService'])->name('kmhfl.facility.facility_services');
 
