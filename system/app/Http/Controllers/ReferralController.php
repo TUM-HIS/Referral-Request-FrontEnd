@@ -19,19 +19,34 @@ use App\Models\Mappings;
 
 class ReferralController extends Controller
 {
-    public function sendtesting(){
 
-        $referralRequest = Referral::where('id', 1)->first();
-        $patientDetails = Patient::where('upi', $referralRequest->clientUPI)->first();
+    public function show($tab)
+    {
+        $activeTab = $tab; // Store the active tab to determine which tab should be marked as active
 
-        $serviceCategories =  ServiceCategory::get();
-        $services = Service::all();
+        $patientDetails = Patient::where('id', 1)->first();
+        $diagnosis = Mappings::select('id', 'from concept name')->get();
+        $serviceCategories = ServiceCategory::all();
 
 
-//        return $serviceCategories;
-        return view('referrals/referralProcess/selectingReferralFacility')->with(['patient' => $patientDetails,
-            'serviceCategories' => $serviceCategories,
-            'services' => $services]);
+        if ($tab === 'tab1') {
+
+            return view('referrals.referralProcess.tabs.tab1',
+                compact('activeTab'))->with(['patient' => $patientDetails, 'diagnosis' => $diagnosis]);
+        } elseif ($tab === 'tab2') {
+            return view('referrals.referralProcess.tabs.tab2',
+                compact('activeTab'))->with(['patient' => $patientDetails,
+                'diagnosis' => $diagnosis,
+            'serviceCategories' => $serviceCategories]);
+        } elseif ($tab === 'tab3') {
+            return view('referrals.referralProcess.tabs.tab3', compact('activeTab'));
+        }
+    }
+
+
+
+    public function outgoingReferralTabs(){
+        return view('referrals/referralProcess/tabs/outgoingReferralTabs');
     }
 
 

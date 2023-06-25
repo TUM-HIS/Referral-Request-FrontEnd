@@ -78,16 +78,24 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/triages', [TriageController::class, 'addTriage'])->name('triages.addTriage');
     Route::post('/store-form', [TriageController::class, 'store'])->name('triages.store-form');
 
-
-
     //admin routes
     Route::get('/admin/dashboard/charts', [AdminController::class, 'admin'])->name('admin.dashboard.charts');
     Route::get('/admin/test-charts', [AdminController::class, 'testCharts'])->name('admin.test-charts');
 
 
     //referral-testing routes
-    Route::get('/testing', [ReferralController::class, 'sendtesting'])->name('sendreferral');
+    Route::post('/testing', [ReferralController::class, 'sendtesting'])->name('sendreferral');
     Route::get('/service_category/get_services', [MflController::class, 'getServiceFromCategory'])->name('services_from_service_category');
+    Route::get('/referralprocess', [ReferralController::class, 'outgoingReferralTabs'])->name('referral.tabs');
+
+
+
+//    //routes used for testing tabs
+//    Route::post('/testtabs', [ReferralController::class, 'testingTabs'])->name('test.tabs');
+
+
+    //referral-tabs e.g referral/tabs/tab2
+    Route::get('referral/tabs/{tab}', [ReferralController::class, 'show'])->name('referral.tabs');
 
 
 });

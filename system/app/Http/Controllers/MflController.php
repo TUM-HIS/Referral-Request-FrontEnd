@@ -8,11 +8,7 @@ use Illuminate\Http\Request;
 
 class MflController extends Controller
 {
-    public function index(){
-
-    }
-
-    public function getFacilityFromService(Request $request){
+      public function getFacilityFromService(Request $request){
 
         $serviceId = $request->service_id;
         $kmhflService = new KMHFLService();
@@ -20,6 +16,8 @@ class MflController extends Controller
 
         return $kmhflServiceResponse;
     }
+
+
 
     public function getServiceFromCategory(Request $request){
         $categoryName = $request->input('category_name');
