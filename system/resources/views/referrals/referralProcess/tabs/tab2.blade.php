@@ -8,7 +8,7 @@
 
     <main id="main" class="main">
         <div class="container">
-            <h1>Refer Patient</h1>
+            <h1>Facility Selection</h1>
             <div class="row" style="padding-top: 58px;">
                 <div class="col-md-6 offset-md-3">
                     <table class="table">

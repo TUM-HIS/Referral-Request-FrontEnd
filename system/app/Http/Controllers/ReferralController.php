@@ -39,7 +39,8 @@ class ReferralController extends Controller
                 'diagnosis' => $diagnosis,
             'serviceCategories' => $serviceCategories]);
         } elseif ($tab === 'tab3') {
-            return view('referrals.referralProcess.tabs.tab3', compact('activeTab'));
+            return view('referrals.referralProcess.tabs.tab3',
+                compact('activeTab'))->with(['patient' => $patientDetails]);
         }
     }
 
