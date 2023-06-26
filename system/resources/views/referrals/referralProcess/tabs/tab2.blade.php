@@ -1,12 +1,18 @@
 <!-- tab2.blade.php -->
 @extends('referrals.referralProcess.layout.referral-tabs-layout')
-
+<style>
+    .spinner {
+        display: none; /* Initially hide the spinner */
+        /* Add your custom styles for the spinner */
+    }
+</style>
 @section('tab-content')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="tab-pane {{ $activeTab === 'tab2' ? 'active' : '' }}" id="tab2" role="tabpanel">
-    <h1>Tab 2 Content</h1>
 
 
-    <main id="main" class="main">
+
+
         <div class="container">
             <h1>Facility Selection</h1>
             <div class="row" style="padding-top: 58px;">
@@ -38,7 +44,7 @@
             {{--@dd($serviceCategories[0])--}}
             <div class="row">
                 <div class="col-md-4">
-                    <form class="my-5 bg-danger-light">
+                    <form class="my-5">
                         {{-- Service category dropdown --}}
                         <div class="form-group">
                             <label for="service_category">Select Service Category:</label>
@@ -48,27 +54,17 @@
                                     <option value="{{ $serviceCategory->name }}">{{ $serviceCategory->name }}</option>
                                 @endforeach
                             </select>
-                            {{--                            <div class="dropdown-icon">--}}
-                            {{--                                <i class="fas fa-chevron-down"></i>--}}
-                            {{--                            </div>--}}
                         </div>
                     </form>
                 </div>
 
                 <div class="col-md-6">
-                    <form class="my-5 bg-danger-light">
+                    <form class="my-5 ">
                         {{-- Services dropdown --}}
                         <div class="form-group position-relative">
                             <label for="service">Select Service:</label>
                             <select class="form-control" id="service" name="service">
-                                {{--                                <option value="">--Select Service--</option>--}}
-                                {{--                                @foreach($services as $service)--}}
-                                {{--                                    <option value="{{ $service->id }}">{{ $service->name }}</option>--}}
-                                {{--                                @endforeach--}}
                             </select>
-                            {{--                            <div class="dropdown-icon">--}}
-                            {{--                                <i class="fas fa-chevron-down"></i>--}}
-                            {{--                            </div>--}}
                         </div>
                     </form>
                 </div>
@@ -79,16 +75,18 @@
             </div>
 
 
-
-
             <div class="row" id="facilities">
 
-                <!-- Services cards will be dynamically generated here -->
+                    <div id="spinner" class="spinner"></div>
+                <!-- facilities cards will be dynamically generated here -->
             </div>
         </div>
-    </main>
 
 
+
+
+
+{{--    SCRIPT SECTION--}}
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -133,12 +131,14 @@
                     .catch(function (error) {
                         // console.log(error);
                     });
-
-
             });
+
 
             $('#search_button').on('click', function () {
                 console.log("search btn clicked")
+                // Show the spinner
+                $('#spinner').show();
+
                 if (selectedService) {
                     axios.get('{{ url('api/kmhfl/facility/facility_services') }}', {
                         params: {
@@ -152,7 +152,7 @@
                             console.log(facilities[0].results[0].name)
 
                             if (facilities.length === 0) {
-                                facilitiesHtml += '<div class="col-md-12"><p>No services found for this level.</p></div>';
+                                facilitiesHtml += '<div class="col-md-12"><p>No facilities found for this service.</p></div>';
                             }
                             for (var i = 0; i < facilities.length; i++) {
                                 facilitiesHtml += '<div class="col-md-4">' +
@@ -161,18 +161,21 @@
                                     '<h5 class="card-title">'+ facilities[i].results[0].code +' - '+ facilities[i].results[0].name + '</h5>' +
                                     '<h5 class="">No. of Beds: ' + facilities[i].results[0].number_of_beds + '</h5>' +
                                     '<h5 class="">No. of ICU Beds:' + facilities[i].results[0].number_of_icu_beds + '</h5>' +
-                                    '<button class="btn btn-primary select-service-btn rounded-pill" data-hospital-level="' + facilities[i].results[0].id + '">Select</button>' +
+                                    '<button class="btn btn-primary select-facility-btn rounded-pill" data-facility-info="' + facilities[i].results[0].id + '">Select</button>' +
                                     '</div>' +
                                     '</div>' +
                                     '</div>';
                             }
                             $("#facilities").html(facilitiesHtml);
 
-
+                            // Hide the spinner after the response is received
+                            $('#spinner').hide();
 
                         })
                         .catch(function (error) {
                             console.log(error);
+                            // Hide the spinner if an error occurs
+                            $('#spinner').hide();
                         });
                 }
             });
@@ -180,7 +183,43 @@
 
 
 
+
         })
+
+        $(document).on('click', '.select-facility-btn', function() {
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            console.log("inside facility")
+            const facilityInfo = $(this).data('facility-info');
+
+
+            var data = {
+                _token: csrfToken,
+                facility: facilityInfo
+            };
+            // Get the selected facility's data
+            console.log("this is facility info..."+facilityInfo)
+
+
+
+            // Send the data to the controller using AJAX POST request
+            $.ajax({
+                url: '{{ route('referral.tabs.save', ['tab' => 'tab2']) }}',
+                type: 'POST',
+                data: data,
+                success: function(response) {
+                    // Handle the response after saving
+                    console.log(response);
+                    window.location.href = '{{ route('referral.tabs', ['tab' => 'tab3']) }}';
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+
+
+        });
+
+
 
     </script>
 
