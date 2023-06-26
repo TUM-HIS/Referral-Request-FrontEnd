@@ -6,12 +6,13 @@ use Illuminate\Support\Facades\Http;
 
 class KMHFLService
 {
-    protected $mykmhflkey = "IAJVYgkRSL3qzzoYK5hclmGEGxD0HH";
+    protected $mykmhflkey = "";
 
     // Constructor
     public function __construct()
     {
-        $this->mykmhflkey = "IAJVYgkRSL3qzzoYK5hclmGEGxD0HH";
+        $token = KmhflTokenGenerator::tokenGenerator();
+        $this->mykmhflkey = $token;
 
     }
 
