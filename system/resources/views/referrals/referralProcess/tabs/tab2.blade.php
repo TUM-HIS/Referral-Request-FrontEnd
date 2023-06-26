@@ -1,9 +1,8 @@
 <!-- tab2.blade.php -->
 @extends('referrals.referralProcess.layout.referral-tabs-layout')
 <style>
-    .spinner {
-        display: none; /* Initially hide the spinner */
-        /* Add your custom styles for the spinner */
+    #spinnerContainer {
+        display: none;
     }
 </style>
 @section('tab-content')
@@ -78,9 +77,33 @@
 
                 <div class="row" id="facilities">
 
-{{--                        <div id="spinner" class="spinner"></div>--}}
-                    <!-- facilities cards will be dynamically generated here -->
+                    <div id="spinnerContainer">
+                        <!-- Growing Color spinnersr -->
+                        <div class="spinner-grow text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-secondary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-success" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-warning" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-info" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-light" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-dark" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div><!-- End Growing Color spinners -->
+                    </div>
+
                 </div>
+
             </fieldset>
             </div>
     </div>
@@ -139,6 +162,7 @@
 
 
             $('#search_button').on('click', function () {
+                $('#spinnerContainer').show();
                 console.log("search btn clicked")
                 // Show the spinner
                 // $('#spinner').show();
@@ -171,6 +195,7 @@
                                     '</div>' +
                                     '</div>';
                             }
+                            $('#spinnerContainer').hide();
                             $("#facilities").html(facilitiesHtml);
 
                             // Hide the spinner after the response is received

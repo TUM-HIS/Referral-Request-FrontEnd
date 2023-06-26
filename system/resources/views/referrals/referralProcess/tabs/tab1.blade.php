@@ -185,7 +185,17 @@
     </div>
 
     <div class="d-flex justify-content-end">
-        <button class="btn btn-primary btn-lg">Next <i class="fas fa-arrow-right ml-2"></i></button>
+        <button id="next_button" class="btn btn-primary btn-lg">Next <i class="fas fa-arrow-right ml-2"></i></button>
     </div>
 </div>
+
+<script>
+
+
+        $('#next_button').on('click', function () {
+            window.location.href = '{{ route('referral.tabs', ['tab' => 'tab2']) }}';
+        })
+
+</script>
+
 @endsection
