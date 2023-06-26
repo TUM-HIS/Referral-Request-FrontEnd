@@ -12,81 +12,85 @@
 
 
 
+    <h1>3. Facility Selection</h1>
+{{--    <div class="">--}}
+{{--        <div class="card">--}}
+{{--            <fieldset class="p-4">--}}
+                <div class="row" style="padding-top: 58px;">
+                    <div class="col-md-6 offset-md-3">
+                        <table class="table">
 
-        <div class="container">
-            <h1>Facility Selection</h1>
-            <div class="row" style="padding-top: 58px;">
-                <div class="col-md-6 offset-md-3">
-                    <table class="table">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <td >First Name</td>
+                                <td >ID Number</td>
+                                <td >Gender</td>
+                                <td >Age</td>
+                            </tr>
+                            <tr>
+                                <th>Patient:</th>
+                                <th class="text-primary"> {{ $patient->first_name }} </th>
+                                <th class="text-primary">{{ $patient->idNo }}</th>
+                                <th class="text-primary">{{ $patient->gender }}</th>
+                                <th class="text-primary">{{ \Carbon\Carbon::parse($patient->dob)->age }}</th>
+                            </tr>
 
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <td >First Name</td>
-                            <td >ID Number</td>
-                            <td >Gender</td>
-                            <td >Age</td>
-                        </tr>
-                        <tr>
-                            <th>Patient:</th>
-                            <th class="text-primary"> {{ $patient->first_name }} </th>
-                            <th class="text-primary">{{ $patient->idNo }}</th>
-                            <th class="text-primary">{{ $patient->gender }}</th>
-                            <th class="text-primary">{{ \Carbon\Carbon::parse($patient->dob)->age }}</th>
-                        </tr>
-
-                        </thead>
-                    </table>
-                </div>
-            </div>
-
-
-            {{--@dd($serviceCategories[0])--}}
-            <div class="row">
-                <div class="col-md-4">
-                    <form class="my-5">
-                        {{-- Service category dropdown --}}
-                        <div class="form-group">
-                            <label for="service_category">Select Service Category:</label>
-                            <select class="form-control" id="service_category" name="service_category">
-                                <option value="">--Select Service Category--</option>
-                                @foreach($serviceCategories as $serviceCategory)
-                                    <option value="{{ $serviceCategory->name }}">{{ $serviceCategory->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </form>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
 
-                <div class="col-md-6">
-                    <form class="my-5 ">
-                        {{-- Services dropdown --}}
-                        <div class="form-group position-relative">
-                            <label for="service">Select Service:</label>
-                            <select class="form-control" id="service" name="service">
-                            </select>
-                        </div>
-                    </form>
+
+                {{--@dd($serviceCategories[0])--}}
+                <div class="row">
+                    <div class="col-md-4">
+                        <form class="my-5">
+                            {{-- Service category dropdown --}}
+                            <div class="form-group">
+                                <label for="service_category">Select Service Category:</label>
+                                <select class="form-control" id="service_category" name="service_category">
+                                    <option value="">--Select Service Category--</option>
+                                    @foreach($serviceCategories as $serviceCategory)
+                                        <option value="{{ $serviceCategory->name }}">{{ $serviceCategory->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-md-6">
+                        <form class="my-5 ">
+                            {{-- Services dropdown --}}
+                            <div class="form-group position-relative">
+                                <label for="service">Select Service:</label>
+                                <select class="form-control" id="service" name="service">
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-md-2">
+                        <button id="search_button" class="btn btn-primary my-5">Search</button>
+                    </div>
                 </div>
 
-                <div class="col-md-2">
-                    <button id="search_button" class="btn btn-primary my-5">Search</button>
+
+                <div class="row" id="facilities">
+
+{{--                        <div id="spinner" class="spinner"></div>--}}
+                    <!-- facilities cards will be dynamically generated here -->
                 </div>
-            </div>
-
-
-            <div class="row" id="facilities">
-
-                    <div id="spinner" class="spinner"></div>
-                <!-- facilities cards will be dynamically generated here -->
-            </div>
-        </div>
+{{--            </fieldset>--}}
+{{--            </div>--}}
+{{--    </div>--}}
+</div>
 
 
 
 
 
-{{--    SCRIPT SECTION--}}
+    {{--    SCRIPT SECTION  --}}
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -137,7 +141,7 @@
             $('#search_button').on('click', function () {
                 console.log("search btn clicked")
                 // Show the spinner
-                $('#spinner').show();
+                // $('#spinner').show();
 
                 if (selectedService) {
                     axios.get('{{ url('api/kmhfl/facility/facility_services') }}', {
@@ -148,8 +152,9 @@
                         .then(function (response) {
                             console.log("inside response")
                             const facilities = response.data;
+                            console.log(facilities[3].results[0].code)
                             let facilitiesHtml = '';
-                            console.log(facilities[0].results[0].name)
+                            // console.log(facilities[0].results[0].name)
 
                             if (facilities.length === 0) {
                                 facilitiesHtml += '<div class="col-md-12"><p>No facilities found for this service.</p></div>';
@@ -158,10 +163,10 @@
                                 facilitiesHtml += '<div class="col-md-4">' +
                                     '<div class="card mb-4 box-shadow">' +
                                     '<div class="card-body">' +
-                                    '<h5 class="card-title">'+ facilities[i].results[0].code +' - '+ facilities[i].results[0].name + '</h5>' +
-                                    '<h5 class="">No. of Beds: ' + facilities[i].results[0].number_of_beds + '</h5>' +
-                                    '<h5 class="">No. of ICU Beds:' + facilities[i].results[0].number_of_icu_beds + '</h5>' +
-                                    '<button class="btn btn-primary select-facility-btn rounded-pill" data-facility-info="' + facilities[i].results[0].id + '">Select</button>' +
+                                    '<h5 class="card-title">'+ (facilities[i]?.results[0]?.code || 'null') +' - '+ (facilities[i]?.results[0]?.name || 'null') + '</h5>' +
+                                    '<h5 class="">No. of Beds: ' + (facilities[i]?.results[0]?.number_of_beds || 'null') + '</h5>' +
+                                    '<h5 class="">No. of ICU Beds:' + (facilities[i]?.results[0]?.number_of_icu_beds || 'null') + '</h5>' +
+                                    '<button class="btn btn-primary select-facility-btn rounded-pill" data-facility-info="' + facilities[i]?.results[0]?.id + '">Select</button>' +
                                     '</div>' +
                                     '</div>' +
                                     '</div>';
@@ -169,7 +174,7 @@
                             $("#facilities").html(facilitiesHtml);
 
                             // Hide the spinner after the response is received
-                            $('#spinner').hide();
+                            // $('#spinner').hide();
 
                         })
                         .catch(function (error) {

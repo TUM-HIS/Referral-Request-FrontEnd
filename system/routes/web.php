@@ -89,11 +89,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/referralprocess', [ReferralController::class, 'outgoingReferralTabs'])->name('referral.tabs');
 
 
-
-//    //routes used for testing tabs
-//    Route::post('/testtabs', [ReferralController::class, 'testingTabs'])->name('test.tabs');
-
-
     //referral-tabs e.g referral/tabs/tab2
     Route::get('referral/tabs/{tab}', [ReferralController::class, 'show'])->name('referral.tabs');
     Route::post('referral/tabs/save/{tab}', [ReferralController::class, 'saveTabData'])->name('referral.tabs.save');

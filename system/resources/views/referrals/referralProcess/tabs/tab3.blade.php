@@ -3,16 +3,12 @@
 
 @section('tab-content')
 <div class="tab-pane {{ $activeTab === 'tab3' ? 'active' : '' }}" id="tab3" role="tabpanel">
-    <h1>Tab 3 Content</h1>
-
 
 
     <h2 class="accordion-header" id="headingFour">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-            4. Summary
-        </button>
+
+            <h1>4. Summary</h1>
     </h2>
-    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
         <div class="accordion-body">
             <div class="row">
                 <div class="col-xxl-6 col-md-4">
@@ -81,6 +77,9 @@
                 </div>
             </div>
         </div>
+
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-primary btn-lg">complete <i class="fas fa-check ml-2"></i></button>
     </div>
 
 </div>
