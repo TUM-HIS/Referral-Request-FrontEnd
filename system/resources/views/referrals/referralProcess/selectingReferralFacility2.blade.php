@@ -1,6 +1,3 @@
-@extends('layouts.backend')
-
-@section('content')
 
     <main id="main" class="main">
         <div class="container">
@@ -180,4 +177,3 @@
 
     </script>
 
-@endsection

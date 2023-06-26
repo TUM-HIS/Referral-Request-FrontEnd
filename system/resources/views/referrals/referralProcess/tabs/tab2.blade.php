@@ -1,10 +1,14 @@
-@extends('layouts.backend')
+<!-- tab2.blade.php -->
+@extends('referrals.referralProcess.layout.referral-tabs-layout')
 
-@section('content')
+@section('tab-content')
+<div class="tab-pane {{ $activeTab === 'tab2' ? 'active' : '' }}" id="tab2" role="tabpanel">
+    <h1>Tab 2 Content</h1>
+
 
     <main id="main" class="main">
         <div class="container">
-            <h1>Refer Patient</h1>
+            <h1>Facility Selection</h1>
             <div class="row" style="padding-top: 58px;">
                 <div class="col-md-6 offset-md-3">
                     <table class="table">
@@ -31,7 +35,7 @@
             </div>
 
 
-{{--@dd($serviceCategories[0])--}}
+            {{--@dd($serviceCategories[0])--}}
             <div class="row">
                 <div class="col-md-4">
                     <form class="my-5 bg-danger-light">
@@ -44,9 +48,9 @@
                                     <option value="{{ $serviceCategory->name }}">{{ $serviceCategory->name }}</option>
                                 @endforeach
                             </select>
-{{--                            <div class="dropdown-icon">--}}
-{{--                                <i class="fas fa-chevron-down"></i>--}}
-{{--                            </div>--}}
+                            {{--                            <div class="dropdown-icon">--}}
+                            {{--                                <i class="fas fa-chevron-down"></i>--}}
+                            {{--                            </div>--}}
                         </div>
                     </form>
                 </div>
@@ -57,20 +61,20 @@
                         <div class="form-group position-relative">
                             <label for="service">Select Service:</label>
                             <select class="form-control" id="service" name="service">
-{{--                                <option value="">--Select Service--</option>--}}
-{{--                                @foreach($services as $service)--}}
-{{--                                    <option value="{{ $service->id }}">{{ $service->name }}</option>--}}
-{{--                                @endforeach--}}
+                                {{--                                <option value="">--Select Service--</option>--}}
+                                {{--                                @foreach($services as $service)--}}
+                                {{--                                    <option value="{{ $service->id }}">{{ $service->name }}</option>--}}
+                                {{--                                @endforeach--}}
                             </select>
-{{--                            <div class="dropdown-icon">--}}
-{{--                                <i class="fas fa-chevron-down"></i>--}}
-{{--                            </div>--}}
+                            {{--                            <div class="dropdown-icon">--}}
+                            {{--                                <i class="fas fa-chevron-down"></i>--}}
+                            {{--                            </div>--}}
                         </div>
                     </form>
                 </div>
 
                 <div class="col-md-2">
-                    <button id="search_button" class="btn btn-primary my-5">Submit</button>
+                    <button id="search_button" class="btn btn-primary my-5">Search</button>
                 </div>
             </div>
 
@@ -94,19 +98,19 @@
             // When the service dropdown value changes
             $('#service').on('change', function () {
                 selectedService = $(this).val();
-                 console.log("checking ...", selectedService)
+                console.log("checking ...", selectedService)
             });
 
             // When the service-category dropdown value changes
-                $('#service_category').on('change', function () {
-                    var category_name = $(this).val();
-                    // var category_name = "LEPROSY TREATMENT";
+            $('#service_category').on('change', function () {
+                var category_name = $(this).val();
+                // var category_name = "LEPROSY TREATMENT";
 
-                    axios.get('{{ url('api/service_category/get_services?category_name=LABORATORY SERVICES') }}', {
-                        params: {
-                            category_name: category_name
-                        }
-                    })
+                axios.get('{{ url('api/service_category/get_services?category_name=LABORATORY SERVICES') }}', {
+                    params: {
+                        category_name: category_name
+                    }
+                })
                     .then(function (response) {
                         // console.log(response)
 
@@ -131,7 +135,7 @@
                     });
 
 
-                });
+            });
 
             $('#search_button').on('click', function () {
                 console.log("search btn clicked")
@@ -176,8 +180,10 @@
 
 
 
-            })
+        })
 
     </script>
 
+
+</div>
 @endsection
