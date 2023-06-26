@@ -24,22 +24,34 @@ class ReferralController extends Controller
     {
         $activeTab = $tab; // Store the active tab to determine which tab should be marked as active
 
-        $patientDetails = Patient::where('id', 1)->first();
         $diagnosis = Mappings::select('id', 'from concept name')->get();
         $serviceCategories = ServiceCategory::all();
 
 
         if ($tab === 'tab1') {
 
+            $patientDetails = Patient::where('id', 1)->first();
+
+
             return view('referrals.referralProcess.tabs.tab1',
                 compact('activeTab'))->with(['patient' => $patientDetails,
                 'diagnosis' => $diagnosis]);
 
         } elseif ($tab === 'tab2') {
+
+            $referralId =request()->input('referralId');
+
+            $referral = Referral::where('id', $referralId)->first();
+            $patientUpi = $referral->clientUPI;
+
+
+
+            $patientDetails = Patient::where('upi', $patientUpi)->first();
+
             return view('referrals.referralProcess.tabs.tab2',
                 compact('activeTab'))->with(['patient' => $patientDetails,
-                'diagnosis' => $diagnosis,
-            'serviceCategories' => $serviceCategories]);
+            'serviceCategories' => $serviceCategories,
+                'referralId' => $referralId]);
 
         } elseif ($tab === 'tab3') {
 

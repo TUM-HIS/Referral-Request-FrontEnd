@@ -38,4 +38,9 @@ class Referral extends Model
     {
         return $this->belongsTo(m_f_l_s::class, 'referringFacility', 'Code');
     }
+
+    public function patientReffered()
+    {
+        return $this->belongsTo(Patient::class, 'clientUPI', 'upi');
+    }
 }

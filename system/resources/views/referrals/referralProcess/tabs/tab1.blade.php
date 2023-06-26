@@ -4,7 +4,6 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.7.0.slim.min.js"></script>
 {{--<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>--}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 @section('tab-content')
@@ -176,6 +175,16 @@
                         });
                     </script>
                 </div>
+                <div class=" pb-1">
+                    <label for="priorityLevel">Priority Level</label>
+                    <select id="priorityLevel" name="priorityLevel" class="form-control">
+                        <option value="">--- Select Priority Level ---</option>
+                        <option value="stat">Emergency</option>
+                        <option value="asap">Critical</option>
+                        <option value="urgent">Urgent</option>
+                        <option value="routine">Routine</option>
+                    </select>
+                </div>
 
                 <div class=" pb-1">
                     <label for="formFileMultiple">Attachments</label>
@@ -200,6 +209,13 @@
 <script>
 
     $(document).ready(function() {
+        var userId = {{ auth()->id() }};
+        {{--var patientName = {{ $patient->first_name }} {{ $patient->last_name }};--}}
+        var patient = {!! json_encode($patient) !!};
+        var patientName = patient.first_name+" "+patient.last_name;
+        var patientUPI = patient.upi;
+        console.log(userId);
+        console.log(patientName);
 
         $('#next_button').on('click', function () {
             // Send the data to the controller using AJAX POST request
@@ -210,6 +226,7 @@
             var diagnosis = $('#diagnosis').val();
             var reasonReferral = $('#reasonReferral').val();
             var additionalNotes = $('#additionalNotes').val();
+            var priorityLevel = $('#priorityLevel').val();
 
             // Create an object with the data
             var formData = {
@@ -217,7 +234,11 @@
                 historyInvestigation: historyInvestigation,
                 diagnosis: diagnosis,
                 reasonReferral: reasonReferral,
-                additionalNotes: additionalNotes
+                additionalNotes: additionalNotes,
+                userId: userId,
+                clientName: patientName,
+                clientUPI: patientUPI,
+                priorityLevel: priorityLevel
             };
 
 
@@ -227,9 +248,16 @@
                 data: formData,
                 success: function (response) {
                     // Handle the response after saving
-                    console.log(response);
+                    var referralId = response.referralId;
+                    var referralSuccess = response.success;
+                    // console.log(response.success);
+                    // console.log(response.referralId);
+                    var url = '{{ route('referral.tabs', ['tab' => 'tab2']) }}';
+                    url += '?referralId=' + referralId;
                     {{--window.location.href = '{{ route('referral.tabs', ['tab' => 'tab2']) }}';--}}
+                        window.location.href = url;
                 },
+
                 error: function (error) {
                     console.log(error);
                 }
