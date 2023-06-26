@@ -1,6 +1,12 @@
 <!-- tab1.blade.php -->
 @extends('referrals.referralProcess.layout.referral-tabs-layout')
 
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.7.0.slim.min.js"></script>
+{{--<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>--}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 @section('tab-content')
 <div class="tab-pane {{ $activeTab === 'tab1' ? 'active' : '' }}" id="tab1" role="tabpanel">
     <h1>Tab 1 Content</h1>
@@ -189,12 +195,52 @@
     </div>
 </div>
 
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
 
+    $(document).ready(function() {
 
         $('#next_button').on('click', function () {
-            window.location.href = '{{ route('referral.tabs', ['tab' => 'tab2']) }}';
+            // Send the data to the controller using AJAX POST request
+            console.log("next btn clicked")
+            // Get the form data
+            var referringOfficer = $('#referringOfficer').val();
+            var historyInvestigation = $('#historyInvestigation').val();
+            var diagnosis = $('#diagnosis').val();
+            var reasonReferral = $('#reasonReferral').val();
+            var additionalNotes = $('#additionalNotes').val();
+
+            // Create an object with the data
+            var formData = {
+                referringOfficer: referringOfficer,
+                historyInvestigation: historyInvestigation,
+                diagnosis: diagnosis,
+                reasonReferral: reasonReferral,
+                additionalNotes: additionalNotes
+            };
+
+
+            $.ajax({
+                url: '{{ url('api/referral/save/tab1') }}',
+                type: 'POST',
+                data: formData,
+                success: function (response) {
+                    // Handle the response after saving
+                    console.log(response);
+                    {{--window.location.href = '{{ route('referral.tabs', ['tab' => 'tab2']) }}';--}}
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+
         })
+
+    });
+
+
+
 
 </script>
 
