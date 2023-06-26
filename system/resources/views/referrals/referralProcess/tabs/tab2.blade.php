@@ -13,9 +13,9 @@
 
 
     <h1>3. Facility Selection</h1>
-{{--    <div class="">--}}
-{{--        <div class="card">--}}
-{{--            <fieldset class="p-4">--}}
+    <div class="">
+        <div class="card">
+            <fieldset class="p-4">
                 <div class="row" style="padding-top: 58px;">
                     <div class="col-md-6 offset-md-3">
                         <table class="table">
@@ -81,9 +81,9 @@
 {{--                        <div id="spinner" class="spinner"></div>--}}
                     <!-- facilities cards will be dynamically generated here -->
                 </div>
-{{--            </fieldset>--}}
-{{--            </div>--}}
-{{--    </div>--}}
+            </fieldset>
+            </div>
+    </div>
 </div>
 
 
