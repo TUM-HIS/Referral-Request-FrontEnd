@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use App\utils\KMHFLService;
+use App\utils\KmhflTokenGenerator;
 use Illuminate\Http\Request;
 
 class MflController extends Controller
@@ -23,5 +24,11 @@ class MflController extends Controller
         $categoryName = $request->input('category_name');
         $services = Service::where('category_name', $categoryName)->get();
         return response()->json($services);
+    }
+
+    public function tokenGenerator(){
+
+         $token =  KmhflTokenGenerator::tokenGenerator();
+         return $token;
     }
 }
