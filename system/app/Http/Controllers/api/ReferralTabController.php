@@ -51,7 +51,19 @@ class ReferralTabController extends Controller
     }
 
     function saveTab2Data(Request $request){
-        $referralId = $request->referral_id;
-        $referralRequests = Referral::where('id', $referralId)->first();
+        $referralId = $request->referralId;
+        $referral = Referral::where('id', $referralId)->first();
+
+        $referral->serviceCategory = $request->input('serviceCategory');
+        $referral->service = $request->input('service');
+        $referral->referredFacility = $request->input('referredFacility');
+
+        $referral->save();
+
+        return response()->json(
+            ['success' => true,
+                'referralId' => $referralId]
+        );
+
     }
 }

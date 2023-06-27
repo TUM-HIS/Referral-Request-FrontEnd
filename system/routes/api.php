@@ -27,6 +27,6 @@ Route::get('/kmhfl/token/generator', [MflController::class, 'tokenGenerator'])->
 
 //saving tab data
 Route::post('/referral/save/tab1', [ReferralTabController::class, 'saveTab1Data']);
-Route::get('/referral/save/tab2', [ReferralTabController::class, 'saveTab2Data']);
+Route::post('/referral/save/tab2', [ReferralTabController::class, 'saveTab2Data']);
 
 

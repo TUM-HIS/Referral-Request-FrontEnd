@@ -232,24 +232,25 @@
                 var formData = {
                     serviceCategory : category_name,
                     service: selectedService,
-                    referredFacilityCode: facilityCode
+                    referredFacilityCode: facilityCode,
+                    referralId: referralId
                 };
 
-                {{--$.ajax({--}}
-                {{--    url: '{{ url('api/referral/save/tab2') }}',--}}
-                {{--    type: 'POST',--}}
-                {{--    data: formData,--}}
-                {{--    success: function (response) {--}}
-                {{--        var referralId = response.referralId;--}}
-                {{--        var referralSuccess = response.success;--}}
+                $.ajax({
+                    url: '{{ url('api/referral/save/tab2') }}',
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        var referralId = response.referralId;
+                        var referralSuccess = response.success;
 
-                {{--        var url = '{{ route('referral.tabs', ['tab' => 'tab3']) }}';--}}
-                {{--        url += '?referralId=' + referralId;--}}
-                {{--        window.location.href = url;--}}
-                {{--    },--}}
+                        var url = '{{ route('referral.tabs', ['tab' => 'tab3']) }}';
+                        url += '?referralId=' + referralId;
+                        window.location.href = url;
+                    },
 
 
-                {{--});--}}
+                });
 
             });
 
