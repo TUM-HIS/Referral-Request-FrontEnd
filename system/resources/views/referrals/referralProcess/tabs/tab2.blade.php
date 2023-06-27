@@ -263,26 +263,6 @@
 
         })
 
-
-
-
-        // Send the data to the controller using AJAX POST request
-        {{--$.ajax({--}}
-        {{--    url: '{{ route('referral.tabs.save', ['tab' => 'tab2']) }}',--}}
-        {{--    type: 'POST',--}}
-        {{--    data: data,--}}
-        {{--    success: function(response) {--}}
-        {{--        // Handle the response after saving--}}
-        {{--        console.log(response);--}}
-        {{--        window.location.href = '{{ route('referral.tabs', ['tab' => 'tab3']) }}';--}}
-        {{--    },--}}
-        {{--    error: function(error) {--}}
-        {{--        console.log(error);--}}
-        {{--    }--}}
-        {{--});--}}
-
-
-
     </script>
 
 
