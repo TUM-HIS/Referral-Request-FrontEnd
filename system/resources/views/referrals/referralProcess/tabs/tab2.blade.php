@@ -241,13 +241,18 @@
                     type: 'POST',
                     data: formData,
                     success: function (response) {
+
                         var referralId = response.referralId;
                         var referralSuccess = response.success;
 
+                        console.log("response : "+referralId)
                         var url = '{{ route('referral.tabs', ['tab' => 'tab3']) }}';
                         url += '?referralId=' + referralId;
                         window.location.href = url;
                     },
+                error: function(error) {
+                    console.log(error);
+                }
 
 
                 });

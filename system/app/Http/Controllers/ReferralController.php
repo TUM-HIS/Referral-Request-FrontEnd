@@ -51,9 +51,14 @@ class ReferralController extends Controller
                 'referralId' => $referralId]);
 
         } elseif ($tab === 'tab3') {
+            $referralId =request()->input('referralId');
+
+            $referral = Referral::where('id', $referralId)->first();
+            $patientUpi = $referral->clientUPI;
+            $patientDetails = Patient::where('upi', $patientUpi)->first();
 
             return view('referrals.referralProcess.tabs.tab3',
-                compact('activeTab'))->with(['patient' => $patientDetails]);
+                compact('activeTab'))->with(['patient' => $patientDetails, 'referral' => $referral]);
 
         }
     }
