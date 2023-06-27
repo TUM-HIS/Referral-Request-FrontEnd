@@ -3,57 +3,55 @@
 
 @section('tab-content')
 <div class="tab-pane {{ $activeTab === 'tab3' ? 'active' : '' }}" id="tab3" role="tabpanel">
-    <h1>Tab 3 Content</h1>
-
 
 
     <h2 class="accordion-header" id="headingFour">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-            4. Summary
-        </button>
+
+            <h1>4. Summary</h1>
     </h2>
-    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
         <div class="accordion-body">
-            <div class="row">
-                <div class="col-xxl-6 col-md-4">
-                    <div class="card">
-                        <div class="p-4">
-                            <div class="pb-1">
-                                <h6 class="card-title" style="font-size: 120% !important;">Patient Details</h6>
-                                <p><strong>Name:</strong> {{ $patient->first_name }} {{ $patient->last_name }}</p>
-                                <p><strong>Identification Number:</strong> {{ $patient->idNo }}</p>
-                                <p><strong>Phone:</strong> {{ $patient->telephone }}</p>
-                                <p><strong>County:</strong> {{ $patient->countyOfBirth }} County</p>
-                                <p><strong>Sub County:</strong> {{ $patient->subCounty }}</p>
-                                <p><strong>Constituency:</strong> {{ $patient->village }}</p>
-                                <p><strong>Ward:</strong> {{ $patient->address }}</p>
-                                <p><strong>Phone:</strong> {{ $patient->telephone }}</p>
-                                <!-- Add more fields as needed -->
+            @if($patient != null)
+                <div class="row">
+                    <div class="col-xxl-6 col-md-4">
+                        <div class="card">
+                            <div class="p-4">
+                                <div class="pb-1">
+                                    <h6 class="card-title" style="font-size: 120% !important;">Patient Details</h6>
+                                    <p><strong>Name:</strong> {{ $patient->first_name }} {{ $patient->last_name }}</p>
+                                    <p><strong>Identification Number:</strong> {{ $patient->idNo }}</p>
+                                    <p><strong>Phone:</strong> {{ $patient->telephone }}</p>
+                                    <p><strong>County:</strong> {{ $patient->countyOfBirth }} County</p>
+                                    <p><strong>Sub County:</strong> {{ $patient->subCounty }}</p>
+                                    <p><strong>Constituency:</strong> {{ $patient->village }}</p>
+                                    <p><strong>Ward:</strong> {{ $patient->address }}</p>
+                                    <p><strong>Phone:</strong> {{ $patient->telephone }}</p>
+                                    <!-- Add more fields as needed -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-6 col-md-4">
+                        <div class="card">
+                            <div class="p-4">
+                                <div class="pb-1">
+                                    <h6 class="card-title" style="font-size: 120% !important;">Next of Kin Details</h6>
+                                    <p><strong>Full name:</strong> {{ $patient->kinName }} {{ $patient->last_name }}</p>
+                                    <p><strong>Relationship:</strong> {{ $patient->relationship }}</p>
+                                    <p><strong>Phone:</strong> {{ $patient->kinTelephone }}</p>
+                                    <!-- Add more fields as needed -->
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xxl-6 col-md-4">
-                    <div class="card">
-                        <div class="p-4">
-                            <div class="pb-1">
-                                <h6 class="card-title" style="font-size: 120% !important;">Next of Kin Details</h6>
-                                <p><strong>Full name:</strong> {{ $patient->kinName }} {{ $patient->last_name }}</p>
-                                <p><strong>Relationship:</strong> {{ $patient->relationship }}</p>
-                                <p><strong>Phone:</strong> {{ $patient->kinTelephone }}</p>
-                                <!-- Add more fields as needed -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endif
             <div class="row">
                 <div class="col-xxl-6 col-md-4">
                     <div class="card">
                         <div class="p-4">
                             <div class="pb-1">
                                 <h6 class="card-title" style="font-size: 120% !important;">Referral Details</h6>
-                                <p><strong>Referring Officer:</strong> Dr. {{ Auth::user()->name }}</p>
+                                <p><strong>Referring Officer:</strong> @if($referral != null) Dr. {{ $referral->referringOfficer }} @endif </p>
                                 <p><strong>History/Investigation:</strong> <span id="summary-historyInvestigation"></span></p>
                                 <p><strong>Diagnosis:</strong> <span id="summary-diagnosis"></span></p>
                                 <p><strong>Reason for referral:</strong> <span id="summary-reasonReferral"></span></p>
@@ -81,6 +79,9 @@
                 </div>
             </div>
         </div>
+
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-primary btn-lg">complete <i class="fas fa-check ml-2"></i></button>
     </div>
 
 </div>

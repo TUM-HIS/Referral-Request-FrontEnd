@@ -24,24 +24,102 @@ class ReferralController extends Controller
     {
         $activeTab = $tab; // Store the active tab to determine which tab should be marked as active
 
-        $patientDetails = Patient::where('id', 1)->first();
         $diagnosis = Mappings::select('id', 'from concept name')->get();
         $serviceCategories = ServiceCategory::all();
 
 
         if ($tab === 'tab1') {
+            $patientId = request()->input('patientId');
+
+            $patientDetails = Patient::where('id', $patientId)->first();
+
+//            return $patientDetails;
 
             return view('referrals.referralProcess.tabs.tab1',
-                compact('activeTab'))->with(['patient' => $patientDetails, 'diagnosis' => $diagnosis]);
+                compact('activeTab'))->with(['patient' => $patientDetails,
+                'diagnosis' => $diagnosis]);
+
         } elseif ($tab === 'tab2') {
+
+            $referralId = request()->input('referralId');
+
+            $referral = Referral::where('id', $referralId)->first();
+            if ($referral == null){
+                $patientDetails = [];
+
+            }else {
+
+                $patientUpi = $referral->clientUPI;
+                $patientDetails = Patient::where('upi', $patientUpi)->first();
+            }
+
+            return view('referrals.referralProcess.tabs.tab2',
+                compact('activeTab'))->with(['patient' => $patientDetails,
+            'serviceCategories' => $serviceCategories,
+                'referralId' => $referralId]);
+
+        } elseif ($tab === 'tab3') {
+            $referralId =request()->input('referralId');
+
+//            return $referralId;
+            $referral = Referral::where('id', $referralId)->first();
+            if ($referral == null){
+                $patientDetails = [];
+
+            }else {
+
+                $patientUpi = $referral->clientUPI;
+                $patientDetails = Patient::where('upi', $patientUpi)->first();
+
+
+                $referralId = $referral->id;
+
+                $user = Auth::user();
+                $userFacility = $user->userFacility;
+
+                $facility = m_f_l_s::where('Code', $referral->referredFacility)->first();
+                $notification = new ReferralRequestSent($referralId, $userFacility->Code, "Referral Request");
+
+                Notification::send($facility, $notification);
+                return Redirect::route('referral.outgoing')->with('success', 'Referral Request Submitted successfully');
+
+            }
+            return view('referrals.referralProcess.tabs.tab3',
+                compact('activeTab'))->with(['patient' => $patientDetails, 'referral' => $referral]);
+
+        }
+    }
+
+    public function saveTabData($tab, Request $request){
+        $activeTab = $tab; // Store the active tab to determine which tab should be marked as active
+
+        $patientDetails = Patient::where('id', 1)->first();
+        $diagnosis = Mappings::select('id', 'from concept name')->get();
+        $serviceCategories = ServiceCategory::all();
+
+        if ($tab === 'tab1'){
+
             return view('referrals.referralProcess.tabs.tab2',
                 compact('activeTab'))->with(['patient' => $patientDetails,
                 'diagnosis' => $diagnosis,
-            'serviceCategories' => $serviceCategories]);
-        } elseif ($tab === 'tab3') {
+                'serviceCategories' => $serviceCategories]);
+
+        }elseif ($tab === 'tab2'){
+
             return view('referrals.referralProcess.tabs.tab3',
                 compact('activeTab'))->with(['patient' => $patientDetails]);
+
+
+        }elseif($tab === 'tab3'){
+
+
+
+        }else{
+            return "our engineers are working on the issue";
         }
+
+
+
     }
 
 
@@ -205,7 +283,7 @@ class ReferralController extends Controller
 
     public function outgoing(){
         $loggedInuserFacility = Auth::user()->userFacility->Code;
-        $referrals = Referral::where('referredFacility', $loggedInuserFacility)
+        $referrals = Referral::where('referring_facility_id', $loggedInuserFacility)
             ->orderBy('created_at', 'desc')
             ->get();
 

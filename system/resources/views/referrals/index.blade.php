@@ -53,7 +53,7 @@
                                     <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $referralRequest->clientName }}</td>
                                     <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $referralRequest->priorityLevel }}</td>
                                     <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $referralRequest->referringOfficer }}</td>
-                                    <td>Cardiovascular</td>
+                                    <td>{{ $referralRequest->service }}</td>
                                     <td >
                                         <p class="badge
                                             @if ($referralRequest->status == 'Pending')
@@ -73,7 +73,7 @@
                                               Action
                                             </button>
                                             <ul class="dropdown-menu">
-                                              <li><a class="dropdown-item" href="#">Reject</a></li>
+{{--                                              <li><a class="dropdown-item" href="#">Reject</a></li>--}}
                                               <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                                     Accept
                                                     <!-- Modal -->
