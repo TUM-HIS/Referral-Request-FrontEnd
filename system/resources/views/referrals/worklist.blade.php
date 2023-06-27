@@ -58,7 +58,8 @@
       <tbody>
         <!-- Patient records will be dynamically added here -->
         @foreach ($patients as $patient)
-            <tr onclick="window.location.href='{{ route('referrals.createReferral', $patient) }}'">
+{{--            <tr onclick="window.location.href='{{ route('referral.tabs', ['tab' => "tab1"]) }}'">--}}
+            <tr class="patient-row" data-patient-id="{{ $patient->id }}">
                 <td>{{ $patient->id }}</td>
                 <td>{{ $patient->first_name }}</td>
                 <td>{{ $patient->last_name }}</td>
@@ -90,5 +91,48 @@
         </section>
 
     </main>
+
+    {{--    SCRIPT SECTION  --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+
+
+            // Handle click event on patient rows
+            $('.patient-row').on('click', function() {
+                console.log("clicked")
+                // Get the patient ID from the data attribute
+                var patientId = $(this).data('patient-id');
+                var url = '{{ route('referral.tabs', ['tab' => 'tab1']) }}';
+                url += '?patientId=' + patientId;
+
+                console.log(patientId)
+
+                 window.location.href = url;
+
+                // Send an AJAX request to fetch the patient data
+                {{--$.ajax({--}}
+                {{--    url: '{{ url('referral/tabs/tab1') }}', // Replace with your route URL--}}
+                {{--    method: 'GET',--}}
+                {{--    data: {--}}
+                {{--        patientId: patientId--}}
+                {{--    },--}}
+                {{--    success: function(response) {--}}
+                {{--        // Handle the response and perform necessary actions--}}
+                {{--        console.log(response);--}}
+                {{--        // Redirect or perform other actions based on the retrieved patient data--}}
+                {{--        window.location.href = '/referral/tabs/tab1'; // Replace with your desired redirect URL--}}
+                {{--    },--}}
+                {{--    error: function(xhr, status, error) {--}}
+                {{--        // Handle any error that occurs during the AJAX request--}}
+                {{--        console.error(error);--}}
+                {{--    }--}}
+                {{--});--}}
+            });
+        });
+    </script>
+
 
 @endsection

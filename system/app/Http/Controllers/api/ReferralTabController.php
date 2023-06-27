@@ -57,6 +57,7 @@ class ReferralTabController extends Controller
         $referral->serviceCategory = $request->input('serviceCategory');
         $referral->service = $request->input('service');
         $referral->referredFacility = $request->input('referredFacilityCode');
+        $referral->status = "Pending";
 
         $referral->save();
 

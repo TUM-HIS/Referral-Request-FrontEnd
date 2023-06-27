@@ -67,7 +67,7 @@
                                     <td>{{ $referralRequest->priorityLevel }}</td>
                                     {{-- <td>{{ $referralRequest->serviceCategory }}</td> --}}
                                     <td>{{ $referralRequest->service }}</td>
-                                    <td>{{ $referralRequest->facilityReffered->Officialname }}</td>
+                                    <td>{{ $referralRequest->referredFacility }}</td>
                                     <td >
                                         <p class="badge
                                             @if ($referralRequest->status == 'Pending')

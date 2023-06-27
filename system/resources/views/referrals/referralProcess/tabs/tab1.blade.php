@@ -8,7 +8,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 @section('tab-content')
 <div class="tab-pane {{ $activeTab === 'tab1' ? 'active' : '' }}" id="tab1" role="tabpanel">
-    <h1>Tab 1 Content</h1>
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
                 <h1> 1. Patient Details</h1>

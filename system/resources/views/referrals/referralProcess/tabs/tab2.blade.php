@@ -27,14 +27,15 @@
                                 <td >Gender</td>
                                 <td >Age</td>
                             </tr>
-                            <tr>
-                                <th>Patient:</th>
-                                <th class="text-primary"> {{ $patient->first_name }} </th>
-                                <th class="text-primary">{{ $patient->idNo }}</th>
-                                <th class="text-primary">{{ $patient->gender }}</th>
-                                <th class="text-primary">{{ \Carbon\Carbon::parse($patient->dob)->age }}</th>
-                            </tr>
-
+                                @if($patient != null)
+                                    <tr>
+                                        <th>Patient:</th>
+                                        <th class="text-primary"> {{ $patient->first_name }} </th>
+                                        <th class="text-primary">{{ $patient->idNo }}</th>
+                                        <th class="text-primary">{{ $patient->gender }}</th>
+                                        <th class="text-primary">{{ \Carbon\Carbon::parse($patient->dob)->age }}</th>
+                                    </tr>
+                                @endif
                             </thead>
                         </table>
                     </div>

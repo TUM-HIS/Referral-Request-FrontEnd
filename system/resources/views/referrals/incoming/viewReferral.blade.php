@@ -228,9 +228,9 @@
 
                 <!-- Button trigger modal -->
 
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#anotherModal">
-                    Reject Referral
-                </button>
+{{--                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#anotherModal">--}}
+{{--                    Reject Referral--}}
+{{--                </button>--}}
 
                 <!-- Modal -->
                 <div class="modal fade" id="anotherModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -250,7 +250,7 @@
                     </div>
                     </div>
                 </div>
-                <a class="btn btn-primary" href="{{ route('referrals.incoming', $referral) }}">Exit Referral</a>
+                <a class="btn btn-primary" href="{{ route('referrals.incoming', $referral) }}">Close</a>
             </div>
 
         </form>
