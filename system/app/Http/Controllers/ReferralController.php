@@ -43,9 +43,6 @@ class ReferralController extends Controller
 
             $referral = Referral::where('id', $referralId)->first();
             $patientUpi = $referral->clientUPI;
-
-
-
             $patientDetails = Patient::where('upi', $patientUpi)->first();
 
             return view('referrals.referralProcess.tabs.tab2',
