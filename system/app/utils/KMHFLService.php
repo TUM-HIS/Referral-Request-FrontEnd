@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Http;
 class KMHFLService
 {
     protected $mykmhflkey = "";
-
-    // Constructor
     public function __construct()
     {
         $token = KmhflTokenGenerator::tokenGenerator();
@@ -16,18 +14,9 @@ class KMHFLService
 
     }
 
-
-
-
     public function facilitiesFromServiceId($serviceId){
-
         $response = $this->facilityIdsFromService();
        $results = $response['results'];
-
-       //FOR TESTING PURPOSES
-//       $facilityId =  $results[0]['facility'];
-//        return$facilityInfo = $this->facilitiesFromFacilityIds($facilityId);
-
 
         $facilities = [];
         $facilityIds = [];
@@ -40,9 +29,6 @@ class KMHFLService
         }
 
         return $facilities;
-
-//        return $results;
-
     }
 
 
@@ -52,7 +38,8 @@ class KMHFLService
         ])
             ->get('http://api.kmhfltest.health.go.ke/api/facilities/facilities', [
                 'format' => 'json',
-                'id' => $facilityId,
+//                'id' => $facilityId,
+                'county_name' => 'Mombasa'
             ]);
 
         if ($response->failed()) {
@@ -73,7 +60,6 @@ class KMHFLService
             ->get('http://api.kmhfltest.health.go.ke/api/facilities/facility_services', [
                 'format' => 'json',
                 'service' => '368c963a-b8de-461b-aa82-5ee1b0c0e391',
-                'county' => 'Nairobi'
             ]);
 
         if ($response->failed()) {
@@ -83,6 +69,9 @@ class KMHFLService
             return $response->json();
         }
     }
+
+
+
 
 
     public function countyIdFromName($county_name){
@@ -97,7 +86,6 @@ class KMHFLService
 
         if ($response->failed()) {
             $error = $response->body();
-            // Handle the error
         } else {
             return $response->json();
         }
