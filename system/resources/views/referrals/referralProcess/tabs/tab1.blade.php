@@ -10,7 +10,7 @@
 <div class="tab-pane {{ $activeTab === 'tab1' ? 'active' : '' }}" id="tab1" role="tabpanel">
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
-                <h1> 1. Patient Details</h1>
+                <h1 class="card-title" style="font-size: 180% !important;"> 1. Patient Details</h1>
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
@@ -18,58 +18,18 @@
                     <div class="col-xxl-6 col-md-4">
                         <div class="card">
                             <div class="p-4">
-
                                 <div class="pb-1">
-                                    <label for="clientName">Full Name</label>
-                                    <input type='text' class="form-control" name='clientName' placeholder="Patient's Full Name" value="{{ $patient->first_name }} {{ $patient->last_name }}">
-                                </div>
-
-                                <div class=" pb-1">
-                                    <label for="clientID">Identification Number</label>
-                                    <input type='text' class="form-control" name='clientID' placeholder='Identification Number' value="{{ $patient->idNo }}" >
-                                </div>
-
-                                <div class=" pb-1">
-                                    <label for="clientAge">Age</label>
-                                    <input type='number' class="form-control" name='clientAge' value="{{ \Carbon\Carbon::parse($patient->dob)->age }}" placeholder='Age' >
-                                </div>
-
-                                <div class=" pb-1">
-                                    <label for="clientUPI">UPI Number</label>
-                                    <input type='text' class="form-control" name='clientUPI' placeholder='Unique Personal Identification Number' value="{{ $patient->upi }}" >
-                                </div>
-
-                                <div class=" pb-1">
-                                    <label for="clientBirthCert">Birth Certificate Number</label>
-                                    <input type='text' class="form-control" name='clientBirthCert' placeholder='Birth Certificate Number'>
-                                </div>
-
-                                <div class=" pb-1">
-                                    <label for="clientTelephone">Telephone Number</label>
-                                    <input type='text' class="form-control" name='clientTelephone' placeholder='Telephone Number' value="{{ $patient->telephone }}" >
-                                </div>
-
-                                <div class=" pb-1">
-                                    <label for="clientCounty">County</label>
-                                    <input type='text' class="form-control" name='clientCounty' placeholder='County' value="{{ $patient->countyOfBirth }}" >
-                                </div>
-
-
-                                <div class=" pb-1">
-                                    <label for="clientSubCounty">Subcounty</label>
-                                    <input type='text' class="form-control" name='clientSubCounty' placeholder='Subcounty' value="{{ $patient->subCounty }}" >
-                                </div>
-
-
-                                <div class=" pb-1">
-                                    <label for="clientConstituency">Constituency</label>
-                                    <input type='text' class="form-control" name='clientConstituency' placeholder='Constituency' value="{{ $patient->village }}" >
-                                </div>
-
-
-                                <div class=" pb-1">
-                                    <label for="clientWard">Ward</label>
-                                    <input type='text' class="form-control" name='clientWard' placeholder='Ward' value="{{ $patient->address }}" >
+                                    <h6 class="card-title" style="font-size: 120% !important;">Patient Details</h6>
+                                    <p><strong>Full Name</strong> {{ $patient->first_name }} {{ $patient->last_name }}</p>
+                                    <p><strong>Identification Number:</strong> {{ $patient->idNo }}</p>
+                                    <p><strong>Age:</strong> {{ \Carbon\Carbon::parse($patient->dob)->age }}</p>
+                                    <p><strong>UPI Number:</strong> {{ $patient->upi }}</p>
+                                    <p><strong>Telephone number:</strong> {{ $patient->telephone }}</p>
+                                    <p><strong>County:</strong> {{ $patient->countyOfBirth }} County</p>
+                                    <p><strong>Sub County:</strong> {{ $patient->subCounty }}</p>
+                                    <p><strong>Constituency:</strong> {{ $patient->village }}</p>
+                                    <p><strong>Ward:</strong> {{ $patient->address }}</p>
+                                    <p><strong>Phone:</strong> {{ $patient->telephone }}</p>
                                 </div>
                             </div>
                         </div>
@@ -78,23 +38,11 @@
                     <div class="col-xxl-6 col-md-4">
                         <div class="card">
                             <div class="p-4">
-                                <legend>Next of Kin Details</legend>
-
-
-                                <div class=" pb-1">
-                                    <label for="kinName">Full Name</label>
-                                    <input type='text' class="form-control" name='kinName' placeholder="Kin's Full Name" value="{{ $patient->kinName }}" >
-                                </div>
-
-
-                                <div class=" pb-1">
-                                    <label for="kinRelationship">Relationship to Patient</label>
-                                    <input class="form-control" name="kinRelationship" id="" value="{{ $patient->relationship }}" >
-                                </div>
-
-                                <div class=" pb-1">
-                                    <label for="kinTelephone">Telephone Number</label>
-                                    <input class="form-control" type='text' name='kinTelephone' placeholder='Telephone Number' value="{{ $patient->kinTelephone }}" >
+                                <div class="pb-1">
+                                    <h6 class="card-title" style="font-size: 120% !important;">Next of Kin Details</h6>
+                                    <p><strong>Full name:</strong> {{ $patient->kinName }} {{ $patient->last_name }}</p>
+                                    <p><strong>Relationship:</strong> {{ $patient->relationship }}</p>
+                                    <p><strong>Phone:</strong> {{ $patient->kinTelephone }}</p>
                                 </div>
                             </div>
                         </div>
