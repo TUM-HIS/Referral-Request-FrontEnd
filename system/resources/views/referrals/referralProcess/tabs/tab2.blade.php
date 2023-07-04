@@ -5,6 +5,8 @@
         display: none;
     }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" defer></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 @section('tab-content')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="tab-pane {{ $activeTab === 'tab2' ? 'active' : '' }}" id="tab2" role="tabpanel">
@@ -45,7 +47,7 @@
                 {{--@dd($serviceCategories[0])--}}
                 <div class="row">
                     <div class="col-md-4">
-                        <form class="my-5">
+                        <form class="my-5 ">
                             {{-- Service category dropdown --}}
                             <div class="form-group">
                                 <label for="service_category">Select Service Category:</label>
@@ -56,6 +58,14 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <script>
+                                $(document).ready(function() {
+                                    // Initialize Select2
+                                    $('#service_category').select2({
+                                        placeholder: 'Type to search...'
+                                    });
+                                });
+                            </script>
                         </form>
                     </div>
 
@@ -65,6 +75,17 @@
                             <div class="form-group position-relative">
                                 <label for="service">Select Service:</label>
                                 <select class="form-control" id="service" name="service">
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-md-6">
+                        <form class="my-5 ">
+                            {{-- Facility dropdown --}}
+                            <div class="form-group position-relative">
+                                <label for="facility">Select Facility:</label>
+                                <select class="form-control" id="facility" name="facility">
                                 </select>
                             </div>
                         </form>
@@ -117,6 +138,8 @@
     {{--    SCRIPT SECTION  --}}
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
     <script>
         $(document).ready(function () {
