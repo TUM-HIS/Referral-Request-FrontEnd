@@ -18,7 +18,7 @@
         <div class="card">
             <fieldset class="p-4">
                 <div class="row" style="padding-top: 58px;">
-                    <div class="col-md-6 offset-md-3">
+                    <div class="col-md-8 offset-md-3">
                         <table class="table">
 
                             <thead>
@@ -44,54 +44,67 @@
                 </div>
 
 
-                {{--@dd($serviceCategories[0])--}}
+{{--                @dd($serviceCategories[0])--}}
                 <div class="row">
+{{--                    <div class="col-md-4">--}}
+{{--                        <form class="my-5 ">--}}
+{{--                            --}}{{-- Service category dropdown --}}
+{{--                            <div class="form-group">--}}
+{{--                                <label for="service_category">Select Service Category:</label>--}}
+{{--                                <select class="form-control" id="service_category" name="service_category">--}}
+{{--                                    <option value="">--Select Service Category--</option>--}}
+{{--                                    @foreach($serviceCategories as $serviceCategory)--}}
+{{--                                        <option value="{{ $serviceCategory->name }}">{{ $serviceCategory->name }}</option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
+{{--                            <script>--}}
+{{--                                $(document).ready(function() {--}}
+{{--                                    // Initialize Select2--}}
+{{--                                    $('#service_category').select2({--}}
+{{--                                        placeholder: 'Type to search...'--}}
+{{--                                    });--}}
+{{--                                });--}}
+{{--                            </script>--}}
+{{--                        </form>--}}
+{{--                    </div>--}}
+
+{{--@dd($services[0]->name)--}}
                     <div class="col-md-4">
                         <form class="my-5 ">
                             {{-- Service category dropdown --}}
                             <div class="form-group">
-                                <label for="service_category">Select Service Category:</label>
-                                <select class="form-control" id="service_category" name="service_category">
+                                <label for="service_category">Select Service:</label>
+                                <select class="form-control" id="services" name="services">
                                     <option value="">--Select Service Category--</option>
-                                    @foreach($serviceCategories as $serviceCategory)
-                                        <option value="{{ $serviceCategory->name }}">{{ $serviceCategory->name }}</option>
+                                    @foreach($services as $service)
+                                        <option value="{{ $service->id }}">{{ $service->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <script>
                                 $(document).ready(function() {
                                     // Initialize Select2
-                                    $('#service_category').select2({
-                                        placeholder: 'Type to search...'
+                                    $('#services').select2({
+                                        placeholder: 'Type a SERVICE to search...'
                                     });
                                 });
                             </script>
                         </form>
                     </div>
 
-                    <div class="col-md-6">
-                        <form class="my-5 ">
-                            {{-- Services dropdown --}}
-                            <div class="form-group position-relative">
-                                <label for="service">Select Service:</label>
-                                <select class="form-control" id="service" name="service">
-                                </select>
-                            </div>
-                        </form>
-                    </div>
+{{--                    <div class="col-md-6">--}}
+{{--                        <form class="my-5 ">--}}
+{{--                            --}}{{-- Facility dropdown --}}
+{{--                            <div class="form-group position-relative">--}}
+{{--                                <label for="facility">Select Facility:</label>--}}
+{{--                                <select class="form-control" id="facility" name="facility">--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
+{{--                        </form>--}}
+{{--                    </div>--}}
 
-                    <div class="col-md-6">
-                        <form class="my-5 ">
-                            {{-- Facility dropdown --}}
-                            <div class="form-group position-relative">
-                                <label for="facility">Select Facility:</label>
-                                <select class="form-control" id="facility" name="facility">
-                                </select>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="col-md-2">
+                    <div class="col-md-2 d-flex  align-items-center">
                         <button id="search_button" class="btn btn-primary my-5">Search</button>
                     </div>
                 </div>
@@ -146,45 +159,45 @@
             var selectedService = null;
             var category_name = null
             // When the service dropdown value changes
-            $('#service').on('change', function () {
+            $('#services').on('change', function () {
                 selectedService = $(this).val();
                 console.log("checking ...", selectedService)
             });
 
             // When the service-category dropdown value changes
-            $('#service_category').on('change', function () {
-                category_name = $(this).val();
-                console.log("category name: " + category_name + "service name:" + selectedService)
-                // var category_name = "LEPROSY TREATMENT";
+            {{--$('#service_category').on('change', function () {--}}
+            {{--    category_name = $(this).val();--}}
+            {{--    console.log("category name: " + category_name + "service name:" + selectedService)--}}
+            {{--    // var category_name = "LEPROSY TREATMENT";--}}
 
-                axios.get('{{ url('api/service_category/get_services') }}', {
-                    params: {
-                        category_name: category_name
-                    }
-                })
-                    .then(function (response) {
-                        // console.log(response)
+            {{--    axios.get('{{ url('api/service_category/get_services') }}', {--}}
+            {{--        params: {--}}
+            {{--            category_name: category_name--}}
+            {{--        }--}}
+            {{--    })--}}
+            {{--        .then(function (response) {--}}
+            {{--            // console.log(response)--}}
 
-                        var services = response.data;
-                        var serviceDropdown = $('#service');
+            {{--            var services = response.data;--}}
+            {{--            var serviceDropdown = $('#service');--}}
 
-                        // Clear the current options in the second dropdown
-                        serviceDropdown.empty();
+            {{--            // Clear the current options in the second dropdown--}}
+            {{--            serviceDropdown.empty();--}}
 
-                        // Add the new options based on the response
-                        if (services.length > 0) {
-                            serviceDropdown.append('<option value="">-- Select Service --</option>');
-                            $.each(services, function (index, service) {
-                                serviceDropdown.append('<option value="' + service.name + '">' + service.name + '</option>');
-                            });
-                        } else {
-                            serviceDropdown.append('<option value="">-- No services available --</option>');
-                        }
-                    })
-                    .catch(function (error) {
-                        // console.log(error);
-                    });
-            });
+            {{--            // Add the new options based on the response--}}
+            {{--            if (services.length > 0) {--}}
+            {{--                serviceDropdown.append('<option value="">-- Select Service --</option>');--}}
+            {{--                $.each(services, function (index, service) {--}}
+            {{--                    serviceDropdown.append('<option value="' + service.name + '">' + service.name + '</option>');--}}
+            {{--                });--}}
+            {{--            } else {--}}
+            {{--                serviceDropdown.append('<option value="">-- No services available --</option>');--}}
+            {{--            }--}}
+            {{--        })--}}
+            {{--        .catch(function (error) {--}}
+            {{--            // console.log(error);--}}
+            {{--        });--}}
+            {{--});--}}
 
 
             $('#search_button').on('click', function () {
@@ -203,7 +216,9 @@
                         .then(function (response) {
                             console.log("inside response")
                             const facilities = response.data;
-                            console.log(facilities[3].results[0].code)
+                            console.log("inside response facilities", facilities)
+
+                            // console.log(facilities[3].results[0].code)
                             let facilitiesHtml = '';
                             // console.log(facilities[0].results[0].name)
 
@@ -211,7 +226,7 @@
                                 facilitiesHtml += '<div class="col-md-12"><p>No facilities found for this service.</p></div>';
                             }
                             for (var i = 0; i < facilities.length; i++) {
-                                var facilityData = facilities[i]?.results[0];
+                                var facilityData = facilities[i]?.results[i];
 
                                 facilitiesHtml += '<div class="col-md-4">' +
                                     '<div class="card mb-4 box-shadow">' +
@@ -290,4 +305,6 @@
 
 
 </div>
+
+
 @endsection

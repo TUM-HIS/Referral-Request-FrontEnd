@@ -15,7 +15,7 @@ class KMHFLService
     }
 
     public function facilitiesFromServiceId($serviceId){
-        $response = $this->facilityIdsFromService();
+        $response = $this->facilityIdsFromService($serviceId);
        $results = $response['results'];
 
         $facilities = [];
@@ -38,7 +38,7 @@ class KMHFLService
         ])
             ->get('http://api.kmhfltest.health.go.ke/api/facilities/facilities', [
                 'format' => 'json',
-//                'id' => $facilityId,
+                'id' => $facilityId,
                 'county_name' => 'Mombasa'
             ]);
 
@@ -53,13 +53,14 @@ class KMHFLService
     }
 
 
-    public function facilityIdsFromService(){
+    public function facilityIdsFromService($serviceId){
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$this->mykmhflkey,
         ])
             ->get('http://api.kmhfltest.health.go.ke/api/facilities/facility_services', [
                 'format' => 'json',
-                'service' => '368c963a-b8de-461b-aa82-5ee1b0c0e391',
+//                'service' => $serviceId,
+                'service' => 'd9703f2f-2c5e-48a1-8b88-679796e4fea5',
             ]);
 
         if ($response->failed()) {

@@ -105,12 +105,17 @@
                 <div class=" pb-1">
                     <label for="reasonReferral">Reason for Referral</label>
                     <select id="reasonReferral" name="reasonReferral" class="form-control" required>
-                        <!-- Add an empty option for the placeholder -->
+
                         <option>--- Select reason for referral ---</option>
-                        <!-- Populate diagnosis options dynamically using coded concepts -->
-                        @foreach($diagnosis as $reason)
-                            <option value="{{ $reason->id }}">{{ $reason->{'from concept name'} }}</option>
-                        @endforeach
+                        <option value="1">Equipment</option>
+                        <option value="2">Expertise</option>
+                        <option value="3">Out of scope Service</option>
+{{--                        <!-- Add an empty option for the placeholder -->--}}
+{{--                        <option>--- Select reason for referral ---</option>--}}
+{{--                        <!-- Populate diagnosis options dynamically using coded concepts -->--}}
+{{--                        @foreach($diagnosis as $reason)--}}
+{{--                            <option value="{{ $reason->id }}">{{ $reason->{'from concept name'} }}</option>--}}
+{{--                        @endforeach--}}
                     </select>
                     <script>
                         $(document).ready(function() {
@@ -127,8 +132,8 @@
                     <select id="priorityLevel" name="priorityLevel" class="form-control">
                         <option value="">--- Select Priority Level ---</option>
                         <option value="stat">Emergency</option>
-                        <option value="asap">Critical</option>
-                        <option value="urgent">Urgent</option>
+{{--                        <option value="asap">Critical</option>--}}
+{{--                        <option value="urgent">Urgent</option>--}}
                         <option value="routine">Routine</option>
                     </select>
                 </div>

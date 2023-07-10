@@ -26,8 +26,10 @@ class MflController extends Controller
         return response()->json($services);
     }
 
-    public function tokenGenerator(){
 
+
+
+    public function tokenGenerator(){
          $token =  KmhflTokenGenerator::tokenGenerator();
          return $token;
     }

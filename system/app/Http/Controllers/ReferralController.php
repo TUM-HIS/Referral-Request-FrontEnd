@@ -25,23 +25,30 @@ class ReferralController extends Controller
         $activeTab = $tab; // Store the active tab to determine which tab should be marked as active
 
         $diagnosis = Mappings::select('id', 'from concept name')->get();
-        $serviceCategories = ServiceCategory::all();
+
 
 
         if ($tab === 'tab1') {
             $patientId = request()->input('patientId');
 
-            $patientDetails = Patient::where('id', $patientId)->first();
+            if($patientId == null){
+                return redirect()->route('referrals.worklist')->with('error', 'No patient selected');
+            }
 
-//            return $patientDetails;
+            $patientDetails = Patient::where('id', $patientId)->first();
 
             return view('referrals.referralProcess.tabs.tab1',
                 compact('activeTab'))->with(['patient' => $patientDetails,
                 'diagnosis' => $diagnosis]);
 
         } elseif ($tab === 'tab2') {
+            $serviceCategories = ServiceCategory::all();
+            $services = Service::all();
 
             $referralId = request()->input('referralId');
+            if($referralId == null){
+                return redirect()->route('referrals.worklist')->with('error', 'No patient selected');
+            }
 
             $referral = Referral::where('id', $referralId)->first();
             if ($referral == null){
@@ -55,11 +62,15 @@ class ReferralController extends Controller
 
             return view('referrals.referralProcess.tabs.tab2',
                 compact('activeTab'))->with(['patient' => $patientDetails,
-            'serviceCategories' => $serviceCategories,
+            'serviceCategories' => $serviceCategories, 'services' => $services,
                 'referralId' => $referralId]);
 
         } elseif ($tab === 'tab3') {
             $referralId =request()->input('referralId');
+
+            if($referralId == null){
+                return redirect()->route('referrals.worklist')->with('error', 'No patient selected');
+            }
 
 //            return $referralId;
             $referral = Referral::where('id', $referralId)->first();
