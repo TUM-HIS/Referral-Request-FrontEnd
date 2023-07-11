@@ -47,7 +47,7 @@ class KMHFLService
                 'id' => $facilityId,
 //                'owner_type' => "6a833136-5f50-46d9-b1f9-5f961a42249f",
                 'owner_type' => $ownerType,
-                'county_name' => 'Mombasa'
+                'county_name' => 'Nairobi'
             ]);
 
         if ($kmhflResponse->failed()) {

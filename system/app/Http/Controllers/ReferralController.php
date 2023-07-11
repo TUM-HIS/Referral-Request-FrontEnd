@@ -94,14 +94,16 @@ class ReferralController extends Controller
                 $userFacility = $user->userFacility;
 
                 $facility = m_f_l_s::where('Code', $referral->referredFacility)->first();
-                $notification = new ReferralRequestSent($referralId, $userFacility->Code, "Referral Request");
-
-                Notification::send($facility, $notification);
-                return Redirect::route('referral.outgoing')->with('success', 'Referral Request Submitted successfully');
+//                $notification = new ReferralRequestSent($referralId, $userFacility->Code, "Referral Request");
+//
+//                Notification::send($facility, $notification);
+//                return Redirect::route('referral.outgoing')->with('success', 'Referral Request Submitted successfully');
+                return view('referrals.referralProcess.tabs.tab3',
+                    compact('activeTab'))->with(['patient' => $patientDetails, 'referral' => $referral]);
 
             }
-            return view('referrals.referralProcess.tabs.tab3',
-                compact('activeTab'))->with(['patient' => $patientDetails, 'referral' => $referral]);
+//            return view('referrals.referralProcess.tabs.tab3',
+//                compact('activeTab'))->with(['patient' => $patientDetails, 'referral' => $referral]);
 
         }
     }
