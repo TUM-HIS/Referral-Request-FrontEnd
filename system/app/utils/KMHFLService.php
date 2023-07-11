@@ -14,7 +14,7 @@ class KMHFLService
 
     }
 
-    public function facilitiesFromServiceId($serviceId){
+    public function facilitiesFromServiceId($serviceId, $ownerName){
         $response = $this->facilityIdsFromService($serviceId);
        $results = $response['results'];
 
@@ -23,7 +23,7 @@ class KMHFLService
         foreach ($results as $item) {
             $facilityId = $item['facility'];
             // Use the facility ID to fetch facility information
-            $facilityInfo = $this->facilitiesFromFacilityIds($facilityId);
+            $facilityInfo = $this->facilitiesFromFacilityIds($facilityId, $ownerName);
             $facilities[] = $facilityInfo;
             $facilityIds = $facilityId;
         }
@@ -32,21 +32,30 @@ class KMHFLService
     }
 
 
-    public function facilitiesFromFacilityIds($facilityId){
-        $response = Http::withHeaders([
+    public function facilitiesFromFacilityIds($facilityId, $ownerName){
+        $ownerType = null;
+        if($ownerName == "Ministry of Health"){
+            $ownerType = "6a833136-5f50-46d9-b1f9-5f961a42249f";
+        }else{
+            $ownerType = "d9a0ce65-baeb-4f3b-81e3-083a24403e92";
+        }
+        $kmhflResponse = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->mykmhflkey,
         ])
             ->get('http://api.kmhfltest.health.go.ke/api/facilities/facilities', [
                 'format' => 'json',
                 'id' => $facilityId,
+//                'owner_type' => "6a833136-5f50-46d9-b1f9-5f961a42249f",
+                'owner_type' => $ownerType,
                 'county_name' => 'Mombasa'
             ]);
 
-        if ($response->failed()) {
-            $error = $response->body();
+        if ($kmhflResponse->failed()) {
+            $error = $kmhflResponse->body();
             // Handle the error
         } else {
-            $jsonResponse = $response->json();
+            $jsonResponse = $kmhflResponse->json();
+//            $jsonResponse = $kmhflResponse;
             return $jsonResponse;
         }
 

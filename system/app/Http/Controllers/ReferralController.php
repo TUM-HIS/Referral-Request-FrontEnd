@@ -65,6 +65,11 @@ class ReferralController extends Controller
             'serviceCategories' => $serviceCategories, 'services' => $services,
                 'referralId' => $referralId]);
 
+//            return view('referrals.referralProcess.tabs.tab2',
+//                compact('activeTab'))->with(['patient' => $patientDetails,
+//            'serviceCategories' => $serviceCategories, 'services' => $services,
+//                'referralId' => $referralId]);
+
         } elseif ($tab === 'tab3') {
             $referralId =request()->input('referralId');
 

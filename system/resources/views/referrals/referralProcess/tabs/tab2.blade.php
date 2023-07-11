@@ -7,6 +7,8 @@
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" defer></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+
 @section('tab-content')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="tab-pane {{ $activeTab === 'tab2' ? 'active' : '' }}" id="tab2" role="tabpanel">
@@ -70,7 +72,7 @@
 {{--                    </div>--}}
 
 {{--@dd($services[0]->name)--}}
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <form class="my-5 ">
                             {{-- Service category dropdown --}}
                             <div class="form-group">
@@ -80,17 +82,35 @@
                                     @foreach($services as $service)
                                         <option value="{{ $service->id }}">{{ $service->name }}</option>
                                     @endforeach
+
+                                    <script>
+                                        $(document).ready(function() {
+                                            // Initialize Select2
+                                            $('#services').select2({
+                                                placeholder: 'Type a SERVICE to search...'
+                                            });
+                                        });
+                                    </script>
+                                </select>
+
+                            </div>
+
+                        </form>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <form class="my-5 ">
+                            <div class="form-group">
+                                <label for="facilityOwner">Facility Type</label>
+                                <select id="facilityOwner" name="facilityOwner" class="form-control" required>
+                                    <option>--- Select Type of Facility ---</option>
+                                    <option value="Ministry of Health">Ministry of Health</option>
+                                    <option value="Private Practice">Private Practice</option>
                                 </select>
                             </div>
-                            <script>
-                                $(document).ready(function() {
-                                    // Initialize Select2
-                                    $('#services').select2({
-                                        placeholder: 'Type a SERVICE to search...'
-                                    });
-                                });
-                            </script>
                         </form>
+
                     </div>
 
 {{--                    <div class="col-md-6">--}}
@@ -158,10 +178,16 @@
         $(document).ready(function () {
             var selectedService = null;
             var category_name = null
+            var facilityOwner = null
             // When the service dropdown value changes
             $('#services').on('change', function () {
                 selectedService = $(this).val();
                 console.log("checking ...", selectedService)
+            });
+
+            $('#facilityOwner').on('change', function () {
+                facilityOwner = $(this).val();
+                console.log("checking owner...", facilityOwner)
             });
 
             // When the service-category dropdown value changes
@@ -210,7 +236,8 @@
                 if (selectedService) {
                     axios.get('{{ url('api/kmhfl/facility/facility_services') }}', {
                         params: {
-                            service_id: selectedService
+                            service_id: selectedService,
+                            owner_name: facilityOwner
                         }
                     })
                         .then(function (response) {
@@ -226,15 +253,17 @@
                                 facilitiesHtml += '<div class="col-md-12"><p>No facilities found for this service.</p></div>';
                             }
                             for (var i = 0; i < facilities.length; i++) {
-                                var facilityData = facilities[i]?.results[i];
+                                var facilityData = facilities[i]?.results[0];
 
                                 facilitiesHtml += '<div class="col-md-4">' +
                                     '<div class="card mb-4 box-shadow">' +
                                     '<div class="card-body">' +
                                     '<h5 class="card-title">' + (facilities[i]?.results[0]?.code || 'null') + ' - ' + (facilities[i]?.results[0]?.name || 'null') + '</h5>' +
                                     '<h5 class="">No. of Beds: ' + (facilities[i]?.results[0]?.number_of_beds || 'null') + '</h5>' +
-                                    '<h5 class="">No. of ICU Beds:' + (facilities[i]?.results[0]?.number_of_icu_beds || 'null') + '</h5>' +
-                                    '<button class="btn btn-primary select-facility-btn rounded-pill" data-facility-code="' + facilities[i]?.results[0]?.code + '">Select</button>' +
+                                    '<h5 class="">No. of ICU Beds:  ' + (facilities[i]?.results[0]?.number_of_icu_beds || 'null') + '</h5>' +
+                                    '<h5 class="">Owner:  ' + (facilityData?.owner_name || 'null') + '</h5>' +
+                                    '<h5 class="">County:  ' + (facilityData?.county || 'null') + '</h5>' +
+                                    '<br><button class="btn btn-primary select-facility-btn rounded-pill" data-facility-code="' + facilities[i]?.results[0]?.code + '">Select</button>' +
                                     '</div>' +
                                     '</div>' +
                                     '</div>';
