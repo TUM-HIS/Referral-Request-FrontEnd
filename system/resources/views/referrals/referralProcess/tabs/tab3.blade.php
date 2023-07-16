@@ -1,5 +1,5 @@
 <!-- tab1.blade.php -->
-@extends('referrals.referralProcess.layout.referral-tabs-layout')
+{{--@extends('referrals.referralProcess.layout.referral-tabs-layout')--}}
 
 @section('tab-content')
 <div class="tab-pane {{ $activeTab === 'tab3' ? 'active' : '' }}" id="tab3" role="tabpanel">
@@ -7,7 +7,7 @@
 
     <h2 class="accordion-header" id="headingFour">
 
-            <h1>4. Summary</h1>
+            <h1>Summary</h1>
     </h2>
         <div class="accordion-body">
             @if($patient != null)
@@ -51,12 +51,16 @@
                         <div class="p-4">
                             <div class="pb-1">
                                 <h6 class="card-title" style="font-size: 120% !important;">Referral Details</h6>
-                                <p><strong>Referring Officer:</strong> @if($referral != null) Dr. {{ $referral->referringOfficer }} @endif </p>
-                                <p><strong>History/Investigation:</strong> <span id="summary-historyInvestigation"></span></p>
-                                <p><strong>Diagnosis:</strong> <span id="summary-diagnosis"></span></p>
-                                <p><strong>Reason for referral:</strong> <span id="summary-reasonReferral"></span></p>
-                                <p><strong>Attachments:</strong> <span id="summary-formFileMultiple"></span></p>
-                                <p><strong>Additional Notes:</strong> <span id="summary-additionalNotes"></span></p>
+                                <p>Referring Officer: <span class="fs-5"> @if($referral != null) <strong>Dr. {{ $referral->referringOfficer }}</strong> @endif </span></p>
+                                <p>History/Investigation: <span class="fs-5" id="summary-historyInvestigation"><strong>{{ $referral->historyInvestigation }}</strong></span></p>
+                                <p>Diagnosis: <span class="fs-5" id="summary-diagnosis">
+                                        @dd($referral->kmhflConcepts)
+                                        {{$referral->kmhflConcepts}}
+{{--                                        <strong>{{ $referral }}</strong>--}}
+                                    </span></p>
+                                <p>Reason for referral: <span class="fs-5" id="summary-reasonReferral"><strong>{{ $referral->reasonReferral }}</strong></span></p>
+                                <p>Attachments: <span class="fs-5" id="summary-formFileMultiple"><strong>{{ $referral->attachments }}</strong></span></p>
+                                <p>Additional Notes: <span class="fs-5" id="summary-additionalNotes"><strong>{{ $referral->additionalNotes }}</strong></span></p>
                             </div>
                         </div>
                     </div>
@@ -66,12 +70,12 @@
                         <div class="p-4">
                             <div class="pb-1">
                                 <h6 class="card-title" style="font-size: 120% !important;">Service Details</h6>
-                                <p><strong>Priority Level:</strong> <span id="summary-priorityLevel"></span></p>
-                                <p><strong>Service Category:</strong> <span id="summary-serviceCategory"></span></p>
-                                <p><strong>Service:</strong> <span id="summary-service"></span></p>
-                                <p><strong>Facility:</strong> <span id="summary-facility"></span></p>
-                                <p><strong>Approximate Distance:</strong> <span id="summary-distance"></span></p>
-                                <p><strong>Additional Notes:</strong> <span id="summary-serviceNotes"></span></p>
+                                <p>Priority Level: <span class="fs-5" id="summary-priorityLevel"><strong>{{ ucfirst($referral->priorityLevel) }}</strong></span></p>
+                                <p>Service Category: <span class="fs-5" id="summary-serviceCategory"><strong>{{ $referral->reasonReferral }}</strong></span></p>
+                                <p>Service: <span class="fs-5" id="summary-service"><strong>{{ $referral->service }}</strong></span></p>
+                                <p>Facility: <span class="fs-5" id="summary-facility"><strong>{{ $referral->referredFacility }}</strong></span></p>
+                                <p>Approximate Distance: <span class="fs-5" id="summary-distance"><strong>{{ $referral->distance }}</strong></span></p>
+                                <p>Additional Notes: <span class="fs-5" id="summary-serviceNotes"><strong>{{ $referral->additionalNotes }}</strong></span></p>
                                 <!-- Add more fields as needed -->
                             </div>
                         </div>

@@ -127,6 +127,7 @@
       <excludeFolder url="file://$MODULE_DIR$/system/vendor/doctrine/deprecations" />
       <excludeFolder url="file://$MODULE_DIR$/system/vendor/balping/json-raw-encoder" />
       <excludeFolder url="file://$MODULE_DIR$/system/vendor/consoletvs/charts" />
+      <excludeFolder url="file://$MODULE_DIR$/system/vendor/africastalking/africastalking" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -134,5 +135,10 @@
     <orderEntry type="library" name="select2" level="application" />
     <orderEntry type="library" name="Chart.js" level="application" />
     <orderEntry type="library" name="highcharts" level="application" />
+    <orderEntry type="library" name="jquery-3.4.1" level="application" />
+    <orderEntry type="library" name="popper.js" level="application" />
+    <orderEntry type="library" name="chart.js" level="application" />
+    <orderEntry type="library" name="jquery-3.6.0" level="application" />
+    <orderEntry type="library" name="axios" level="application" />
   </component>
 </module>

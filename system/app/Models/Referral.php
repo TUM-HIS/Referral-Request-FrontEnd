@@ -43,4 +43,9 @@ class Referral extends Model
     {
         return $this->belongsTo(Patient::class, 'clientUPI', 'upi');
     }
+
+    public function kmhflConcepts()
+    {
+        return $this->belongsTo(Mappings::class, 'diagnosis', 'from concept name');
+    }
 }

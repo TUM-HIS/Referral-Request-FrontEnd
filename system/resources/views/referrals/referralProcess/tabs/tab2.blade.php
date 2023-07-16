@@ -15,7 +15,7 @@
 
 
 
-    <h1>3. Facility Selection</h1>
+    <h1>Facility Selection</h1>
     <div class="">
         <div class="card">
             <fieldset class="p-4">
