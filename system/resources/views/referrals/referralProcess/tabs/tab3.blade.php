@@ -1,5 +1,5 @@
 <!-- tab1.blade.php -->
-{{--@extends('referrals.referralProcess.layout.referral-tabs-layout')--}}
+@extends('referrals.referralProcess.layout.referral-tabs-layout')
 
 @section('tab-content')
 <div class="tab-pane {{ $activeTab === 'tab3' ? 'active' : '' }}" id="tab3" role="tabpanel">
@@ -51,11 +51,11 @@
                         <div class="p-4">
                             <div class="pb-1">
                                 <h6 class="card-title" style="font-size: 120% !important;">Referral Details</h6>
-                                <p>Referring Officer: <span class="fs-5"> @if($referral != null) <strong>Dr. {{ $referral->referringOfficer }}</strong> @endif </span></p>
+                                <p>Referring Officer: <span class="fs-5"> @if($referral != null) <strong> {{ $referral->referringOfficer }}</strong> @endif </span></p>
                                 <p>History/Investigation: <span class="fs-5" id="summary-historyInvestigation"><strong>{{ $referral->historyInvestigation }}</strong></span></p>
                                 <p>Diagnosis: <span class="fs-5" id="summary-diagnosis">
-                                        @dd($referral->kmhflConcepts)
-                                        {{$referral->kmhflConcepts}}
+{{--                                        @dd($referral->referredFacility)--}}
+                                        <strong>{{$referral->diagnosis}}</strong>
 {{--                                        <strong>{{ $referral }}</strong>--}}
                                     </span></p>
                                 <p>Reason for referral: <span class="fs-5" id="summary-reasonReferral"><strong>{{ $referral->reasonReferral }}</strong></span></p>
@@ -76,7 +76,6 @@
                                 <p>Facility: <span class="fs-5" id="summary-facility"><strong>{{ $referral->referredFacility }}</strong></span></p>
                                 <p>Approximate Distance: <span class="fs-5" id="summary-distance"><strong>{{ $referral->distance }}</strong></span></p>
                                 <p>Additional Notes: <span class="fs-5" id="summary-serviceNotes"><strong>{{ $referral->additionalNotes }}</strong></span></p>
-                                <!-- Add more fields as needed -->
                             </div>
                         </div>
                     </div>
@@ -85,8 +84,21 @@
         </div>
 
     <div class="d-flex justify-content-end">
-        <button class="btn btn-primary btn-lg">complete <i class="fas fa-check ml-2"></i></button>
+        <button id="complete_button" class="btn btn-primary btn-lg">complete <i class="fas fa-check ml-2"></i></button>
     </div>
 
 </div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+
+    $(document).ready(function() {
+
+        $('#complete_button').on('click', function () {
+
+            console.log("complete clicked")
+        });
+    });
+
+</script>
 @endsection

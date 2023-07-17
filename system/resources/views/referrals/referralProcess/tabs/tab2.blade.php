@@ -48,30 +48,7 @@
 
 {{--                @dd($serviceCategories[0])--}}
                 <div class="row">
-{{--                    <div class="col-md-4">--}}
-{{--                        <form class="my-5 ">--}}
-{{--                            --}}{{-- Service category dropdown --}}
-{{--                            <div class="form-group">--}}
-{{--                                <label for="service_category">Select Service Category:</label>--}}
-{{--                                <select class="form-control" id="service_category" name="service_category">--}}
-{{--                                    <option value="">--Select Service Category--</option>--}}
-{{--                                    @foreach($serviceCategories as $serviceCategory)--}}
-{{--                                        <option value="{{ $serviceCategory->name }}">{{ $serviceCategory->name }}</option>--}}
-{{--                                    @endforeach--}}
-{{--                                </select>--}}
-{{--                            </div>--}}
-{{--                            <script>--}}
-{{--                                $(document).ready(function() {--}}
-{{--                                    // Initialize Select2--}}
-{{--                                    $('#service_category').select2({--}}
-{{--                                        placeholder: 'Type to search...'--}}
-{{--                                    });--}}
-{{--                                });--}}
-{{--                            </script>--}}
-{{--                        </form>--}}
-{{--                    </div>--}}
 
-{{--@dd($services[0]->name)--}}
                     <div class="col-md-6">
                         <form class="my-5 ">
                             {{-- Service category dropdown --}}
@@ -112,17 +89,6 @@
                         </form>
 
                     </div>
-
-{{--                    <div class="col-md-6">--}}
-{{--                        <form class="my-5 ">--}}
-{{--                            --}}{{-- Facility dropdown --}}
-{{--                            <div class="form-group position-relative">--}}
-{{--                                <label for="facility">Select Facility:</label>--}}
-{{--                                <select class="form-control" id="facility" name="facility">--}}
-{{--                                </select>--}}
-{{--                            </div>--}}
-{{--                        </form>--}}
-{{--                    </div>--}}
 
                     <div class="col-md-2 d-flex  align-items-center">
                         <button id="search_button" class="btn btn-primary my-5">Search</button>
@@ -190,41 +156,6 @@
                 console.log("checking owner...", facilityOwner)
             });
 
-            // When the service-category dropdown value changes
-            {{--$('#service_category').on('change', function () {--}}
-            {{--    category_name = $(this).val();--}}
-            {{--    console.log("category name: " + category_name + "service name:" + selectedService)--}}
-            {{--    // var category_name = "LEPROSY TREATMENT";--}}
-
-            {{--    axios.get('{{ url('api/service_category/get_services') }}', {--}}
-            {{--        params: {--}}
-            {{--            category_name: category_name--}}
-            {{--        }--}}
-            {{--    })--}}
-            {{--        .then(function (response) {--}}
-            {{--            // console.log(response)--}}
-
-            {{--            var services = response.data;--}}
-            {{--            var serviceDropdown = $('#service');--}}
-
-            {{--            // Clear the current options in the second dropdown--}}
-            {{--            serviceDropdown.empty();--}}
-
-            {{--            // Add the new options based on the response--}}
-            {{--            if (services.length > 0) {--}}
-            {{--                serviceDropdown.append('<option value="">-- Select Service --</option>');--}}
-            {{--                $.each(services, function (index, service) {--}}
-            {{--                    serviceDropdown.append('<option value="' + service.name + '">' + service.name + '</option>');--}}
-            {{--                });--}}
-            {{--            } else {--}}
-            {{--                serviceDropdown.append('<option value="">-- No services available --</option>');--}}
-            {{--            }--}}
-            {{--        })--}}
-            {{--        .catch(function (error) {--}}
-            {{--            // console.log(error);--}}
-            {{--        });--}}
-            {{--});--}}
-
 
             $('#search_button').on('click', function () {
                 $('#spinnerContainer').show();
@@ -289,8 +220,6 @@
                 console.log("inside facility: ")
                 const facilityCode = $(this).data('facility-code');
 
-
-
                 console.log(facilityCode)
                 var serviceCategory = category_name;
                 var service = selectedService;
@@ -332,8 +261,6 @@
 
     </script>
 
-
-</div>
 
 
 @endsection

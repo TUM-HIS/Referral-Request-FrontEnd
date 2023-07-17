@@ -25,7 +25,8 @@ class Referral extends Model
         'distance',
         'serviceNotes',
         'referralId',
-        'submitReferral'
+        'submitReferral',
+        'referring_facility_id'
     ];
 
 
