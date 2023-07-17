@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\services;
+namespace App\Http\Controllers\api\services;
 
 use App\Http\Controllers\Controller;
 use App\Services\AfricasTalking\Sms\SmsService;
@@ -28,8 +28,11 @@ class SmsController extends Controller
     public function sendSms(Request $request)
     {
         //receiving recipients as a String and the message curated.
-        $recipients = $request->input('recipients');
-        $message = $request->input('message');
+//        $recipients = $request->input('recipients');
+//        $message = $request->input('message');
+        $message = "message from Kenya Referral System";
+
+        $recipients = "+254708392326";
 
 
         $result = $this->smsService->sendSms(1, $recipients, $message);

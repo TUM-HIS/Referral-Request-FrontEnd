@@ -96,9 +96,25 @@
 
         $('#complete_button').on('click', function () {
 
-            console.log("complete clicked")
+            // console.log("complete clicked")
+
+            $.ajax({
+                url: '{{ url('api/sms/referral_sms') }}',
+                type: 'POST',
+                data: '',
+                success: function (response) {
+                    console.log("inside respopnse "+response.success);
+                    {{--var url = '{{ route('referral.tabs', ['tab' => 'tab2']) }}';--}}
+                    {{--url += '?referralId=' + referralId;--}}
+                    {{--window.location.href = '{{ route('referral.tabs', ['tab' => 'tab2']) }}';--}}
+                    {{--    window.location.href = url;--}}
+                },
+
+                error: function (error) {
+                    console.log(error);
+                }
+            });
         });
     });
-
 </script>
 @endsection

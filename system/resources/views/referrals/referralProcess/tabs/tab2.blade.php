@@ -250,8 +250,6 @@
                 error: function(error) {
                     console.log(error);
                 }
-
-
                 });
 
             });

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\ReferralTabController;
+use App\Http\Controllers\api\services\SmsController;
 use App\Http\Controllers\MflController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,5 +29,8 @@ Route::get('/kmhfl/token/generator', [MflController::class, 'tokenGenerator'])->
 //saving tab data
 Route::post('/referral/save/tab1', [ReferralTabController::class, 'saveTab1Data']);
 Route::post('/referral/save/tab2', [ReferralTabController::class, 'saveTab2Data']);
+
+//sms sending
+Route::post('/sms/referral_sms', [SmsController::class, 'sendSms']);
 
 
