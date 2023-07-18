@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Http\Controllers\api\services\SmsController;
 use App\Http\Controllers\Controller;
 use App\Models\Referral;
 use App\Models\User;
+use App\Services\AfricasTalking\Sms\SmsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ReferralTabController extends Controller
 {
-
 
 
 
@@ -65,6 +66,25 @@ class ReferralTabController extends Controller
             ['success' => true,
                 'referralId' => $referralId]
         );
+
+    }
+
+
+    protected SmsService $smsService;
+    function saveTab3Data(Request $request){
+        $this->smsService  = new SmsService();
+
+        $message = "message from Kenya Referral System";
+
+        $recipients = "+254708392326";
+
+        $result = $this->smsService->sendSms(1, $recipients, $message);
+
+        return response()->json($result);
+
+//        return response()->json(
+//            ['success' => true]
+//        );
 
     }
 }
