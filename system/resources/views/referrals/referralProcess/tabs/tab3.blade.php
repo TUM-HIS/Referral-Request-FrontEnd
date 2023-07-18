@@ -96,12 +96,23 @@
 
         $('#complete_button').on('click', function () {
 
+            let referringFacilityId = "{{ $referral->referring_facility_id }}";
+            let referredFacilityCode =  "{{ $referral->referredFacility }}";
+            let referralId = "{{ $referral->id }}"
+            console.log(referringFacilityId)
+
             // console.log("complete clicked")
+            // Create an object with the data
+            let formData = {
+                referringFacilityCode : referringFacilityId,
+                referredFacilityCode : referredFacilityCode,
+                referralId: referralId
+            };
 
             $.ajax({
                 url: '{{ url('api/referral/save/tab3') }}',
                 type: 'POST',
-                data: '',
+                data: formData,
                 dataType: 'json',
                 success: function (response) {
                     console.log(response)
@@ -110,10 +121,6 @@
                         let url = '{{ route('referral.tabs', ['tab' => 'tab4']) }}';
                         window.location.href = url;
                     }
-
-
-
-
                 },
 
                 error: function (error) {

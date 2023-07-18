@@ -96,6 +96,49 @@
                 </div>
 
 
+                <div class="col-xxl-6 col-md-4">
+                    <div class="card">
+                        <div class="p-4">
+                            <div class="pb-1">
+                                <label for="facility">Facility</label>
+                                <select id="facility" name="facility" class="form-control">
+                                    <option>--- Select Medical Facility ---</option>
+                                    @foreach($facilities as $facility)
+                                        <option value="{{ $facility->Code }}">{{$facility->Code}} - {{ $facility->Officialname }}</option>
+                                    @endforeach
+                                </select>
+                                <span class="col-md-2 d-flex  align-items-center">
+                                    <button id="refer_button" class="btn btn-primary my-5">Refer</button>
+                                </span>
+
+
+                                <script>
+                                    $(document).ready(function() {
+                                        // Initialize Select2
+                                        $('#facility').select2({
+                                            placeholder: 'Type to search...',
+                                            minimumInputLength: 3 // Minimum number of characters to trigger the autocomplete
+                                        });
+
+                                        // Initially disable the button
+                                        $('#refer_button').addClass('disabled');
+
+
+
+
+
+                                    });
+                                </script>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
                 <div class="row" id="facilities">
 
                     <div id="spinnerContainer">
@@ -143,6 +186,7 @@
     <script>
         $(document).ready(function () {
             var selectedService = null;
+            var selectedFacility = null;
             var category_name = null
             var facilityOwner = null
             // When the service dropdown value changes
@@ -155,6 +199,80 @@
                 facilityOwner = $(this).val();
                 console.log("checking owner...", facilityOwner)
             });
+
+            // Initially disable the button
+            $('#search_button').addClass('disabled');
+
+            // Enable the button when a facility is selected
+            $('#services').on('change', function() {
+                if ($(this).val() !== "") {
+                    $('#search_button').removeClass('disabled');
+                } else {
+                    $('#search_button').addClass('disabled');
+                }
+            });
+
+
+
+            // Enable the button when a facility is selected
+            $('#facility').on('change', function() {
+                if ($(this).val() !== "") {
+                    selectedFacility = $(this).val();
+                    $('#refer_button').removeClass('disabled');
+                } else {
+                    $('#refer_button').addClass('disabled');
+                }
+            });
+
+
+            $('#refer_button').on('click', function () {
+                console.log("inside refer button")
+                console.log("checking ...", selectedFacility)
+                const facilityCode = selectedFacility;
+
+
+                var referralId = {!! json_encode($referralId) !!};
+                console.log("inside facility: ")
+                // const facilityCode = $(this).data('facility-code');
+
+                console.log(facilityCode)
+                var serviceCategory = category_name;
+                var service = selectedService;
+                var referredFacility = $('#diagnosis').val();
+
+                // Create an object with the data
+                var formData = {
+                    serviceCategory : category_name,
+                    service: selectedService,
+                    referredFacilityCode: facilityCode,
+                    referralId: referralId
+                };
+
+                $.ajax({
+                    url: '{{ url('api/referral/save/tab2') }}',
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+
+                        var referralId = response.referralId;
+                        var referralSuccess = response.success;
+
+                        console.log("response : "+referralId)
+                        var url = '{{ route('referral.tabs', ['tab' => 'tab3']) }}';
+                        url += '?referralId=' + referralId;
+                        window.location.href = url;
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+
+            });
+
+
+
+
+            // })
 
 
             $('#search_button').on('click', function () {

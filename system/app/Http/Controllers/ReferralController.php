@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-//use ;
 use App\Models\m_f_l_s;
 use App\Models\Service;
 use App\Models\ServiceCategory;
@@ -44,6 +42,7 @@ class ReferralController extends Controller
         } elseif ($tab === 'tab2') {
             $serviceCategories = ServiceCategory::all();
             $services = Service::all();
+            $facilities = m_f_l_s::all();
 
             $referralId = request()->input('referralId');
             if($referralId == null){
@@ -63,7 +62,7 @@ class ReferralController extends Controller
             return view('referrals.referralProcess.tabs.tab2',
                 compact('activeTab'))->with(['patient' => $patientDetails,
             'serviceCategories' => $serviceCategories, 'services' => $services,
-                'referralId' => $referralId]);
+                'referralId' => $referralId, 'facilities' => $facilities]);
 
         } elseif ($tab === 'tab3') {
             $referralId =request()->input('referralId');
@@ -74,13 +73,11 @@ class ReferralController extends Controller
             $referral = Referral::where('id', $referralId)->first();
             if ($referral == null){
                 $patientDetails = [];
-
+                return redirect()->route('referrals.worklist')->with('error', 'No patient selected');
             }else {
 
                 $patientUpi = $referral->clientUPI;
                 $patientDetails = Patient::where('upi', $patientUpi)->first();
-
-
                 $referralId = $referral->id;
 
                 $user = Auth::user();
