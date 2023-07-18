@@ -85,9 +85,10 @@
                         });
                     </script>
                 </div>
+                <br>
 
                 <div class=" pb-1">
-                    <label for="diagnosis">Diagnosis</label>
+                    <label for="diagnosis">Diagnosis<span class="required" style="color: red">*</span></label>
                     <select id="diagnosis" name="diagnosis" class="form-control" required>
                         <option>--- Select Diagnosis details ---</option>
                         <!-- Populate diagnosis options dynamically using coded concepts -->
@@ -105,21 +106,16 @@
                         });
                     </script>
                 </div>
+                <br>
 
                 <div class=" pb-1">
-                    <label for="reasonReferral">Reason for Referral</label>
+                    <label for="reasonReferral">Reason for Referral<span class="required" style="color: red">*</span></label>
                     <select id="reasonReferral" name="reasonReferral" class="form-control" required>
 
                         <option>--- Select reason for referral ---</option>
                         <option value="Equipment">Equipment</option>
                         <option value="Expertise">Expertise</option>
                         <option value="Out of scope Service">Out of scope Service</option>
-{{--                        <!-- Add an empty option for the placeholder -->--}}
-{{--                        <option>--- Select reason for referral ---</option>--}}
-{{--                        <!-- Populate diagnosis options dynamically using coded concepts -->--}}
-{{--                        @foreach($diagnosis as $reason)--}}
-{{--                            <option value="{{ $reason->id }}">{{ $reason->{'from concept name'} }}</option>--}}
-{{--                        @endforeach--}}
                     </select>
                     <script>
                         $(document).ready(function() {
@@ -131,21 +127,22 @@
                         });
                     </script>
                 </div>
+                <br>
                 <div class=" pb-1">
-                    <label for="priorityLevel">Priority Level</label>
+                    <label for="priorityLevel">Priority Level<span class="required" style="color: red">*</span></label>
                     <select id="priorityLevel" name="priorityLevel" class="form-control">
                         <option value="">--- Select Priority Level ---</option>
                         <option value="stat">Emergency</option>
-{{--                        <option value="asap">Critical</option>--}}
-{{--                        <option value="urgent">Urgent</option>--}}
                         <option value="routine">Routine</option>
                     </select>
                 </div>
+                <br>
 
                 <div class=" pb-1">
                     <label for="formFileMultiple">Attachments</label>
                     <input type="file" class="form-control" id="formFileMultiple" multiple placeholder='File Attachments'>
                 </div>
+                <br>
 
                 <div class=" pb-1">
                     <label for="additionalNotes">Additional Notes</label>
