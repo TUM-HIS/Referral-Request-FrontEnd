@@ -81,8 +81,6 @@
                                             {{ $referralRequest->status }}
                                         </p>
                                     </td>
-                                    {{-- <td>{{ $referralRequest->distance }}</td>
-                                    <td>{{ $referralRequest->serviceNotes }}</td> --}}
                                 </tr>
                             @endforeach
                             </tbody>

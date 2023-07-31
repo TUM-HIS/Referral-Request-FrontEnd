@@ -6,6 +6,8 @@
 {{--<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>--}}
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+
 @section('tab-content')
 <div class="tab-pane {{ $activeTab === 'tab1' ? 'active' : '' }}" id="tab1" role="tabpanel">
     <div class="accordion-item">
@@ -105,12 +107,17 @@
                 <div class=" pb-1">
                     <label for="reasonReferral">Reason for Referral</label>
                     <select id="reasonReferral" name="reasonReferral" class="form-control" required>
-                        <!-- Add an empty option for the placeholder -->
+
                         <option>--- Select reason for referral ---</option>
-                        <!-- Populate diagnosis options dynamically using coded concepts -->
-                        @foreach($diagnosis as $reason)
-                            <option value="{{ $reason->id }}">{{ $reason->{'from concept name'} }}</option>
-                        @endforeach
+                        <option value="1">Equipment</option>
+                        <option value="2">Expertise</option>
+                        <option value="3">Out of scope Service</option>
+{{--                        <!-- Add an empty option for the placeholder -->--}}
+{{--                        <option>--- Select reason for referral ---</option>--}}
+{{--                        <!-- Populate diagnosis options dynamically using coded concepts -->--}}
+{{--                        @foreach($diagnosis as $reason)--}}
+{{--                            <option value="{{ $reason->id }}">{{ $reason->{'from concept name'} }}</option>--}}
+{{--                        @endforeach--}}
                     </select>
                     <script>
                         $(document).ready(function() {
@@ -127,8 +134,8 @@
                     <select id="priorityLevel" name="priorityLevel" class="form-control">
                         <option value="">--- Select Priority Level ---</option>
                         <option value="stat">Emergency</option>
-                        <option value="asap">Critical</option>
-                        <option value="urgent">Urgent</option>
+{{--                        <option value="asap">Critical</option>--}}
+{{--                        <option value="urgent">Urgent</option>--}}
                         <option value="routine">Routine</option>
                     </select>
                 </div>
