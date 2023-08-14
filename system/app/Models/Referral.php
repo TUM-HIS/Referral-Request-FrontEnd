@@ -25,7 +25,8 @@ class Referral extends Model
         'distance',
         'serviceNotes',
         'referralId',
-        'submitReferral'
+        'submitReferral',
+        'referring_facility_id'
     ];
 
 
@@ -42,5 +43,10 @@ class Referral extends Model
     public function patientReffered()
     {
         return $this->belongsTo(Patient::class, 'clientUPI', 'upi');
+    }
+
+    public function kmhflConcepts()
+    {
+        return $this->belongsTo(Mappings::class, 'diagnosis', 'from concept name');
     }
 }

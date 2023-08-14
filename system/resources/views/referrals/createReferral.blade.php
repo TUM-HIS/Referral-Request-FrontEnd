@@ -53,56 +53,56 @@
                                                 <div class="p-4">
 
                                                     <div class="pb-1">
-                                                        <label for="clientName">Full Name</label> 
-                                                        <input type='text' class="form-control" name='clientName' placeholder="Patient's Full Name" value="{{ $patient->first_name }} {{ $patient->last_name }}"> 
+                                                        <label for="clientName">Full Name</label>
+                                                        <input type='text' class="form-control" name='clientName' placeholder="Patient's Full Name" value="{{ $patient->first_name }} {{ $patient->last_name }}">
                                                     </div>
 
                                                     <div class=" pb-1">
-                                                        <label for="clientID">Identification Number</label> 
-                                                        <input type='text' class="form-control" name='clientID' placeholder='Identification Number' value="{{ $patient->idNo }}" > 
+                                                        <label for="clientID">Identification Number</label>
+                                                        <input type='text' class="form-control" name='clientID' placeholder='Identification Number' value="{{ $patient->idNo }}" >
                                                     </div>
 
                                                     <div class=" pb-1">
-                                                        <label for="clientAge">Age</label> 
-                                                        <input type='number' class="form-control" name='clientAge' value="{{ \Carbon\Carbon::parse($patient->dob)->age }}" placeholder='Age' > 
+                                                        <label for="clientAge">Age</label>
+                                                        <input type='number' class="form-control" name='clientAge' value="{{ \Carbon\Carbon::parse($patient->dob)->age }}" placeholder='Age' >
                                                     </div>
 
                                                     <div class=" pb-1">
-                                                        <label for="clientUPI">UPI Number</label> 
-                                                        <input type='text' class="form-control" name='clientUPI' placeholder='Unique Personal Identification Number' value="{{ $patient->upi }}" > 
+                                                        <label for="clientUPI">UPI Number</label>
+                                                        <input type='text' class="form-control" name='clientUPI' placeholder='Unique Personal Identification Number' value="{{ $patient->upi }}" >
                                                     </div>
 
                                                     <div class=" pb-1">
-                                                        <label for="clientBirthCert">Birth Certificate Number</label> 
-                                                        <input type='text' class="form-control" name='clientBirthCert' placeholder='Birth Certificate Number'> 
+                                                        <label for="clientBirthCert">Birth Certificate Number</label>
+                                                        <input type='text' class="form-control" name='clientBirthCert' placeholder='Birth Certificate Number'>
                                                     </div>
 
                                                     <div class=" pb-1">
-                                                        <label for="clientTelephone">Telephone Number</label> 
-                                                        <input type='text' class="form-control" name='clientTelephone' placeholder='Telephone Number' value="{{ $patient->telephone }}" > 
+                                                        <label for="clientTelephone">Telephone Number</label>
+                                                        <input type='text' class="form-control" name='clientTelephone' placeholder='Telephone Number' value="{{ $patient->telephone }}" >
                                                     </div>
 
                                                     <div class=" pb-1">
-                                                        <label for="clientCounty">County</label> 
-                                                        <input type='text' class="form-control" name='clientCounty' placeholder='County' value="{{ $patient->countyOfBirth }}" > 
-                                                    </div>
-
-
-                                                    <div class=" pb-1">
-                                                        <label for="clientSubCounty">Subcounty</label> 
-                                                        <input type='text' class="form-control" name='clientSubCounty' placeholder='Subcounty' value="{{ $patient->subCounty }}" > 
+                                                        <label for="clientCounty">County</label>
+                                                        <input type='text' class="form-control" name='clientCounty' placeholder='County' value="{{ $patient->countyOfBirth }}" >
                                                     </div>
 
 
                                                     <div class=" pb-1">
-                                                        <label for="clientConstituency">Constituency</label> 
-                                                        <input type='text' class="form-control" name='clientConstituency' placeholder='Constituency' value="{{ $patient->village }}" > 
+                                                        <label for="clientSubCounty">Subcounty</label>
+                                                        <input type='text' class="form-control" name='clientSubCounty' placeholder='Subcounty' value="{{ $patient->subCounty }}" >
                                                     </div>
 
 
                                                     <div class=" pb-1">
-                                                        <label for="clientWard">Ward</label> 
-                                                        <input type='text' class="form-control" name='clientWard' placeholder='Ward' value="{{ $patient->address }}" > 
+                                                        <label for="clientConstituency">Constituency</label>
+                                                        <input type='text' class="form-control" name='clientConstituency' placeholder='Constituency' value="{{ $patient->village }}" >
+                                                    </div>
+
+
+                                                    <div class=" pb-1">
+                                                        <label for="clientWard">Ward</label>
+                                                        <input type='text' class="form-control" name='clientWard' placeholder='Ward' value="{{ $patient->address }}" >
                                                     </div>
                                                 </div>
                                             </div>
@@ -115,19 +115,19 @@
 
 
                                                     <div class=" pb-1">
-                                                        <label for="kinName">Full Name</label> 
-                                                        <input type='text' class="form-control" name='kinName' placeholder="Kin's Full Name"" value="{{ $patient->kinName }}" > 
+                                                        <label for="kinName">Full Name</label>
+                                                        <input type='text' class="form-control" name='kinName' placeholder="Kin's Full Name"" value="{{ $patient->kinName }}" >
                                                     </div>
 
 
                                                     <div class=" pb-1">
-                                                        <label for="kinRelationship">Relationship to Patient</label> 
-                                                        <input class="form-control" name="kinRelationship" id="" value="{{ $patient->relationship }}" > 
+                                                        <label for="kinRelationship">Relationship to Patient</label>
+                                                        <input class="form-control" name="kinRelationship" id="" value="{{ $patient->relationship }}" >
                                                     </div>
 
                                                     <div class=" pb-1">
-                                                        <label for="kinTelephone">Telephone Number</label> 
-                                                        <input class="form-control" type='text' name='kinTelephone' placeholder='Telephone Number' value="{{ $patient->kinTelephone }}" > 
+                                                        <label for="kinTelephone">Telephone Number</label>
+                                                        <input class="form-control" type='text' name='kinTelephone' placeholder='Telephone Number' value="{{ $patient->kinTelephone }}" >
                                                     </div>
                                                 </div>
                                             </div>
@@ -147,12 +147,12 @@
                                         <div class="card">
                                             <fieldset class="p-4">
                                                 <div class=" pb-1">
-                                                    <label for="referringOfficer">Referring Officer</label> 
-                                                    <input type='text' class="form-control" name='referringOfficer' id='referringOfficer' placeholder="Referring Officer's Name" value="{{ Auth::user()->name }}" readonly> 
+                                                    <label for="referringOfficer">Referring Officer</label>
+                                                    <input type='text' class="form-control" name='referringOfficer' id='referringOfficer' placeholder="Referring Officer's Name" value="{{ Auth::user()->name }}" readonly>
                                                 </div>
 
                                                 <div class=" pb-1">
-                                                    <label for="historyInvestigation">History/Investigation</label> 
+                                                    <label for="historyInvestigation">History/Investigation</label>
                                                     <select id="historyInvestigation" name="historyInvestigation" class="form-control" required>
                                                         <option>--- Select History/Investigation Facility ---</option>
                                                         <!-- Place all the options here initially -->
@@ -172,7 +172,7 @@
                                                 </div>
 
                                                 <div class=" pb-1">
-                                                    <label for="diagnosis">Diagnosis</label> 
+                                                    <label for="diagnosis">Diagnosis</label>
                                                     <select id="diagnosis" name="diagnosis" class="form-control" required>
                                                         <option>--- Select Diagnosis details ---</option>
                                                         <!-- Populate diagnosis options dynamically using coded concepts -->
@@ -192,7 +192,7 @@
                                                 </div>
 
                                                 <div class=" pb-1">
-                                                    <label for="reasonReferral">Reason for Referral</label> 
+                                                    <label for="reasonReferral">Reason for Referral</label>
                                                     <select id="reasonReferral" name="reasonReferral" class="form-control" required>
                                                         <!-- Add an empty option for the placeholder -->
                                                         <option>--- Select reason for referral ---</option>
@@ -213,16 +213,16 @@
                                                 </div>
 
                                                 <div class=" pb-1">
-                                                    <label for="formFileMultiple">Attachments</label> 
-                                                    <input type="file" class="form-control" id="formFileMultiple" multiple placeholder='File Attachments'> 
+                                                    <label for="formFileMultiple">Attachments</label>
+                                                    <input type="file" class="form-control" id="formFileMultiple" multiple placeholder='File Attachments'>
                                                 </div>
 
                                                 <div class=" pb-1">
-                                                    <label for="additionalNotes">Additional Notes</label> 
+                                                    <label for="additionalNotes">Additional Notes</label>
                                                     <textarea cols="30" rows="10" class="form-control" id="additionalNotes" name="additionalNotes" style="height: 100px;" placeholder='Additional Medical Notes' required></textarea>
                                                 </div>
                                             </fieldset>
-                                        </div>            
+                                        </div>
                                 </div>
                             </div>
                             </div>
@@ -240,7 +240,7 @@
                                                 <fieldset class="">
                                                     <div class="p-4">
                                                         <div class=" pb-1">
-                                                            <label for="priorityLevel">Priority Level</label> 
+                                                            <label for="priorityLevel">Priority Level</label>
                                                             <select id="priorityLevel" name="priorityLevel" class="form-control">
                                                                 <option value="">--- Select Priority Level ---</option>
                                                                 <option value="stat">Emergency</option>
@@ -249,9 +249,9 @@
                                                                 <option value="routine">Routine</option>
                                                             </select>
                                                         </div>
-                                
+
                                                         <div class=" pb-1">
-                                                            <label for="serviceCategory">Service Category</label> 
+                                                            <label for="serviceCategory">Service Category</label>
                                                             <select id="serviceCategory" name="serviceCategory" class="form-control">
                                                                 <option value="">--- Select Service Category ---</option>
                                                                 <!-- Populate service category options dynamically from KMHFL API -->
@@ -271,9 +271,9 @@
                                                                 <option value="category14">Oncology</option>
                                                             </select>
                                                         </div>
-                                    
+
                                                         <div class=" pb-1">
-                                                            <label for="service">Service</label> 
+                                                            <label for="service">Service</label>
                                                             <select id="service" name="service" class="form-control">
                                                                 <option value="">--- Select Service ---</option>
                                                                 <!-- Populate service options dynamically based on selected service category -->
@@ -286,23 +286,27 @@
                                                         </div>
 
                                                         <div class="pb-1">
-                                                            <label for="distance">Approximate Distance</label> 
-                                                            <input type="text" class="form-control" id="distance" name='distance' placeholder='Approximate distance' readonly> 
+                                                            <label for="distance">Approximate Distance</label>
+                                                            <input type="text" class="form-control" id="distance" name='distance' placeholder='Approximate distance' readonly>
                                                         </div>
-                                        
+
                                                         <div class="pb-1">
-                                                            <label for="serviceNotes">Additional Notes</label> 
+                                                            <label for="serviceNotes">Additional Notes</label>
                                                             <textarea class="form-control" id="serviceNotes" name="serviceNotes" cols="30" rows="10" style="height: 100px;" placeholder="Additional Medical Notes..."></textarea>
-                                                        </div>     
+                                                        </div>
                                                     </div>
                                                 </fieldset>
                                             </div>
                                         </div>
+
+
+
+
                                         <div class="col-xxl-6 col-md-4">
                                             <div class="card">
                                                 <div class="p-4">
                                                     <div class="pb-1">
-                                                        <label for="facility">Facility</label> 
+                                                        <label for="facility">Facility</label>
                                                         <select id="facility" name="facility" class="form-control">
                                                             <option>--- Select Medical Facility ---</option>
                                                             @foreach($facilities as $facility)
@@ -322,6 +326,11 @@
                                                 </div>
                                             </div>
                                         </div>
+
+
+
+
+
                                     </div>
                                 </div>
                             </div>
