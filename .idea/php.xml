@@ -130,6 +130,7 @@
       <path value="$PROJECT_DIR$/system/vendor/doctrine/deprecations" />
       <path value="$PROJECT_DIR$/system/vendor/balping/json-raw-encoder" />
       <path value="$PROJECT_DIR$/system/vendor/consoletvs/charts" />
+      <path value="$PROJECT_DIR$/system/vendor/africastalking/africastalking" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />

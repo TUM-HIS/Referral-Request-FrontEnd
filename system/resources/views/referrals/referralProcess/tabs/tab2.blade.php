@@ -15,7 +15,7 @@
 
 
 
-    <h1>3. Facility Selection</h1>
+    <h1>Facility Selection</h1>
     <div class="">
         <div class="card">
             <fieldset class="p-4">
@@ -48,30 +48,7 @@
 
 {{--                @dd($serviceCategories[0])--}}
                 <div class="row">
-{{--                    <div class="col-md-4">--}}
-{{--                        <form class="my-5 ">--}}
-{{--                            --}}{{-- Service category dropdown --}}
-{{--                            <div class="form-group">--}}
-{{--                                <label for="service_category">Select Service Category:</label>--}}
-{{--                                <select class="form-control" id="service_category" name="service_category">--}}
-{{--                                    <option value="">--Select Service Category--</option>--}}
-{{--                                    @foreach($serviceCategories as $serviceCategory)--}}
-{{--                                        <option value="{{ $serviceCategory->name }}">{{ $serviceCategory->name }}</option>--}}
-{{--                                    @endforeach--}}
-{{--                                </select>--}}
-{{--                            </div>--}}
-{{--                            <script>--}}
-{{--                                $(document).ready(function() {--}}
-{{--                                    // Initialize Select2--}}
-{{--                                    $('#service_category').select2({--}}
-{{--                                        placeholder: 'Type to search...'--}}
-{{--                                    });--}}
-{{--                                });--}}
-{{--                            </script>--}}
-{{--                        </form>--}}
-{{--                    </div>--}}
 
-{{--@dd($services[0]->name)--}}
                     <div class="col-md-6">
                         <form class="my-5 ">
                             {{-- Service category dropdown --}}
@@ -113,20 +90,52 @@
 
                     </div>
 
-{{--                    <div class="col-md-6">--}}
-{{--                        <form class="my-5 ">--}}
-{{--                            --}}{{-- Facility dropdown --}}
-{{--                            <div class="form-group position-relative">--}}
-{{--                                <label for="facility">Select Facility:</label>--}}
-{{--                                <select class="form-control" id="facility" name="facility">--}}
-{{--                                </select>--}}
-{{--                            </div>--}}
-{{--                        </form>--}}
-{{--                    </div>--}}
-
                     <div class="col-md-2 d-flex  align-items-center">
                         <button id="search_button" class="btn btn-primary my-5">Search</button>
                     </div>
+                </div>
+
+
+                <div class="col-xxl-6 col-md-4">
+                    <div class="card">
+                        <div class="p-4">
+                            <div class="pb-1">
+                                <label for="facility">Facility</label>
+                                <select id="facility" name="facility" class="form-control">
+                                    <option>--- Select Medical Facility ---</option>
+                                    @foreach($facilities as $facility)
+                                        <option value="{{ $facility->Code }}">{{$facility->Code}} - {{ $facility->Officialname }}</option>
+                                    @endforeach
+                                </select>
+                                <span class="col-md-2 d-flex  align-items-center">
+                                    <button id="refer_button" class="btn btn-primary my-5">Refer</button>
+                                </span>
+
+
+                                <script>
+                                    $(document).ready(function() {
+                                        // Initialize Select2
+                                        $('#facility').select2({
+                                            placeholder: 'Type to search...',
+                                            minimumInputLength: 3 // Minimum number of characters to trigger the autocomplete
+                                        });
+
+                                        // Initially disable the button
+                                        $('#refer_button').addClass('disabled');
+
+
+
+
+
+                                    });
+                                </script>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
                 </div>
 
 
@@ -177,6 +186,7 @@
     <script>
         $(document).ready(function () {
             var selectedService = null;
+            var selectedFacility = null;
             var category_name = null
             var facilityOwner = null
             // When the service dropdown value changes
@@ -190,40 +200,79 @@
                 console.log("checking owner...", facilityOwner)
             });
 
-            // When the service-category dropdown value changes
-            {{--$('#service_category').on('change', function () {--}}
-            {{--    category_name = $(this).val();--}}
-            {{--    console.log("category name: " + category_name + "service name:" + selectedService)--}}
-            {{--    // var category_name = "LEPROSY TREATMENT";--}}
+            // Initially disable the button
+            $('#search_button').addClass('disabled');
 
-            {{--    axios.get('{{ url('api/service_category/get_services') }}', {--}}
-            {{--        params: {--}}
-            {{--            category_name: category_name--}}
-            {{--        }--}}
-            {{--    })--}}
-            {{--        .then(function (response) {--}}
-            {{--            // console.log(response)--}}
+            // Enable the button when a facility is selected
+            $('#services').on('change', function() {
+                if ($(this).val() !== "") {
+                    $('#search_button').removeClass('disabled');
+                } else {
+                    $('#search_button').addClass('disabled');
+                }
+            });
 
-            {{--            var services = response.data;--}}
-            {{--            var serviceDropdown = $('#service');--}}
 
-            {{--            // Clear the current options in the second dropdown--}}
-            {{--            serviceDropdown.empty();--}}
 
-            {{--            // Add the new options based on the response--}}
-            {{--            if (services.length > 0) {--}}
-            {{--                serviceDropdown.append('<option value="">-- Select Service --</option>');--}}
-            {{--                $.each(services, function (index, service) {--}}
-            {{--                    serviceDropdown.append('<option value="' + service.name + '">' + service.name + '</option>');--}}
-            {{--                });--}}
-            {{--            } else {--}}
-            {{--                serviceDropdown.append('<option value="">-- No services available --</option>');--}}
-            {{--            }--}}
-            {{--        })--}}
-            {{--        .catch(function (error) {--}}
-            {{--            // console.log(error);--}}
-            {{--        });--}}
-            {{--});--}}
+            // Enable the button when a facility is selected
+            $('#facility').on('change', function() {
+                if ($(this).val() !== "") {
+                    selectedFacility = $(this).val();
+                    $('#refer_button').removeClass('disabled');
+                } else {
+                    $('#refer_button').addClass('disabled');
+                }
+            });
+
+
+            $('#refer_button').on('click', function () {
+                console.log("inside refer button")
+                console.log("checking ...", selectedFacility)
+                const facilityCode = selectedFacility;
+
+
+                var referralId = {!! json_encode($referralId) !!};
+                console.log("inside facility: ")
+                // const facilityCode = $(this).data('facility-code');
+
+                console.log(facilityCode)
+                var serviceCategory = category_name;
+                var service = selectedService;
+                var referredFacility = $('#diagnosis').val();
+
+                // Create an object with the data
+                var formData = {
+                    serviceCategory : category_name,
+                    service: selectedService,
+                    referredFacilityCode: facilityCode,
+                    referralId: referralId
+                };
+
+                $.ajax({
+                    url: '{{ url('api/referral/save/tab2') }}',
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+
+                        var referralId = response.referralId;
+                        var referralSuccess = response.success;
+
+                        console.log("response : "+referralId)
+                        var url = '{{ route('referral.tabs', ['tab' => 'tab3']) }}';
+                        url += '?referralId=' + referralId;
+                        window.location.href = url;
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+
+            });
+
+
+
+
+            // })
 
 
             $('#search_button').on('click', function () {
@@ -289,8 +338,6 @@
                 console.log("inside facility: ")
                 const facilityCode = $(this).data('facility-code');
 
-
-
                 console.log(facilityCode)
                 var serviceCategory = category_name;
                 var service = selectedService;
@@ -321,8 +368,6 @@
                 error: function(error) {
                     console.log(error);
                 }
-
-
                 });
 
             });
@@ -332,8 +377,6 @@
 
     </script>
 
-
-</div>
 
 
 @endsection

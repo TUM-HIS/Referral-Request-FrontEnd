@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-//use ;
 use App\Models\m_f_l_s;
 use App\Models\Service;
 use App\Models\ServiceCategory;
@@ -44,6 +42,7 @@ class ReferralController extends Controller
         } elseif ($tab === 'tab2') {
             $serviceCategories = ServiceCategory::all();
             $services = Service::all();
+            $facilities = m_f_l_s::all();
 
             $referralId = request()->input('referralId');
             if($referralId == null){
@@ -63,12 +62,7 @@ class ReferralController extends Controller
             return view('referrals.referralProcess.tabs.tab2',
                 compact('activeTab'))->with(['patient' => $patientDetails,
             'serviceCategories' => $serviceCategories, 'services' => $services,
-                'referralId' => $referralId]);
-
-//            return view('referrals.referralProcess.tabs.tab2',
-//                compact('activeTab'))->with(['patient' => $patientDetails,
-//            'serviceCategories' => $serviceCategories, 'services' => $services,
-//                'referralId' => $referralId]);
+                'referralId' => $referralId, 'facilities' => $facilities]);
 
         } elseif ($tab === 'tab3') {
             $referralId =request()->input('referralId');
@@ -76,18 +70,14 @@ class ReferralController extends Controller
             if($referralId == null){
                 return redirect()->route('referrals.worklist')->with('error', 'No patient selected');
             }
-
-//            return $referralId;
             $referral = Referral::where('id', $referralId)->first();
             if ($referral == null){
                 $patientDetails = [];
-
+                return redirect()->route('referrals.worklist')->with('error', 'No patient selected');
             }else {
 
                 $patientUpi = $referral->clientUPI;
                 $patientDetails = Patient::where('upi', $patientUpi)->first();
-
-
                 $referralId = $referral->id;
 
                 $user = Auth::user();
@@ -105,8 +95,14 @@ class ReferralController extends Controller
 //            return view('referrals.referralProcess.tabs.tab3',
 //                compact('activeTab'))->with(['patient' => $patientDetails, 'referral' => $referral]);
 
+        } elseif ($tab === 'tab4') {
+            return redirect()->route('referrals.worklist')->with('success', 'message sent successfully');
         }
+        return redirect()->route('referrals.worklist')->with('error', 'No patient selected');
     }
+
+
+
 
     public function saveTabData($tab, Request $request){
         $activeTab = $tab; // Store the active tab to determine which tab should be marked as active
@@ -135,9 +131,6 @@ class ReferralController extends Controller
         }else{
             return "our engineers are working on the issue";
         }
-
-
-
     }
 
 
@@ -148,14 +141,12 @@ class ReferralController extends Controller
 
 
     public function index(){
-
         $referrals = [];
-
         return view('referrals.index')->with(['referrals' => $referrals]);
     }
 
-    public function addReferral(){
 
+    public function addReferral(){
         return view('referrals.addReferral');
     }
 
@@ -168,38 +159,32 @@ class ReferralController extends Controller
         }
         // Delete the record
         $referralRequests->delete();
-
         return redirect()->route('referrals.outgoing.outgoing')->with('success', 'Record deleted successfully');
-
     }
 
     public function facilities(){
 
         return view('referrals.facilities');
     }
-    public function medicalTerms(){
 
+    public function medicalTerms(){
         return view('referrals.medicalTerms');
     }
 
     public function worklist(){
-
         $patients = Patient::all(); // Retrieve all patients from the database
-
         return view('referrals.worklist', ['patients' => $patients]);
     }
 
-    public function createreferal(Patient $patient){
 
+    public function createreferal(Patient $patient){
         $facilities = m_f_l_s::all();
         $patientDetails = Patient::where('id', $patient->id)->first();
         $diagnosis = Mappings::select('id', 'from concept name')->get();
-
         return view('referrals.createReferral')->with(['facilities' => $facilities, 'patient' => $patientDetails, 'diagnosis' => $diagnosis]);
     }
 
     public function viewReferal(Referral $referral){
-
         // $facilities = m_f_l_s::take(20)->get();
         // $patientDetails = Patient::where('id', $patient->id)->first();
         $referralRequests = Referral::where('id', $referral->id)->first();
@@ -304,8 +289,6 @@ class ReferralController extends Controller
         $referrals = Referral::where('referring_facility_id', $loggedInuserFacility)
             ->orderBy('created_at', 'desc')
             ->get();
-
-        //$referralRequests = referralRequest::all();
         return view('referrals.outgoing.outgoing',['referralRequests'=>$referrals]);
     }
 
@@ -317,13 +300,9 @@ class ReferralController extends Controller
 
          $loggedInuserFacility = Auth::user()->userFacility->Code;
 
-        //dd($loggedInuserFacility);
-
         $referrals = Referral::where('referredFacility', $loggedInuserFacility)
             ->orderBy('created_at', 'desc')
             ->get();
-
-        //dd($referrals);
 
         return view('referrals.index')->with(['referralRequests' => $referrals]);
 

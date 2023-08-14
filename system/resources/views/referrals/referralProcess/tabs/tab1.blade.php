@@ -11,9 +11,9 @@
 @section('tab-content')
 <div class="tab-pane {{ $activeTab === 'tab1' ? 'active' : '' }}" id="tab1" role="tabpanel">
     <div class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
-                <h1 class="card-title" style="font-size: 180% !important;"> 1. Patient Details</h1>
-        </h2>
+{{--        <h2 class="accordion-header" id="headingOne">--}}
+{{--                <h1 class="card-title" style="font-size: 180% !important;">Patient Details</h1>--}}
+{{--        </h2>--}}
         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
                 <div class="row">
@@ -54,18 +54,20 @@
         </div>
     </div>
 
-            <h1>2. Referral Details</h1>
+{{--            <h1>2. Referral Details</h1>--}}
 
     <div class="accordion-body">
         <div class="card">
+
             <fieldset class="p-4">
+                <h6 class="card-title" style="font-size: 120% !important;">Referral Details</h6>
                 <div class=" pb-1">
                     <label for="referringOfficer">Referring Officer</label>
                     <input type='text' class="form-control" name='referringOfficer' id='referringOfficer' placeholder="Referring Officer's Name" value="{{ Auth::user()->name }}" readonly>
                 </div>
 
                 <div class=" pb-1">
-                    <label for="historyInvestigation">History/Investigation</label>
+                    <label for="historyInvestigation">History/Investigation<span class="required" style="color: red">*</span></label>
                     <select id="historyInvestigation" name="historyInvestigation" class="form-control" required>
                         <option>--- Select History/Investigation Facility ---</option>
                         <!-- Place all the options here initially -->
@@ -83,9 +85,10 @@
                         });
                     </script>
                 </div>
+                <br>
 
                 <div class=" pb-1">
-                    <label for="diagnosis">Diagnosis</label>
+                    <label for="diagnosis">Diagnosis<span class="required" style="color: red">*</span></label>
                     <select id="diagnosis" name="diagnosis" class="form-control" required>
                         <option>--- Select Diagnosis details ---</option>
                         <!-- Populate diagnosis options dynamically using coded concepts -->
@@ -103,21 +106,16 @@
                         });
                     </script>
                 </div>
+                <br>
 
                 <div class=" pb-1">
-                    <label for="reasonReferral">Reason for Referral</label>
+                    <label for="reasonReferral">Reason for Referral<span class="required" style="color: red">*</span></label>
                     <select id="reasonReferral" name="reasonReferral" class="form-control" required>
 
                         <option>--- Select reason for referral ---</option>
-                        <option value="1">Equipment</option>
-                        <option value="2">Expertise</option>
-                        <option value="3">Out of scope Service</option>
-{{--                        <!-- Add an empty option for the placeholder -->--}}
-{{--                        <option>--- Select reason for referral ---</option>--}}
-{{--                        <!-- Populate diagnosis options dynamically using coded concepts -->--}}
-{{--                        @foreach($diagnosis as $reason)--}}
-{{--                            <option value="{{ $reason->id }}">{{ $reason->{'from concept name'} }}</option>--}}
-{{--                        @endforeach--}}
+                        <option value="Equipment">Equipment</option>
+                        <option value="Expertise">Expertise</option>
+                        <option value="Out of scope Service">Out of scope Service</option>
                     </select>
                     <script>
                         $(document).ready(function() {
@@ -129,21 +127,22 @@
                         });
                     </script>
                 </div>
+                <br>
                 <div class=" pb-1">
-                    <label for="priorityLevel">Priority Level</label>
+                    <label for="priorityLevel">Priority Level<span class="required" style="color: red">*</span></label>
                     <select id="priorityLevel" name="priorityLevel" class="form-control">
                         <option value="">--- Select Priority Level ---</option>
                         <option value="stat">Emergency</option>
-{{--                        <option value="asap">Critical</option>--}}
-{{--                        <option value="urgent">Urgent</option>--}}
                         <option value="routine">Routine</option>
                     </select>
                 </div>
+                <br>
 
                 <div class=" pb-1">
                     <label for="formFileMultiple">Attachments</label>
                     <input type="file" class="form-control" id="formFileMultiple" multiple placeholder='File Attachments'>
                 </div>
+                <br>
 
                 <div class=" pb-1">
                     <label for="additionalNotes">Additional Notes</label>
