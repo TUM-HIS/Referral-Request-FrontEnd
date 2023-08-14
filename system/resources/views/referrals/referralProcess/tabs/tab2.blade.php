@@ -4,6 +4,17 @@
     #spinnerContainer {
         display: none;
     }
+
+
+     .selected-button {
+         background-color: #007bff;
+         color: #fff;
+     }
+    .unselected-button {
+        background-color: #f8f9fa;
+        color: #333;
+    }
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" defer></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
@@ -45,15 +56,49 @@
                     </div>
                 </div>
 
+                <div class="d-flex justify-content-center py-5 ">
+                    <button class="mx-2 w-25 selected-button" id="mou_button">MOU</button>
+                    <button class="mx-2 w-25 unselected-button" id="no_mou_button">Non MOU</button>
+                    <script>
+                        $(document).ready(function() {
+                            // Initially hide "No MOU" row
+                            $("#no-MOU-row").hide();
+
+                            // Handle button clicks
+                            $("#no_mou_button").click(function() {
+                                $("#no-MOU-row").show();
+                                $("#MOU-row").hide();
+
+                                // Update button styles
+                                $(this).addClass("selected-button");
+                                $(this).removeClass("unselected-button");
+                                $("#mou_button").addClass("unselected-button");
+                                $("#mou_button").removeClass("selected-button");
+                            });
+
+                            $("#mou_button").click(function() {
+                                $("#no-MOU-row").hide();
+                                $("#MOU-row").show();
+
+                                // Update button styles
+                                $(this).addClass("selected-button");
+                                $(this).removeClass("unselected-button");
+                                $("#no_mou_button").addClass("unselected-button");
+                                $("#no_mou_button").removeClass("selected-button");
+                            });
+                        });
+                    </script>
+                </div>
+
 
 {{--                @dd($serviceCategories[0])--}}
-                <div class="row">
+                <div class="row align-items-center mt-4" id="no-MOU-row" style="display: none">
 
                     <div class="col-md-6">
-                        <form class="my-5 ">
+                        <label for="service_category">Select Service:</label>
+                        <form class="">
                             {{-- Service category dropdown --}}
                             <div class="form-group">
-                                <label for="service_category">Select Service:</label>
                                 <select class="form-control" id="services" name="services">
                                     <option value="">--Select Service Category--</option>
                                     @foreach($services as $service)
@@ -69,7 +114,6 @@
                                         });
                                     </script>
                                 </select>
-
                             </div>
 
                         </form>
@@ -77,9 +121,10 @@
 
 
                     <div class="col-md-4">
-                        <form class="my-5 ">
+                        <label for="facilityOwner">Facility Type</label>
+                        <form class="">
                             <div class="form-group">
-                                <label for="facilityOwner">Facility Type</label>
+
                                 <select id="facilityOwner" name="facilityOwner" class="form-control" required>
                                     <option>--- Select Type of Facility ---</option>
                                     <option value="Ministry of Health">Ministry of Health</option>
@@ -87,55 +132,44 @@
                                 </select>
                             </div>
                         </form>
-
                     </div>
 
                     <div class="col-md-2 d-flex  align-items-center">
-                        <button id="search_button" class="btn btn-primary my-5">Search</button>
+                        <button id="search_button" class="btn btn-primary">Search</button>
                     </div>
                 </div>
 
-
-                <div class="col-xxl-6 col-md-4">
-                    <div class="card">
-                        <div class="p-4">
-                            <div class="pb-1">
-                                <label for="facility">Facility</label>
-                                <select id="facility" name="facility" class="form-control">
-                                    <option>--- Select Medical Facility ---</option>
-                                    @foreach($facilities as $facility)
-                                        <option value="{{ $facility->Code }}">{{$facility->Code}} - {{ $facility->Officialname }}</option>
-                                    @endforeach
-                                </select>
-                                <span class="col-md-2 d-flex  align-items-center">
-                                    <button id="refer_button" class="btn btn-primary my-5">Refer</button>
-                                </span>
-
-
-                                <script>
-                                    $(document).ready(function() {
-                                        // Initialize Select2
-                                        $('#facility').select2({
-                                            placeholder: 'Type to search...',
-                                            minimumInputLength: 3 // Minimum number of characters to trigger the autocomplete
-                                        });
-
-                                        // Initially disable the button
-                                        $('#refer_button').addClass('disabled');
-
-
-
-
-
-                                    });
-                                </script>
-                            </div>
+                <div class="card" id="MOU-row">
+                    <label for="facility">Facility</label>
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <select id="facility" name="facility" class="form-control">
+                                <option>--- Select Medical Facility ---</option>
+                                @foreach($facilities as $facility)
+                                    <option value="{{ $facility->Code }}">{{$facility->Code}} - {{ $facility->Officialname }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
+                        <div class="col-md-2 d-flex  align-items-center">
+                            <button id="refer_button" class="btn btn-primary">Refer</button>
+                        </div>
 
                     </div>
 
 
+
+                    <script>
+                        $(document).ready(function() {
+                            // Initialize Select2
+                            $('#facility').select2({
+                                placeholder: 'Type to search...',
+                                minimumInputLength: 3 // Minimum number of characters to trigger the autocomplete
+                            });
+                            // Initially disable the button
+                            $('#refer_button').addClass('disabled');
+                        });
+                    </script>
                 </div>
 
 
