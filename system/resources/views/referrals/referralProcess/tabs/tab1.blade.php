@@ -67,7 +67,7 @@
                 </div>
 
                 <div class=" pb-1">
-                    <label for="historyInvestigation">History/Investigation</label>
+                    <label for="historyInvestigation">History/Investigation<span class="required" style="color: red">*</span></label>
                     <select id="historyInvestigation" name="historyInvestigation" class="form-control" required>
                         <option>--- Select History/Investigation Facility ---</option>
                         <!-- Place all the options here initially -->

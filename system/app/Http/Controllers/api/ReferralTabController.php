@@ -88,10 +88,10 @@ class ReferralTabController extends Controller
 
 
         $facility = m_f_l_s::where('Code', $referredFacilityCode)->first();
-                $notification = new ReferralRequestSent($referralId, $referringFacilityCode, "Referral Request");
+        $notification = new ReferralRequestSent($referralId, $referringFacilityCode, "Referral Request");
 
-                Notification::send($facility, $notification);
-//                return Redirect::route('referral.outgoing')->with('success', 'Referral Request Submitted successfully');
+        Notification::send($facility, $notification);
+//      return Redirect::route('referral.outgoing')->with('success', 'Referral Request Submitted successfully');
 
         return response()->json($result);
 

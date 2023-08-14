@@ -71,7 +71,7 @@
                             <div class="pb-1">
                                 <h6 class="card-title" style="font-size: 120% !important;">Service Details</h6>
                                 <p>Priority Level: <span class="fs-5" id="summary-priorityLevel"><strong>{{ ucfirst($referral->priorityLevel) }}</strong></span></p>
-                                <p>Service Category: <span class="fs-5" id="summary-serviceCategory"><strong>{{ $referral->reasonReferral }}</strong></span></p>
+{{--                                <p>Service Category: <span class="fs-5" id="summary-serviceCategory"><strong>{{ $referral->reasonReferral }}</strong></span></p>--}}
                                 <p>Service: <span class="fs-5" id="summary-service"><strong>{{ $referral->service }}</strong></span></p>
                                 <p>Facility: <span class="fs-5" id="summary-facility"><strong>{{ $referral->referredFacility }}</strong></span></p>
                                 <p>Approximate Distance: <span class="fs-5" id="summary-distance"><strong>{{ $referral->distance }}</strong></span></p>
