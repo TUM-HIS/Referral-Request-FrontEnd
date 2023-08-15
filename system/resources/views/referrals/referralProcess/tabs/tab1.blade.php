@@ -132,7 +132,7 @@
                     <label for="priorityLevel">Priority Level<span class="required" style="color: red">*</span></label>
                     <select id="priorityLevel" name="priorityLevel" class="form-control">
                         <option value="">--- Select Priority Level ---</option>
-                        <option value="stat">Emergency</option>
+                        <option value="emergency">Emergency</option>
                         <option value="routine">Routine</option>
                     </select>
                 </div>

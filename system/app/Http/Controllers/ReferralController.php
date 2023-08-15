@@ -259,26 +259,7 @@ class ReferralController extends Controller
         $facility = m_f_l_s::where('Code', $referral->referredFacility)->first();
         $notification = new ReferralRequestSent($referralId, $userFacility->Code, "Referral Request");
 
-        Notification::send($facility, $notification);
-
-
-
- /*
-        $savedId = $referral->id;
-        $SendReferral = new SendReferral();
-        $res = json_decode($SendReferral->sendPost($savedId));
-        $referral->referralId = $res->referralRes->referralId;
-
-        //local and remote referral ids
-        $local = $savedId;
-        $remote = $referral->referralId;
-
-        $referral = Referral::find($local);
-        $referral->referralId =$remote;
-        $referral->update();*/
-
-
-        // Redirect to a success page or display a success message
+        Notification::send($facility, $notification);        // Redirect to a success page or display a success message
         return Redirect::route('referral.outgoing')->with('success', 'Referral Request Submitted successfully');
     }
 
@@ -493,74 +474,3 @@ class ReferralController extends Controller
         return response()->json($json);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//
-//
-//
-//
-//"supportingInfo": [
-//    {
-//        "reference": "Observation/example",
-//      "code": {
-//        "coding": [
-//          {
-//              "system": "http://loinc.org",
-//            "code": "8302-2",
-//            "display": "Height"
-//          }
-//        ],
-//        "text": "Patient height"
-//      }
-//    },
-//    {
-//        "code": {
-//        "coding": [
-//          {
-//              "system": "http://snomed.info/sct",
-//            "code": "162864005",
-//            "display": "Vital signs"
-//          }
-//        ],
-//        "text": "Clinical note"
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//        "supportingInfo": [
-//    {
-//        "reference": "Observation/example-lab-result",
-//      "code": {
-//        "coding": [
-//          {
-//              "system": "http://loinc.org",
-//            "code": "94531-1",
-//            "display": "SARS-CoV-2 (COVID-19) RNA panel - Respiratory specimen by NAA with probe detection"
-//          }
-//        ],
-//        "text": "COVID-19 lab results"
-//      }
-//    },
-//    {
-//        "reference": "DocumentReference/example-clinical-note",
-//      "code": {
-//        "coding": [
-//          {

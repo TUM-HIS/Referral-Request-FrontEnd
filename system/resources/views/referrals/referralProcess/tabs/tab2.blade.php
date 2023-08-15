@@ -380,6 +380,8 @@
                     referralId: referralId
                 };
 
+                console.log("service is",service)
+
                 $.ajax({
                     url: '{{ url('api/referral/save/tab2') }}',
                     type: 'POST',

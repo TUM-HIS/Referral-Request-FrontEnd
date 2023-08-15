@@ -33,26 +33,12 @@
                             </thead>
                             <tbody>
                             @foreach($referralRequests as $referralRequest)
-                                <tr
-{{--                                    class="--}}
-{{--                                    @if ($referralRequest->priorityLevel == 'stat')--}}
-{{--                                        color-red--}}
-{{--                                    @elseif ($referralRequest->priorityLevel == 'asap')--}}
-{{--                                        color-blue--}}
-{{--                                    @elseif ($referralRequest->priorityLevel == 'urgent')--}}
-{{--                                        color-green--}}
-{{--                                    @elseif ($referralRequest->priorityLevel == 'routine')--}}
-{{--                                        color-yellow--}}
-{{--                                    @else--}}
-{{--                                        color-default--}}
-{{--                                    @endif--}}
-{{--                                "--}}
-                                >
-                                    <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $loop->iteration }}</td>
+                                <tr>
+                                    <td >{{ $loop->iteration }}</td>
 
-                                    <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $referralRequest->clientName }}</td>
-                                    <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $referralRequest->priorityLevel }}</td>
-                                    <td onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'">{{ $referralRequest->referringOfficer }}</td>
+                                    <td>{{ $referralRequest->clientName }}</td>
+                                    <td >{{ $referralRequest->priorityLevel }}</td>
+                                    <td >{{ $referralRequest->referringOfficer }}</td>
                                     <td>{{ $referralRequest->service }}</td>
                                     <td >
                                         <p class="badge
@@ -69,33 +55,9 @@
                                     </td>
                                     <td class="no-click">
                                         <div class="btn-group" role="group">
-                                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <button onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'" type="button" class="btn btn-primary" data-bs-toggle="dropdown" aria-expanded="false">
                                               Action
                                             </button>
-                                            <ul class="dropdown-menu">
-{{--                                              <li><a class="dropdown-item" href="#">Reject</a></li>--}}
-                                              <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                    Accept
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                            Another
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                                            </div>
-                                                        </div>
-                                                        </div>
-                                                    </div>
-                                                </a></li>
-                                            </ul>
                                           </div>
                                     </td>
 
