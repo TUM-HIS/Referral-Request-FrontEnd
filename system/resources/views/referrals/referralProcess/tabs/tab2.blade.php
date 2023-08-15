@@ -304,11 +304,6 @@
             });
 
 
-
-
-            // })
-
-
             $('#search_button').on('click', function () {
                 $('#spinnerContainer').show();
                 console.log("search btn clicked")

@@ -82,9 +82,9 @@ class ReferralTabController extends Controller
         $officialName = $referringFacility->Officialname;
         $this->smsService  = new SmsService();
         $message = "Referral Request recieved from ".$officialName;
-        $recipients = "+254708392326";
+        $recipients = "+254729395605, +254708392326";
 
-        $result = $this->smsService->sendSms(1, $recipients, $message);
+        $result = $this->smsService->sendSms(2, $recipients, $message);
 
 
         $facility = m_f_l_s::where('Code', $referredFacilityCode)->first();

@@ -88,7 +88,8 @@ Route::group(['middleware' => 'auth'], function () {
     //referral-testing routes
     Route::post('/testing', [ReferralController::class, 'sendtesting'])->name('sendreferral');
     Route::get('/service_category/get_services', [MflController::class, 'getServiceFromCategory'])->name('services_from_service_category');
-    Route::get('/referralprocess', [ReferralController::class, 'outgoingReferralTabs'])->name('referral.tabs');
+//    Route::get('/referralprocess', [ReferralController::class, 'outgoingReferralTabs'])->name('referral.tabs');
+    Route::get('/referralprocess', [ReferralController::class, 'outgoingReferralTabs']);
 
 
     //referral-tabs e.g referral/tabs/tab2
