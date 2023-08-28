@@ -14,6 +14,9 @@ RUN sh -c "wget http://getcomposer.org/composer.phar && chmod a+x composer.phar 
 RUN cd /app/system && \
     /usr/local/bin/composer install --no-dev
 
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+
+
 RUN cd /app/system npm install
 
 RUN chown -R www-data: /app

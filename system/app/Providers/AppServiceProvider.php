@@ -26,5 +26,7 @@ class AppServiceProvider extends ServiceProvider
         }else{
             Url::forceScheme('http');
         }
+        Schema::defaultStringLength(191);
+
     }
 }
