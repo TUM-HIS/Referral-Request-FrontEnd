@@ -34,7 +34,7 @@
                                 <th>diagnosis</th>
                                 <th>Referral Reason</th>
                                 <th>Priority</th>
-                                <th>Requested Service </th>
+{{--                                <th>Requested Service </th>--}}
                                 <th>Intended Facility </th>
                                 <th>Status</th>
                                 <th></th>
@@ -54,7 +54,7 @@
                                     <td>{{ $referralRequest->additionalNotes }}</td> --}}
                                     <td>{{ $referralRequest->priorityLevel }}</td>
                                     {{-- <td>{{ $referralRequest->serviceCategory }}</td> --}}
-                                    <td>{{ $referralRequest->service }}</td>
+{{--                                    <td>{{ $referralRequest->service }}</td>--}}
                                     <td>{{ $referralRequest->referredFacility }}</td>
                                     <td >
                                         <p class="badge

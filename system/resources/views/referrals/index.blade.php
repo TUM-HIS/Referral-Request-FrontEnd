@@ -26,7 +26,7 @@
                                 <th>Client Name</th>
                                 <th>Priority Level</th>
                                 <th>Referring Officer </th>
-                                <th>Requested Service </th>
+{{--                                <th>Requested Service </th>--}}
                                 <th>Status </th>
                                 <th>Action </th>
                             </tr>
@@ -39,7 +39,7 @@
                                     <td>{{ $referralRequest->clientName }}</td>
                                     <td >{{ $referralRequest->priorityLevel }}</td>
                                     <td >{{ $referralRequest->referringOfficer }}</td>
-                                    <td>{{ $referralRequest->service }}</td>
+{{--                                    <td>{{ $referralRequest->service }}</td>--}}
                                     <td >
                                         <p class="badge
                                             @if ($referralRequest->status == 'Pending')
@@ -56,7 +56,7 @@
                                     <td class="no-click">
                                         <div class="btn-group" role="group">
                                             <button onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'" type="button" class="btn btn-primary" data-bs-toggle="dropdown" aria-expanded="false">
-                                              Action
+                                              View
                                             </button>
                                           </div>
                                     </td>
