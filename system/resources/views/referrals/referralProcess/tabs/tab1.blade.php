@@ -113,9 +113,9 @@
                     <select id="reasonReferral" name="reasonReferral" class="form-control" required>
 
                         <option>--- Select reason for referral ---</option>
-                        <option value="Equipment">Equipment</option>
-                        <option value="Expertise">Expertise</option>
-                        <option value="Out of scope Service">Out of scope Service</option>
+                        <option value="Equipment">Lack of equipment</option>
+                        <option value="Expertise">Lack of expertise</option>
+                        <option value="Out of scope Service">Service sought is out of scope</option>
                     </select>
                     <script>
                         $(document).ready(function() {
