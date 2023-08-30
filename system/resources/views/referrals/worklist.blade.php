@@ -99,27 +99,27 @@
                 // Get the patient ID from the data attribute
                 var patientId = $(this).data('patient-id');
                 var url = '{{ route('referral.tabs', ['tab' => 'tab1']) }}';
-                url += '?patientId=1';
+                url += '?patientId=' + patientId;
 
                 console.log(patientId)
 
                  window.location.href = url;
 
                 // Send an AJAX request to fetch the patient data
-            {{--    $.ajax({--}}
-            {{--        url: '{{ url('referral/tabs/tab1') }}',--}}
-            {{--        method: 'GET',--}}
-            {{--        data: {--}}
-            {{--            patientId: patientId--}}
-            {{--        },--}}
-            {{--        success: function(response) {--}}
-            {{--            console.log(response);--}}
-            {{--            // window.location.href = '/referral/tabs/tab1'; // Replace with your desired redirect URL--}}
-            {{--        },--}}
-            {{--        error: function(xhr, status, error) {--}}
-            {{--            console.error(error);--}}
-            {{--        }--}}
-            {{--    });--}}
+                {{--$.ajax({--}}
+                {{--    url: '{{ url('referral/tabs/tab1') }}',--}}
+                {{--    method: 'GET',--}}
+                {{--    data: {--}}
+                {{--        patientId: patientId--}}
+                {{--    },--}}
+                {{--    success: function(response) {--}}
+                {{--        console.log(response);--}}
+                {{--        // window.location.href = '/referral/tabs/tab1'; // Replace with your desired redirect URL--}}
+                {{--    },--}}
+                {{--    error: function(xhr, status, error) {--}}
+                {{--        console.error(error);--}}
+                {{--    }--}}
+                {{--});--}}
             });
         });
     </script>
