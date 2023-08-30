@@ -26,7 +26,7 @@ class ReferralController extends Controller
 
         if ($tab === 'tab1') {
             $patientId = request()->input('patientId');
-            return $patientId;
+            return "the patient id is:".$patientId;
 
             if($patientId == null){
                 return redirect()->route('referrals.worklist')->with('error', 'No patient selected');
