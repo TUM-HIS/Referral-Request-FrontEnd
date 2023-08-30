@@ -59,7 +59,7 @@
                         <!-- Patient records will be dynamically added here -->
                         @foreach ($patients as $patient)
                 {{--            <tr onclick="window.location.href='{{ route('referral.tabs', ['tab' => "tab1"]) }}'">--}}
-                            <tr >
+                            <tr onclick="window.location.href='{{ route('referral.tabs', ['tab' => 'tab1']) }}?patientId={{ $patient->id }}'">
                                 <td>{{ $patient->id }}</td>
                                 <td>{{ $patient->first_name }}</td>
                                 <td>{{ $patient->last_name }}</td>
@@ -102,8 +102,8 @@
 
                 console.log(url)
 
-                 window.location.href = url;
-
+                 // window.location.href = url;
+                //
                 // Send an AJAX request to fetch the patient data
                 {{--$.ajax({--}}
                 {{--    url: '{{ url('referral/tabs/tab1') }}',--}}
