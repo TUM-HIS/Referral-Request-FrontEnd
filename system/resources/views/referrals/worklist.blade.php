@@ -66,6 +66,13 @@
                                 <td>{{ $patient->idNo }}</td>
                                 <td>{{ $patient->gender }}</td>
                                 <td>{{ $patient->telephone }}</td>
+                                <td class="no-click">
+                                    <div class="btn-group" role="group">
+                                        <button onclick="window.location.href='{{ route('referral.tabs', ['tab' => "tab1"]) }}'" type="button" class="btn btn-primary" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Refer
+                                        </button>
+                                    </div>
+                                </td>
                                 <!-- Add more patient fields as needed -->
                             </tr>
                         @endforeach
