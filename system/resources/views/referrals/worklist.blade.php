@@ -98,7 +98,6 @@
                 var patientId = $(this).data('patient-id');
                 var url = '{{ route('referral.tabs', ['tab' => 'tab1']) }}';
                 url += '?patientId=' + encodeURIComponent(patientId);
-                // url += (url.includes('?') ? '&' : '?') + 'patientId=' + encodeURIComponent(patientId);
 
                 console.log(url)
 

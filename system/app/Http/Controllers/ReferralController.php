@@ -23,6 +23,10 @@ class ReferralController extends Controller
         $activeTab = $tab; // Store the active tab to determine which tab should be marked as active
 
         $diagnosis = Mappings::select('id', 'from concept name')->get();
+//        $patientId = request()->query('patientId');
+//        $patientId2 = request()->input('patientId');
+//
+//        dd($patientId, $patientId2);
 
 //        dd(request()->all());
         if ($tab === 'tab1') {
