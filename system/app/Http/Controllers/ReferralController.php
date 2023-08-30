@@ -24,8 +24,6 @@ class ReferralController extends Controller
 
         $diagnosis = Mappings::select('id', 'from concept name')->get();
 
-
-
         if ($tab === 'tab1') {
             $patientId = request()->input('patientId');
 

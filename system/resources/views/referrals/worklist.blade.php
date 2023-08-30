@@ -99,7 +99,7 @@
                 // Get the patient ID from the data attribute
                 var patientId = $(this).data('patient-id');
                 var url = '{{ route('referral.tabs', ['tab' => 'tab1']) }}';
-                url += '?patientId=' + patientId;
+                url += '?patientId=1';
 
                 console.log(patientId)
 
