@@ -96,7 +96,7 @@ class ReferralController extends Controller
         } elseif ($tab === 'tab4') {
             return redirect()->route('referrals.worklist')->with('success', 'message sent successfully');
         }
-        return redirect()->route('referrals.worklist')->with('error', 'No patient selected');
+        return redirect()->route('referrals.worklist')->with('error', 'No tab selected');
     }
 
 
