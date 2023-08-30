@@ -91,17 +91,15 @@
 
     <script>
         $(document).ready(function() {
-
-
             // Handle click event
             $('.refer-btn').on('click', function() {
                 console.log("clicked")
                 // Get the patient ID from the data attribute
                 var patientId = $(this).data('patient-id');
                 var url = '{{ route('referral.tabs', ['tab' => 'tab1']) }}';
-                url += '?patientId=' + patientId;
+                url += '?patientId=' + encodeURIComponent(patientId);
 
-                console.log(patientId)
+                console.log(url)
 
                  window.location.href = url;
 
