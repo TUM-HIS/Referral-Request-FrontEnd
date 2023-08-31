@@ -34,27 +34,15 @@
                                 <th>diagnosis</th>
                                 <th>Referral Reason</th>
                                 <th>Priority</th>
-                                <th>Requested Service </th>
+{{--                                <th>Requested Service </th>--}}
                                 <th>Intended Facility </th>
                                 <th>Status</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($referralRequests as $referralRequest)
-                                <tr onclick="window.location.href='{{ route('referrals.viewReferral', $referralRequest) }}'"
-{{--                                    class="--}}
-{{--                                    @if ($referralRequest->priorityLevel == 'stat')--}}
-{{--                                        color-red--}}
-{{--                                    @elseif ($referralRequest->priorityLevel == 'asap')--}}
-{{--                                        color-blue--}}
-{{--                                    @elseif ($referralRequest->priorityLevel == 'urgent')--}}
-{{--                                        color-green--}}
-{{--                                    @elseif ($referralRequest->priorityLevel == 'routine')--}}
-{{--                                        color-yellow--}}
-{{--                                    @else--}}
-{{--                                        color-default--}}
-{{--                                    @endif--}}
-                                ">
+                                <tr >
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $referralRequest->clientName }}</td>
                                     <td>{{ $referralRequest->clientUPI }}</td>
@@ -66,7 +54,7 @@
                                     <td>{{ $referralRequest->additionalNotes }}</td> --}}
                                     <td>{{ $referralRequest->priorityLevel }}</td>
                                     {{-- <td>{{ $referralRequest->serviceCategory }}</td> --}}
-                                    <td>{{ $referralRequest->service }}</td>
+{{--                                    <td>{{ $referralRequest->service }}</td>--}}
                                     <td>{{ $referralRequest->referredFacility }}</td>
                                     <td >
                                         <p class="badge
@@ -81,6 +69,7 @@
                                             {{ $referralRequest->status }}
                                         </p>
                                     </td>
+                                    <td onclick="window.location.href='{{ route('referrals.viewReferral', $referralRequest) }}'"><button class="bg-primary text-white px-2 rounded-2">View</button></td>
                                 </tr>
                             @endforeach
                             </tbody>

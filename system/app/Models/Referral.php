@@ -49,4 +49,9 @@ class Referral extends Model
     {
         return $this->belongsTo(Mappings::class, 'diagnosis', 'from concept name');
     }
+
+    public function referredService()
+    {
+        return $this->belongsTo(Service::class, 'service', 'id');
+    }
 }
