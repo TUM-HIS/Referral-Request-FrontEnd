@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Notification;
 class ReferralTabController extends Controller
 {
 
+    function test(){
+        return "just testing if our api is working";
+    }
+
 
 
     function saveTab1Data(Request $request){
@@ -100,4 +104,25 @@ class ReferralTabController extends Controller
 //        );
 
     }
+
+
+    public function apiReferral(Request $request)
+    {
+        // Extract all the data from the request
+        $referralData = $request->all();
+
+        // Validate the data as needed
+
+        // Create a new Referral model and populate it with the data
+        $referral = new Referral;
+        $referral->fill($referralData);
+
+        // Additional validation and processing can be done here
+
+        // Save the referral data
+        $referral->save();
+
+        return response()->json(['success' => true, 'referralId' => $referral->id]);
+    }
+
 }
