@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Notification;
 class ReferralTabController extends Controller
 {
 
+    function test(){
+        return "just testing if our api is working";
+    }
+
 
 
     function saveTab1Data(Request $request){
@@ -81,10 +85,10 @@ class ReferralTabController extends Controller
         $referringFacility = m_f_l_s::where('Code', $referringFacilityCode)->first();
         $officialName = $referringFacility->Officialname;
         $this->smsService  = new SmsService();
-        $message = "Referral Request recieved from ".$officialName;
-        $recipients = "+254708392326";
+        $message = "You have a new referral request from ".$officialName;
+        $recipients = "+254729395605, +254708392326";
 
-        $result = $this->smsService->sendSms(1, $recipients, $message);
+        $result = $this->smsService->sendSms(2, $recipients, $message);
 
 
         $facility = m_f_l_s::where('Code', $referredFacilityCode)->first();
@@ -100,4 +104,25 @@ class ReferralTabController extends Controller
 //        );
 
     }
+
+
+    public function apiReferral(Request $request)
+    {
+        // Extract all the data from the request
+        $referralData = $request->all();
+
+        // Validate the data as needed
+
+        // Create a new Referral model and populate it with the data
+        $referral = new Referral;
+        $referral->fill($referralData);
+
+        // Additional validation and processing can be done here
+
+        // Save the referral data
+        $referral->save();
+
+        return response()->json(['success' => true, 'referralId' => $referral->id]);
+    }
+
 }

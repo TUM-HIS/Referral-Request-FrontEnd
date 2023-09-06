@@ -59,13 +59,20 @@
                         <!-- Patient records will be dynamically added here -->
                         @foreach ($patients as $patient)
                 {{--            <tr onclick="window.location.href='{{ route('referral.tabs', ['tab' => "tab1"]) }}'">--}}
-                            <tr class="patient-row" data-patient-id="{{ $patient->id }}">
+                            <tr onclick="window.location.href='{{ route('referral.tabs', ['tab' => 'tab1']) }}?patientId={{ $patient->id }}'">
                                 <td>{{ $patient->id }}</td>
                                 <td>{{ $patient->first_name }}</td>
                                 <td>{{ $patient->last_name }}</td>
                                 <td>{{ $patient->idNo }}</td>
                                 <td>{{ $patient->gender }}</td>
                                 <td>{{ $patient->telephone }}</td>
+                                <td class="refer-btn" data-patient-id="{{ $patient->id }}">
+                                    <div class="btn-group" role="group">
+                                        <button type="" class="btn btn-primary" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Refer
+                                        </button>
+                                    </div>
+                                </td>
                                 <!-- Add more patient fields as needed -->
                             </tr>
                         @endforeach
@@ -84,35 +91,33 @@
 
     <script>
         $(document).ready(function() {
-
-
-            // Handle click event on patient rows
-            $('.patient-row').on('click', function() {
+            // Handle click event
+            $('.refer-btn').on('click', function() {
                 console.log("clicked")
                 // Get the patient ID from the data attribute
                 var patientId = $(this).data('patient-id');
                 var url = '{{ route('referral.tabs', ['tab' => 'tab1']) }}';
-                url += '?patientId=' + patientId;
+                url += '?patientId=' + encodeURIComponent(patientId);
 
-                console.log(patientId)
+                console.log(url)
 
-                 window.location.href = url;
-
+                 // window.location.href = url;
+                //
                 // Send an AJAX request to fetch the patient data
-                $.ajax({
-                    url: '{{ url('referral/tabs/tab1') }}',
-                    method: 'GET',
-                    data: {
-                        patientId: patientId
-                    },
-                    success: function(response) {
-                        console.log(response);
-                        // window.location.href = '/referral/tabs/tab1'; // Replace with your desired redirect URL
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(error);
-                    }
-                });
+                {{--$.ajax({--}}
+                {{--    url: '{{ url('referral/tabs/tab1') }}',--}}
+                {{--    method: 'GET',--}}
+                {{--    data: {--}}
+                {{--        patientId: patientId--}}
+                {{--    },--}}
+                {{--    success: function(response) {--}}
+                {{--        console.log(response);--}}
+                {{--        // window.location.href = '/referral/tabs/tab1'; // Replace with your desired redirect URL--}}
+                {{--    },--}}
+                {{--    error: function(xhr, status, error) {--}}
+                {{--        console.error(error);--}}
+                {{--    }--}}
+                {{--});--}}
             });
         });
     </script>

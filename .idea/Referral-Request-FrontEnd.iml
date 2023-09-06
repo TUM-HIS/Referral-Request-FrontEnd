@@ -140,5 +140,7 @@
     <orderEntry type="library" name="chart.js" level="application" />
     <orderEntry type="library" name="jquery-3.6.0" level="application" />
     <orderEntry type="library" name="axios" level="application" />
+    <orderEntry type="library" name="toastr.js" level="application" />
+    <orderEntry type="library" name="jquery" level="application" />
   </component>
 </module>
