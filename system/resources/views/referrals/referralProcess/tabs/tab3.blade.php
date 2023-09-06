@@ -83,8 +83,19 @@
             </div>
         </div>
 
+{{--    <div class="d-flex justify-content-end">--}}
+{{--        <button id="complete_button" class="btn btn-primary btn-lg">complete <i class="fas fa-check ml-2"></i></button>--}}
+{{--    </div>--}}
+
+
+    {{--    our loader when complete button is clicked--}}
     <div class="d-flex justify-content-end">
-        <button id="complete_button" class="btn btn-primary btn-lg">complete <i class="fas fa-check ml-2"></i></button>
+        <button id="complete_button" class="btn btn-primary btn-lg" onclick="completeAction()">Complete <i class="fas fa-check ml-2"></i></button>
+        <div id="loader" class="ml-2" style="display: none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
     </div>
 
 </div>
@@ -95,6 +106,12 @@
     $(document).ready(function() {
 
         $('#complete_button').on('click', function () {
+
+            // Disable the button
+            $('#complete_button').prop('disabled', true);
+
+            // Show the loader
+            $('#loader').show();
 
             let referringFacilityId = "{{ $referral->referring_facility_id }}";
             let referredFacilityCode =  "{{ $referral->referredFacility }}";
@@ -122,9 +139,13 @@
                         window.location.href = url;
                     }
                 },
-
                 error: function (error) {
                     console.log(error);
+                },
+                complete: function () {
+                    // Re-enable the button and hide the loader
+                    $('#complete_button').prop('disabled', false);
+                    $('#loader').hide();
                 }
             });
         });
