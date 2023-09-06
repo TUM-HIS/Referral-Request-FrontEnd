@@ -23,11 +23,15 @@ class ReferralController extends Controller
         $activeTab = $tab; // Store the active tab to determine which tab should be marked as active
 
         $diagnosis = Mappings::select('id', 'from concept name')->get();
+//        $patientId = request()->query('patientId');
+//        $patientId2 = request()->input('patientId');
+//
+//        dd($patientId, $patientId2);
 
-
-
+//        dd(request()->all());
         if ($tab === 'tab1') {
             $patientId = request()->input('patientId');
+//            return "the patient id is:".$patientId;
 
             if($patientId == null){
                 return redirect()->route('referrals.worklist')->with('error', 'No patient selected');
@@ -98,7 +102,7 @@ class ReferralController extends Controller
         } elseif ($tab === 'tab4') {
             return redirect()->route('referrals.worklist')->with('success', 'message sent successfully');
         }
-        return redirect()->route('referrals.worklist')->with('error', 'No patient selected');
+        return redirect()->route('referrals.worklist')->with('error', 'No tab selected');
     }
 
 
