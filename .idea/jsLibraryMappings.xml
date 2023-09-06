@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="PROJECT" libraries="{Chart.js, axios, chart.js, highcharts, jquery, jquery-3.4.1, jquery-3.6.0, jquery-3.7.0.slim, popper.js, select2, toastr.js}" />
+  </component>
+</project>

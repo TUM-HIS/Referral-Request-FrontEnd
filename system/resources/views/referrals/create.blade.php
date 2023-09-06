@@ -15,6 +15,41 @@
     .form-floating>label {
         padding: 0.5rem 0.75rem !important;
     }
+
+    /*CUSTOM CLASSES*/
+    .grid{
+        display: grid;
+    }
+
+
+    .grid-1-1{
+        grid-row: 1;
+        grid-column: 1;
+    }
+
+    .grid-1-2{
+        grid-row: 1;
+        grid-column: 2;
+    }
+
+    .grid-2-1{
+        grid-row: 2;
+        grid-column: 1;
+    }
+
+    .grid-2-2{
+        grid-row: 2;
+        grid-column: 2;
+    }
+
+    fieldset{
+        border-radius: 8px;
+        border: 2px solid rgb(2,48,71);
+    }
+
+    legend{
+        font-weight: bold;
+    }
 </style>
 @section('content')
 
@@ -56,50 +91,54 @@
 <form id="referralForm" action="{{ route('referrals.submitReferral') }}" method="POST">
     @csrf
     <div class="section">
-      <h2>Patient Details</h2>
-      <div class="form-group">
-        <label for="clientName">Name:</label>
-        <input type="text" id="clientName" name="clientName" class="form-control" value="{{ $patient->first_name }}" phprequired>
-        
-      </div>
-      <div class="form-group">
-        <label for="clientID">ID Number:</label> 
-        <input type="text" id="clientID" name="clientID" class="form-control" value="{{ $patient->idNo }}" required>
-      </div>
-      <div class="form-group">
-        <label for="clientAge">Age:</label>
-        <input type="number" id="clientAge" name="clientAge" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="clientUPI">UPI Number:</label>
-        <input type="text" id="clientUPI" name="clientUPI" class="form-control" value="{{ $patient->upi }}">
-      </div>
-      <div class="form-group">
-        <label for="clientBirthCert">Birth Certificate Number:</label>
-        <input type="text" id="clientBirthCert" name="clientBirthCert" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="clientTelephone">Telephone Number:</label>
-        <input type="tel" id="clientTelephone" name="clientTelephone" class="form-control" value="{{ $patient->telephone }}" required>
-      </div>
-      <div class="form-group">
-        <label for="clientCounty">County:</label>
-        <input type="text" id="clientCounty" name="clientCounty" class="form-control" value="{{ $patient->countyOfBirth }}" required>
-      </div>
-      <div class="form-group">
-        <label for="clientSubCounty">Sub-county:</label>
-        <input type="text" id="clientSubCounty" name="clientSubCounty" class="form-control" value="{{ $patient->subCounty }}" required>
-      </div>
-      <div class="form-group">
-        <label for="clientConstituency">Constituency:</label>
-        <input type="text" id="clientConstituency" name="clientConstituency" class="form-control" value="{{ $patient->village }}" required>
-      </div>
-      <div class="form-group">
-        <label for="clientWard">Ward:</label>
-        <input type="text" id="clientWard" name="clientWard" class="form-control" value="{{ $patient->address }}" required>
-      </div>
-    </div>
-    
+      <fieldset>
+        <legend>Patient Details</legend>
+
+        {{-- <h2>Patient Details</h2> --}}
+        <div class=" ">
+            <label for="clientName">Name:</label>
+            <input type="text" id="clientName" name="clientName" class="form-control" value="{{ $patient->first_name }}" phprequired>
+
+        </div>
+        <div class=" ">
+            <label for="clientID">ID Number:</label>
+            <input type="text" id="clientID" name="clientID" class="form-control" value="{{ $patient->idNo }}" required>
+        </div>
+        <div class=" ">
+            <label for="clientAge">Age:</label>
+            <input type="number" id="clientAge" name="clientAge" class="form-control">
+        </div>
+        <div class=" ">
+            <label for="clientUPI">UPI Number:</label>
+            <input type="text" id="clientUPI" name="clientUPI" class="form-control" value="{{ $patient->upi }}">
+        </div>
+        <div class=" ">
+            <label for="clientBirthCert">Birth Certificate Number:</label>
+            <input type="text" id="clientBirthCert" name="clientBirthCert" class="form-control">
+        </div>
+        <div class=" ">
+            <label for="clientTelephone">Telephone Number:</label>
+            <input type="tel" id="clientTelephone" name="clientTelephone" class="form-control" value="{{ $patient->telephone }}" required>
+        </div>
+        <div class=" ">
+            <label for="clientCounty">County:</label>
+            <input type="text" id="clientCounty" name="clientCounty" class="form-control" value="{{ $patient->countyOfBirth }}" required>
+        </div>
+        <div class=" ">
+            <label for="clientSubCounty">Sub-county:</label>
+            <input type="text" id="clientSubCounty" name="clientSubCounty" class="form-control" value="{{ $patient->subCounty }}" required>
+        </div>
+        <div class=" ">
+            <label for="clientConstituency">Constituency:</label>
+            <input type="text" id="clientConstituency" name="clientConstituency" class="form-control" value="{{ $patient->village }}" required>
+        </div>
+        <div class=" ">
+            <label for="clientWard">Ward:</label>
+            <input type="text" id="clientWard" name="clientWard" class="form-control" value="{{ $patient->address }}" required>
+        </div>
+        </div>
+      </fieldset>
+
     <div class="section">
       <h2>Next of Kin Details</h2>
       <div class="form-group">
@@ -115,7 +154,7 @@
         <input type="tel" id="kinTelephone" name="kinTelephone" class="form-control" value="{{ $patient->kinTelephone }}">
       </div>
     </div>
-    
+
     <div class="section">
       <h2>Referral Details</h2>
       <div class="form-group">
@@ -272,7 +311,7 @@
         <textarea id="serviceNotes" name="serviceNotes"></textarea>
       </div>
     </div>
-    
+
     <div class="form-group">
       <button type="submit">Submit</button>
     </div>

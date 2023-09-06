@@ -7,7 +7,7 @@
             <h1> Referrals </h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('referrals.index') }}">Incoming</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('referrals.incoming') }}">Incoming</a></li>
                     <li class="breadcrumb-item active">Referrals</li>
                 </ol>
             </nav>
@@ -23,19 +23,45 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Referral ID</th>
-                                <th>Referral Type</th>
-                                <th>Initiating Facility </th>
-                                <th>Requested Service </th>
+                                <th>Client Name</th>
+                                <th>Priority Level</th>
+                                <th>Referring Officer </th>
+{{--                                <th>Requested Service </th>--}}
                                 <th>Status </th>
-                                <th>Action</th>
+                                <th>Action </th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($referrals as $key => $referral)
-                                    <tr>
+                            @foreach($referralRequests as $referralRequest)
+                                <tr>
+                                    <td >{{ $loop->iteration }}</td>
 
-                                    </tr>
+                                    <td>{{ $referralRequest->clientName }}</td>
+                                    <td >{{ $referralRequest->priorityLevel }}</td>
+                                    <td >{{ $referralRequest->referringOfficer }}</td>
+{{--                                    <td>{{ $referralRequest->service }}</td>--}}
+                                    <td >
+                                        <p class="badge
+                                            @if ($referralRequest->status == 'Pending')
+                                                bg-warning
+                                            @elseif ($referralRequest->status == 'Accepted')
+                                                bg-success
+                                            @elseif ($referralRequest->status == 'Rejected')
+                                                bg-danger
+                                            @endif"
+                                           style="display: flex; align-items: center; justify-content: center;">
+                                        {{ $referralRequest->status }}
+                                        </p>
+                                    </td>
+                                    <td class="no-click">
+                                        <div class="btn-group" role="group">
+                                            <button onclick="window.location.href='{{ route('referrals.viewIncomingReferral', $referralRequest) }}'" type="button" class="btn btn-primary" data-bs-toggle="dropdown" aria-expanded="false">
+                                              View
+                                            </button>
+                                          </div>
+                                    </td>
+
+                                </tr>
                             @endforeach
                             </tbody>
                         </table>
@@ -45,4 +71,15 @@
         </section>
 
     </main>
+@endsection
+@section('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('table td:not(.no-click)').on('click', function() {
+                // Your onclick function logic goes here
+                console.log('Clicked on a table column');
+            });
+        });
+    </script>
 @endsection

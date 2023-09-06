@@ -1,11 +1,5 @@
 <footer id="footer" class="footer">
     <div class="copyright">
-<<<<<<< HEAD
-        &copy; Copyright <strong><span>TUM-HIS CLUB</span></strong>. All Rights Reserved
-=======
-        &copy; Copyright <strong><span>Referal System</span></strong>. All Rights Reserved
->>>>>>> 801c38186ad9d9aae89bfdf168d7637eb3082965
-    </div>
-    <div class="credits">Designed by <a href="#">TUM-HIS</a>
+        <h2 style="font-size: 90% !important;" class="card-title">&copy; Copyright <strong><span><a href="https://github.com/TUM-HIS">TUM-HIS CLUB</a></span></strong>. All Rights Reserved</h2>
     </div>
 </footer><!-- End Footer -->

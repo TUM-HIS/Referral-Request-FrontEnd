@@ -4,19 +4,62 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-            <a class="nav-link " href="{{ route('user.dashboard') }}">
+            <a class="nav-link" href="{{ route('admin.dashboard') }}">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
         </li><!-- End Dashboard Nav -->
 
+
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-layout-text-window-reverse"></i><span>Referrals</span><i class="bi bi-chevron-down ms-auto"></i>
+            <a class="nav-link collapsed" data-bs-target="#registration-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-person-plus"></i><span>Registration</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <ul id="registration-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{ route('referrals.index') }}">
+                    <a href="{{ route('patients.addPatient') }}">
+                        <i class="bi bi-circle"></i><span>Register Patient</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('triages.addTriage') }}">
+                        <i class="bi bi-circle"></i><span>Triage</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Tables Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#verification-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-check2-circle"></i><span>Verification</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="verification-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="">
+                        <i class="bi bi-circle"></i><span>Verify Patient</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="bi bi-circle"></i><span>Verify Referral</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End Tables Nav -->
+
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#incoming-referals-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-arrow-down-left-circle"></i><span>Referrals</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="incoming-referals-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ route('referrals.worklist') }}">
+                        <i class="bi bi-circle"></i><span>Refer patient</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('referrals.incoming') }}">
                         <i class="bi bi-circle"></i><span>Incoming Referrals</span>
                     </a>
                 </li>
@@ -25,37 +68,17 @@
                         <i class="bi bi-circle"></i><span>Outgoing Referrals</span>
                     </a>
                 </li>
-                <li>
-                    <a href="{{ route('referral.facilities') }}">
-                        <i class="bi bi-circle"></i><span>Facilities</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('referral.medicalTerms') }}">
-                        <i class="bi bi-circle"></i><span>Medical terms database</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('referrals.worklist') }}">
-                        <i class="bi bi-circle"></i><span>Worklist</span>
-                    </a>
-                </li>
             </ul>
         </li><!-- End Tables Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#patient-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-layout-text-window-reverse"></i><span>Patients</span><i class="bi bi-chevron-down ms-auto"></i>
+            <a class="nav-link collapsed" data-bs-target="#reports-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-graph-up"></i><span>Reports</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
-            <ul id="patient-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <ul id="reports-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
-                    <a href="{{ route('patients.addPatient') }}">
-                        <i class="bi bi-circle"></i><span>Add patient</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('triages.addTriage') }}">
-                        <i class="bi bi-circle"></i><span>Triage Form</span>
+                    <a href="{{ route('admin.dashboard.charts') }}">
+                        <i class="bi bi-circle"></i><span>Visualizations</span>
                     </a>
                 </li>
             </ul>

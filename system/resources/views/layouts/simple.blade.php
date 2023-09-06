@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Login | {{ config('app.name') }}</title>
+    <title>Login | Referral System</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="{{ url('assets/img/favicon.png') }}" rel="icon">
+    <link href="{{ url('assets/img/favicon.ico') }}" rel="icon">
     <link href="{{ url('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
@@ -28,12 +28,17 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ url('assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ url('assets/css/newPatient.css') }}" rel="stylesheet">
+    <link href="{{ url('assets/css/outgoingTable.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css"href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 
 </head>
 
@@ -45,6 +50,7 @@
         @include('includes.messages')
     </div>
 </main>
+@yield('script')
 </body>
 </html>
 

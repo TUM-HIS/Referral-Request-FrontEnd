@@ -1,109 +1,231 @@
 <?php
 
 namespace App\Http\Controllers;
-
-//use ;
+use App\Models\m_f_l_s;
+use App\Models\Service;
+use App\Models\ServiceCategory;
+use App\Models\User;
+use App\Notifications\ReferralRequestSent;
+use App\utils\SendReferral;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Http\RedirectResponse;
-use App\Models\ReferalRequest;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
 use App\Models\Patient;
 use App\Models\Referral;
+use App\Models\Mappings;
 
 class ReferralController extends Controller
 {
+
+    public function show($tab)
+    {
+        $activeTab = $tab; // Store the active tab to determine which tab should be marked as active
+
+        $diagnosis = Mappings::select('id', 'from concept name')->get();
+//        $patientId = request()->query('patientId');
+//        $patientId2 = request()->input('patientId');
+//
+//        dd($patientId, $patientId2);
+
+//        dd(request()->all());
+        if ($tab === 'tab1') {
+            $patientId = request()->input('patientId');
+//            return "the patient id is:".$patientId;
+
+            if($patientId == null){
+                return redirect()->route('referrals.worklist')->with('error', 'No patient selected');
+            }
+
+            $patientDetails = Patient::where('id', $patientId)->first();
+
+            return view('referrals.referralProcess.tabs.tab1',
+                compact('activeTab'))->with(['patient' => $patientDetails,
+                'diagnosis' => $diagnosis]);
+
+        } elseif ($tab === 'tab2') {
+            $serviceCategories = ServiceCategory::all();
+            $services = Service::all();
+            $facilities = m_f_l_s::all();
+
+            $referralId = request()->input('referralId');
+            if($referralId == null){
+                return redirect()->route('referrals.worklist')->with('error', 'No patient selected');
+            }
+
+            $referral = Referral::where('id', $referralId)->first();
+            if ($referral == null){
+                $patientDetails = [];
+
+            }else {
+
+                $patientUpi = $referral->clientUPI;
+                $patientDetails = Patient::where('upi', $patientUpi)->first();
+            }
+
+            return view('referrals.referralProcess.tabs.tab2',
+                compact('activeTab'))->with(['patient' => $patientDetails,
+            'serviceCategories' => $serviceCategories, 'services' => $services,
+                'referralId' => $referralId, 'facilities' => $facilities]);
+
+        } elseif ($tab === 'tab3') {
+            $referralId =request()->input('referralId');
+
+            if($referralId == null){
+                return redirect()->route('referrals.worklist')->with('error', 'No patient selected');
+            }
+            $referral = Referral::where('id', $referralId)->first();
+            if ($referral == null){
+                $patientDetails = [];
+                return redirect()->route('referrals.worklist')->with('error', 'No patient selected');
+            }else {
+
+                $patientUpi = $referral->clientUPI;
+                $patientDetails = Patient::where('upi', $patientUpi)->first();
+                $referralId = $referral->id;
+
+                $user = Auth::user();
+                $userFacility = $user->userFacility;
+
+                $facility = m_f_l_s::where('Code', $referral->referredFacility)->first();
+//                $notification = new ReferralRequestSent($referralId, $userFacility->Code, "Referral Request");
+//
+//                Notification::send($facility, $notification);
+//                return Redirect::route('referral.outgoing')->with('success', 'Referral Request Submitted successfully');
+                return view('referrals.referralProcess.tabs.tab3',
+                    compact('activeTab'))->with(['patient' => $patientDetails, 'referral' => $referral]);
+
+            }
+//            return view('referrals.referralProcess.tabs.tab3',
+//                compact('activeTab'))->with(['patient' => $patientDetails, 'referral' => $referral]);
+
+        } elseif ($tab === 'tab4') {
+            return redirect()->route('referrals.worklist')->with('success', 'message sent successfully');
+        }
+        return redirect()->route('referrals.worklist')->with('error', 'No tab selected');
+    }
+
+
+
+
+    public function saveTabData($tab, Request $request){
+        $activeTab = $tab; // Store the active tab to determine which tab should be marked as active
+
+        $patientDetails = Patient::where('id', 1)->first();
+        $diagnosis = Mappings::select('id', 'from concept name')->get();
+        $serviceCategories = ServiceCategory::all();
+
+        if ($tab === 'tab1'){
+
+            return view('referrals.referralProcess.tabs.tab2',
+                compact('activeTab'))->with(['patient' => $patientDetails,
+                'diagnosis' => $diagnosis,
+                'serviceCategories' => $serviceCategories]);
+
+        }elseif ($tab === 'tab2'){
+
+            return view('referrals.referralProcess.tabs.tab3',
+                compact('activeTab'))->with(['patient' => $patientDetails]);
+
+
+        }elseif($tab === 'tab3'){
+
+
+
+        }else{
+            return "our engineers are working on the issue";
+        }
+    }
+
+
+
+    public function outgoingReferralTabs(){
+        return view('referrals/referralProcess/tabs/outgoingReferralTabs');
+    }
+
+
     public function index(){
-
         $referrals = [];
-
         return view('referrals.index')->with(['referrals' => $referrals]);
     }
 
-    public function outgoingReferrals(){
-
-        $referrals = [];
-
-        return view('referrals.outgoing.outgoing')->with(['referrals' => $referrals]);
-    }
 
     public function addReferral(){
-
         return view('referrals.addReferral');
+    }
+
+    public function destroy(referral $referral) {
+        $referralRequests = Referral::where('id', $referral->id)->first();
+
+        // Perform any additional checks or authorization if needed
+        if (!$referralRequests) {
+            return redirect()->route('referrals.outgoing')->with('error', 'Record not found');
+        }
+        // Delete the record
+        $referralRequests->delete();
+        return redirect()->route('referrals.outgoing.outgoing')->with('success', 'Record deleted successfully');
     }
 
     public function facilities(){
 
         return view('referrals.facilities');
     }
-    public function medicalTerms(){
 
+    public function medicalTerms(){
         return view('referrals.medicalTerms');
     }
 
     public function worklist(){
-
         $patients = Patient::all(); // Retrieve all patients from the database
-
         return view('referrals.worklist', ['patients' => $patients]);
     }
 
-    public function create(Patient $patient){
 
+    public function createreferal(Patient $patient){
+        $facilities = m_f_l_s::all();
         $patientDetails = Patient::where('id', $patient->id)->first();
-
-        return view('referrals.create', compact('patient', 'patientDetails'));
+        $diagnosis = Mappings::select('id', 'from concept name')->get();
+        return view('referrals.createReferral')->with(['facilities' => $facilities, 'patient' => $patientDetails, 'diagnosis' => $diagnosis]);
     }
 
-    public function store(Request $request){
-        // Process and store the referral form data
-        // Retrieve the patient ID from $request->input('patient_id')
-        // Store the referral details in the database
+    public function viewReferal(Referral $referral){
+        // $facilities = m_f_l_s::take(20)->get();
+        // $patientDetails = Patient::where('id', $patient->id)->first();
+        $referralRequests = Referral::where('id', $referral->id)->first();
+        $patientDetails = Patient::where('upi', $referral->clientUPI)->first();
 
-        // Optionally, redirect to a success page
-        return redirect()->route('referrals.success');
-}
+        $data = [
+            'referral' => $referralRequests,
+            'patient' => $patientDetails,
+        ];
 
 
-    public function storeReferral(Request $request)
-    {
-        $post = new ReferalRequest;
-        $post->identifier = $request->identifier;
-        $post->definition = $request->definition;
-        $post->basedOn = $request->basedOn;
-        $post->replaces = $request->replaces;
-        $post->groupIdentifier = $request->groupIdentifier;
-        $post->status = $request->status;
-        $post->intent = $request->intent;
-        $post->type = $request->type;
-        $post->priority = $request->priority;
-        $post->serviceRequested = $request->serviceRequested;
-        $post->subject = $request->subject;
-        $post->context = $request->context;
-        $post->occurrence = $request->occurrence;
-        $post->authoredOn = $request->authoredOn;
-        $post->requester = $request->requester;
-        $post->specialty = $request->specialty;
-        $post->recipient = $request->recipient;
-        $post->reasonCode = $request->reasonCode;
-        $post->reasonReference = $request->reasonReference;
-        $post->description = $request->description;
-        $post->supportingInfo = $request->supportingInfo;
-        $post->note = $request->note;
-        $post->relevantHistory = $request->relevantHistory;
-        $post->save();
-        return redirect('add-referral')->with('status', 'Referral Request posted succesfully');
+        return view('referrals.outgoing.viewReferral', $data);
     }
 
-    public function submitReferral(Request $request): RedirectResponse
-    {
+    public function viewIncomingReferal(Referral $referral){
 
-        // Validate the form data
+        // $facilities = m_f_l_s::take(20)->get();
+        // $patientDetails = Patient::where('id', $patient->id)->first();
+        $referralRequests = Referral::where('id', $referral->id)->first();
+        $patientDetails = Patient::where('upi', $referral->clientUPI)->first();
+
+        $data = [
+            'referral' => $referralRequests,
+            'patient' => $patientDetails,
+        ];
+
+
+        return view('referrals.incoming.viewReferral', $data);
+    }
+
+
+    public function submitReferral(Request $request)
+    {
+        //Validate the form data
         $validatedData = $request->validate([
             'referringOfficer' => 'required',
-            'reasonReferral' => 'required',
+            //'reasonReferral' => 'required',
             'priorityLevel' => 'required',
             // Add validation rules for other form fields
         ]);
@@ -112,7 +234,8 @@ class ReferralController extends Controller
         $referral = new Referral;
         $referral->clientName = $request->input('clientName');
         $referral->clientUPI = $request->input('clientUPI');
-        $referral->referringOfficer = $request->input('referringOfficer');
+        $referral->referringOfficer = Auth::user()->name;
+        $referral->referring_facility_id = Auth::user()->facility_id;
         $referral->historyInvestigation = $request->input('historyInvestigation');
         $referral->diagnosis = $request->input('diagnosis');
         $referral->reasonReferral = $request->input('reasonReferral');
@@ -121,34 +244,138 @@ class ReferralController extends Controller
         $referral->priorityLevel = $request->input('priorityLevel');
         $referral->serviceCategory = $request->input('serviceCategory');
         $referral->service = $request->input('service');
-        $referral->facility = $request->input('facility');
+        $referral->referredFacility = $request->input('facility');
         $referral->distance = $request->input('distance');
         $referral->serviceNotes = $request->input('serviceNotes');
 
-        // Set other referral properties
 
         // Save the referral to the database
         $referral->save();
 
-        // Perform any additional processing or integrations
+        //return redirect()->back()->with('success', 'Referral Request Submitted successfully');
 
-        // Redirect to a success page or display a success message
-        return Redirect::route('referrals.success');
+
+        $referralId = $referral->id;
+
+        $user = Auth::user();
+        $userFacility = $user->userFacility;
+
+        $facility = m_f_l_s::where('Code', $referral->referredFacility)->first();
+        $notification = new ReferralRequestSent($referralId, $userFacility->Code, "Referral Request");
+
+        Notification::send($facility, $notification);        // Redirect to a success page or display a success message
+        return Redirect::route('referral.outgoing')->with('success', 'Referral Request Submitted successfully');
     }
+
+
 
     public function outgoing(){
-        $referralRequests = DB::select('select * from referal_requests');
-        //$referralRequests = referralRequest::all();
-        return view('referrals.outgoing.outgoing',['referralRequests'=>$referralRequests]);
+        $loggedInuserFacility = Auth::user()->userFacility->Code;
+        $referrals = Referral::where('referring_facility_id', $loggedInuserFacility)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('referrals.outgoing.outgoing',['referralRequests'=>$referrals]);
     }
 
-//    public function getFacilities(){
-//
-//        $apifacilities = Http::withToken('xN1xg42a71GUnXs9Kwf2VLrik7Jtq2')->get('http://api.kmhfltest.health.go.ke/api/facilities/facilities/?format=json');
-//
-//        return $apifacilities['results'];
-//
-//    }
+
+
+    public function incomingReferrals(){
+        //getting referrals associated to a particular facility
+        $referralRequests = Referral::orderBy('created_at', 'desc')->get();
+
+         $loggedInuserFacility = Auth::user()->userFacility->Code;
+
+        $referrals = Referral::where('referredFacility', $loggedInuserFacility)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('referrals.index')->with(['referralRequests' => $referrals]);
+
+    }
+
+
+
+    public function acceptReferralRequest(Referral $referral){
+        $referral->status = "Accepted"; // Assign the new value to the column
+        $referral->save();
+
+        $user = Auth::user();
+        $userFacility = $user->userFacility;
+        $userFacility->unreadNotifications
+            ->where('data.referral_id', $referral->id)
+            ->each(function ($notification) {
+                $notification->markAsRead();
+                // Perform any other necessary updates
+            });
+
+
+
+        $referralRequests = Referral::orderBy('created_at', 'desc')->get();
+        //$referralRequests = referralRequest::all();
+        return  redirect()->route('referrals.incoming')->with(['referralRequests' => $referralRequests]);
+
+    }
+
+    public function rejectReferralRequest(Referral $referral){
+
+        $referral->status = "Rejected"; // Assign the new value to the column
+        $referral->save();
+
+        //changing the status of the notification
+        $user = Auth::user();
+        $userFacility = $user->userFacility;
+        $userFacility->unreadNotifications
+            ->where('data.referral_id', $referral->id)
+            ->each(function ($notification) {
+                $notification->markAsRead();
+                //you can add aditional code here for more functionality
+
+            });
+
+        //sending notification to referral facility of rejected referral
+        $referralId = $referral->id;
+        $facility = m_f_l_s::where('Code', $referral->referring_facility_id)->first();
+        $notification = new ReferralRequestSent($referralId,$userFacility->Code , "Referral Request Rejected");
+
+        Notification::send($facility, $notification);
+
+        $referralRequests = Referral::orderBy('created_at', 'desc')->get();
+
+        return redirect()->route('referrals.incoming')->with(['referralRequests' => $referralRequests]);
+    }
+
+
+
+
+    public function reviewed(){
+
+        return view('referrals.incoming.reviewed');
+    }
+
+    public function counterReferral(){
+
+        return view('referrals.incoming.counter-referral');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public function fhirJson(){
@@ -251,74 +478,3 @@ class ReferralController extends Controller
         return response()->json($json);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//
-//
-//
-//
-//"supportingInfo": [
-//    {
-//        "reference": "Observation/example",
-//      "code": {
-//        "coding": [
-//          {
-//              "system": "http://loinc.org",
-//            "code": "8302-2",
-//            "display": "Height"
-//          }
-//        ],
-//        "text": "Patient height"
-//      }
-//    },
-//    {
-//        "code": {
-//        "coding": [
-//          {
-//              "system": "http://snomed.info/sct",
-//            "code": "162864005",
-//            "display": "Vital signs"
-//          }
-//        ],
-//        "text": "Clinical note"
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//        "supportingInfo": [
-//    {
-//        "reference": "Observation/example-lab-result",
-//      "code": {
-//        "coding": [
-//          {
-//              "system": "http://loinc.org",
-//            "code": "94531-1",
-//            "display": "SARS-CoV-2 (COVID-19) RNA panel - Respiratory specimen by NAA with probe detection"
-//          }
-//        ],
-//        "text": "COVID-19 lab results"
-//      }
-//    },
-//    {
-//        "reference": "DocumentReference/example-clinical-note",
-//      "code": {
-//        "coding": [
-//          {

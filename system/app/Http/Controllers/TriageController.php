@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Patient;
 use Illuminate\Http\Request;
 use App\Models\Triage;
 
@@ -10,8 +11,16 @@ class TriageController extends Controller
 {
     public function addTriage()
     {
-        return view('triages.triage');
+        $patients = Patient::all();
+        return view('triages.triage')->with(['patients' => $patients]);
     }
+    
+    // public function addTriagePatient(patient $patient)
+    // {
+    //     $patientDetails = Patient::where('id', $patient->id)->first();
+
+    //     return view('triages.triage', compact('patient', 'patientDetails'));
+    // }
 
     public function store(Request $request)
     {
