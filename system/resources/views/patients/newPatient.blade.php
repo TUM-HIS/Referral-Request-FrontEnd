@@ -25,21 +25,21 @@
 
                         <div class="row">
                             <div class="col-md-6 pb-2">
-                                <label for="first_name">First name:</label>
+                                <label for="first_name">First name<span class="required" style="color: red">*</span></label>
                                 <input type="text" id="first_name" name="first_name" required class="form-control">
                             </div>
                             <div class="col-md-6 pb-2">
-                                <label for="name">Last Name:</label>
+                                <label for="name">Last Name<span class="required" style="color: red">*</span></label>
                                 <input type="text" id="last_name" name="name" required class="form-control">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 pb-2">
-                                <label for="DOB">Date of Birth:</label>
+                                <label for="DOB">Date of Birth:<span class="required" style="color: red">*</span></label>
                                 <input type="date" id="dob" name="dob" required class="form-control">
                             </div>
                             <div class="col-md-6 pb-2">
-                                <label for="id">Identification type:</label>
+                                <label for="id">Identification type:<span class="required" style="color: red">*</span></label>
                                 <select name="id" id="id" class="form-control">
                                     <option value="">--please select Id type--</option>
                                     <option value="NationalId">National Id</option>
@@ -50,11 +50,11 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6 pb-2">
-                                <label for="id">Identification No:</label>
+                                <label for="id">Identification No:<span class="required" style="color: red">*</span></label>
                                 <input id="id" name="id" required class="form-control">
                             </div>
                             <div class="col-md-6 pb-2">
-                                <label for="gender">Gender:</label>
+                                <label for="gender">Gender:<span class="required" style="color: red">*</span></label>
                                 <select name="gender" id="gender" class="form-control">
                                     <option value="">--please select gender--</option>
                                     <option value="male">male</option>
@@ -64,11 +64,11 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6 pb-2">
-                                <label for="country">Country:</label>
+                                <label for="country">Country:<span class="required" style="color: red">*</span></label>
                                 <input type="text" id="country" name="country" required class="form-control">
                             </div>
                             <div class="col-md-6 pb-2">
-                                <label for="countyOfBirth">County of Birth:</label>
+                                <label for="countyOfBirth">County of Birth:<span class="required" style="color: red">*</span></label>
                                 <select id="county" name="county" required class="form-control">
                                     <option value="">--Please select a county--</option>
                                     <option value="Nyandarua">Nyandarua</option>
@@ -173,12 +173,12 @@
                         <h5 class="pb-1 font-weight-bold title-x">Contact</h5>
                         <div class="row">
                             <div class="col-md-6 pb-2">
-                                <label for="telephone">Telephone:</label>
+                                <label for="telephone">Telephone:<span class="required" style="color: red">*</span></label>
                                 <input type="text" id="telephone" name="telephone" required class="form-control">
                             </div>
                             <div class="col-md-6 pb-2">
                                 <label for="telephone">Other Telephone:</label>
-                                <input type="text" id="telephone1" name="telephone1" class="form-control">
+                                <input type="text" id="telephone1" name="telephone1"  not-required class="form-control">
                             </div>
                         </div>
 
@@ -187,7 +187,7 @@
                         <h5 class="p-1 font-weight-bold title-x">Residence</h5>
                         <div class="row">
                             <div class="col-md-6 pb-2">
-                                <label for="county">County:</label>
+                                <label for="county">County:<span class="required" style="color: red">*</span></label>
                                 <select id="county" name="county" required class="form-control">
                                     <option value="">--Please select a county--</option>
                                     <option value="mombasa">Mombasa</option>
@@ -195,7 +195,7 @@
                                 </select>
                             </div>
                             <div class="col-md-6 pb-2">
-                                <label for="subCounty">Sub-county:</label>
+                                <label for="subCounty">Sub-county:<span class="required" style="color: red">*</span></label>
                                 <select id="subCounty" name="subCounty" required class="form-control">
                                     <option value="">--Please select a sub-county--</option>
                                     <option value="mvita">Mvita</option>
@@ -209,7 +209,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6 pb-2">
-                                <label for="location">Ward:</label>
+                                <label for="location">Ward:<span class="required" style="color: red">*</span></label>
                                 <select id="location" name="location" required class="form-control">
                                     <option value="">--Please select a location--</option>
                                     <option value="mji wa kale">Mji wa Kale</option>
@@ -235,11 +235,11 @@
                         <h5 class="title-x">Next of Kin</h5>
                         <div class="row">
                             <div class="col-md-6 pb-2">
-                                <label for="kinName">Name:</label>
+                                <label for="kinName">Name:<span class="required" style="color: red">*</span></label>
                                 <input type="text" id="kinName" name="kinName" required class="form-control">
                             </div>
                             <div class="col-md-6 pb-2">
-                                <label for="relationship">Relationship:</label>
+                                <label for="relationship">Relationship:<span class="required" style="color: red">*</span></label>
                                 <select id="relationship" name="relationship" required class="form-control">
                                     <option value="">--Please select a relationship--</option>
                                     <option value="parent">Parent</option>
@@ -253,11 +253,11 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6 pb-2">
-                                <label for="kinResidence">Residence:</label>
+                                <label for="kinResidence">Residence:<span class="required" style="color: red">*</span></label>
                                 <input type="text" id="KinResidence" name="KinResidence" required class="form-control">
                             </div>
                             <div class="col-md-6 pb-2">
-                                <label for="kinTelephone">Telephone:</label>
+                                <label for="kinTelephone">Telephone:<span class="required" style="color: red">*</span></label>
                                 <input type="text" id="kinTelephone" name="kinTelephone" required class="form-control">
                             </div>
                         </div>
