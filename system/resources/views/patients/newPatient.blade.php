@@ -44,13 +44,14 @@
                                     <option value="">--please select Id type--</option>
                                     <option value="NationalId">National Id</option>
                                     <option value="BirthCertificate">Birth Certificate</option>
+                                    <option value="Passport">Passport</option>
                                 </select>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 pb-2">
                                 <label for="id">Identification No:</label>
-                                <input type="number" id="id" name="id" required class="form-control">
+                                <input id="id" name="id" required class="form-control">
                             </div>
                             <div class="col-md-6 pb-2">
                                 <label for="gender">Gender:</label>
