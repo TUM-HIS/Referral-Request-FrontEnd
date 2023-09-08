@@ -27,13 +27,13 @@ class PatientController extends Controller
         $randomupi='MOH-'.substr(str_shuffle($chars),0,4).'-'.substr(str_shuffle($numbers),0,3).'-'.substr(str_shuffle($chars),0,3);
 
         $patient = new Patient;
-        $patient -> first_name = $request ->patientname;
+        $patient -> first_name = $request ->first_name;
         $patient -> last_name = $request->name;
         $patient -> dob = $request ->dob;
         $patient -> idNo = $request->id;
         $patient -> gender = $request ->gender;
         $patient -> country = $request->country;
-        $patient -> countyOfBirth = $request ->countyOfBirth;
+        $patient -> countyOfBirth = $request ->county;
         $patient -> telephone = $request->telephone;
         $patient -> telephone1 = $request ->telephone1;
         $patient -> county = $request->country;
