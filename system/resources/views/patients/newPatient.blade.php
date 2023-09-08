@@ -44,6 +44,7 @@
                                     <option value="">--please select Id type--</option>
                                     <option value="NationalId">National Id</option>
                                     <option value="BirthCertificate">Birth Certificate</option>
+                                    <option value="Passport">Passport</option>
                                 </select>
                             </div>
                         </div>
