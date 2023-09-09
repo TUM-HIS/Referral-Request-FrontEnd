@@ -221,13 +221,13 @@
                             </div>
                             <div class="col-md-6 pb-2">
                                 <label for="landmark">Landmark:</label>
-                                <input type="text" id="landmark" name="landmark" required class="form-control">
+                                <input type="text" id="landmark" name="landmark" class="form-control">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 pb-2">
                                 <label for="address">Address:</label>
-                                <input type="text" id="address" name="address" required class="form-control">
+                                <input type="text" id="address" name="address" class="form-control">
                             </div>
                         </div>
                 </div>
@@ -264,7 +264,7 @@
                         <div class="row">
                             <div class="col-md-6 pb-2">
                                 <label for="mail">Email:</label>
-                                <input type="text" id="mail" name="mail" required class="form-control">
+                                <input type="text" id="mail" name="mail" class="form-control">
                             </div>
                         </div>
                 </div>
