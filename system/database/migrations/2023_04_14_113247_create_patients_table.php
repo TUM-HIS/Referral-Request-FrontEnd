@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('kinName');
             $table->string('relationship');
-            $table->string('kinResidence');
+            $table->string('kinResidence')->nullable();
             $table->string('kinTelephone');
             $table->string('mail')->nullable();
             $table->string('upi');
