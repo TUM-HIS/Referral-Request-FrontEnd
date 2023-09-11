@@ -34,18 +34,22 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     //patient routes
-    Route::get('/new-patient',[PatientController::class,'addPatient'])->name('patients.addPatient');
+    Route::get('/getSubcounties/{county_id}', [PatientController::class, 'getSubcounties'])->name('getSubcounties');
+    Route::get('/getWards/{contituency_name}', [PatientController::class, 'getWards'])->name('getWards');
+
+
+    Route::get('/new-patient', [PatientController::class, 'addPatient'])->name('patients.addPatient');
     Route::post('/store-patient', [PatientController::class, 'addData'])->name('patients.storeData');
     Route::get('/search-patient', [PatientController::class, 'searchPatient'])->name('patients.searchPatients');
     Route::get('/search-patients', [PatientController::class, 'search'])->name('patients.search-patient');
     // Route::get('/search-patient/results/', [PatientController::class, 'searchResults'])->name('patients.searchResults');
     Route::get('/patients/view/{patient}', [PatientController::class, 'viewPatient'])->name('patients.viewPatient');
-    Route::get('/patients-count',[PatientController::class,'getPatientsCount']);
+    Route::get('/patients-count', [PatientController::class, 'getPatientsCount']);
 
 
 
     //referral routes
-    Route::get('/worklist',[ReferralController::class,'worklist'])->name('referrals.worklist');
+    Route::get('/worklist', [ReferralController::class, 'worklist'])->name('referrals.worklist');
     Route::post('/submit-referral', [ReferralController::class, 'submitReferral'])->name('referrals.submitReferral');
     //Route::get('/referral/{patient}', [ReferralController::class, 'create'])->name('referrals.create');
     Route::get('/referral/create/{patient}', [ReferralController::class, 'createreferal'])->name('referrals.createReferral');
@@ -94,7 +98,4 @@ Route::group(['middleware' => 'auth'], function () {
     //referral-tabs e.g referral/tabs/tab2
     Route::get('referral/tabs/{tab}', [ReferralController::class, 'show'])->name('referral.tabs');
     Route::post('referral/tabs/save/{tab}', [ReferralController::class, 'saveTabData'])->name('referral.tabs.save');
-
 });
-
-
