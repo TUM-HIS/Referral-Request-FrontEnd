@@ -72,7 +72,7 @@
                                     <label for="countyOfBirth">County of Birth:<span class="required" style="color: red">*</span></label>
                                     <select id="county" name="county" required class="form-control">
                                         <option value="">--Please select a county--</option>
-                                        <option value="Nyandarua">Nyandarua</option>
+                                        <!-- <option value="Nyandarua">Nyandarua</option>
 
                                         <option value="Embu">Embu</option>
 
@@ -164,7 +164,7 @@
 
                                         <option value="Busia">Busia</option>
 
-                                        <option value="Narok">Narok</option>
+                                        <option value="Narok">Narok</option> -->
                                     </select>
                                 </div>
                             </div>
@@ -199,27 +199,16 @@
                                 </div>
                                 <div class="col-md-6 pb-2">
                                     <label for="subCounty">Sub-county:<span class="required" style="color: red">*</span></label>
-                                    <select id="subCounty" name="subCounty" required class="form-control">
+                                    <select id="subCounty" name="subCounty" required class="form-control" disabled>
                                         <option value="">--Please select a sub-county--</option>
-                                        <option value="mvita">Mvita</option>
-                                        <option value="changamwe">Changamwe</option>
-                                        <option value="nyali">Nyali</option>
-                                        <option value="jomvu">Jomvu</option>
-                                        <option value="kisauni">Kisauni</option>
-                                        <option value="likoni">Likoni</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 pb-2">
                                     <label for="location">Ward:<span class="required" style="color: red">*</span></label>
-                                    <select id="location" name="location" required class="form-control">
+                                    <select id="location" name="location" required class="form-control" disabled>
                                         <option value="">--Please select a location--</option>
-                                        <option value="mji wa kale">Mji wa Kale</option>
-                                        <option value="tudor">Tudor</option>
-                                        <option value="tononoka">Tononoka</option>
-                                        <option value="shimanzi">Shimanzi</option>
-                                        <option value="majengo">Majengo</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 pb-2">
@@ -276,6 +265,53 @@
                         </div>
                 </form>
 
+
+                <script>
+                    $(document).ready(function() {
+                        $('#county').change(function() {
+                            var countyId = $(this).val();
+                            // console.log('Selected County ID: ' + countyId);
+                            if (countyId) {
+                                $.ajax({
+                                    url: '/getSubcounties/' + countyId,
+                                    type: 'GET',
+                                    dataType: 'json',
+                                    success: function(data) {
+                                        $('#subcounty').empty().attr('disabled', false);
+                                        $.each(data, function(key, value) {
+                                            $('#subcounty').append('<option value="' + key + '">' + value + '</option>');
+                                        });
+                                    }
+                                });
+                            } else {
+                                $('#subcounty').empty().attr('disabled', true);
+                                $('#ward').empty().attr('disabled', true);
+                            }
+                        });
+
+                        $('#subcounty').change(function() {
+                            var subcountyId = $(this).val();
+                            if (subcountyId) {
+                                $.ajax({
+                                    url: '/get-wards/' + subcountyId,
+                                    type: 'GET',
+                                    dataType: 'json',
+                                    success: function(data) {
+                                        $('#ward').empty().attr('disabled', false);
+                                        $.each(data, function(key, value) {
+                                            $('#ward').append('<option value="' + key + '">' + value + '</option>');
+                                        });
+                                    }
+                                });
+                            } else {
+                                $('#ward').empty().attr('disabled', true);
+                            }
+                        });
+                    });
+                </script>
+
             </div>
         </div>
     </section>
+</main>
+@endsection
