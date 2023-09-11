@@ -5,11 +5,20 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Patient;
 
+use App\Rules\NotInFuture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PatientController extends Controller
 {
+
+    public function index()
+    {
+        $counties = County::all();
+        // dd($counties);
+        return view('dropdown', compact('counties'));
+    }
+
 
     public function addPatient (){
 
@@ -18,6 +27,11 @@ class PatientController extends Controller
     //
     public function addData(Request $request)
     {
+
+        $request->validate([
+    
+            'dob' => ['required', 'date', new NotInFuture],
+        ]);
 
         // return $request->all();
 
