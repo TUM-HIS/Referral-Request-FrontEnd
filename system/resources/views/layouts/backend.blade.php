@@ -9,8 +9,8 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-    <!-- Include jQuery from a CDN -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!-- Include jQuery from a CDN -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- <script src="{{ asset('js/dropdown.js') }}"></script> -->
 
@@ -39,7 +39,7 @@
     <link href="{{ asset('assets/css/outgoingTable.css') }}" rel="stylesheet">
 
 
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" type="text/css"href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -49,7 +49,8 @@
 
 
     <style>
-        .main {
+
+        .main{
             min-height: 80vh !important;
         }
     </style>
@@ -60,9 +61,9 @@
     @include('includes.messages')
     @include('includes.header')
     @include('includes.sidebar')
-    @yield('content')
-    @yield('form')
-    @yield('scripts')
+        @yield('content')
+        @yield('form')
+        @yield('scripts')
     @include('includes.footer')
 
 
@@ -85,9 +86,9 @@
 <!-- Template Main JS File -->
 <script src="{{ url('assets/js/main.js') }}"></script>
 {{--<script src="{{ url('assets/js/dashboardCount.js') }}"--}}
-{{-- data-patients-count-url="{{ route('patients.count') }}"--}}
-{{-- data-physicians-count-url="{{ route('physicians.count') }}"--}}
-{{-- data-referrals-count-url="{{ route('referrals.count') }}"></script>--}}
+{{--        data-patients-count-url="{{ route('patients.count') }}"--}}
+{{--        data-physicians-count-url="{{ route('physicians.count') }}"--}}
+{{--        data-referrals-count-url="{{ route('referrals.count') }}"></script>--}}
 
 
 

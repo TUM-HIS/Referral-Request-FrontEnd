@@ -70,9 +70,9 @@
                                 </div>
                                 <div class="col-md-6 pb-2">
                                     <label for="countyOfBirth">County of Birth:<span class="required" style="color: red">*</span></label>
-                                    <select id="county" name="county" required class="form-control">
+                                    <select id="county1" name="county" required class="form-control">
                                         <option value="">--Please select a county--</option>
-                                        <!-- <option value="Nyandarua">Nyandarua</option>
+                                        <option value="Nyandarua">Nyandarua</option>
 
                                         <option value="Embu">Embu</option>
 
@@ -164,7 +164,7 @@
 
                                         <option value="Busia">Busia</option>
 
-                                        <option value="Narok">Narok</option> -->
+                                        <option value="Narok">Narok</option>
                                     </select>
                                 </div>
                             </div>
@@ -263,48 +263,52 @@
                         <div class="d-flex pt-4">
                             <button type="submit" class="btn btn-md btn-primary "> Register Patient </button>
                         </div>
+
                 </form>
 
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
                 <script>
                     $(document).ready(function() {
                         $('#county').change(function() {
+                            console.log('County changed');
                             var countyId = $(this).val();
-                            // console.log('Selected County ID: ' + countyId);
                             if (countyId) {
                                 $.ajax({
-                                    url: '/getSubcounties/' + countyId,
+                                    url: './getSubcounties/' + countyId,
                                     type: 'GET',
                                     dataType: 'json',
                                     success: function(data) {
-                                        $('#subcounty').empty().attr('disabled', false);
+                                        $('#subCounty').empty().attr('disabled', false);
                                         $.each(data, function(key, value) {
-                                            $('#subcounty').append('<option value="' + key + '">' + value + '</option>');
+                                            $('#subCounty').append('<option value="' + key + '">' + value + '</option>');
                                         });
                                     }
                                 });
                             } else {
-                                $('#subcounty').empty().attr('disabled', true);
+                                $('#subCounty').empty().attr('disabled', true);
                                 $('#ward').empty().attr('disabled', true);
                             }
                         });
 
-                        $('#subcounty').change(function() {
-                            var subcountyId = $(this).val();
-                            if (subcountyId) {
+                        $('#subCounty').change(function() {
+                            console.log('SubCounty changed');
+                            var subcountyName = $(this).find("option:selected").text();
+
+                            if (subcountyName) {
                                 $.ajax({
-                                    url: '/get-wards/' + subcountyId,
+                                    url: './getWards/' + subcountyName,
                                     type: 'GET',
                                     dataType: 'json',
                                     success: function(data) {
-                                        $('#ward').empty().attr('disabled', false);
+                                        $('#location').empty().attr('disabled', false);
                                         $.each(data, function(key, value) {
-                                            $('#ward').append('<option value="' + key + '">' + value + '</option>');
+                                            $('#location').append('<option value="' + key + '">' + value + '</option>');
                                         });
                                     }
                                 });
                             } else {
-                                $('#ward').empty().attr('disabled', true);
+                                $('#location').empty().attr('disabled', true);
                             }
                         });
                     });
