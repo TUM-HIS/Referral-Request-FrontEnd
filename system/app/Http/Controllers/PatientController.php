@@ -80,7 +80,7 @@ class PatientController extends Controller
     public function getWards($constituency_name)
     {
         $wards = Subcounty::where('constituency_name', $constituency_name)->pluck('ward', 'id');
-        dd($wards);
+        // dd($wards);
         return response()->json($wards);
     }
 
