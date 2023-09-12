@@ -271,7 +271,7 @@
                 <script>
                     $(document).ready(function() {
                         $('#county').change(function() {
-                            console.log('County changed');
+                            // console.log('County changed');
                             var countyId = $(this).val();
                             if (countyId) {
                                 $.ajax({
@@ -280,6 +280,7 @@
                                     dataType: 'json',
                                     success: function(data) {
                                         $('#subCounty').empty().attr('disabled', false);
+                                        $('#subCounty').append('<option value="">--Please select a subcounty--</option>');
                                         $.each(data, function(key, value) {
                                             $('#subCounty').append('<option value="' + key + '">' + value + '</option>');
                                         });
@@ -292,7 +293,7 @@
                         });
 
                         $('#subCounty').change(function() {
-                            console.log('SubCounty changed');
+                            // console.log('SubCounty changed');
                             var subcountyName = $(this).find("option:selected").text();
 
                             if (subcountyName) {
@@ -302,6 +303,7 @@
                                     dataType: 'json',
                                     success: function(data) {
                                         $('#location').empty().attr('disabled', false);
+                                        $('#location').append('<option value="">--Please select a ward--</option>');
                                         $.each(data, function(key, value) {
                                             $('#location').append('<option value="' + key + '">' + value + '</option>');
                                         });
